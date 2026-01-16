@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{453102F9-A1E1-4188-B5CA-2D26CE7B391C}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>BenhVienS</RootNamespace>
+    <AssemblyName>BenhVienS</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="benhvienvsDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="caidat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="caidat.Designer.cs">
+      <DependentUpon>caidat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DangKi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DangKi.Designer.cs">
+      <DependentUpon>DangKi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dangnhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dangnhap.Designer.cs">
+      <DependentUpon>Dangnhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="qlhosobenhnhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="qlhosobenhnhan.Designer.cs">
+      <DependentUpon>qlhosobenhnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuenMK.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuenMK.Designer.cs">
+      <DependentUpon>QuenMK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="thembenhnhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="thembenhnhan.Designer.cs">
+      <DependentUpon>thembenhnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="TrangchuBVS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TrangchuBVS.Designer.cs">
+      <DependentUpon>TrangchuBVS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucQlibacsi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucQlibacsi.Designer.cs">
+      <DependentUpon>ucQlibacsi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucQlilichkham.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucQlilichkham.Designer.cs">
+      <DependentUpon>ucQlilichkham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucQuanlibenhnhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucQuanlibenhnhan.Designer.cs">
+      <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="caidat.resx">
+      <DependentUpon>caidat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DangKi.resx">
+      <DependentUpon>DangKi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dangnhap.resx">
+      <DependentUpon>Dangnhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="qlhosobenhnhan.resx">
+      <DependentUpon>qlhosobenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="QuenMK.resx">
+      <DependentUpon>QuenMK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="thembenhnhan.resx">
+      <DependentUpon>thembenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TrangchuBVS.resx">
+      <DependentUpon>TrangchuBVS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucQlibacsi.resx">
+      <DependentUpon>ucQlibacsi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucQlilichkham.resx">
+      <DependentUpon>ucQlilichkham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucQuanlibenhnhan.resx">
+      <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="benhvienvsDataSet.xsc">
+      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="benhvienvsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>benhvienvsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="benhvienvsDataSet.xss">
+      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HospitalManagementSystemDataSet.xsc">
+      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HospitalManagementSystemDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HospitalManagementSystemDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HospitalManagementSystemDataSet.xss">
+      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChatGPT Image Jan 10, 2026, 02_50_57 PM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Medical Care - Letter S Logo Template.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ChatGPT Image Jan 10, 2026, 02_35_05 PM.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GIAO DIỆN.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons8-profile.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\khóa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icon ngươig.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hình nền.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\email.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone_icon-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OIP-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-removebg-preview-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-removebg-preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-removebg-preview2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OIP-removebg-preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-removebg-preview3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-removebg-preview-removebg-preview1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download-removebg-preview4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OIP-removebg-preview2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\OIP-removebg-preview3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\7c0e4e447a43a52a3473690cac3e7a0b-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8a8ae6a0780f7797f831fd6ba635b7ba-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\8a295bc728db5b2b86bc91d48241b545-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\e8c9b4913db521be37fdb019122d73bc-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\5248a67978b9ac609717e0cdd691c7a9-removebg-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Vector Oeil Icône PNG , Les Yeux Clipart, Icônes Des Yeux, Icône Oeil PNG et vecteur pour téléchargement gratuit.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Trash_Bin_free_icons_designed_by_Freepik-removebg-preview.png" />
+    <None Include="Resources\значок вектор карандаш PNG , карандашный клипарт, карандашные иконки, редактировать PNG картинки и пнг рисунок для бесплатной загрузки.jpg" />
+    <None Include="Resources\Add A Photo icon 27apr24 %2829%29.jpg" />
+    <None Include="Resources\Reload_page_flat_illustration___Premium_Vector-removebg-preview.png" />
+    <Content Include="Resources\Search_Vector_Icon__Search_Icons__Search_Clipart__Engine_PNG_and_Vector_with_Transparent_Background_for_Free_Download-removebg-preview.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
