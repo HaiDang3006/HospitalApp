@@ -546,6 +546,16 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap manager_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("manager-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap medical {
             get {
                 object obj = ResourceManager.GetObject("medical", resourceCulture);
@@ -729,82 +739,6 @@ namespace BenhVienS.Properties {
         internal static System.Drawing.Bitmap wall_clock {
             get {
                 object obj = ResourceManager.GetObject("wall-clock", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Add_A_Photo_icon_27apr24__29_
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Add A Photo icon 27apr24 (29)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Reload_page_flat_illustration___Premium_Vector_removebg_preview
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Reload_page_flat_illustration___Premium_Vector-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Search_Vector_Icon__Search_Icons__Search_Clipart__Engine_PNG_and_Vector_with_Transparent_Background_for_Free_Download_removebg_preview
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Search_Vector_Icon__Search_Icons__Search_Clipart__Engine_PNG_and_Vector_with_Tran" +
-                        "sparent_Background_for_Free_Download-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Trash_Bin_free_icons_designed_by_Freepik_removebg_preview
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Trash_Bin_free_icons_designed_by_Freepik-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Vector_Oeil_Icône_PNG___Les_Yeux_Clipart__Icônes_Des_Yeux__Icône_Oeil_PNG_et_vecteur_pour_téléchargement_gratuit
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Vector Oeil Icône PNG , Les Yeux Clipart, Icônes Des Yeux, Icône Oeil PNG et vect" +
-                        "eur pour téléchargement gratuit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap значок_вектор_карандаш_PNG___карандашный_клипарт__карандашные_иконки__редактировать_PNG_картинки_и_пнг_рисунок_для_бесплатной_загрузки
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("значок вектор карандаш PNG , карандашный клипарт, карандашные иконки, редактирова" +
-                        "ть PNG картинки и пнг рисунок для бесплатной загрузки", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
