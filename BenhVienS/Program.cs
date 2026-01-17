@@ -16,7 +16,7 @@ namespace BenhVienS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DuocSi());
+            Application.Run(new Bacsi());
         }
     }
 }

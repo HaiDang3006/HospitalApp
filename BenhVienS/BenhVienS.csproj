@@ -56,6 +56,12 @@
     <Compile Include="Bacsi.Designer.cs">
       <DependentUpon>Bacsi.cs</DependentUpon>
     </Compile>
+    <Compile Include="benhnhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="benhnhan.Designer.cs">
+      <DependentUpon>benhnhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="benhvienvsDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -200,6 +206,30 @@
     <Compile Include="ucDanhSachNhapThuoc.Designer.cs">
       <DependentUpon>ucDanhSachNhapThuoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucdonthuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucdonthuoc.Designer.cs">
+      <DependentUpon>ucdonthuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uchotro.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uchotro.Designer.cs">
+      <DependentUpon>uchotro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uchsbenhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uchsbenhan.Designer.cs">
+      <DependentUpon>uchsbenhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="uckedonthuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uckedonthuoc.Designer.cs">
+      <DependentUpon>uckedonthuoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucQlibacsi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -211,6 +241,12 @@
     </Compile>
     <Compile Include="ucQlilichkham.Designer.cs">
       <DependentUpon>ucQlilichkham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucqllichhen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucqllichhen.Designer.cs">
+      <DependentUpon>ucqllichhen.cs</DependentUpon>
     </Compile>
     <Compile Include="ucqllichkham.cs">
       <SubType>UserControl</SubType>
@@ -229,6 +265,18 @@
     </Compile>
     <Compile Include="ucQuanLyDonThuoc.Designer.cs">
       <DependentUpon>ucQuanLyDonThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucttbenhnhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucttbenhnhan.Designer.cs">
+      <DependentUpon>ucttbenhnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucttbv.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucttbv.Designer.cs">
+      <DependentUpon>ucttbv.cs</DependentUpon>
     </Compile>
     <Compile Include="đmkhau.cs">
       <SubType>UserControl</SubType>
