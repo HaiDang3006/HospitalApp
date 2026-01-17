@@ -85,6 +85,12 @@
     <Compile Include="dskham.Designer.cs">
       <DependentUpon>dskham.cs</DependentUpon>
     </Compile>
+    <Compile Include="DuocSi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DuocSi.Designer.cs">
+      <DependentUpon>DuocSi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -176,6 +182,24 @@
     <Compile Include="ttvphi.Designer.cs">
       <DependentUpon>ttvphi.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucCD.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucCD.Designer.cs">
+      <DependentUpon>ucCD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucDanhMucThuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucDanhMucThuoc.Designer.cs">
+      <DependentUpon>ucDanhMucThuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucDanhSachNhapThuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucDanhSachNhapThuoc.Designer.cs">
+      <DependentUpon>ucDanhSachNhapThuoc.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucQlibacsi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -199,6 +223,12 @@
     </Compile>
     <Compile Include="ucQuanlibenhnhan.Designer.cs">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucQuanLyDonThuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucQuanLyDonThuoc.Designer.cs">
+      <DependentUpon>ucQuanLyDonThuoc.cs</DependentUpon>
     </Compile>
     <Compile Include="đmkhau.cs">
       <SubType>UserControl</SubType>
