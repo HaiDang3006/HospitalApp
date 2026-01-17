@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Bacsi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bacsi.Designer.cs">
+      <DependentUpon>Bacsi.cs</DependentUpon>
+    </Compile>
     <Compile Include="benhvienvsDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -73,6 +79,12 @@
     <Compile Include="Dangnhap.Designer.cs">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="dskham.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dskham.Designer.cs">
+      <DependentUpon>dskham.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -89,6 +101,24 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="hsbnhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="hsbnhan.Designer.cs">
+      <DependentUpon>hsbnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="kdthuoc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="kdthuoc.Designer.cs">
+      <DependentUpon>kdthuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="khbenh.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="khbenh.Designer.cs">
+      <DependentUpon>khbenh.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -110,11 +140,29 @@
     <Compile Include="thembenhnhan.Designer.cs">
       <DependentUpon>thembenhnhan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Thungan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Thungan.Designer.cs">
+      <DependentUpon>Thungan.cs</DependentUpon>
+    </Compile>
     <Compile Include="TrangchuBVS.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="TrangchuBVS.Designer.cs">
       <DependentUpon>TrangchuBVS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ttcnhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ttcnhan.Designer.cs">
+      <DependentUpon>ttcnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ttvphi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ttvphi.Designer.cs">
+      <DependentUpon>ttvphi.cs</DependentUpon>
     </Compile>
     <Compile Include="ucQlibacsi.cs">
       <SubType>UserControl</SubType>
@@ -128,12 +176,27 @@
     <Compile Include="ucQlilichkham.Designer.cs">
       <DependentUpon>ucQlilichkham.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucqllichkham.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucqllichkham.Designer.cs">
+      <DependentUpon>ucqllichkham.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucQuanlibenhnhan.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucQuanlibenhnhan.Designer.cs">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
     </Compile>
+    <Compile Include="đmkhau.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="đmkhau.Designer.cs">
+      <DependentUpon>đmkhau.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Bacsi.resx">
+      <DependentUpon>Bacsi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="caidat.resx">
       <DependentUpon>caidat.cs</DependentUpon>
     </EmbeddedResource>
@@ -216,128 +279,73 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\download.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ChatGPT Image Jan 10, 2026, 02_50_57 PM.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Medical Care - Letter S Logo Template.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ChatGPT Image Jan 10, 2026, 02_35_05 PM.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\GIAO DIỆN.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icons8-profile.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\khóa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\icon ngươig.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\hình nền.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\email.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\phone icon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\phone_icon-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\OIP-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download-removebg-preview-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download-removebg-preview1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download-removebg-preview2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\OIP-removebg-preview1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download-removebg-preview3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download-removebg-preview-removebg-preview1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\download-removebg-preview4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\OIP-removebg-preview2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\OIP-removebg-preview3.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\7c0e4e447a43a52a3473690cac3e7a0b-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\8a8ae6a0780f7797f831fd6ba635b7ba-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\8a295bc728db5b2b86bc91d48241b545-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\e8c9b4913db521be37fdb019122d73bc-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\5248a67978b9ac609717e0cdd691c7a9-removebg-preview.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Vector Oeil Icône PNG , Les Yeux Clipart, Icônes Des Yeux, Icône Oeil PNG et vecteur pour téléchargement gratuit.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Trash_Bin_free_icons_designed_by_Freepik-removebg-preview.png" />
-    <None Include="Resources\значок вектор карандаш PNG , карандашный клипарт, карандашные иконки, редактировать PNG картинки и пнг рисунок для бесплатной загрузки.jpg" />
-    <None Include="Resources\Add A Photo icon 27apr24 %2829%29.jpg" />
-    <None Include="Resources\Reload_page_flat_illustration___Premium_Vector-removebg-preview.png" />
-    <Content Include="Resources\Search_Vector_Icon__Search_Icons__Search_Clipart__Engine_PNG_and_Vector_with_Transparent_Background_for_Free_Download-removebg-preview.png" />
+    <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview.png" />
+    <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview1.png" />
+    <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview2.png" />
+    <Content Include="Resources\5248a67978b9ac609717e0cdd691c7a9-removebg-preview.png" />
+    <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview.png" />
+    <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview1.png" />
+    <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview2.png" />
+    <Content Include="Resources\7c0e4e447a43a52a3473690cac3e7a0b-removebg-preview.png" />
+    <Content Include="Resources\8a295bc728db5b2b86bc91d48241b545-removebg-preview.png" />
+    <Content Include="Resources\8a8ae6a0780f7797f831fd6ba635b7ba-removebg-preview.png" />
+    <Content Include="Resources\business-continuity.png" />
+    <Content Include="Resources\calendar %281%29.png" />
+    <Content Include="Resources\calendar.png" />
+    <Content Include="Resources\cash.png" />
+    <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_35_05 PM.png" />
+    <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_50_57 PM.png" />
+    <Content Include="Resources\checked.png" />
+    <Content Include="Resources\doctor.png" />
+    <Content Include="Resources\doctor1.png" />
+    <Content Include="Resources\doctor2.png" />
+    <Content Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview.png" />
+    <Content Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview1.png" />
+    <Content Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview2.png" />
+    <Content Include="Resources\document.png" />
+    <Content Include="Resources\document1.png" />
+    <Content Include="Resources\download-removebg-preview-removebg-preview.png" />
+    <Content Include="Resources\download-removebg-preview-removebg-preview1.png" />
+    <Content Include="Resources\download-removebg-preview.png" />
+    <Content Include="Resources\download-removebg-preview1.png" />
+    <Content Include="Resources\download-removebg-preview2.png" />
+    <Content Include="Resources\download-removebg-preview3.png" />
+    <Content Include="Resources\download-removebg-preview4.png" />
+    <Content Include="Resources\download.jpg" />
+    <Content Include="Resources\e8c9b4913db521be37fdb019122d73bc-removebg-preview.png" />
+    <Content Include="Resources\email.jpg" />
+    <Content Include="Resources\exam.png" />
+    <Content Include="Resources\GIAO DIỆN.png" />
+    <Content Include="Resources\group.png" />
+    <Content Include="Resources\home-icon-silhouette.png" />
+    <Content Include="Resources\home-icon-silhouette1.png" />
+    <Content Include="Resources\hình nền.jpg" />
+    <Content Include="Resources\icon ngươig.png" />
+    <Content Include="Resources\icons8-profile.gif" />
+    <Content Include="Resources\invoice.png" />
+    <Content Include="Resources\khóa.png" />
+    <Content Include="Resources\logo.png" />
+    <Content Include="Resources\mail.png" />
+    <Content Include="Resources\manager.png" />
+    <Content Include="Resources\Medical Care - Letter S Logo Template.jpg" />
+    <Content Include="Resources\medical.png" />
+    <Content Include="Resources\medication.png" />
+    <Content Include="Resources\OIP-removebg-preview.png" />
+    <Content Include="Resources\OIP-removebg-preview1.png" />
+    <Content Include="Resources\OIP-removebg-preview2.png" />
+    <Content Include="Resources\OIP-removebg-preview3.png" />
+    <Content Include="Resources\password.png" />
+    <Content Include="Resources\pension.png" />
+    <Content Include="Resources\phone icon.jpg" />
+    <Content Include="Resources\phone-call.png" />
+    <Content Include="Resources\phone-call1.png" />
+    <Content Include="Resources\phone_icon-removebg-preview.png" />
+    <Content Include="Resources\power.png" />
+    <Content Include="Resources\report.png" />
+    <Content Include="Resources\settings.png" />
+    <Content Include="Resources\stethoscope.png" />
+    <Content Include="Resources\user.png" />
+    <Content Include="Resources\wall-clock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
