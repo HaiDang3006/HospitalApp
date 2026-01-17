@@ -203,6 +203,26 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap calendar__1_1 {
+            get {
+                object obj = ResourceManager.GetObject("calendar (1)1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap calendar1 {
+            get {
+                object obj = ResourceManager.GetObject("calendar1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap cash {
             get {
                 object obj = ResourceManager.GetObject("cash", resourceCulture);
@@ -226,6 +246,16 @@ namespace BenhVienS.Properties {
         internal static System.Drawing.Bitmap ChatGPT_Image_Jan_10__2026__02_50_57_PM {
             get {
                 object obj = ResourceManager.GetObject("ChatGPT Image Jan 10, 2026, 02_50_57 PM", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap checked1 {
+            get {
+                object obj = ResourceManager.GetObject("checked1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -309,6 +339,16 @@ namespace BenhVienS.Properties {
         internal static System.Drawing.Bitmap document1 {
             get {
                 object obj = ResourceManager.GetObject("document1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap document2 {
+            get {
+                object obj = ResourceManager.GetObject("document2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -426,6 +466,16 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap exam1 {
+            get {
+                object obj = ResourceManager.GetObject("exam1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap GIAO_DIỆN {
             get {
                 object obj = ResourceManager.GetObject("GIAO DIỆN", resourceCulture);
@@ -476,6 +526,16 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap home_icon_silhouette2 {
+            get {
+                object obj = ResourceManager.GetObject("home-icon-silhouette2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap icon_ngươig {
             get {
                 object obj = ResourceManager.GetObject("icon ngươig", resourceCulture);
@@ -499,6 +559,16 @@ namespace BenhVienS.Properties {
         internal static System.Drawing.Bitmap invoice {
             get {
                 object obj = ResourceManager.GetObject("invoice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap invoice1 {
+            get {
+                object obj = ResourceManager.GetObject("invoice1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -566,9 +636,29 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap medical1 {
+            get {
+                object obj = ResourceManager.GetObject("medical1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap medication {
             get {
                 object obj = ResourceManager.GetObject("medication", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap medication1 {
+            get {
+                object obj = ResourceManager.GetObject("medication1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -706,9 +796,29 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap settings1 {
+            get {
+                object obj = ResourceManager.GetObject("settings1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap stethoscope {
             get {
                 object obj = ResourceManager.GetObject("stethoscope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap stethoscope1 {
+            get {
+                object obj = ResourceManager.GetObject("stethoscope1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -726,85 +836,29 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap user1 {
+            get {
+                object obj = ResourceManager.GetObject("user1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap wall_clock {
             get {
                 object obj = ResourceManager.GetObject("wall-clock", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Add_A_Photo_icon_27apr24__29_
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Add A Photo icon 27apr24 (29)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Reload_page_flat_illustration___Premium_Vector_removebg_preview
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Reload_page_flat_illustration___Premium_Vector-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Search_Vector_Icon__Search_Icons__Search_Clipart__Engine_PNG_and_Vector_with_Transparent_Background_for_Free_Download_removebg_preview
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Search_Vector_Icon__Search_Icons__Search_Clipart__Engine_PNG_and_Vector_with_Tran" +
-                        "sparent_Background_for_Free_Download-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Trash_Bin_free_icons_designed_by_Freepik_removebg_preview
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Trash_Bin_free_icons_designed_by_Freepik-removebg-preview", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Vector_Oeil_Icône_PNG___Les_Yeux_Clipart__Icônes_Des_Yeux__Icône_Oeil_PNG_et_vecteur_pour_téléchargement_gratuit
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("Vector Oeil Icône PNG , Les Yeux Clipart, Icônes Des Yeux, Icône Oeil PNG et vect" +
-                        "eur pour téléchargement gratuit", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-
-
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap значок_вектор_карандаш_PNG___карандашный_клипарт__карандашные_иконки__редактировать_PNG_картинки_и_пнг_рисунок_для_бесплатной_загрузки
-        {
-            get
-            {
-                object obj = ResourceManager.GetObject("значок вектор карандаш PNG , карандашный клипарт, карандашные иконки, редактирова" +
-                        "ть PNG картинки и пнг рисунок для бесплатной загрузки", resourceCulture);
+        internal static System.Drawing.Bitmap wall_clock1 {
+            get {
+                object obj = ResourceManager.GetObject("wall-clock1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
