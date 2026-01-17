@@ -35,10 +35,7 @@ namespace BenhVienS
             }*/
         }
         // Thêm dấu @ và bao quanh bằng dấu ngoặc kép ""
-        string connectionString = @"Data Source=localhost\SQLEXPRESS02;
-Initial Catalog=benhvienvs;
-Integrated Security=True;
-TrustServerCertificate=True;";
+       
 
         public Form2()
         {
