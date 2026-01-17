@@ -120,6 +120,18 @@
     <Compile Include="khbenh.Designer.cs">
       <DependentUpon>khbenh.cs</DependentUpon>
     </Compile>
+    <Compile Include="LeTan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LeTan.Designer.cs">
+      <DependentUpon>LeTan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Lichhen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Lichhen.Designer.cs">
+      <DependentUpon>Lichhen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="qlhosobenhnhan.cs">
@@ -211,6 +223,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LeTan.resx">
+      <DependentUpon>LeTan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
