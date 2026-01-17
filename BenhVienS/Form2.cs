@@ -19,7 +19,7 @@ namespace BenhVienS
         {
             
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+           /* using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 conn.Open();
 
@@ -32,15 +32,13 @@ namespace BenhVienS
 
                 dgvbenhnhan.AutoGenerateColumns = true;
                 dgvbenhnhan.DataSource = dt;
-            }
+            }*/
         }
-        string connectionString =
-                        @"Data Source=DESKTOP-2F65IMT;
-                        Initial Catalog=haidang6868;
-                        Integrated Security=True;
-                        Encrypt=True;
-                        TrustServerCertificate=True;";
-
+        // Thêm dấu @ và bao quanh bằng dấu ngoặc kép ""
+        string connectionString = @"Data Source=localhost\SQLEXPRESS02;
+Initial Catalog=benhvienvs;
+Integrated Security=True;
+TrustServerCertificate=True;";
 
         public Form2()
         {

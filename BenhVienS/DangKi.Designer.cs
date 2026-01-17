@@ -138,6 +138,7 @@
             this.btDangki.TabIndex = 12;
             this.btDangki.Text = "Đăng kí";
             this.btDangki.UseVisualStyleBackColor = false;
+            this.btDangki.Click += new System.EventHandler(this.btDangki_Click);
             // 
             // DangKi
             // 

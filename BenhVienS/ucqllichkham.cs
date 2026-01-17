@@ -10,24 +10,24 @@ using System.Windows.Forms;
 
 namespace BenhVienS
 {
-    public partial class DangKi : Form
+    public partial class ucqllichkham : UserControl
     {
-        public DangKi()
+        public ucqllichkham()
         {
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void ucqllichkham_Load(object sender, EventArgs e)
         {
 
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
 
-        private void btDangki_Click(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
         }

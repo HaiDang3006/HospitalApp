@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.labGT = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.linkDangky = new System.Windows.Forms.LinkLabel();
@@ -36,7 +37,6 @@
             this.linkDangnhap = new System.Windows.Forms.LinkLabel();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.labGT = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -61,6 +61,19 @@
             this.panel1.Size = new System.Drawing.Size(987, 551);
             this.panel1.TabIndex = 3;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // labGT
+            // 
+            this.labGT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labGT.AutoSize = true;
+            this.labGT.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labGT.ForeColor = System.Drawing.Color.Black;
+            this.labGT.Location = new System.Drawing.Point(324, 485);
+            this.labGT.Name = "labGT";
+            this.labGT.Size = new System.Drawing.Size(347, 25);
+            this.labGT.TabIndex = 7;
+            this.labGT.Text = "Y đức làm gốc – Niềm tin làm đầu";
+            this.labGT.Click += new System.EventHandler(this.labGT_Click);
             // 
             // pictureBox2
             // 
@@ -132,7 +145,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Times New Roman", 22.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.label1.Location = new System.Drawing.Point(626, 106);
+            this.label1.Location = new System.Drawing.Point(643, 100);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(235, 42);
             this.label1.TabIndex = 1;
@@ -143,26 +156,13 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox1.Image = global::BenhVienS.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(318, -129);
+            this.pictureBox1.Location = new System.Drawing.Point(329, -130);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(868, 563);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click_1);
-            // 
-            // labGT
-            // 
-            this.labGT.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.labGT.AutoSize = true;
-            this.labGT.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labGT.ForeColor = System.Drawing.Color.Black;
-            this.labGT.Location = new System.Drawing.Point(324, 485);
-            this.labGT.Name = "labGT";
-            this.labGT.Size = new System.Drawing.Size(347, 25);
-            this.labGT.TabIndex = 7;
-            this.labGT.Text = "Y đức làm gốc – Niềm tin làm đầu";
-            this.labGT.Click += new System.EventHandler(this.labGT_Click);
             // 
             // Form1
             // 
