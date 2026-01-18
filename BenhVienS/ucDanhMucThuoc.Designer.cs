@@ -32,7 +32,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.dgvDanhMucThuoc = new System.Windows.Forms.DataGridView();
-            this.txtTimkiem = new System.Windows.Forms.TextBox();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btThem = new System.Windows.Forms.Button();
             this.btSua = new System.Windows.Forms.Button();
             this.btXoa = new System.Windows.Forms.Button();
@@ -71,12 +71,10 @@
             // 
             // dgvDanhMucThuoc
             // 
-            this.dgvDanhMucThuoc.AllowUserToAddRows = false;
             this.dgvDanhMucThuoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDanhMucThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDanhMucThuoc.Location = new System.Drawing.Point(3, 0);
             this.dgvDanhMucThuoc.Name = "dgvDanhMucThuoc";
-            this.dgvDanhMucThuoc.ReadOnly = true;
             this.dgvDanhMucThuoc.RowHeadersVisible = false;
             this.dgvDanhMucThuoc.RowHeadersWidth = 51;
             this.dgvDanhMucThuoc.RowTemplate.Height = 24;
@@ -84,15 +82,15 @@
             this.dgvDanhMucThuoc.Size = new System.Drawing.Size(889, 410);
             this.dgvDanhMucThuoc.TabIndex = 1;
             // 
-            // txtTimkiem
+            // txtTimKiem
             // 
-            this.txtTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimkiem.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtTimkiem.Location = new System.Drawing.Point(3, 65);
-            this.txtTimkiem.Name = "txtTimkiem";
-            this.txtTimkiem.Size = new System.Drawing.Size(484, 30);
-            this.txtTimkiem.TabIndex = 5;
-            this.txtTimkiem.Text = "Nhập mã đơn, họ tên bệnh nhân";
+            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtTimKiem.Location = new System.Drawing.Point(3, 65);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(484, 30);
+            this.txtTimKiem.TabIndex = 5;
+            this.txtTimKiem.Text = "Nhập mã đơn, họ tên bệnh nhân";
             // 
             // btThem
             // 
@@ -103,6 +101,7 @@
             this.btThem.TabIndex = 11;
             this.btThem.Text = "Thêm";
             this.btThem.UseVisualStyleBackColor = true;
+            this.btThem.Click += new System.EventHandler(this.btThem_Click);
             // 
             // btSua
             // 
@@ -113,6 +112,7 @@
             this.btSua.TabIndex = 12;
             this.btSua.Text = "Sửa";
             this.btSua.UseVisualStyleBackColor = true;
+            this.btSua.Click += new System.EventHandler(this.btSua_Click);
             // 
             // btXoa
             // 
@@ -123,6 +123,7 @@
             this.btXoa.TabIndex = 13;
             this.btXoa.Text = "Xóa";
             this.btXoa.UseVisualStyleBackColor = true;
+            this.btXoa.Click += new System.EventHandler(this.btXoa_Click);
             // 
             // btTimkiem
             // 
@@ -138,6 +139,7 @@
             this.btTimkiem.Size = new System.Drawing.Size(42, 27);
             this.btTimkiem.TabIndex = 6;
             this.btTimkiem.UseVisualStyleBackColor = false;
+            this.btTimkiem.Click += new System.EventHandler(this.btTimkiem_Click);
             // 
             // ucDanhMucThuoc
             // 
@@ -149,7 +151,7 @@
             this.Controls.Add(this.btThem);
             this.Controls.Add(this.btTimkiem);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtTimkiem);
+            this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Name = "ucDanhMucThuoc";
@@ -168,7 +170,7 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dgvDanhMucThuoc;
         private System.Windows.Forms.Button btTimkiem;
-        private System.Windows.Forms.TextBox txtTimkiem;
+        private System.Windows.Forms.TextBox txtTimKiem;
         private System.Windows.Forms.Button btThem;
         private System.Windows.Forms.Button btSua;
         private System.Windows.Forms.Button btXoa;

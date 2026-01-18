@@ -36,12 +36,6 @@
             this.btSua = new System.Windows.Forms.Button();
             this.btThem = new System.Windows.Forms.Button();
             this.dgvQuanLyDonThuoc = new System.Windows.Forms.DataGridView();
-            this.colSTT = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colMaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colNgay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colTongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.colThaoTac = new System.Windows.Forms.DataGridViewButtonColumn();
             this.txtTimkiem = new System.Windows.Forms.TextBox();
             this.btTimkiem = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
@@ -128,13 +122,6 @@
             this.dgvQuanLyDonThuoc.AllowUserToAddRows = false;
             this.dgvQuanLyDonThuoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvQuanLyDonThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQuanLyDonThuoc.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.colSTT,
-            this.colMaDon,
-            this.colHoTen,
-            this.colNgay,
-            this.colTongTien,
-            this.colThaoTac});
             this.dgvQuanLyDonThuoc.Location = new System.Drawing.Point(3, 32);
             this.dgvQuanLyDonThuoc.Name = "dgvQuanLyDonThuoc";
             this.dgvQuanLyDonThuoc.ReadOnly = true;
@@ -144,50 +131,6 @@
             this.dgvQuanLyDonThuoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvQuanLyDonThuoc.Size = new System.Drawing.Size(885, 393);
             this.dgvQuanLyDonThuoc.TabIndex = 0;
-            // 
-            // colSTT
-            // 
-            this.colSTT.HeaderText = "STT";
-            this.colSTT.MinimumWidth = 6;
-            this.colSTT.Name = "colSTT";
-            this.colSTT.ReadOnly = true;
-            // 
-            // colMaDon
-            // 
-            this.colMaDon.HeaderText = "Mã Đơn";
-            this.colMaDon.MinimumWidth = 6;
-            this.colMaDon.Name = "colMaDon";
-            this.colMaDon.ReadOnly = true;
-            // 
-            // colHoTen
-            // 
-            this.colHoTen.HeaderText = "Họ Tên BN";
-            this.colHoTen.MinimumWidth = 6;
-            this.colHoTen.Name = "colHoTen";
-            this.colHoTen.ReadOnly = true;
-            // 
-            // colNgay
-            // 
-            this.colNgay.HeaderText = "Ngày Kê Đơn";
-            this.colNgay.MinimumWidth = 6;
-            this.colNgay.Name = "colNgay";
-            this.colNgay.ReadOnly = true;
-            // 
-            // colTongTien
-            // 
-            this.colTongTien.HeaderText = "Tổng Tiền";
-            this.colTongTien.MinimumWidth = 6;
-            this.colTongTien.Name = "colTongTien";
-            this.colTongTien.ReadOnly = true;
-            // 
-            // colThaoTac
-            // 
-            this.colThaoTac.HeaderText = "Thao Tác";
-            this.colThaoTac.MinimumWidth = 6;
-            this.colThaoTac.Name = "colThaoTac";
-            this.colThaoTac.ReadOnly = true;
-            this.colThaoTac.Text = "Sửa / Xóa";
-            this.colThaoTac.UseColumnTextForButtonValue = true;
             // 
             // txtTimkiem
             // 
@@ -242,12 +185,6 @@
         private System.Windows.Forms.Button btTimkiem;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.DataGridView dgvQuanLyDonThuoc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colSTT;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colMaDon;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colNgay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn colTongTien;
-        private System.Windows.Forms.DataGridViewButtonColumn colThaoTac;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Button btSua;
         private System.Windows.Forms.Button btThem;
