@@ -45,13 +45,13 @@ namespace BenhVienS
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dgvDonThuoc.DataSource = dt;
+                    dgvQuanLyDonThuoc.DataSource = dt;
 
-                    dgvDonThuoc.Columns["MaDonThuoc"].HeaderText = "Mã Đơn";
-                    dgvDonThuoc.Columns["HoTenBN"].HeaderText = "Họ Tên BN";
-                    dgvDonThuoc.Columns["NgayKeDon"].HeaderText = "Ngày Kê Đơn";
-                    dgvDonThuoc.Columns["TenBacSi"].HeaderText = "Bác Sĩ";
-                    dgvDonThuoc.Columns["TrangThai"].HeaderText = "Trạng Thái";
+                    dgvQuanLyDonThuoc.Columns["MaDonThuoc"].HeaderText = "Mã Đơn";
+                    dgvQuanLyDonThuoc.Columns["HoTenBN"].HeaderText = "Họ Tên BN";
+                    dgvQuanLyDonThuoc.Columns["NgayKeDon"].HeaderText = "Ngày Kê Đơn";
+                    dgvQuanLyDonThuoc.Columns["TenBacSi"].HeaderText = "Bác Sĩ";
+                    dgvQuanLyDonThuoc.Columns["TrangThai"].HeaderText = "Trạng Thái";
                 }
             }
 

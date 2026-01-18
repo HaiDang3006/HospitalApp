@@ -37,15 +37,15 @@ namespace BenhVienS
                         da.Fill(dt);
 
                         // Giả sử DataGridView của bạn tên là dgvThuoc
-                        dgvDonThuoc.DataSource = dt;
+                        dgvDanhMucThuoc.DataSource = dt;
 
                     // Đặt lại tên cột hiển thị cho đẹp
-                        dgvDonThuoc.Columns["MaThuoc"].HeaderText = "Mã Thuốc";
-                        dgvDonThuoc.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
-                        dgvDonThuoc.Columns["HoatChat"].HeaderText = "Hoạt Chất";
-                        dgvDonThuoc.Columns["DonViTinh"].HeaderText = "Đơn Vị Tính";
-                        dgvDonThuoc.Columns["LoaiThuoc"].HeaderText = "Loại Thuốc";
-                        dgvDonThuoc.Columns["GiaBan"].HeaderText = "Giá Bán";
+                        dgvDanhMucThuoc.Columns["MaThuoc"].HeaderText = "Mã Thuốc";
+                        dgvDanhMucThuoc.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
+                        dgvDanhMucThuoc.Columns["HoatChat"].HeaderText = "Hoạt Chất";
+                        dgvDanhMucThuoc.Columns["DonViTinh"].HeaderText = "Đơn Vị Tính";
+                        dgvDanhMucThuoc.Columns["LoaiThuoc"].HeaderText = "Loại Thuốc";
+                        dgvDanhMucThuoc.Columns["GiaBan"].HeaderText = "Giá Bán";
                     }
                 }
                 catch (Exception ex)

@@ -173,7 +173,6 @@
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.dataGridViewImageColumn1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewImageColumn1.HeaderText = "";
-            this.dataGridViewImageColumn1.Image = global::BenhVienS.Properties.Resources.Vector_Oeil_Icône_PNG___Les_Yeux_Clipart__Icônes_Des_Yeux__Icône_Oeil_PNG_et_vecteur_pour_téléchargement_gratuit;
             this.dataGridViewImageColumn1.ImageLayout = System.Windows.Forms.DataGridViewImageCellLayout.Zoom;
             this.dataGridViewImageColumn1.MinimumWidth = 6;
             this.dataGridViewImageColumn1.Name = "dataGridViewImageColumn1";
@@ -229,7 +228,6 @@
             // pictureBox10
             // 
             this.pictureBox10.BackColor = System.Drawing.Color.White;
-            this.pictureBox10.Image = global::BenhVienS.Properties.Resources.Reload_page_flat_illustration___Premium_Vector_removebg_preview;
             this.pictureBox10.Location = new System.Drawing.Point(479, 24);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(45, 28);
@@ -240,7 +238,6 @@
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.Color.White;
-            this.pictureBox9.Image = global::BenhVienS.Properties.Resources.Search_Vector_Icon__Search_Icons__Search_Clipart__Engine_PNG_and_Vector_with_Transparent_Background_for_Free_Download_removebg_preview;
             this.pictureBox9.Location = new System.Drawing.Point(687, 23);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(34, 29);
@@ -264,7 +261,6 @@
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.Color.White;
-            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.Trash_Bin_free_icons_designed_by_Freepik_removebg_preview;
             this.pictureBox8.Location = new System.Drawing.Point(194, 17);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(53, 42);
@@ -287,7 +283,6 @@
             // pictureBox7
             // 
             this.pictureBox7.BackColor = System.Drawing.Color.White;
-            this.pictureBox7.Image = global::BenhVienS.Properties.Resources.значок_вектор_карандаш_PNG___карандашный_клипарт__карандашные_иконки__редактировать_PNG_картинки_и_пнг_рисунок_для_бесплатной_загрузки;
             this.pictureBox7.Location = new System.Drawing.Point(334, 21);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(60, 35);
@@ -298,7 +293,6 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.White;
-            this.pictureBox5.Image = global::BenhVienS.Properties.Resources.Add_A_Photo_icon_27apr24__29_;
             this.pictureBox5.Location = new System.Drawing.Point(15, 17);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(57, 37);

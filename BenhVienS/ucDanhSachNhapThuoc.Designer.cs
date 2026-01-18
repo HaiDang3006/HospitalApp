@@ -201,6 +201,7 @@
             // btTimkiem
             // 
             this.btTimkiem.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btTimkiem.BackgroundImage = global::BenhVienS.Properties.Resources.Search_White_Transparent__Search_Icon__Search_Icons__Search_Clipart__Magnifying_Glass_PNG_Image_For_Free_Download_removebg_preview;
             this.btTimkiem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btTimkiem.FlatAppearance.BorderSize = 0;
             this.btTimkiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

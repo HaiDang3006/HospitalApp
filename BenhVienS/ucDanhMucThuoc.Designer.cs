@@ -31,14 +31,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dgvDonThuoc = new System.Windows.Forms.DataGridView();
-            this.btTimkiem = new System.Windows.Forms.Button();
+            this.dgvDanhMucThuoc = new System.Windows.Forms.DataGridView();
             this.txtTimkiem = new System.Windows.Forms.TextBox();
             this.btThem = new System.Windows.Forms.Button();
             this.btSua = new System.Windows.Forms.Button();
             this.btXoa = new System.Windows.Forms.Button();
+            this.btTimkiem = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDonThuoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDanhMucThuoc)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -52,14 +52,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "DANH MỤC THUỐC";
             // 
-            // directorySearcher1
-            // 
-       
-            // 
-            // directorySearcher2
-            // 
-          
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -71,40 +63,26 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.dgvDonThuoc);
+            this.panel3.Controls.Add(this.dgvDanhMucThuoc);
             this.panel3.Location = new System.Drawing.Point(0, 110);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(907, 422);
             this.panel3.TabIndex = 10;
             // 
-            // dgvDonThuoc
+            // dgvDanhMucThuoc
             // 
-            this.dgvDonThuoc.AllowUserToAddRows = false;
-            this.dgvDonThuoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDonThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDonThuoc.Location = new System.Drawing.Point(3, 0);
-            this.dgvDonThuoc.Name = "dgvDonThuoc";
-            this.dgvDonThuoc.ReadOnly = true;
-            this.dgvDonThuoc.RowHeadersVisible = false;
-            this.dgvDonThuoc.RowHeadersWidth = 51;
-            this.dgvDonThuoc.RowTemplate.Height = 24;
-            this.dgvDonThuoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDonThuoc.Size = new System.Drawing.Size(889, 410);
-            this.dgvDonThuoc.TabIndex = 1;
-            // 
-            // btTimkiem
-            // 
-            this.btTimkiem.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btTimkiem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btTimkiem.FlatAppearance.BorderSize = 0;
-            this.btTimkiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTimkiem.ImageKey = "(none)";
-            this.btTimkiem.Location = new System.Drawing.Point(493, 67);
-            this.btTimkiem.Name = "btTimkiem";
-            this.btTimkiem.Size = new System.Drawing.Size(42, 27);
-            this.btTimkiem.TabIndex = 6;
-            this.btTimkiem.UseVisualStyleBackColor = false;
+            this.dgvDanhMucThuoc.AllowUserToAddRows = false;
+            this.dgvDanhMucThuoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDanhMucThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDanhMucThuoc.Location = new System.Drawing.Point(3, 0);
+            this.dgvDanhMucThuoc.Name = "dgvDanhMucThuoc";
+            this.dgvDanhMucThuoc.ReadOnly = true;
+            this.dgvDanhMucThuoc.RowHeadersVisible = false;
+            this.dgvDanhMucThuoc.RowHeadersWidth = 51;
+            this.dgvDanhMucThuoc.RowTemplate.Height = 24;
+            this.dgvDanhMucThuoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDanhMucThuoc.Size = new System.Drawing.Size(889, 410);
+            this.dgvDanhMucThuoc.TabIndex = 1;
             // 
             // txtTimkiem
             // 
@@ -146,6 +124,21 @@
             this.btXoa.Text = "Xóa";
             this.btXoa.UseVisualStyleBackColor = true;
             // 
+            // btTimkiem
+            // 
+            this.btTimkiem.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btTimkiem.BackgroundImage = global::BenhVienS.Properties.Resources.Search_White_Transparent__Search_Icon__Search_Icons__Search_Clipart__Magnifying_Glass_PNG_Image_For_Free_Download_removebg_preview;
+            this.btTimkiem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btTimkiem.FlatAppearance.BorderSize = 0;
+            this.btTimkiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTimkiem.ImageKey = "(none)";
+            this.btTimkiem.Location = new System.Drawing.Point(493, 67);
+            this.btTimkiem.Name = "btTimkiem";
+            this.btTimkiem.Size = new System.Drawing.Size(42, 27);
+            this.btTimkiem.TabIndex = 6;
+            this.btTimkiem.UseVisualStyleBackColor = false;
+            // 
             // ucDanhMucThuoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -162,7 +155,7 @@
             this.Name = "ucDanhMucThuoc";
             this.Size = new System.Drawing.Size(907, 603);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDonThuoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDanhMucThuoc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,7 +166,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView dgvDonThuoc;
+        private System.Windows.Forms.DataGridView dgvDanhMucThuoc;
         private System.Windows.Forms.Button btTimkiem;
         private System.Windows.Forms.TextBox txtTimkiem;
         private System.Windows.Forms.Button btThem;
