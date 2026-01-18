@@ -148,6 +148,11 @@ namespace BenhVienS
         {
 
         }
+
+        private void btcaidat_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

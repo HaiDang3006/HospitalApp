@@ -228,7 +228,6 @@
             // pictureBox10
             // 
             this.pictureBox10.BackColor = System.Drawing.Color.White;
-
             this.pictureBox10.Location = new System.Drawing.Point(479, 24);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(45, 28);
@@ -262,6 +261,7 @@
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.Color.White;
+            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.OIP_removebg_preview;
             this.pictureBox8.Location = new System.Drawing.Point(194, 17);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(53, 42);
@@ -294,6 +294,7 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.White;
+            this.pictureBox5.Image = global::BenhVienS.Properties.Resources.download_removebg_preview;
             this.pictureBox5.Location = new System.Drawing.Point(15, 17);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(57, 37);
@@ -914,6 +915,7 @@
             this.btcaidat.Text = "Cài đặt";
             this.btcaidat.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btcaidat.UseVisualStyleBackColor = false;
+            this.btcaidat.Click += new System.EventHandler(this.btcaidat_Click);
             // 
             // Form2
             // 
