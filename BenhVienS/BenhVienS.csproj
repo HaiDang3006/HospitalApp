@@ -302,6 +302,9 @@
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="kdthuoc.resx">
+      <DependentUpon>kdthuoc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
     </EmbeddedResource>
@@ -332,6 +335,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucQlilichkham.resx">
       <DependentUpon>ucQlilichkham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucqllichkham.resx">
+      <DependentUpon>ucqllichkham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucQuanlibenhnhan.resx">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
@@ -389,6 +395,7 @@
     <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_35_05 PM.png" />
     <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_50_57 PM.png" />
     <Content Include="Resources\checked.png" />
+    <None Include="Resources\checked2.png" />
     <Content Include="Resources\doctor.png" />
     <Content Include="Resources\doctor1.png" />
     <Content Include="Resources\doctor2.png" />
@@ -439,6 +446,7 @@
     <Content Include="Resources\stethoscope.png" />
     <Content Include="Resources\user.png" />
     <Content Include="Resources\wall-clock.png" />
+    <None Include="Resources\wall-clock2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
