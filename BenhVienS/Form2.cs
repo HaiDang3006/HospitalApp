@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using static BenhVienS.Form2;
 
 namespace BenhVienS
 {
@@ -733,26 +734,34 @@ namespace BenhVienS
             return dt;
         }
 
-        private void dgvDanhsachkhoanchihomnay_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDanhsachkhoanchihomnay_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
 
-        private void chart1_Click(object sender, EventArgs e)
+        private void chartThongketaichinh_Click(object sender, EventArgs e)
         {
-            chart1.Series.Clear();
-            Series series = new Series("Doanh thu 7 ngày gần nhất");
-            series.ChartType = SeriesChartType.Column; // Dạng cột như hình
+            // Xóa dữ liệu cũ
+            chartThongketaichinh.Series.Clear();
+            chartThongketaichinh.Titles.Clear();
+            chartThongketaichinh.Titles.Add("Thống kê tài chính hôm nay");
 
-            // Giả sử lấy dữ liệu từ list hoặc DB
-            series.Points.AddXY("10/01", 75);
-            series.Points.AddXY("11/01", 82);
-            series.Points.AddXY("12/01", 70);
-            // ...
+            // Lấy dữ liệu an toàn
+            double doanhThu = 0, chiPhi = 0;
+            double.TryParse(txtTongdoanhthuhomnay.Text, out doanhThu);
+            double.TryParse(txtTongchihomnay.Text, out chiPhi);
 
-            chart1.Series.Add(series);
+            // Tạo Series
+            Series series = new Series("VND");
+            series.ChartType = SeriesChartType.Column; // Chọn kiểu biểu đồ cột
+
+            // Thêm dữ liệu
+            series.Points.AddXY("Doanh thu", doanhThu);
+            series.Points.AddXY("Chi phí", chiPhi);
+
+            // Thêm vào biểu đồ
+            chartThongketaichinh.Series.Add(series);
         }
-
 
         private void LoadDataThuChi()
         {
@@ -1216,6 +1225,270 @@ namespace BenhVienS
         private void btnTimkiemBS_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void pictureBox8_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTongdoanhthuhomnay_TextChanged(object sender, EventArgs e)
+        {
+            TinhLoiNhuan();
+        }
+
+        private void txtTongchihomnay_TextChanged(object sender, EventArgs e)
+        {
+            TinhLoiNhuan();
+        }
+
+        private void btnLoinhuanhomnay_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // 1. Lấy dữ liệu từ TextBox và xóa bỏ các ký tự không phải số (nếu có format tiền tệ)
+                string strDoanhThu = txtTongdoanhthuhomnay.Text.Trim();
+                string strChiPhi = txtTongchihomnay.Text.Trim();
+
+                // 2. Chuyển đổi sang kiểu decimal (phù hợp cho tiền tệ)
+                decimal doanhThu = string.IsNullOrEmpty(strDoanhThu) ? 0 : decimal.Parse(strDoanhThu);
+                decimal chiPhi = string.IsNullOrEmpty(strChiPhi) ? 0 : decimal.Parse(strChiPhi);
+
+                // 3. Tính toán
+                decimal loiNhuan = doanhThu - chiPhi;
+
+                // 4. Hiển thị kết quả (Ví dụ hiển thị lên một Label hoặc chính nó)
+                // Format "N0" để hiển thị dấu phân cách hàng nghìn
+                MessageBox.Show($"Lợi nhuận hôm nay là: {loiNhuan.ToString("N0")} VNĐ", "Kết quả");
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Vui lòng chỉ nhập số vào ô Doanh thu và Chi phí!", "Lỗi nhập liệu");
+            }
+
+        }
+        private void TinhLoiNhuan()
+        {
+            decimal.TryParse(txtTongdoanhthuhomnay.Text, out decimal dt);
+            decimal.TryParse(txtTongchihomnay.Text, out decimal cp);
+
+            decimal ketQua = dt - cp;
+            // Giả sử bạn có lblKetQua để hiển thị
+            // lblKetQua.Text = ketQua.ToString("N0"); 
+        }
+
+        private void btnTongsobacsi_Click(object sender, EventArgs e)
+        {
+            string query = "SELECT COUNT(*) FROM BacSi";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    btnTongsobacsi.Text = $"Tổng bác sĩ: {count}";
+                }
+            }
+        }
+
+
+        private void btntongbenhnhna_Click(object sender, EventArgs e)
+        {
+           
+            string query = "SELECT COUNT(*) FROM BenhNhan";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    btntongbenhnhan.Text = $"Tổng bệnh nhân: {count}";
+                }
+            }
+        }
+
+        
+
+        private void btnDoanhthu_Click(object sender, EventArgs e)
+        {
+            string query = "SELECT COUNT(*) FROM Doanhthu";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    btnDoanhthu.Text = $"Tổng doanh thu: {count}";
+                }
+            }
+        }
+
+        private void chartbaocaolichkham_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void chartsolichkhamdadatdahuy_Click(object sender, EventArgs e)
+        {
+            chartsolichkhamdadatdahuy.Series.Clear();
+            Series s = chartsolichkhamdadatdahuy.Series.Add("Trạng thái");
+            s.ChartType = SeriesChartType.Pie; // Biểu đồ tròn
+
+            // Giả sử lấy từ DB
+            int daDat = 80; // Truy vấn SQL: WHERE TrangThai = 'DaDat'
+            int daHuy = 20; // Truy vấn SQL: WHERE TrangThai = 'DaHuy'
+
+            s.Points.AddXY("Đã đặt", daDat);
+            s.Points.AddXY("Đã hủy", daHuy);
+        }
+
+        private void chartThongketheodichvu_Click(object sender, EventArgs e)
+        {
+
+            chartThongketheodichvu.Series.Clear();
+            chartThongketheodichvu.Titles.Clear();
+            chartThongketheodichvu.Titles.Add("Thống kê Loại hình khám & Bảo hiểm");
+
+            // 2. Tạo Series cho nhóm Dịch vụ
+            Series seriesDichVu = chartThongketheodichvu.Series.Add("Loại hình khám");
+            seriesDichVu.ChartType = SeriesChartType.Column; // Biểu đồ cột
+
+            // Giả sử lấy số liệu từ hàm truy vấn (thay số bằng biến từ DB)
+            int soCaDichVu = 150;
+            int soCaThuong = 90;
+
+            seriesDichVu.Points.AddXY("Có Dịch vụ", soCaDichVu);
+            seriesDichVu.Points.AddXY("Không Dịch vụ", soCaThuong);
+
+            // 3. Tạo Series cho nhóm BHYT
+            Series seriesBHYT = chartThongketheodichvu.Series.Add("Bảo hiểm");
+            seriesBHYT.ChartType = SeriesChartType.Column;
+
+            int soCaBHYT = 200;
+            int soCaKhongBHYT = 40;
+
+            seriesBHYT.Points.AddXY("Có BHYT", soCaBHYT);
+            seriesBHYT.Points.AddXY("Không BHYT", soCaKhongBHYT);
+
+            // Thêm nhãn số liệu trên đầu cột
+            seriesDichVu.IsValueShownAsLabel = true;
+            seriesBHYT.IsValueShownAsLabel = true;
+        }
+
+        private void chartBaocaothuchi_Click(object sender, EventArgs e)
+        {
+            chartBaocaothuchi.Series.Clear();
+            chartBaocaothuchi.Titles.Clear();
+            chartBaocaothuchi.Titles.Add("Báo Cáo Thu Chi Theo Tháng");
+
+            // 2. Tạo Series cho Khoản Thu
+            Series seriesThu = chartBaocaothuchi.Series.Add("Tổng Thu");
+            seriesThu.ChartType = SeriesChartType.Column;
+            seriesThu.Color = Color.Green; // Màu xanh cho doanh thu
+
+            // 3. Tạo Series cho Khoản Chi
+            Series seriesChi = chartBaocaothuchi.Series.Add("Tổng Chi");
+            seriesChi.ChartType = SeriesChartType.Column;
+            seriesChi.Color = Color.Red; // Màu đỏ cho chi phí
+
+            // Giả sử lấy dữ liệu từ Database (Thay thế bằng các biến lấy từ SQL của bạn)
+            // Ví dụ: thống kê 3 tháng gần nhất
+            string[] months = { "Tháng 11", "Tháng 12", "Tháng 01" };
+            double[] dataThu = { 150000000, 185000000, 160000000 };
+            double[] dataChi = { 90000000, 110000000, 95000000 };
+
+            for (int i = 0; i < months.Length; i++)
+            {
+                seriesThu.Points.AddXY(months[i], dataThu[i]);
+                seriesChi.Points.AddXY(months[i], dataChi[i]);
+            }
+
+            // Hiển thị con số cụ thể trên mỗi cột
+            seriesThu.IsValueShownAsLabel = true;
+            seriesChi.IsValueShownAsLabel = true;
+
+            // Định dạng đơn vị tiền tệ cho nhãn (VNĐ)
+            seriesThu.LabelFormat = "{#,##0} VNĐ";
+            seriesChi.LabelFormat = "{#,##0} VNĐ";
+
+        }
+
+        private void chartBieudodoanhthu_Click(object sender, EventArgs e)
+        {
+            chartBieudodoanhthu.Series.Clear();
+            Series s = chartBieudodoanhthu.Series.Add("Doanh thu");
+            s.ChartType = SeriesChartType.Column; // Biểu đồ cột
+
+            // Ví dụ nạp dữ liệu thủ công hoặc từ DataTable
+            s.Points.AddXY("Tháng 1", 5000000);
+            s.Points.AddXY("Tháng 2", 7500000);
+            s.Points.AddXY("Tháng 3", 6200000);
+        }
+
+        private void chartBieudoluotkham_Click(object sender, EventArgs e)
+        {
+            chartBieudoluotkham.Series.Clear();
+            chartBieudoluotkham.Titles.Clear();
+            chartBieudoluotkham.Titles.Add("Biểu Đồ Xu Hướng Lượt Khám");
+
+            // 2. Tạo Series biểu đồ đường (Line Chart)
+            Series seriesLuotKham = chartBieudoluotkham.Series.Add("Số lượt khám");
+            seriesLuotKham.ChartType = SeriesChartType.Line; // Dạng đường kẻ
+            seriesLuotKham.BorderWidth = 3;
+            seriesLuotKham.MarkerStyle = MarkerStyle.Circle; // Thêm điểm chấm tròn
+            seriesLuotKham.MarkerSize = 8;
+            seriesLuotKham.Color = Color.DodgerBlue;
+
+            // 3. Dữ liệu giả lập (Bạn nên thay bằng dữ liệu từ SQL)
+            // Giả sử thống kê lượt khám trong 7 ngày gần nhất
+            string[] ngay = { "12/01", "13/01", "14/01", "15/01", "16/01", "17/01", "18/01" };
+            int[] soLuot = { 45, 32, 58, 70, 42, 25, 60 };
+
+            for (int i = 0; i < ngay.Length; i++)
+            {
+                seriesLuotKham.Points.AddXY(ngay[i], soLuot[i]);
+            }
+
+            // 4. Cấu hình thêm cho trục tọa độ
+            chartBieudoluotkham.ChartAreas[0].AxisX.Title = "Ngày";
+            chartBieudoluotkham.ChartAreas[0].AxisY.Title = "Số bệnh nhân";
+
+            // Hiển thị nhãn giá trị trên từng điểm
+            seriesLuotKham.IsValueShownAsLabel = true;
+        }
+
+        private void dateLocngay_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dateLocngay.Value.Date;
+        }
+
+        private void dateDenngay_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dateDenngay.Value.Date;
+        }
+
+        private void btnTimkiemngay_Click(object sender, EventArgs e)
+        {
+            DateTime tuNgay = dateLocngay.Value.Date;
+            DateTime denNgay = dateDenngay.Value.Date;
+
+            if (tuNgay > denNgay)
+            {
+                MessageBox.Show("Ngày bắt đầu không được lớn hơn ngày kết thúc!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // Câu lệnh SQL mẫu để lọc dữ liệu trong khoảng ngày
+            string query = $"SELECT * FROM KhoanChi WHERE NgayChi BETWEEN '{tuNgay:yyyy-MM-dd}' AND '{denNgay:yyyy-MM-dd}'";
+
+            // Gọi hàm thực thi SQL và đổ dữ liệu vào DataGridView
+            // dgvDanhsachkhoanchihomnay.DataSource = dataProvider.ExecuteQuery(query);
+
+            // Sau khi lọc xong, đừng quên cập nhật lại các biểu đồ để khớp với dữ liệu mới
+            // CapNhatTatCaBieuDo(tuNgay, denNgay);
         }
     }
 }
