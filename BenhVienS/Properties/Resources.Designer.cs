@@ -63,6 +63,16 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap _09e450ee99ad374d695f94a7548eed5f_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("09e450ee99ad374d695f94a7548eed5f-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap _17b4557bc883c78782564ec7283bf15a_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("17b4557bc883c78782564ec7283bf15a-removebg-preview", resourceCulture);
@@ -86,6 +96,16 @@ namespace BenhVienS.Properties {
         internal static System.Drawing.Bitmap _17b4557bc883c78782564ec7283bf15a_removebg_preview2 {
             get {
                 object obj = ResourceManager.GetObject("17b4557bc883c78782564ec7283bf15a-removebg-preview2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap _4a8bae08568f81029a018d1fdd439a4d_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("4a8bae08568f81029a018d1fdd439a4d-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,6 +196,16 @@ namespace BenhVienS.Properties {
         internal static System.Drawing.Bitmap business_continuity {
             get {
                 object obj = ResourceManager.GetObject("business-continuity", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap business_continuity1 {
+            get {
+                object obj = ResourceManager.GetObject("business-continuity1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
