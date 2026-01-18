@@ -36,7 +36,7 @@
             this.btSua = new System.Windows.Forms.Button();
             this.btThem = new System.Windows.Forms.Button();
             this.dgvQuanLyDonThuoc = new System.Windows.Forms.DataGridView();
-            this.txtTimkiem = new System.Windows.Forms.TextBox();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btTimkiem = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -94,6 +94,7 @@
             this.btXoa.TabIndex = 2;
             this.btXoa.Text = "Xóa";
             this.btXoa.UseVisualStyleBackColor = false;
+            this.btXoa.Click += new System.EventHandler(this.btXoa_Click);
             // 
             // btSua
             // 
@@ -105,6 +106,7 @@
             this.btSua.TabIndex = 1;
             this.btSua.Text = "Sửa";
             this.btSua.UseVisualStyleBackColor = false;
+            this.btSua.Click += new System.EventHandler(this.btSua_Click);
             // 
             // btThem
             // 
@@ -116,6 +118,7 @@
             this.btThem.TabIndex = 0;
             this.btThem.Text = "Thêm";
             this.btThem.UseVisualStyleBackColor = false;
+            this.btThem.Click += new System.EventHandler(this.btThem_Click);
             // 
             // dgvQuanLyDonThuoc
             // 
@@ -132,15 +135,15 @@
             this.dgvQuanLyDonThuoc.Size = new System.Drawing.Size(885, 393);
             this.dgvQuanLyDonThuoc.TabIndex = 0;
             // 
-            // txtTimkiem
+            // txtTimKiem
             // 
-            this.txtTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimkiem.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtTimkiem.Location = new System.Drawing.Point(6, 68);
-            this.txtTimkiem.Name = "txtTimkiem";
-            this.txtTimkiem.Size = new System.Drawing.Size(442, 30);
-            this.txtTimkiem.TabIndex = 7;
-            this.txtTimkiem.Text = "Nhập tên, mã thuốc";
+            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtTimKiem.Location = new System.Drawing.Point(6, 68);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(442, 30);
+            this.txtTimKiem.TabIndex = 7;
+            this.txtTimKiem.Text = "Nhập tên, mã thuốc";
             // 
             // btTimkiem
             // 
@@ -156,6 +159,7 @@
             this.btTimkiem.Size = new System.Drawing.Size(42, 27);
             this.btTimkiem.TabIndex = 8;
             this.btTimkiem.UseVisualStyleBackColor = false;
+            this.btTimkiem.Click += new System.EventHandler(this.btTimkiem_Click);
             // 
             // ucQuanLyDonThuoc
             // 
@@ -163,7 +167,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.Controls.Add(this.btTimkiem);
-            this.Controls.Add(this.txtTimkiem);
+            this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "ucQuanLyDonThuoc";
@@ -189,6 +193,6 @@
         private System.Windows.Forms.Button btSua;
         private System.Windows.Forms.Button btThem;
         private System.Windows.Forms.Button btXoa;
-        private System.Windows.Forms.TextBox txtTimkiem;
+        private System.Windows.Forms.TextBox txtTimKiem;
     }
 }
