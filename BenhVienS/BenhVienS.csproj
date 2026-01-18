@@ -115,6 +115,12 @@
     <Compile Include="frmBacsi.Designer.cs">
       <DependentUpon>frmBacsi.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmvaitro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmvaitro.Designer.cs">
+      <DependentUpon>frmvaitro.cs</DependentUpon>
+    </Compile>
     <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -313,6 +319,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBacsi.resx">
       <DependentUpon>frmBacsi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmvaitro.resx">
+      <DependentUpon>frmvaitro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
