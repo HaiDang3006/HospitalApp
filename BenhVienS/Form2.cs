@@ -428,10 +428,15 @@ namespace BenhVienS
             string ten = txtTimtenbacsi.Text.Trim();
 
             int maCK = 0;
-            if (cbChuyenkhoa.SelectedValue != null)
-                maCK = Convert.ToInt32(cbChuyenkhoa.SelectedValue);
+            
+            if (cbChuyenkhoa.SelectedValue != null && int.TryParse(cbChuyenkhoa.SelectedValue.ToString(), out int result))
+            {
+                maCK = result;
+            }
 
             LoadDanhSachBacSi(ten, maCK);
+
+           
         }
 
         private void LoadLichLamHomNay()
@@ -1051,12 +1056,37 @@ namespace BenhVienS
 
         private void btThemBS_Click(object sender, EventArgs e)
         {
-            
+            frmBacsi frm = new frmBacsi();
+            frm.State = "Them";
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LoadDanhSachBacSi(); // Load lại GridView ở Form2
+            }
         }
 
         private void btSuaBS_Click(object sender, EventArgs e)
         {
-            
+            if (dgvDanhsachbacsi.CurrentRow != null) // Nếu đã chọn một dòng trên GridView
+            {
+                frmBacsi frm = new frmBacsi();
+                frm.State = "Sua";
+
+                // Truyền dữ liệu từ dòng đang chọn sang Form con
+                frm.txtID.Text = dgvDanhsachbacsi.CurrentRow.Cells["ID"].Value.ToString();
+                frm.txtHoten.Text = dgvDanhsachbacsi.CurrentRow.Cells["HoTen"].Value.ToString();
+                frm.cbChuyenkhoa.Text = dgvDanhsachbacsi.CurrentRow.Cells["ChuyenKhoa"].Value.ToString();
+                frm.txtTrinhdo.Text = dgvDanhsachbacsi.CurrentRow.Cells["TrinhDo"].Value.ToString();
+                frm.txtKinhnghiem.Text = dgvDanhsachbacsi.CurrentRow.Cells["KinhNghiem"].Value.ToString();
+                frm.txtSDT.Text = dgvDanhsachbacsi.CurrentRow.Cells["SDT"].Value.ToString();
+                frm.txtEmail.Text = dgvDanhsachbacsi.CurrentRow.Cells["Email"].Value.ToString();
+
+                // ... truyền tiếp các trường khác
+
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadDanhSachBacSi();
+                }
+            }
         }
 
         private void btXoaBS_Click(object sender, EventArgs e)
@@ -1181,6 +1211,11 @@ namespace BenhVienS
 
             btLuuthongtin.Visible = false;
             btHuy.Visible = false;
+        }
+
+        private void btnTimkiemBS_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
