@@ -318,6 +318,23 @@
             this.pictureBox12 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
+            this.panel14 = new System.Windows.Forms.Panel();
+            this.txtnhaphoten = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
+            this.pictureBox20 = new System.Windows.Forms.PictureBox();
+            this.label37 = new System.Windows.Forms.Label();
+            this.panel15 = new System.Windows.Forms.Panel();
+            this.txthsbn = new System.Windows.Forms.TextBox();
+            this.labhsbn = new System.Windows.Forms.Label();
+            this.panel16 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.labdieutri = new System.Windows.Forms.Label();
+            this.panel17 = new System.Windows.Forms.Panel();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.labnmoi = new System.Windows.Forms.Label();
+            this.panel18 = new System.Windows.Forms.Panel();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.lbtongbn = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel4.SuspendLayout();
@@ -336,6 +353,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.tabPage2.SuspendLayout();
             this.tabQlibacsi.SuspendLayout();
             this.panel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -398,6 +416,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
+            this.panel14.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
+            this.panel15.SuspendLayout();
+            this.panel16.SuspendLayout();
+            this.panel17.SuspendLayout();
+            this.panel18.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -812,6 +836,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.panel14);
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -2964,6 +2989,199 @@
             this.pictureBox10.TabIndex = 1;
             this.pictureBox10.TabStop = false;
             // 
+            // panel14
+            // 
+            this.panel14.Controls.Add(this.txtnhaphoten);
+            this.panel14.Controls.Add(this.label36);
+            this.panel14.Controls.Add(this.pictureBox20);
+            this.panel14.Controls.Add(this.label37);
+            this.panel14.Controls.Add(this.panel15);
+            this.panel14.Controls.Add(this.panel16);
+            this.panel14.Controls.Add(this.panel17);
+            this.panel14.Controls.Add(this.panel18);
+            this.panel14.Location = new System.Drawing.Point(3, 3);
+            this.panel14.Name = "panel14";
+            this.panel14.Size = new System.Drawing.Size(1164, 161);
+            this.panel14.TabIndex = 9;
+            this.panel14.Paint += new System.Windows.Forms.PaintEventHandler(this.panel14_Paint);
+            // 
+            // txtnhaphoten
+            // 
+            this.txtnhaphoten.Location = new System.Drawing.Point(191, 81);
+            this.txtnhaphoten.Multiline = true;
+            this.txtnhaphoten.Name = "txtnhaphoten";
+            this.txtnhaphoten.Size = new System.Drawing.Size(198, 25);
+            this.txtnhaphoten.TabIndex = 6;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(30, 81);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(155, 25);
+            this.label36.TabIndex = 5;
+            this.label36.Text = "Nhập họ và tên :";
+            // 
+            // pictureBox20
+            // 
+            this.pictureBox20.Image = global::BenhVienS.Properties.Resources.download_removebg_preview3;
+            this.pictureBox20.Location = new System.Drawing.Point(3, 3);
+            this.pictureBox20.Name = "pictureBox20";
+            this.pictureBox20.Size = new System.Drawing.Size(71, 58);
+            this.pictureBox20.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox20.TabIndex = 4;
+            this.pictureBox20.TabStop = false;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(80, 17);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(199, 20);
+            this.label37.TabIndex = 3;
+            this.label37.Text = "QUẢN LÍ BỆNH NHÂN";
+            // 
+            // panel15
+            // 
+            this.panel15.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel15.Controls.Add(this.txthsbn);
+            this.panel15.Controls.Add(this.labhsbn);
+            this.panel15.Location = new System.Drawing.Point(1012, 17);
+            this.panel15.Name = "panel15";
+            this.panel15.Size = new System.Drawing.Size(189, 90);
+            this.panel15.TabIndex = 2;
+            // 
+            // txthsbn
+            // 
+            this.txthsbn.BackColor = System.Drawing.Color.DodgerBlue;
+            this.txthsbn.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txthsbn.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txthsbn.ForeColor = System.Drawing.Color.White;
+            this.txthsbn.Location = new System.Drawing.Point(76, 40);
+            this.txthsbn.Multiline = true;
+            this.txthsbn.Name = "txthsbn";
+            this.txthsbn.Size = new System.Drawing.Size(100, 40);
+            this.txthsbn.TabIndex = 1;
+            this.txthsbn.Text = "00";
+            this.txthsbn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labhsbn
+            // 
+            this.labhsbn.AutoSize = true;
+            this.labhsbn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labhsbn.ForeColor = System.Drawing.Color.White;
+            this.labhsbn.Location = new System.Drawing.Point(39, 14);
+            this.labhsbn.Name = "labhsbn";
+            this.labhsbn.Size = new System.Drawing.Size(138, 23);
+            this.labhsbn.TabIndex = 0;
+            this.labhsbn.Text = "Hồ sơ cập nhập";
+            // 
+            // panel16
+            // 
+            this.panel16.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel16.Controls.Add(this.textBox1);
+            this.panel16.Controls.Add(this.labdieutri);
+            this.panel16.Location = new System.Drawing.Point(818, 16);
+            this.panel16.Name = "panel16";
+            this.panel16.Size = new System.Drawing.Size(188, 90);
+            this.panel16.TabIndex = 2;
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.ForeColor = System.Drawing.Color.White;
+            this.textBox1.Location = new System.Drawing.Point(45, 50);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(100, 40);
+            this.textBox1.TabIndex = 2;
+            this.textBox1.Text = "00";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labdieutri
+            // 
+            this.labdieutri.AutoSize = true;
+            this.labdieutri.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labdieutri.ForeColor = System.Drawing.Color.White;
+            this.labdieutri.Location = new System.Drawing.Point(41, 14);
+            this.labdieutri.Name = "labdieutri";
+            this.labdieutri.Size = new System.Drawing.Size(119, 23);
+            this.labdieutri.TabIndex = 0;
+            this.labdieutri.Text = "Đang điều trị";
+            // 
+            // panel17
+            // 
+            this.panel17.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel17.Controls.Add(this.textBox2);
+            this.panel17.Controls.Add(this.labnmoi);
+            this.panel17.Location = new System.Drawing.Point(622, 16);
+            this.panel17.Name = "panel17";
+            this.panel17.Size = new System.Drawing.Size(190, 90);
+            this.panel17.TabIndex = 2;
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.Color.DodgerBlue;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox2.ForeColor = System.Drawing.Color.White;
+            this.textBox2.Location = new System.Drawing.Point(45, 50);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(100, 40);
+            this.textBox2.TabIndex = 3;
+            this.textBox2.Text = "00";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // labnmoi
+            // 
+            this.labnmoi.AutoSize = true;
+            this.labnmoi.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labnmoi.ForeColor = System.Drawing.Color.White;
+            this.labnmoi.Location = new System.Drawing.Point(41, 14);
+            this.labnmoi.Name = "labnmoi";
+            this.labnmoi.Size = new System.Drawing.Size(134, 23);
+            this.labnmoi.TabIndex = 0;
+            this.labnmoi.Text = "Bệnh nhân mới";
+            // 
+            // panel18
+            // 
+            this.panel18.BackColor = System.Drawing.Color.DodgerBlue;
+            this.panel18.Controls.Add(this.textBox3);
+            this.panel18.Controls.Add(this.lbtongbn);
+            this.panel18.Location = new System.Drawing.Point(419, 17);
+            this.panel18.Name = "panel18";
+            this.panel18.Size = new System.Drawing.Size(197, 90);
+            this.panel18.TabIndex = 1;
+            // 
+            // textBox3
+            // 
+            this.textBox3.BackColor = System.Drawing.Color.DodgerBlue;
+            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox3.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox3.ForeColor = System.Drawing.Color.White;
+            this.textBox3.Location = new System.Drawing.Point(46, 50);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(100, 40);
+            this.textBox3.TabIndex = 4;
+            this.textBox3.Text = "00";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // lbtongbn
+            // 
+            this.lbtongbn.AutoSize = true;
+            this.lbtongbn.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbtongbn.ForeColor = System.Drawing.Color.White;
+            this.lbtongbn.Location = new System.Drawing.Point(26, 14);
+            this.lbtongbn.Name = "lbtongbn";
+            this.lbtongbn.Size = new System.Drawing.Size(166, 23);
+            this.lbtongbn.TabIndex = 0;
+            this.lbtongbn.Text = "Tổng số bệnh nhân";
+            // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -2998,6 +3216,7 @@
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.tabPage2.ResumeLayout(false);
             this.tabQlibacsi.ResumeLayout(false);
             this.tabQlibacsi.PerformLayout();
             this.panel9.ResumeLayout(false);
@@ -3073,6 +3292,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
+            this.panel14.ResumeLayout(false);
+            this.panel14.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
+            this.panel15.ResumeLayout(false);
+            this.panel15.PerformLayout();
+            this.panel16.ResumeLayout(false);
+            this.panel16.PerformLayout();
+            this.panel17.ResumeLayout(false);
+            this.panel17.PerformLayout();
+            this.panel18.ResumeLayout(false);
+            this.panel18.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -3311,5 +3541,22 @@
         private System.Windows.Forms.DataGridViewComboBoxColumn cbDV;
         private System.Windows.Forms.DataGridViewComboBoxColumn cbBHYT;
         private System.Windows.Forms.DataGridViewTextBoxColumn txtDongia;
+        private System.Windows.Forms.Panel panel14;
+        private System.Windows.Forms.TextBox txtnhaphoten;
+        private System.Windows.Forms.Label label36;
+        private System.Windows.Forms.PictureBox pictureBox20;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Panel panel15;
+        private System.Windows.Forms.TextBox txthsbn;
+        private System.Windows.Forms.Label labhsbn;
+        private System.Windows.Forms.Panel panel16;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label labdieutri;
+        private System.Windows.Forms.Panel panel17;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label labnmoi;
+        private System.Windows.Forms.Panel panel18;
+        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.Label lbtongbn;
     }
 }

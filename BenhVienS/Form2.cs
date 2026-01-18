@@ -1490,6 +1490,11 @@ namespace BenhVienS
             // Sau khi lọc xong, đừng quên cập nhật lại các biểu đồ để khớp với dữ liệu mới
             // CapNhatTatCaBieuDo(tuNgay, denNgay);
         }
+
+        private void panel14_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
 
