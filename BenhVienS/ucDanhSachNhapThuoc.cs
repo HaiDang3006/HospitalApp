@@ -47,6 +47,8 @@ namespace BenhVienS
                     dgvDanhSachNhapThuoc.Columns["SoLuongTon"].HeaderText = "Số Lượng";
                     dgvDanhSachNhapThuoc.Columns["GiaNhap"].HeaderText = "Giá Nhập";
                     dgvDanhSachNhapThuoc.Columns["TongTien"].HeaderText = "Thành Tiền";
+                    dgvDanhSachNhapThuoc.Columns["NgayNhap"].HeaderText = "Ngày Nhập";
+                    dgvDanhSachNhapThuoc.Columns["NgayHetHan"].HeaderText = "Ngày Hết Hạn";
                 }
             }
             catch (Exception ex)

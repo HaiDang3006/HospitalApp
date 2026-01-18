@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,7 @@ namespace BenhVienS
                 panelMenu.Controls.Add(leftBorderBtn); // Thêm vào panelMenu (bạn nhớ đặt tên panel chứa menu là panelMenu nhé)
                 
             }
+        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENS;Trusted_Connection=True;TrustServerCertificate=True;";
         private void showControl(Control control)
         {
 
@@ -121,15 +123,88 @@ namespace BenhVienS
             ucCD uc = new ucCD();
             showControl(uc);
         }
-
-        private void dgvThuocSapHetHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void LoadDashboardStats()
         {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
 
+                    // 1. Tổng số loại thuốc
+                    string queryTotal = "SELECT COUNT(*) FROM Thuoc";
+                    SqlCommand cmd1 = new SqlCommand(queryTotal, conn);
+                    lbTongSoThuoc.Text = cmd1.ExecuteScalar().ToString();
+
+                    // 2. Thuốc sắp hết hạn (trong vòng 30 ngày)
+                    string queryExpiry = "SELECT COUNT(*) FROM Thuoc WHERE HanSuDung <= DATEADD(day, 30, GETDATE())";
+                    SqlCommand cmd2 = new SqlCommand(queryExpiry, conn);
+                    lbThuocSapHetHan.Text = cmd2.ExecuteScalar().ToString();
+
+                    // 3. Thuốc sắp hết hàng (Số lượng tồn < 10)
+                    string queryStock = "SELECT COUNT(*) FROM TonKhoThuoc WHERE SoLuongTon < 10";
+                    SqlCommand cmd3 = new SqlCommand(queryStock, conn);
+                    lbThuocSapHetHang.Text = cmd3.ExecuteScalar().ToString();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi kết nối: " + ex.Message);
+                }
+            }
         }
-
-        private void dgvThuocSapHetHan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public void LoadAllData()
         {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
 
+                    // 1. Danh Mục Thuốc (Bảng bên trái - Trên)
+                    // Lấy dữ liệu từ bảng Thuoc
+                    string sqlDanhMuc = "SELECT MaThuoc, TenThuoc, HoatChat, DonViTinh, GiaBan FROM Thuoc";
+                    SqlDataAdapter da1 = new SqlDataAdapter(sqlDanhMuc, conn);
+                    DataTable dt1 = new DataTable();
+                    da1.Fill(dt1);
+                    dgvDanhMucThuoc.DataSource = dt1;
+
+                    // 2. Thuốc Sắp Hết Hàng (Bảng bên phải - Trên)
+                    // Liên kết bảng Thuoc và TonKhoThuoc để lấy số lượng tồn
+                    string sqlSapHetHang = @"SELECT T.TenThuoc, TK.SoLuongTon, T.DonViTinh 
+                                   FROM Thuoc T 
+                                   JOIN TonKhoThuoc TK ON T.MaThuoc = TK.MaThuoc 
+                                   WHERE TK.SoLuongTon < 10";
+                    SqlDataAdapter da2 = new SqlDataAdapter(sqlSapHetHang, conn);
+                    DataTable dt2 = new DataTable();
+                    da2.Fill(dt2);
+                    dgvThuocSapHetHang.DataSource = dt2;
+
+                    // 3. Đơn Thuốc Gần Đây (Bảng bên trái - Dưới)
+                    // Liên kết DonThuoc -> PhieuKham -> LichHen -> BenhNhan
+                    string sqlDonThuoc = @"SELECT TOP 10 DT.MaDonThuoc, BN.HoTen, DT.NgayKeDon, DT.TrangThai 
+                                 FROM DonThuoc DT 
+                                 JOIN PhieuKham PK ON DT.MaPhieuKham = PK.MaPhieuKham 
+                                 JOIN LichHen LH ON PK.MaLichHen = LH.MaLichHen 
+                                 JOIN BenhNhan BN ON LH.MaBenhNhan = BN.MaBenhNhan 
+                                 ORDER BY DT.NgayKeDon DESC";
+                    SqlDataAdapter da3 = new SqlDataAdapter(sqlDonThuoc, conn);
+                    DataTable dt3 = new DataTable();
+                    da3.Fill(dt3);
+                    dgvDonThuocGanDay.DataSource = dt3;
+
+                    // 4. Thuốc Sắp Hết Hạn (Bảng bên phải - Dưới)
+                    // Lọc các thuốc có HanSuDung trong vòng 30 ngày tới
+                    string sqlSapHetHan = "SELECT TenThuoc, HanSuDung, LoaiThuoc FROM Thuoc WHERE HanSuDung <= DATEADD(day, 30, GETDATE())";
+                    SqlDataAdapter da4 = new SqlDataAdapter(sqlSapHetHan, conn);
+                    DataTable dt4 = new DataTable();
+                    da4.Fill(dt4);
+                    dgvThuocSapHetHan.DataSource = dt4;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message);
+                }
+            }
         }
     }
 }
