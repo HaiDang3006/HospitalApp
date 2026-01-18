@@ -39,13 +39,14 @@ namespace BenhVienS
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
-                    dgvDonThuoc.DataSource = dt;
+                    dgvDanhSachNhapThuoc.DataSource = dt;
 
                     // Gán tiêu đề cột
-                    dgvDonThuoc.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
-                    dgvDonThuoc.Columns["SoLuongTon"].HeaderText = "Số Lượng";
-                    dgvDonThuoc.Columns["GiaNhap"].HeaderText = "Giá Nhập";
-                    dgvDonThuoc.Columns["TongTien"].HeaderText = "Thành Tiền";
+                    dgvDanhSachNhapThuoc.Columns["MaTonKho"].HeaderText = "Mã Tồn Kho";
+                    dgvDanhSachNhapThuoc.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
+                    dgvDanhSachNhapThuoc.Columns["SoLuongTon"].HeaderText = "Số Lượng";
+                    dgvDanhSachNhapThuoc.Columns["GiaNhap"].HeaderText = "Giá Nhập";
+                    dgvDanhSachNhapThuoc.Columns["TongTien"].HeaderText = "Thành Tiền";
                 }
             }
             catch (Exception ex)
