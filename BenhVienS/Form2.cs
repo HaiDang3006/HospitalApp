@@ -1491,7 +1491,12 @@ namespace BenhVienS
             // CapNhatTatCaBieuDo(tuNgay, denNgay);
         }
 
+
         private void panel14_Paint(object sender, PaintEventArgs e)
+        { }
+
+        private void bthem_Click(object sender, EventArgs e)
+
         {
 
         }
