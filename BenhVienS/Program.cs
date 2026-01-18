@@ -16,7 +16,8 @@ namespace BenhVienS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new caidat());
+            Application.Run(new Form2());
+
         }
     }
 }

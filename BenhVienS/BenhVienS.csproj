@@ -85,12 +85,6 @@
     <Compile Include="Dangnhap.Designer.cs">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucdoimkadmin.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ucdoimkadmin.Designer.cs">
-      <DependentUpon>ucdoimkadmin.cs</DependentUpon>
-    </Compile>
     <Compile Include="dskham.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -114,6 +108,12 @@
     </Compile>
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmBacsi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBacsi.Designer.cs">
+      <DependentUpon>frmBacsi.cs</DependentUpon>
     </Compile>
     <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -260,12 +260,6 @@
     <Compile Include="ucqllichkham.Designer.cs">
       <DependentUpon>ucqllichkham.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucqltaikhoanvaphanquyen.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucqltaikhoanvaphanquyen.Designer.cs">
-      <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
-    </Compile>
     <Compile Include="ucQuanlibenhnhan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -277,12 +271,6 @@
     </Compile>
     <Compile Include="ucQuanLyDonThuoc.Designer.cs">
       <DependentUpon>ucQuanLyDonThuoc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ucthongbao.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucthongbao.Designer.cs">
-      <DependentUpon>ucthongbao.cs</DependentUpon>
     </Compile>
     <Compile Include="ucttbenhnhan.cs">
       <SubType>UserControl</SubType>
@@ -314,14 +302,17 @@
     <EmbeddedResource Include="Dangnhap.resx">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucdoimkadmin.resx">
-      <DependentUpon>ucdoimkadmin.cs</DependentUpon>
+    <EmbeddedResource Include="dskham.resx">
+      <DependentUpon>dskham.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBacsi.resx">
+      <DependentUpon>frmBacsi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
@@ -354,14 +345,8 @@
     <EmbeddedResource Include="ucQlilichkham.resx">
       <DependentUpon>ucQlilichkham.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucqltaikhoanvaphanquyen.resx">
-      <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ucQuanlibenhnhan.resx">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucthongbao.resx">
-      <DependentUpon>ucthongbao.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="benhvienvsDataSet.xsc">
       <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
@@ -399,9 +384,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\09e450ee99ad374d695f94a7548eed5f-removebg-preview.png" />
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview.png" />
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview1.png" />
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview2.png" />
+    <None Include="Resources\4a8bae08568f81029a018d1fdd439a4d-removebg-preview.png" />
     <Content Include="Resources\5248a67978b9ac609717e0cdd691c7a9-removebg-preview.png" />
     <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview.png" />
     <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview1.png" />
