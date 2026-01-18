@@ -891,17 +891,7 @@ namespace BenhVienS
 
         private void comboBox1_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            string selectedRange = comboBox1.SelectedItem.ToString();
-
-            if (selectedRange == "Tháng này")
-            {
-                // Gọi hàm truy vấn SQL với điều kiện WHERE Month(Ngay) = Month(GETDATE())
-                UpdateChartsByTime("ThangNay");
-            }
-            else if (selectedRange == "Hôm nay")
-            {
-                UpdateChartsByTime("HomNay");
-            }
+           
         }
 
         private void chartThongkelichkham_Click(object sender, EventArgs e)
@@ -1061,23 +1051,17 @@ namespace BenhVienS
 
         private void btThemBS_Click(object sender, EventArgs e)
         {
-            frmThemBS f = new frmThemBS("THÊM THÔNG TIN BÁC SĨ");
-            f.ShowDialog();
-            LoadDanhSachBacSi();
+            
         }
 
         private void btSuaBS_Click(object sender, EventArgs e)
         {
-            frmThemBS f = new frmThemBS("SỬA THÔNG TIN BÁC SĨ");
-
-        
-            LoadDanhSachBacSi();
+            
         }
 
         private void btXoaBS_Click(object sender, EventArgs e)
         {
-            frmThemBS f = new frmThemBS("XÓA THÔNG TIN BÁC SĨ");
-            f.ShowDialog();
+            
             LoadDanhSachBacSi();
         }
 

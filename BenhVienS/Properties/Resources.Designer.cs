@@ -286,6 +286,16 @@ namespace BenhVienS.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap doctor11 {
+            get {
+                object obj = ResourceManager.GetObject("doctor11", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap doctor2 {
             get {
                 object obj = ResourceManager.GetObject("doctor2", resourceCulture);

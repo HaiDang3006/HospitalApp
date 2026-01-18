@@ -296,6 +296,9 @@
     <EmbeddedResource Include="Dangnhap.resx">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dskham.resx">
+      <DependentUpon>dskham.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
