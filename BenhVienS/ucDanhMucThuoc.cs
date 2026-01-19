@@ -24,143 +24,318 @@ namespace BenhVienS
         // Hàm tải dữ liệu lên DataGridView
         public void LoadData()
         {
-            try
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                try
                 {
-                    conn.Open();
-                    string query = "SELECT MaThuoc, TenThuoc, HoatChat, DonViTinh, LoaiThuoc, GiaBan FROM Thuoc WHERE TrangThai = N'ConHang'";
+                    // Truy vấn đúng các cột bạn yêu cầu
+                    string query = @"SELECT TenThuoc, HoatChat, DonViTinh, LoaiThuoc, 
+                             GiaNhap, GiaBan, ApDungBHYT, TrangThai, MaThuoc 
+                             FROM Thuoc";
+
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     da.Fill(dt);
 
                     dgvDanhMucThuoc.DataSource = dt;
+                    // 2. Định dạng giao diện các cột
+                    DinhDangLuoi();
 
-                    // --- THÊM 2 DÒNG NÀY ĐỂ NHẬP LIỆU ĐƯỢC ---
-                    dgvDanhMucThuoc.AllowUserToAddRows = true;
-                    dgvDanhMucThuoc.ReadOnly = false;
-                    // ----------------------------------------
-
-                    // Đặt tên Header an toàn
-                    if (dgvDanhMucThuoc.Columns.Count > 0)
-                    {
-                        dgvDanhMucThuoc.Columns["MaThuoc"].HeaderText = "Mã Thuốc";
-                        dgvDanhMucThuoc.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
-                        dgvDanhMucThuoc.Columns["HoatChat"].HeaderText = "Hoạt Chất";
-                        dgvDanhMucThuoc.Columns["DonViTinh"].HeaderText = "Đơn Vị Tính";
-                        dgvDanhMucThuoc.Columns["LoaiThuoc"].HeaderText = "Loại Thuốc";
-                        dgvDanhMucThuoc.Columns["GiaBan"].HeaderText = "Giá Bán";
-                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tải danh mục thuốc: " + ex.Message, "Thông báo");
+                }
             }
         }
 
+        private void DinhDangLuoi()
+        {
+            if (dgvDanhMucThuoc.Columns.Count > 0)
+            {
+                // Đặt tên tiêu đề tiếng Việt
+                dgvDanhMucThuoc.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
+                dgvDanhMucThuoc.Columns["HoatChat"].HeaderText = "Hoạt Chất";
+                dgvDanhMucThuoc.Columns["DonViTinh"].HeaderText = "ĐVT";
+                dgvDanhMucThuoc.Columns["LoaiThuoc"].HeaderText = "Loại";
+                dgvDanhMucThuoc.Columns["GiaNhap"].HeaderText = "Giá Nhập";
+                dgvDanhMucThuoc.Columns["GiaBan"].HeaderText = "Giá Bán";
+                dgvDanhMucThuoc.Columns["ApDungBHYT"].HeaderText = "BHYT";
+                dgvDanhMucThuoc.Columns["TrangThai"].HeaderText = "Trạng Thái";
+
+                // Ẩn mã thuốc nếu không cần hiển thị cho người dùng
+                if (dgvDanhMucThuoc.Columns.Contains("MaThuoc"))
+                    dgvDanhMucThuoc.Columns["MaThuoc"].Visible = false;
+
+                // Định dạng tiền tệ cho GiaNhap và GiaBan (Ví dụ: 100,000)
+                dgvDanhMucThuoc.Columns["GiaNhap"].DefaultCellStyle.Format = "N0";
+                dgvDanhMucThuoc.Columns["GiaBan"].DefaultCellStyle.Format = "N0";
+
+                // Để cột ApDungBHYT có thể tích chọn trực tiếp trên lưới
+                dgvDanhMucThuoc.Columns["ApDungBHYT"].ReadOnly = false;
+
+                // Tự động căn chỉnh chiều rộng cột
+                dgvDanhMucThuoc.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
         private void btThem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                // Lấy dòng người dùng vừa nhập (dòng sát cuối)
-                int index = dgvDanhMucThuoc.Rows.Count - 2;
-                if (index < 0) return;
-                DataGridViewRow row = dgvDanhMucThuoc.Rows[index];
+            // 1. Kết thúc việc gõ trên lưới để hệ thống ghi nhận giá trị cuối cùng
+            dgvDanhMucThuoc.EndEdit();
 
-                using (SqlConnection conn = new SqlConnection(connectionString))
+            // 2. Xác định dòng bạn đang đứng (thường là dòng bạn vừa gõ xong)
+            DataGridViewRow row = dgvDanhMucThuoc.CurrentRow;
+
+            if (row == null || row.IsNewRow)
+            {
+                MessageBox.Show("Hãy nhấp vào dòng trống cuối cùng của lưới và gõ thông tin trước!", "Thông báo");
+                return;
+            }
+
+            // 3. Kiểm tra dữ liệu bắt buộc (ví dụ Tên thuốc không được để trống)
+            if (row.Cells["TenThuoc"].Value == null || string.IsNullOrWhiteSpace(row.Cells["TenThuoc"].Value.ToString()))
+            {
+                MessageBox.Show("Vui lòng nhập Tên thuốc vào lưới trước khi nhấn Lưu!", "Lỗi");
+                return;
+            }
+
+            // 4. Thực hiện Lưu vào Database
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
                 {
                     conn.Open();
-                    // KHÔNG liệt kê MaThuoc trong câu lệnh INSERT
-                    string sql = @"INSERT INTO Thuoc (TenThuoc, HoatChat, DonViTinh, LoaiThuoc, GiaBan, TrangThai) 
-                           VALUES (@ten, @hc, @dvt, @loai, @gia, N'ConHang')";
+                    string query = @"INSERT INTO Thuoc (TenThuoc, HoatChat, DonViTinh, LoaiThuoc, GiaNhap, GiaBan, ApDungBHYT, TrangThai) 
+                             VALUES (@Ten, @HoatChat, @DVT, @Loai, @GiaN, @GiaB, @BHYT, @TrangThai)";
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    // Bỏ cmd.Parameters cho MaThuoc
-                    cmd.Parameters.AddWithValue("@ten", row.Cells["TenThuoc"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@hc", row.Cells["HoatChat"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@dvt", row.Cells["DonViTinh"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@loai", row.Cells["LoaiThuoc"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@gia", row.Cells["GiaBan"].Value ?? 0);
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Lấy dữ liệu từ các ô (Cells) của dòng bạn đang đứng
+                        cmd.Parameters.AddWithValue("@Ten", row.Cells["TenThuoc"].Value?.ToString() ?? "");
+                        cmd.Parameters.AddWithValue("@HoatChat", row.Cells["HoatChat"].Value?.ToString() ?? "");
+                        cmd.Parameters.AddWithValue("@DVT", row.Cells["DonViTinh"].Value?.ToString() ?? "");
+                        cmd.Parameters.AddWithValue("@Loai", row.Cells["LoaiThuoc"].Value?.ToString() ?? "");
 
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Thêm thành công! Mã thuốc sẽ tự động được cấp.");
-                    LoadData();
+                        decimal giaN = 0, giaB = 0;
+                        decimal.TryParse(row.Cells["GiaNhap"].Value?.ToString(), out giaN);
+                        decimal.TryParse(row.Cells["GiaBan"].Value?.ToString(), out giaB);
+                        cmd.Parameters.AddWithValue("@GiaN", giaN);
+                        cmd.Parameters.AddWithValue("@GiaB", giaB);
+
+                        bool bhyt = false;
+                        if (row.Cells["ApDungBHYT"].Value != null)
+                            bool.TryParse(row.Cells["ApDungBHYT"].Value.ToString(), out bhyt);
+                        cmd.Parameters.AddWithValue("@BHYT", bhyt);
+
+                        cmd.Parameters.AddWithValue("@TrangThai", (dgvDanhMucThuoc.CurrentRow.Cells["TrangThai"].Value?.ToString().Trim().ToLower() == "hết hàng") ? "HetHang" : "ConHang");
+
+                        cmd.ExecuteNonQuery();
+
+                        MessageBox.Show("Đã lưu dữ liệu thành công vào hệ thống!", "Thành công");
+
+                        // 5. Quan trọng nhất: Tải lại dữ liệu để khi mở app lên vẫn thấy thuốc vừa thêm
+                        LoadData();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi lưu Database: " + ex.Message);
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }
         private void btSua_Click(object sender, EventArgs e)
         {
-            if (dgvDanhMucThuoc.CurrentRow == null || dgvDanhMucThuoc.CurrentRow.IsNewRow) return;
+            // 1. Kết thúc việc chỉnh sửa trên lưới để đảm bảo dữ liệu mới nhất được ghi nhận
+            dgvDanhMucThuoc.EndEdit();
 
-            try
+            // 2. Kiểm tra xem người dùng có đang chọn dòng nào hợp lệ không
+            if (dgvDanhMucThuoc.CurrentRow == null || dgvDanhMucThuoc.CurrentRow.IsNewRow)
             {
-                DataGridViewRow row = dgvDanhMucThuoc.CurrentRow;
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                MessageBox.Show("Vui lòng chọn một dòng thuốc cụ thể để sửa!", "Thông báo");
+                return;
+            }
+
+            DataGridViewRow row = dgvDanhMucThuoc.CurrentRow;
+
+            // 3. Lấy MaThuoc (Khóa chính) để biết cần sửa dòng nào trong SQL
+            // Lưu ý: Cột MaThuoc phải có trong DataSource của dgv (dù bạn có ẩn nó đi)
+            if (row.Cells["MaThuoc"].Value == null)
+            {
+                MessageBox.Show("Không tìm thấy mã thuốc để cập nhật!", "Lỗi");
+                return;
+            }
+            int maThuoc = Convert.ToInt32(row.Cells["MaThuoc"].Value);
+
+            // 4. Thực hiện cập nhật vào Database
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
                 {
                     conn.Open();
-                    string sql = @"UPDATE Thuoc 
-                           SET TenThuoc=@ten, HoatChat=@hc, DonViTinh=@dvt, LoaiThuoc=@loai, GiaBan=@gia 
-                           WHERE MaThuoc=@ma";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@ma", row.Cells["MaThuoc"].Value.ToString());
-                    cmd.Parameters.AddWithValue("@ten", row.Cells["TenThuoc"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@hc", row.Cells["HoatChat"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@dvt", row.Cells["DonViTinh"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@loai", row.Cells["LoaiThuoc"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@gia", row.Cells["GiaBan"].Value ?? 0);
+                    string query = @"UPDATE Thuoc 
+                             SET TenThuoc = @Ten, 
+                                 HoatChat = @HoatChat, 
+                                 DonViTinh = @DVT, 
+                                 LoaiThuoc = @Loai, 
+                                 GiaNhap = @GiaN, 
+                                 GiaBan = @GiaB, 
+                                 ApDungBHYT = @BHYT, 
+                                 TrangThai = @TrangThai
+                             WHERE MaThuoc = @Ma";
 
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Đã cập nhật thay đổi!");
-                    LoadData();
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Truyền tham số từ các ô trên dòng đang chọn
+                        cmd.Parameters.AddWithValue("@Ma", maThuoc);
+                        cmd.Parameters.AddWithValue("@Ten", row.Cells["TenThuoc"].Value?.ToString() ?? "");
+                        cmd.Parameters.AddWithValue("@HoatChat", row.Cells["HoatChat"].Value?.ToString() ?? "");
+                        cmd.Parameters.AddWithValue("@DVT", row.Cells["DonViTinh"].Value?.ToString() ?? "");
+                        cmd.Parameters.AddWithValue("@Loai", row.Cells["LoaiThuoc"].Value?.ToString() ?? "");
+
+                        // Xử lý kiểu số
+                        decimal giaN = 0, giaB = 0;
+                        decimal.TryParse(row.Cells["GiaNhap"].Value?.ToString(), out giaN);
+                        decimal.TryParse(row.Cells["GiaBan"].Value?.ToString(), out giaB);
+                        cmd.Parameters.AddWithValue("@GiaN", giaN);
+                        cmd.Parameters.AddWithValue("@GiaB", giaB);
+
+                        // Xử lý kiểu checkbox BHYT
+                        bool bhyt = false;
+                        if (row.Cells["ApDungBHYT"].Value != null)
+                            bool.TryParse(row.Cells["ApDungBHYT"].Value.ToString(), out bhyt);
+                        cmd.Parameters.AddWithValue("@BHYT", bhyt);
+
+                        // Lấy trạng thái từ lưới hoặc để mặc định
+                        cmd.Parameters.AddWithValue("@TrangThai", row.Cells["TrangThai"].Value?.ToString() ?? "ConHang");
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result > 0)
+                        {
+                            MessageBox.Show("Cập nhật thông tin thuốc thành công!", "Thành công");
+                            LoadData(); // Tải lại lưới để đồng bộ dữ liệu
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi cập nhật database: " + ex.Message);
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi khi sửa: " + ex.Message); }
         }
 
         private void btXoa_Click(object sender, EventArgs e)
         {
-            if (dgvDanhMucThuoc.CurrentRow == null || dgvDanhMucThuoc.CurrentRow.IsNewRow) return;
-
-            string ma = dgvDanhMucThuoc.CurrentRow.Cells["MaThuoc"].Value.ToString();
-            if (MessageBox.Show($"Bạn có chắc chắn muốn xóa thuốc {ma}?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            // 1. Kiểm tra xem người dùng có chọn dòng nào hợp lệ không
+            if (dgvDanhMucThuoc.CurrentRow == null || dgvDanhMucThuoc.CurrentRow.IsNewRow)
             {
-                try
+                MessageBox.Show("Vui lòng chọn loại thuốc cần xóa khỏi danh sách!", "Thông báo");
+                return;
+            }
+
+            // 2. Lấy thông tin MaThuoc và TenThuoc từ dòng đang chọn
+            DataGridViewRow row = dgvDanhMucThuoc.CurrentRow;
+            int maThuoc = Convert.ToInt32(row.Cells["MaThuoc"].Value);
+            string tenThuoc = row.Cells["TenThuoc"].Value?.ToString() ?? "này";
+
+            // 3. Hiển thị hộp thoại xác nhận (Warning) để tránh nhấn nhầm
+            DialogResult result = MessageBox.Show($"Bạn có chắc chắn muốn xóa thuốc '{tenThuoc}' không?\nLưu ý: Hành động này không thể hoàn tác.",
+                                                  "Xác nhận xóa",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    try
                     {
                         conn.Open();
-                        SqlCommand cmd = new SqlCommand("DELETE FROM Thuoc WHERE MaThuoc=@ma", conn);
-                        cmd.Parameters.AddWithValue("@ma", ma);
-                        cmd.ExecuteNonQuery();
-                        LoadData();
+
+                        // 4. Thực hiện lệnh DELETE
+                        // Lưu ý: Nếu thuốc đã có trong đơn thuốc cũ, SQL sẽ chặn xóa để bảo vệ dữ liệu.
+                        string query = "DELETE FROM Thuoc WHERE MaThuoc = @Ma";
+
+                        using (SqlCommand cmd = new SqlCommand(query, conn))
+                        {
+                            cmd.Parameters.AddWithValue("@Ma", maThuoc);
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Đã xóa thuốc thành công!", "Thành công");
+                                LoadData(); // Tải lại danh sách thuốc
+                            }
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+                        // Xử lý lỗi ràng buộc khóa ngoại (ví dụ: thuốc đã nằm trong DonThuoc hoặc ChiTietHoaDon)
+                        if (ex.Number == 547)
+                        {
+                            MessageBox.Show("Không thể xóa thuốc này vì nó đã được sử dụng trong các đơn thuốc hoặc hóa đơn của bệnh viện!\n" +
+                                            "Gợi ý: Hãy cập nhật Trạng thái sang 'NgungSuDung' thay vì xóa vĩnh viễn.",
+                                            "Lỗi ràng buộc dữ liệu",
+                                            MessageBoxButtons.OK,
+                                            MessageBoxIcon.Error);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Lỗi hệ thống: " + ex.Message);
+                        }
                     }
                 }
-                catch (Exception ex) { MessageBox.Show("Lỗi xóa: " + ex.Message); }
             }
         }
 
         private void btTimkiem_Click(object sender, EventArgs e)
         {
+            // 1. Lấy từ khóa từ TextBox và xóa khoảng trắng thừa
+            string keyword = txtTimKiem.Text.Trim();
 
-            try
+            // 2. Nếu ô tìm kiếm trống, tải lại toàn bộ danh mục thuốc
+            if (string.IsNullOrEmpty(keyword) || keyword == "Nhập mã đơn, họ tên bệnh nhân")
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                LoadData();
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
                 {
                     conn.Open();
-                    // Tìm theo mã hoặc tên thuốc
-                    string sql = @"SELECT MaThuoc, TenThuoc, HoatChat, DonViTinh, LoaiThuoc, GiaBan 
-                           FROM Thuoc 
-                           WHERE (MaThuoc LIKE @k OR TenThuoc LIKE @k) AND TrangThai = N'ConHang'";
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    da.SelectCommand.Parameters.AddWithValue("@k", "%" + txtTimKiem.Text.Trim() + "%");
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dgvDanhMucThuoc.DataSource = dt;
+
+                    // 3. Truy vấn tìm kiếm theo Tên thuốc hoặc Hoạt chất (sử dụng LIKE)
+                    string query = @"SELECT TenThuoc, HoatChat, DonViTinh, LoaiThuoc, 
+                             GiaNhap, GiaBan, ApDungBHYT, TrangThai, MaThuoc 
+                             FROM Thuoc 
+                             WHERE TenThuoc LIKE @keyword OR HoatChat LIKE @keyword";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        // Sử dụng %keyword% để tìm kiếm tương đối (chứa từ khóa)
+                        cmd.Parameters.AddWithValue("@keyword", "%" + keyword + "%");
+
+                        SqlDataAdapter da = new SqlDataAdapter(cmd);
+                        DataTable dt = new DataTable();
+                        da.Fill(dt);
+
+                        // 4. Hiển thị kết quả lên DataGridView
+                        dgvDanhMucThuoc.DataSource = dt;
+
+                        // Thông báo nếu không tìm thấy kết quả
+                        if (dt.Rows.Count == 0)
+                        {
+                            MessageBox.Show("Không tìm thấy thuốc nào khớp với từ khóa!", "Thông báo");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi tìm kiếm: " + ex.Message); }
         }
     }
 }
