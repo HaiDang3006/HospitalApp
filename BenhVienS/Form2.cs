@@ -1500,6 +1500,21 @@ namespace BenhVienS
         {
 
         }
+
+        private void txtnhaphoten_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage12_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
