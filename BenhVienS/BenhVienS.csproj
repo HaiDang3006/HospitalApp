@@ -278,6 +278,10 @@
     <Compile Include="uckedonthuoc.Designer.cs">
       <DependentUpon>uckedonthuoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucmkadmin.cs" />
+    <Compile Include="ucmkadmin.Designer.cs">
+      <DependentUpon>ucmkadmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucQlibacsi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -301,6 +305,12 @@
     </Compile>
     <Compile Include="ucqllichkham.Designer.cs">
       <DependentUpon>ucqllichkham.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucqltaikhoanvaphanquyen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucqltaikhoanvaphanquyen.Designer.cs">
+      <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
     </Compile>
     <Compile Include="ucQuanlibenhnhan.cs">
       <SubType>UserControl</SubType>
@@ -402,11 +412,17 @@
     <EmbeddedResource Include="TrangchuBVS.resx">
       <DependentUpon>TrangchuBVS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucmkadmin.resx">
+      <DependentUpon>ucmkadmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucQlibacsi.resx">
       <DependentUpon>ucQlibacsi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucQlilichkham.resx">
       <DependentUpon>ucQlilichkham.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucqltaikhoanvaphanquyen.resx">
+      <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucQuanlibenhnhan.resx">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
