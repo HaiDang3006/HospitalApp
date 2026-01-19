@@ -149,7 +149,7 @@
             this.btDSNT.Name = "btDSNT";
             this.btDSNT.Size = new System.Drawing.Size(218, 50);
             this.btDSNT.TabIndex = 19;
-            this.btDSNT.Text = "Danh Sách Nhập Thuốc";
+            this.btDSNT.Text = "QL TK Và HD Thuốc";
             this.btDSNT.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btDSNT.UseVisualStyleBackColor = false;
             this.btDSNT.Click += new System.EventHandler(this.btDSNT_Click);
