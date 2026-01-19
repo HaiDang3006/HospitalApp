@@ -13,97 +13,109 @@ namespace BenhVienS
 {
     public partial class Dangnhap : Form
     {
-        string connectionString =
-    @"Server=localhost\SQLEXPRESS02;
-      Database=HospitalManagementSystem;
-      Trusted_Connection=True;
-      TrustServerCertificate=True;";
-
+        
         public Dangnhap()
         {
             InitializeComponent();
-        }
+            InitPlaceholder();
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        }
+        private void InitPlaceholder()
         {
-
+            SetPlaceholder(txtEmail, "Email hoặc tên đăng nhập");
+            SetPlaceholder(txtPassword, "Mật khẩu", true);
         }
 
-        private void Dangnhap_Load(object sender, EventArgs e)
-        {
-            cobVaitro.Items.Add("ADMIN");
-            cobVaitro.Items.Add("Bác sĩ");
-            cobVaitro.Items.Add("Dược sĩ");
-            cobVaitro.Items.Add("Nhân viên");
-            cobVaitro.Items.Add("Bệnh nhân");
-            // Chọn mặc định mục đầu tiên
-            cobVaitro.SelectedIndex = 0;
-        }
 
-        private void textEmail_TextChanged(object sender, EventArgs e)
-        {
-
-        }
 
         private void btDangnhap_Click(object sender, EventArgs e)
         {
-            string email = txtEmail.Text.Trim();
-            string matKhau = txtPassword.Text.Trim();
+           
+        }
 
-            if (email == "" || matKhau == "")
+
+        private void SetPlaceholder(TextBox txt, string text, bool isPassword = false)
+        {
+            txt.Text = text;
+            txt.ForeColor = Color.Gray;
+            txt.Tag = text;
+
+            if (isPassword)
+                txt.UseSystemPasswordChar = false;
+        }
+
+
+        private void RemovePlaceholder(TextBox txt, bool isPassword = false)
+        {
+            if (txt.Text == txt.Tag.ToString())
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                txt.Text = "";
+                txt.ForeColor = Color.Black;
+
+                if (isPassword)
+                    txt.UseSystemPasswordChar = true;
+            }
+        }
+
+        private void AddPlaceholder(TextBox txt, bool isPassword = false)
+        {
+            if (string.IsNullOrWhiteSpace(txt.Text))
+            {
+                txt.Text = txt.Tag.ToString();
+                txt.ForeColor = Color.Gray;
+
+                if (isPassword)
+                    txt.UseSystemPasswordChar = false;
+            }
+        }
+
+        // ===== EMAIL =====
+        private void txtEmail_Enter(object sender, EventArgs e)
+        {
+            RemovePlaceholder(txtEmail);
+        }
+
+        private void txtEmail_Leave(object sender, EventArgs e)
+        {
+            AddPlaceholder(txtEmail);
+        }
+
+        // ===== PASSWORD =====
+        private void txtPassword_Enter(object sender, EventArgs e)
+        {
+            RemovePlaceholder(txtPassword, true);
+        }
+
+        private void txtPassword_Leave(object sender, EventArgs e)
+        {
+            AddPlaceholder(txtPassword, true);
+        }
+
+        // ===== BUTTON HOVER =====
+        private void btDangnhap_MouseEnter(object sender, EventArgs e)
+        {
+            btDangnhap.BackColor = Color.FromArgb(41, 128, 185);
+        }
+
+        private void btDangnhap_MouseLeave(object sender, EventArgs e)
+        {
+            btDangnhap.BackColor = Color.FromArgb(52, 152, 219);
+        }
+
+       
+
+        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            // Nếu đang là placeholder thì KHÔNG bật password char
+            if (txtPassword.ForeColor == Color.Gray)
+            {
+                txtPassword.UseSystemPasswordChar = false;
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                conn.Open();
-
-                string sql = @"
-            SELECT MaVaiTro 
-            FROM NguoiDung
-            WHERE Email = @Email AND MatKhau = @MatKhau";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@Email", email);
-                cmd.Parameters.AddWithValue("@MatKhau", matKhau);
-
-                object result = cmd.ExecuteScalar();
-
-                if (result == null)
-                {
-                    MessageBox.Show("Sai tài khoản hoặc mật khẩu");
-                    return;
-                }
-
-                int maVaiTro = Convert.ToInt32(result);
-
-                // ADMIN
-                if (maVaiTro == 1)
-                {
-                    Form2 f = new Form2();
-                    f.Show();
-                    this.Hide();
-                }
-                else
-                {
-                    MessageBox.Show("Bạn không có quyền Admin");
-                }
-            }
+            // Checked = hiện mật khẩu
+            txtPassword.UseSystemPasswordChar = !chkShowPassword.Checked;
         }
 
-        private void linkQuenMK_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            using (var forgotForm = new QuenMK())
-            {
-                forgotForm.ShowDialog(this);
-            }
-        }
-
-        private void cobVaitro_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
     }
 }
