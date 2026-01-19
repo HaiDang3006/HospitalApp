@@ -85,6 +85,7 @@
     <Compile Include="Dangnhap.Designer.cs">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="dbUtils.cs" />
     <Compile Include="dskham.cs">
       <SubType>UserControl</SubType>
     </Compile>
