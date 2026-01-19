@@ -325,6 +325,9 @@
     <EmbeddedResource Include="frmBacsi.resx">
       <DependentUpon>frmBacsi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="khbenh.resx">
+      <DependentUpon>khbenh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
     </EmbeddedResource>
@@ -427,6 +430,8 @@
     <Content Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview2.png" />
     <Content Include="Resources\document.png" />
     <Content Include="Resources\document1.png" />
+    <None Include="Resources\document3.png" />
+    <None Include="Resources\document4.png" />
     <Content Include="Resources\download-removebg-preview-removebg-preview.png" />
     <Content Include="Resources\download-removebg-preview-removebg-preview1.png" />
     <Content Include="Resources\download-removebg-preview.png" />
@@ -468,6 +473,8 @@
     <Content Include="Resources\settings.png" />
     <Content Include="Resources\stethoscope.png" />
     <Content Include="Resources\user.png" />
+    <None Include="Resources\user2.png" />
+    <None Include="Resources\user3.png" />
     <Content Include="Resources\wall-clock.png" />
     <None Include="Resources\wall-clock2.png" />
   </ItemGroup>

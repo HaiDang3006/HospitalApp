@@ -14,8 +14,10 @@ namespace BenhVienS
     {
         public khbenh()
         {
+
             InitializeComponent();
         }
+        
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -49,6 +51,13 @@ namespace BenhVienS
 
         private void tabPage1_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            hsbnhan hsbnhan = new hsbnhan();
+            showControl
 
         }
     }
