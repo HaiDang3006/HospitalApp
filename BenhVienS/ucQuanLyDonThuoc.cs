@@ -14,161 +14,154 @@ namespace BenhVienS
 {
     public partial class ucQuanLyDonThuoc : UserControl
     {
+        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENS;Trusted_Connection=True;TrustServerCertificate=True;";
         public ucQuanLyDonThuoc()
         {
             InitializeComponent();
-            LoadData();
-        }
-        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENS;Trusted_Connection=True;TrustServerCertificate=True;";
-        public void LoadData()
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    // Query lấy thông tin đơn thuốc kèm tên bệnh nhân từ bảng liên quan
-                    string query = @"SELECT 
-                                dt.MaDonThuoc AS [Mã Đơn], 
-                                bn.HoTen AS [Bệnh Nhân], 
-                                dt.NgayKeDon AS [Ngày Kê], 
-                                dt.TrangThai AS [Trạng Thái], 
-                                dt.LoiDan AS [Lời Dặn]
-                             FROM DonThuoc dt
-                             JOIN PhieuKham pk ON dt.MaPhieuKham = pk.MaPhieuKham
-                             JOIN LichHen lh ON pk.MaLichHen = lh.MaLichHen
-                             JOIN BenhNhan bn ON lh.MaBenhNhan = bn.MaBenhNhan
-                             ORDER BY dt.MaDonThuoc DESC"; // Đơn mới nhất lên đầu
 
-                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dgvQuanLyDonThuoc.DataSource = dt;
-                }
-            }
-            catch (Exception ex) { MessageBox.Show("Lỗi LoadData: " + ex.Message); }
-        }
-    
-        private void btThem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    // Câu lệnh INSERT vào bảng DonThuoc
-                    // Lưu ý: MaPhieuKham và MaBacSi trong DB của bạn là NOT NULL, 
-                    // nên cần có giá trị hợp lệ tồn tại trong bảng PhieuKham và BacSi.
-                    string query = @"INSERT INTO DonThuoc (MaPhieuKham, MaBacSi, LoiDan, TrangThai, NgayKeDon) 
-                             VALUES (@maPK, @maBS, @loidan, N'ChuaLay', GETDATE())";
-
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        // Thay 'txtLoiDan' bằng tên thực tế của ô nhập liệu trên Form của bạn
-                        // Nếu chưa có ô nhập, bạn có thể để tạm một chuỗi trống ""
-                        string noiDungLoiDan = "";
-                        if (this.Controls.ContainsKey("txtLoiDan"))
-                        {
-                            noiDungLoiDan = ((TextBox)this.Controls["txtLoiDan"]).Text;
-                        }
-
-                        cmd.Parameters.AddWithValue("@maPK", 1); // Cần thay bằng mã Phiếu Khám thực tế
-                        cmd.Parameters.AddWithValue("@maBS", 1); // Cần thay bằng mã Bác Sĩ thực tế
-                        cmd.Parameters.AddWithValue("@loidan", noiDungLoiDan);
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    MessageBox.Show("Thêm đơn thuốc thành công và mã đã tự động cập nhật!");
-                    LoadData(); // Cập nhật lại lưới hiển thị
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi: " + ex.Message + "\nLưu ý: Mã PhieuKham và BacSi phải tồn tại trong DB.");
-            }
         }
 
-        private void btSua_Click(object sender, EventArgs e)
+        private void ucQuanLyDonThuoc_Load(object sender, EventArgs e)
         {
-            if (dgvQuanLyDonThuoc.CurrentRow == null || dgvQuanLyDonThuoc.CurrentRow.IsNewRow) return;
-            try
-            {
-                DataGridViewRow row = dgvQuanLyDonThuoc.CurrentRow;
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    string sql = "UPDATE DonThuoc SET TrangThai=@tt, NgayKeDon=@ngay WHERE MaDonThuoc=@ma";
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@ma", row.Cells["MaDonThuoc"].Value);
-                    cmd.Parameters.AddWithValue("@tt", row.Cells["TrangThai"].Value ?? "");
-                    cmd.Parameters.AddWithValue("@ngay", row.Cells["NgayKeDon"].Value ?? DateTime.Now);
-                    cmd.ExecuteNonQuery();
-                    MessageBox.Show("Cập nhật thành công!");
-                    LoadData();
-                }
-            }
-            catch (Exception ex) { MessageBox.Show("Lỗi sửa: " + ex.Message); }
+            LoadDanhSachDonThuoc();
+            SetupGridAppearance();
         }
-
-        private void btXoa_Click(object sender, EventArgs e)
+        #region 1. Tải Danh Sách Đơn Thuốc (Master)
+        private void LoadDanhSachDonThuoc()
         {
-            if (dgvQuanLyDonThuoc.CurrentRow == null) return;
-
-            int maDon = Convert.ToInt32(dgvQuanLyDonThuoc.CurrentRow.Cells["Mã Đơn"].Value);
-
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa đơn thuốc này?", "Xác nhận",
-                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    {
-                        conn.Open();
-                        // Xóa chi tiết trước để tránh lỗi ràng buộc khóa ngoại (Foreign Key)
-                        string deleteDetails = "DELETE FROM ChiTietDonThuoc WHERE MaDonThuoc = @id";
-                        SqlCommand cmd1 = new SqlCommand(deleteDetails, conn);
-                        cmd1.Parameters.AddWithValue("@id", maDon);
-                        cmd1.ExecuteNonQuery();
-
-                        // Sau đó xóa đơn thuốc
-                        string deleteMaster = "DELETE FROM DonThuoc WHERE MaDonThuoc = @id";
-                        SqlCommand cmd2 = new SqlCommand(deleteMaster, conn);
-                        cmd2.Parameters.AddWithValue("@id", maDon);
-                        cmd2.ExecuteNonQuery();
-
-                        MessageBox.Show("Xóa thành công!");
-                        LoadData();
-                    }
-                }
-                catch (Exception ex) { MessageBox.Show("Lỗi xóa: " + ex.Message); }
-            }
-        }
-
-        private void btTimkiem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    string query = @"SELECT dt.MaDonThuoc AS [Mã Đơn], bn.HoTen AS [Bệnh Nhân], 
-                                    dt.NgayKeDon AS [Ngày Kê], dt.TrangThai AS [Trạng Thái], dt.LoiDan AS [Lời Dặn]
-                             FROM DonThuoc dt
-                             JOIN PhieuKham pk ON dt.MaPhieuKham = pk.MaPhieuKham
-                             JOIN LichHen lh ON pk.MaLichHen = lh.MaLichHen
-                             JOIN BenhNhan bn ON lh.MaBenhNhan = bn.MaBenhNhan
-                             WHERE bn.HoTen LIKE @key OR CAST(dt.MaDonThuoc AS VARCHAR) LIKE @key";
+                    // Truy vấn liên kết 5 bảng để lấy thông tin định danh
+                    string query = @"SELECT dt.MaDonThuoc, bn.HoTen AS TenBenhNhan, nd.HoTen AS TenBacSi, 
+                                     dt.NgayKeDon, dt.TrangThai, dt.MaPhieuKham
+                                     FROM DonThuoc dt
+                                     JOIN PhieuKham pk ON dt.MaPhieuKham = pk.MaPhieuKham
+                                     JOIN LichHen lh ON pk.MaLichHen = lh.MaLichHen
+                                     JOIN BenhNhan bn ON lh.MaBenhNhan = bn.MaBenhNhan
+                                     JOIN BacSi bs ON dt.MaBacSi = bs.MaBacSi
+                                     JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
+                                     ORDER BY dt.NgayKeDon DESC";
 
                     SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    // txtSearch là ô "Nhập tên, mã thuốc" trên giao diện của bạn
-                    da.SelectCommand.Parameters.AddWithValue("@key", "%" + txtTimKiem.Text.Trim() + "%");
-
                     DataTable dt = new DataTable();
                     da.Fill(dt);
-                    dgvQuanLyDonThuoc.DataSource = dt;
+                    dgvDonThuoc.DataSource = dt;
+
+                    // Định dạng tiêu đề tiếng Việt
+                    dgvDonThuoc.Columns["MaDonThuoc"].HeaderText = "Mã Đơn";
+                    dgvDonThuoc.Columns["TenBenhNhan"].HeaderText = "Bệnh Nhân";
+                    dgvDonThuoc.Columns["TenBacSi"].HeaderText = "Bác Sĩ Kê";
+                    dgvDonThuoc.Columns["NgayKeDon"].HeaderText = "Ngày Kê Đơn";
+                    dgvDonThuoc.Columns["TrangThai"].HeaderText = "Trạng Thái";
+                    dgvDonThuoc.Columns["MaPhieuKham"].Visible = false; // Ẩn mã phiếu khám
+                }
+                catch (Exception ex) { MessageBox.Show("Lỗi tải đơn thuốc: " + ex.Message); }
+            }
+        }
+        #endregion
+
+        #region 2. Tải Chi Tiết Đơn Thuốc (Detail)
+        private void dgvDonThuoc_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                int maDon = Convert.ToInt32(dgvDonThuoc.Rows[e.RowIndex].Cells["MaDonThuoc"].Value);
+
+                // Hiển thị thông tin lên Label minh họa
+                lbMaDon.Text = "Mã Phiếu: " + dgvDonThuoc.Rows[e.RowIndex].Cells["MaPhieuKham"].Value.ToString();
+                lbBenhNhan.Text = "BN: " + dgvDonThuoc.Rows[e.RowIndex].Cells["TenBenhNhan"].Value.ToString();
+
+                LoadChiTietDonThuoc(maDon);
+            }
+        }
+
+        private void LoadChiTietDonThuoc(int maDon)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = @"SELECT t.TenThuoc, ct.SoLuong, t.DonViTinh, ct.DonGia, ct.ThanhTien
+                                 FROM ChiTietDonThuoc ct
+                                 JOIN Thuoc t ON ct.MaThuoc = t.MaThuoc
+                                 WHERE ct.MaDonThuoc = @MaDon";
+
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                da.SelectCommand.Parameters.AddWithValue("@MaDon", maDon);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvChiTietDonThuoc.DataSource = dt;
+
+                // Tự động tính tổng tiền
+                decimal tongTien = 0;
+                foreach (DataRow row in dt.Rows) tongTien += Convert.ToDecimal(row["ThanhTien"]);
+                lbTongTien.Text = string.Format("{0:N0} VNĐ", tongTien);
+            }
+        }
+        #endregion
+
+        #region 3. Xác Nhận Xuất Thuốc (Transaction & Inventory)
+        private void btXacNhan_Click(object sender, EventArgs e)
+        {
+            if (dgvDonThuoc.CurrentRow == null) return;
+
+            int maDon = Convert.ToInt32(dgvDonThuoc.CurrentRow.Cells["MaDonThuoc"].Value);
+            string trangThai = dgvDonThuoc.CurrentRow.Cells["TrangThai"].Value.ToString();
+
+            if (trangThai == "DaLay")
+            {
+                MessageBox.Show("Đơn này đã được phát thuốc rồi!");
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                conn.Open();
+                SqlTransaction trans = conn.BeginTransaction();
+
+                try
+                {
+                    // 1. Lưu vào bảng XuatThuoc
+                    string sqlXuat = "INSERT INTO XuatThuoc (MaDonThuoc, MaDuocSi, MaQuayThuoc, NgayXuat) VALUES (@MaDon, 1, 1, GETDATE())";
+                    SqlCommand cmdXuat = new SqlCommand(sqlXuat, conn, trans);
+                    cmdXuat.Parameters.AddWithValue("@MaDon", maDon);
+                    cmdXuat.ExecuteNonQuery();
+
+                    // 2. Trừ tồn kho (Dựa trên MaThuoc trong ChiTietDonThuoc)
+                    string sqlUpdateKho = @"UPDATE TonKhoThuoc 
+                                            SET SoLuongTon = SoLuongTon - ct.SoLuong
+                                            FROM TonKhoThuoc tk
+                                            JOIN ChiTietDonThuoc ct ON tk.MaThuoc = ct.MaThuoc
+                                            WHERE ct.MaDonThuoc = @MaDon AND tk.MaQuayThuoc = 1";
+                    SqlCommand cmdKho = new SqlCommand(sqlUpdateKho, conn, trans);
+                    cmdKho.Parameters.AddWithValue("@MaDon", maDon);
+                    cmdKho.ExecuteNonQuery();
+
+                    // 3. Cập nhật trạng thái đơn
+                    string sqlDon = "UPDATE DonThuoc SET TrangThai = 'DaLay' WHERE MaDonThuoc = @MaDon";
+                    SqlCommand cmdDon = new SqlCommand(sqlDon, conn, trans);
+                    cmdDon.Parameters.AddWithValue("@MaDon", maDon);
+                    cmdDon.ExecuteNonQuery();
+
+                    trans.Commit();
+                    MessageBox.Show("Xuất thuốc thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadDanhSachDonThuoc();
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    MessageBox.Show("Lỗi hệ thống: " + ex.Message);
                 }
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi tìm kiếm: " + ex.Message); }
+        }
+            #endregion
+
+        private void SetupGridAppearance()
+        {
+            dgvDonThuoc.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvChiTietDonThuoc.ReadOnly = true;
+            dgvDonThuoc.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvChiTietDonThuoc.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
     }
-}
-
+    }
