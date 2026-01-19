@@ -31,6 +31,7 @@
             System.Windows.Forms.Button bthuy;
             this.panel1 = new System.Windows.Forms.Panel();
             this.gbttbn = new System.Windows.Forms.GroupBox();
+            this.rdoNu = new System.Windows.Forms.RadioButton();
             this.rdoNam = new System.Windows.Forms.RadioButton();
             this.bgbhyt = new System.Windows.Forms.GroupBox();
             this.dtpBHYT_Den = new System.Windows.Forms.DateTimePicker();
@@ -62,7 +63,6 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.btluu = new System.Windows.Forms.Button();
             this.lblttbn = new System.Windows.Forms.Label();
-            this.rdoNu = new System.Windows.Forms.RadioButton();
             bthuy = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.gbttbn.SuspendLayout();
@@ -81,6 +81,7 @@
             bthuy.TabIndex = 4;
             bthuy.Text = "Hủy";
             bthuy.UseVisualStyleBackColor = false;
+            bthuy.Click += new System.EventHandler(this.bthuy_Click);
             // 
             // panel1
             // 
@@ -122,6 +123,17 @@
             this.gbttbn.TabIndex = 2;
             this.gbttbn.TabStop = false;
             this.gbttbn.Text = "Thông tin bệnh nhân";
+            // 
+            // rdoNu
+            // 
+            this.rdoNu.AutoSize = true;
+            this.rdoNu.Location = new System.Drawing.Point(215, 174);
+            this.rdoNu.Name = "rdoNu";
+            this.rdoNu.Size = new System.Drawing.Size(53, 26);
+            this.rdoNu.TabIndex = 22;
+            this.rdoNu.TabStop = true;
+            this.rdoNu.Text = "nữ";
+            this.rdoNu.UseVisualStyleBackColor = true;
             // 
             // rdoNam
             // 
@@ -414,6 +426,7 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(949, 559);
             this.panel2.TabIndex = 1;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // btluu
             // 
@@ -438,17 +451,6 @@
             this.lblttbn.Size = new System.Drawing.Size(251, 29);
             this.lblttbn.TabIndex = 0;
             this.lblttbn.Text = "Thông tin bệnh nhân";
-            // 
-            // rdoNu
-            // 
-            this.rdoNu.AutoSize = true;
-            this.rdoNu.Location = new System.Drawing.Point(215, 174);
-            this.rdoNu.Name = "rdoNu";
-            this.rdoNu.Size = new System.Drawing.Size(53, 26);
-            this.rdoNu.TabIndex = 22;
-            this.rdoNu.TabStop = true;
-            this.rdoNu.Text = "nữ";
-            this.rdoNu.UseVisualStyleBackColor = true;
             // 
             // thembenhnhan
             // 

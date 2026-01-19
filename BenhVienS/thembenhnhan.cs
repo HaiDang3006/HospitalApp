@@ -13,9 +13,23 @@ using System.Windows.Forms;
 
 namespace BenhVienS
 {
+   
+
     public partial class thembenhnhan : Form
     {
-
+        public void SetBenhNhanData(int maBenhNhan, int maNguoiDung, string hoTen, DateTime ngaySinh, string gioiTinh, string soDienThoai, string diaChi)
+        {
+            txtmabn.Text = maBenhNhan.ToString();
+            // If you have a field for MaNguoiDung, set it here (e.g., txtMaNguoiDung.Text = maNguoiDung.ToString();)
+            txthoten.Text = hoTen;
+            dtpngaysinh.Value = ngaySinh;
+            if (gioiTinh == "Nam")
+                rdoNam.Checked = true;
+            else if (gioiTinh == "Nữ")
+                rdoNu.Checked = true;
+            txtSDT.Text = soDienThoai;
+            txtdiachi.Text = diaChi;
+        }
         public thembenhnhan()
         {
             InitializeComponent();
@@ -130,6 +144,16 @@ namespace BenhVienS
         private void dtpngaysinh_ValueChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void bthuy_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
