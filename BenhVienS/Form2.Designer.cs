@@ -939,8 +939,8 @@
             // pictureBox5
             // 
             this.pictureBox5.BackColor = System.Drawing.Color.CadetBlue;
-            this.pictureBox5.Image = global::BenhVienS.Properties.Resources.doctor3;
-            this.pictureBox5.Location = new System.Drawing.Point(5, 5);
+/*            this.pictureBox5.Image = global::BenhVienS.Properties.Resources.doctor3;
+*/            this.pictureBox5.Location = new System.Drawing.Point(5, 5);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(64, 62);
@@ -1721,8 +1721,8 @@
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.business_continuity1;
-            this.pictureBox8.Location = new System.Drawing.Point(18, 13);
+/*            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.business_continuity1;
+*/            this.pictureBox8.Location = new System.Drawing.Point(18, 13);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(52, 74);
             this.pictureBox8.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1762,8 +1762,8 @@
             // 
             // pictureBox7
             // 
-            this.pictureBox7.Image = global::BenhVienS.Properties.Resources._09e450ee99ad374d695f94a7548eed5f_removebg_preview;
-            this.pictureBox7.Location = new System.Drawing.Point(17, 13);
+/*            this.pictureBox7.Image = global::BenhVienS.Properties.Resources._09e450ee99ad374d695f94a7548eed5f_removebg_preview;
+*/            this.pictureBox7.Location = new System.Drawing.Point(17, 13);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(61, 88);
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1802,8 +1802,8 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Image = global::BenhVienS.Properties.Resources._4a8bae08568f81029a018d1fdd439a4d_removebg_preview;
-            this.pictureBox6.Location = new System.Drawing.Point(19, 13);
+/*            this.pictureBox6.Image = global::BenhVienS.Properties.Resources._4a8bae08568f81029a018d1fdd439a4d_removebg_preview;
+*/            this.pictureBox6.Location = new System.Drawing.Point(19, 13);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(66, 88);
             this.pictureBox6.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;

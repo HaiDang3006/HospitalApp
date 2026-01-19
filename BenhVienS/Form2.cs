@@ -331,7 +331,7 @@ namespace BenhVienS
         }
         private void LoadChuyenmon()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 string query = "SELECT MaChuyenKhoa, TenChuyenKhoa FROM ChuyenKhoa";
@@ -375,22 +375,22 @@ namespace BenhVienS
                     conn.Open();
 
                     string query = @"
-                SELECT 
-                    bs.MaBacSi,
-                    nd.HoTen AS TenBacSi,
-                    ck.TenChuyenKhoa,
-                    bs.BangCap,
-                    bs.ChuyenMon,
-                    bs.NamKinhNghiem,
-                    bs.DanhGia,
-                    CASE WHEN bs.TrangThai = 1 
-                         THEN N'Hoạt động' 
-                         ELSE N'Ngưng hoạt động' 
-                    END AS TrangThai
-                FROM BacSi bs
-                JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
-                JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
-                WHERE 1 = 1";
+                        SELECT 
+                            bs.MaBacSi,
+                            nd.HoTen AS TenBacSi,
+                            ck.TenChuyenKhoa,
+                            bs.BangCap,
+                            bs.ChuyenMon,
+                            bs.NamKinhNghiem,
+                            bs.DanhGia,
+                            CASE WHEN bs.TrangThai = 1 
+                                 THEN N'Hoạt động' 
+                                 ELSE N'Ngưng hoạt động' 
+                            END AS TrangThai
+                        FROM BacSi bs
+                        JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
+                        JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
+                        WHERE 1 = 1";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
 

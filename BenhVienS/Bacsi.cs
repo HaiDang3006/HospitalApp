@@ -410,7 +410,7 @@ namespace BenhVienS
         private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
         {
 
-            dgvLichkhambenh.Columns.Add("BenhNhan", "Bệnh Nhân");
+            /*dgvLichkhambenh.Columns.Add("BenhNhan", "Bệnh Nhân");
             dgvLichkhambenh.Columns.Add("ThoiGian", "Thời Gian");
             dgvLichkhambenh.Columns.Add("LoaiKham", "Loại Khám");
             dgvLichkhambenh.Columns.Add("PhongKham", "Phòng Khám");
@@ -430,7 +430,7 @@ namespace BenhVienS
                     row.Cells["TrangThai"].Style.BackColor = Color.Orange;
                 else
                     row.Cells["TrangThai"].Style.BackColor = Color.LightBlue;
-            }
+            }*/
             }
 
      
@@ -501,7 +501,7 @@ namespace BenhVienS
 
         private void LoadLichKham()
         {
-            dgvLichkhambenh.Columns.Clear();
+            /*dgvLichkhambenh.Columns.Clear();
             dgvLichkhambenh.Rows.Clear();
 
             dgvLichkhambenh.Columns.Add("BenhNhan", "Bệnh Nhân");
@@ -525,13 +525,13 @@ namespace BenhVienS
                     row.Cells["TrangThai"].Style.BackColor = Color.Orange;
                 else
                     row.Cells["TrangThai"].Style.BackColor = Color.LightBlue;
-            }
+            }*/
         }
 
 
         private void LoadCongViec()
         {
-            listView1.Clear();
+           /* listView1.Clear();
             listView1.View = View.Details;
 
             listView1.Columns.Add("Công Việc", 350);
@@ -539,7 +539,7 @@ namespace BenhVienS
             listView1.Items.Add("Xử lý kết quả xét nghiệm cho bệnh nhân Phạm Thị H");
             listView1.Items.Add("Đọc kết quả siêu âm tim của Trần Văn E");
             listView1.Items.Add("Trao đổi với bệnh nhân Lê Thị F đã nhập viện hôm qua");
-            listView1.Items.Add("Kiểm tra phản ứng thuốc của bệnh nhân Nguyễn Văn B");
+            listView1.Items.Add("Kiểm tra phản ứng thuốc của bệnh nhân Nguyễn Văn B");*/
         }
 
 
