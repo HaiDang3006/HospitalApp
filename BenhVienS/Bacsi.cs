@@ -44,13 +44,7 @@ namespace BenhVienS
             }
         }
 
-        private void Bacsi_Load(object sender, EventArgs e)
-        {
-            LoadLichKham();
-            LoadCongViec();
-            LoadNhatKy();
-            LoadThongTinBacSi();
-        }
+        
 
 
         private void groupBox4_Enter(object sender, EventArgs e)
@@ -407,32 +401,7 @@ namespace BenhVienS
 
        
 
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
-        {
-
-            dgvLichkhambenh.Columns.Add("BenhNhan", "Bệnh Nhân");
-            dgvLichkhambenh.Columns.Add("ThoiGian", "Thời Gian");
-            dgvLichkhambenh.Columns.Add("LoaiKham", "Loại Khám");
-            dgvLichkhambenh.Columns.Add("PhongKham", "Phòng Khám");
-            dgvLichkhambenh.Columns.Add("TrangThai", "Trạng Thái");
-            dgvLichkhambenh.Rows.Add("Nguyễn Văn B", "08:00", "Nội Khoa", "Phòng 101", "Đã Khám");
-            dgvLichkhambenh.Rows.Add("Trần Thị C", "08:45", "Nội Khoa", "Phòng 101", "Chờ Khám");
-            dgvLichkhambenh.Rows.Add("Hoàng Văn D", "09:30", "Nội Khoa", "Phòng 101", "Chưa Khám");
-
-
-
-            foreach (DataGridViewRow row in dgvLichkhambenh.Rows)
-            {
-                string status = row.Cells["TrangThai"].Value?.ToString();
-                if (status == "Đã Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightGreen;
-                else if (status == "Chờ Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.Orange;
-                else
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightBlue;
-            }
-            }
-
+       
      
 
         private void button5_Click(object sender, EventArgs e)
@@ -499,48 +468,10 @@ namespace BenhVienS
 
         }
 
-        private void LoadLichKham()
-        {
-            dgvLichkhambenh.Columns.Clear();
-            dgvLichkhambenh.Rows.Clear();
-
-            dgvLichkhambenh.Columns.Add("BenhNhan", "Bệnh Nhân");
-            dgvLichkhambenh.Columns.Add("ThoiGian", "Thời Gian");
-            dgvLichkhambenh.Columns.Add("LoaiKham", "Loại Khám");
-            dgvLichkhambenh.Columns.Add("PhongKham", "Phòng Khám");
-            dgvLichkhambenh.Columns.Add("TrangThai", "Trạng Thái");
-
-            dgvLichkhambenh.Rows.Add("Nguyễn Văn B", "08:00", "Nội Khoa", "Phòng 101", "Đã Khám");
-            dgvLichkhambenh.Rows.Add("Trần Thị C", "08:45", "Nội Khoa", "Phòng 101", "Chờ Khám");
-            dgvLichkhambenh.Rows.Add("Hoàng Văn D", "09:30", "Nội Khoa", "Phòng 101", "Chưa Khám");
-
-            foreach (DataGridViewRow row in dgvLichkhambenh.Rows)
-            {
-                if (row.Cells["TrangThai"].Value == null) continue;
-
-                string status = row.Cells["TrangThai"].Value.ToString();
-                if (status == "Đã Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightGreen;
-                else if (status == "Chờ Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.Orange;
-                else
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightBlue;
-            }
-        }
+        
 
 
-        private void LoadCongViec()
-        {
-            listView1.Clear();
-            listView1.View = View.Details;
-
-            listView1.Columns.Add("Công Việc", 350);
-
-            listView1.Items.Add("Xử lý kết quả xét nghiệm cho bệnh nhân Phạm Thị H");
-            listView1.Items.Add("Đọc kết quả siêu âm tim của Trần Văn E");
-            listView1.Items.Add("Trao đổi với bệnh nhân Lê Thị F đã nhập viện hôm qua");
-            listView1.Items.Add("Kiểm tra phản ứng thuốc của bệnh nhân Nguyễn Văn B");
-        }
+       
 
 
         private void LoadNhatKy()
