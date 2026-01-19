@@ -38,7 +38,7 @@
             this.txtEmail = new System.Windows.Forms.TextBox();
             this.btnThemletan = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.cbCapnhatletan = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,7 +55,7 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
-            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.cbCapnhatletan);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.btnThemletan);
             this.groupBox1.Controls.Add(this.txtEmail);
@@ -142,15 +142,15 @@
             this.label4.TabIndex = 8;
             this.label4.Text = "Trạng thái:";
             // 
-            // checkBox1
+            // cbCapnhatletan
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(356, 174);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(97, 22);
-            this.checkBox1.TabIndex = 9;
-            this.checkBox1.Text = "Cập nhật";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbCapnhatletan.AutoSize = true;
+            this.cbCapnhatletan.Location = new System.Drawing.Point(356, 174);
+            this.cbCapnhatletan.Name = "cbCapnhatletan";
+            this.cbCapnhatletan.Size = new System.Drawing.Size(97, 22);
+            this.cbCapnhatletan.TabIndex = 9;
+            this.cbCapnhatletan.Text = "Cập nhật";
+            this.cbCapnhatletan.UseVisualStyleBackColor = true;
             // 
             // frmLetan
             // 
@@ -178,7 +178,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtEmail;
         private System.Windows.Forms.Button btnThemletan;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox cbCapnhatletan;
         private System.Windows.Forms.Label label4;
     }
 }

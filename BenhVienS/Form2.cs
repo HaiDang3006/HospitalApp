@@ -1505,6 +1505,11 @@ namespace BenhVienS
         {
 
         }
+
+        private void tabPage12_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

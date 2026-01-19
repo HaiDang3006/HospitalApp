@@ -35,6 +35,7 @@
             this.radDuocsi = new System.Windows.Forms.RadioButton();
             this.radBenhnhan = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnTieptuc = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -120,12 +121,22 @@
             this.panel1.Size = new System.Drawing.Size(401, 262);
             this.panel1.TabIndex = 6;
             // 
+            // btnTieptuc
+            // 
+            this.btnTieptuc.Location = new System.Drawing.Point(296, 334);
+            this.btnTieptuc.Name = "btnTieptuc";
+            this.btnTieptuc.Size = new System.Drawing.Size(133, 23);
+            this.btnTieptuc.TabIndex = 7;
+            this.btnTieptuc.Text = "Tiếp tục";
+            this.btnTieptuc.UseVisualStyleBackColor = true;
+            // 
             // frmvaitro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(459, 355);
+            this.Controls.Add(this.btnTieptuc);
             this.Controls.Add(this.radBenhnhan);
             this.Controls.Add(this.radDuocsi);
             this.Controls.Add(this.radLetan);
@@ -149,5 +160,6 @@
         private System.Windows.Forms.RadioButton radDuocsi;
         private System.Windows.Forms.RadioButton radBenhnhan;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btnTieptuc;
     }
 }
