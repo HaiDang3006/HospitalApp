@@ -56,7 +56,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
 
