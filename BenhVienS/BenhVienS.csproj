@@ -173,7 +173,7 @@
     <Compile Include="QuenMK.Designer.cs">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
-    <Compile Include="MapperSql\LichHenMapper.cs" />
+    <Compile Include="MapperSql\AppointmentMapper.cs" />
     <Compile Include="Service\LichHenService\LichHenService.cs" />
     <Compile Include="thembenhnhan.cs">
       <SubType>Form</SubType>
@@ -324,6 +324,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmBacsi.resx">
       <DependentUpon>frmBacsi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hsbnhan.resx">
+      <DependentUpon>hsbnhan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="khbenh.resx">
       <DependentUpon>khbenh.cs</DependentUpon>
