@@ -130,10 +130,6 @@
             // 
             this.cbQuay.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbQuay.FormattingEnabled = true;
-            this.cbQuay.Items.AddRange(new object[] {
-            "Quầy 1",
-            "Quầy 2",
-            "Quầy 3"});
             this.cbQuay.Location = new System.Drawing.Point(112, 10);
             this.cbQuay.Name = "cbQuay";
             this.cbQuay.Size = new System.Drawing.Size(349, 28);

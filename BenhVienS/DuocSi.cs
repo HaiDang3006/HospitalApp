@@ -11,25 +11,31 @@ using System.Windows.Forms;
 
 namespace BenhVienS
 {
-        public partial class DuocSi : Form
-        {
-            // Khai báo biến để lưu nút đang được chọn (để đổi màu)
-            private Button currentBtn;
-            private Panel leftBorderBtn; // Cái vạch màu bên cạnh nút khi active
+    public partial class DuocSi : Form
+    {
+        // Khai báo biến để lưu nút đang được chọn (để đổi màu)
+        private Button currentBtn;
+        private Panel leftBorderBtn; // Cái vạch màu bên cạnh nút khi active
         private List<Control> _defaultPanelControls;
         public DuocSi()
-            {
-                InitializeComponent();
+        {
+            InitializeComponent();
             _defaultPanelControls = panelBody.Controls.Cast<Control>().ToList();
             btTongquan.Click += btTongquan_Click;
 
             // Tạo cái vạch trang trí bên trái nút (nếu thích)
             leftBorderBtn = new Panel();
-                leftBorderBtn.Size = new Size(7, 60); // Kích thước vạch
-                panelMenu.Controls.Add(leftBorderBtn); // Thêm vào panelMenu (bạn nhớ đặt tên panel chứa menu là panelMenu nhé)
-                
-            }
-        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENS;Trusted_Connection=True;TrustServerCertificate=True;";
+            leftBorderBtn.Size = new Size(7, 60); // Kích thước vạch
+            panelMenu.Controls.Add(leftBorderBtn); // Thêm vào panelMenu (bạn nhớ đặt tên panel chứa menu là panelMenu nhé)
+
+        }
+
+        private void DuocSi_Load(object sender, EventArgs e)
+        {
+            LoadDashboardStats();
+
+        }
+
         private void showControl(Control control)
         {
 
@@ -55,49 +61,49 @@ namespace BenhVienS
         }
         // --- HÀM 1: Đổi màu nút khi được bấm (Hiệu ứng Active) ---
         private void ActivateButton(object senderBtn)
+        {
+            if (senderBtn != null)
             {
-                if (senderBtn != null)
-                {
-                    DisableButton(); // Trả các nút khác về màu thường
+                DisableButton(); // Trả các nút khác về màu thường
 
-                    // Chỉnh màu nút được chọn
-                    currentBtn = (Button)senderBtn;
-                    currentBtn.BackColor = Color.FromArgb(37, 36, 81); // Màu đậm hơn chút để biết đang chọn
-                    currentBtn.ForeColor = Color.White;
+                // Chỉnh màu nút được chọn
+                currentBtn = (Button)senderBtn;
+                currentBtn.BackColor = Color.FromArgb(37, 36, 81); // Màu đậm hơn chút để biết đang chọn
+                currentBtn.ForeColor = Color.White;
 
-                    // Hiệu ứng vạch màu bên trái (Giống các app hiện đại)
-                    leftBorderBtn.BackColor = Color.Orange; // Hoặc màu xanh tùy bạn
-                    leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
-                    leftBorderBtn.Visible = true;
-                    leftBorderBtn.BringToFront();
-                }
+                // Hiệu ứng vạch màu bên trái (Giống các app hiện đại)
+                leftBorderBtn.BackColor = Color.Orange; // Hoặc màu xanh tùy bạn
+                leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
+                leftBorderBtn.Visible = true;
+                leftBorderBtn.BringToFront();
             }
+        }
 
-            // --- HÀM 2: Trả lại màu cũ cho nút không được chọn ---
-            private void DisableButton()
+        // --- HÀM 2: Trả lại màu cũ cho nút không được chọn ---
+        private void DisableButton()
+        {
+            if (currentBtn != null)
             {
-                if (currentBtn != null)
-                {
-                    // Màu nền mặc định của menu (bạn xem mã màu RGB bên design là bao nhiêu thì điền vào đây)
-                    // Ví dụ màu xanh menu của bạn là: 
-                    currentBtn.BackColor = Color.SteelBlue; // SỬA LẠI MÀU NÀY CHO TRÙNG MÀU MENU CỦA BẠN
-                    currentBtn.ForeColor = Color.White;
-                }
+                // Màu nền mặc định của menu (bạn xem mã màu RGB bên design là bao nhiêu thì điền vào đây)
+                // Ví dụ màu xanh menu của bạn là: 
+                currentBtn.BackColor = Color.SteelBlue; // SỬA LẠI MÀU NÀY CHO TRÙNG MÀU MENU CỦA BẠN
+                currentBtn.ForeColor = Color.White;
             }
+        }
 
-            // --- HÀM 3: Mở UserControl vào PanelBody (QUAN TRỌNG NHẤT) ---
-            private void OpenChildControl(UserControl childControl)
-            {
-                // Xóa hết các control đang hiển thị cũ
-                panelBody.Controls.Clear();
+        // --- HÀM 3: Mở UserControl vào PanelBody (QUAN TRỌNG NHẤT) ---
+        private void OpenChildControl(UserControl childControl)
+        {
+            // Xóa hết các control đang hiển thị cũ
+            panelBody.Controls.Clear();
 
-                // Cấu hình control mới
-                childControl.Dock = DockStyle.Fill; // Lấp đầy panel
-                childControl.BringToFront();
+            // Cấu hình control mới
+            childControl.Dock = DockStyle.Fill; // Lấp đầy panel
+            childControl.BringToFront();
 
-                // Thêm vào panel
-                panelBody.Controls.Add(childControl);
-            }
+            // Thêm vào panel
+            panelBody.Controls.Add(childControl);
+        }
         private void btTongquan_Click(object sender, EventArgs e)
         {
             RestorePanelThongTin();
@@ -123,89 +129,101 @@ namespace BenhVienS
             ucCD uc = new ucCD();
             showControl(uc);
         }
-        public void LoadDashboardStats()
+
+        private void LoadDashboardStats()
         {
+            string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENS;Trusted_Connection=True;TrustServerCertificate=True;";
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
 
-                    // 1. Tổng số loại thuốc
-                    string queryTotal = "SELECT COUNT(*) FROM Thuoc";
-                    SqlCommand cmd1 = new SqlCommand(queryTotal, conn);
-                    lbTongSoThuoc.Text = cmd1.ExecuteScalar().ToString();
+                    // --- 1. CẬP NHẬT CÁC THẺ THỐNG KÊ (CARDS) ---
 
-                    // 2. Thuốc sắp hết hạn (trong vòng 30 ngày)
-                    string queryExpiry = "SELECT COUNT(*) FROM Thuoc WHERE HanSuDung <= DATEADD(day, 30, GETDATE())";
-                    SqlCommand cmd2 = new SqlCommand(queryExpiry, conn);
+                    // Đơn thuốc chờ xử lý 
+                    string sqlDonChoStats = "SELECT COUNT(*) FROM DonThuoc WHERE TrangThai = N'ChuaLay'";
+                    SqlCommand cmd1 = new SqlCommand(sqlDonChoStats, conn);
+                    lbDonThuocChoXuLy.Text = cmd1.ExecuteScalar().ToString();
+
+                    // Thuốc sắp hết hạn (trong vòng 3 tháng tới)
+                    string sqlHetHanStats = "SELECT COUNT(*) FROM TonKhoThuoc WHERE NgayHetHan <= DATEADD(month, 3, GETDATE())";
+                    SqlCommand cmd2 = new SqlCommand(sqlHetHanStats, conn);
                     lbThuocSapHetHan.Text = cmd2.ExecuteScalar().ToString();
 
-                    // 3. Thuốc sắp hết hàng (Số lượng tồn < 10)
-                    string queryStock = "SELECT COUNT(*) FROM TonKhoThuoc WHERE SoLuongTon < 10";
-                    SqlCommand cmd3 = new SqlCommand(queryStock, conn);
+                    // Thuốc sắp hết hàng (số lượng tồn dưới 10)
+                    string sqlHetHangStats = "SELECT COUNT(*) FROM TonKhoThuoc WHERE SoLuongTon < 10";
+                    SqlCommand cmd3 = new SqlCommand(sqlHetHangStats, conn);
                     lbThuocSapHetHang.Text = cmd3.ExecuteScalar().ToString();
+
+
+                    // --- 2. ĐỔ DỮ LIỆU VÀO CÁC BẢNG (DATAGRIDVIEWS) ---
+
+                    // Bảng: Đơn thuốc mới nhất (Chưa lấy thuốc)
+                    string sqlDonThuocGrid = @"SELECT TOP 10 dt.MaDonThuoc, bn.HoTen AS TenBenhNhan, dt.NgayKeDon 
+                           FROM DonThuoc dt 
+                           JOIN PhieuKham pk ON dt.MaPhieuKham = pk.MaPhieuKham
+                           JOIN LichHen lh ON pk.MaLichHen = lh.MaLichHen
+                           JOIN BenhNhan bn ON lh.MaBenhNhan = bn.MaBenhNhan
+                           WHERE dt.TrangThai = N'ChuaLay' 
+                           ORDER BY dt.NgayKeDon DESC";
+
+                    SqlDataAdapter da1 = new SqlDataAdapter(sqlDonThuocGrid, conn);
+                    DataTable dtDonThuoc = new DataTable();
+                    da1.Fill(dtDonThuoc);
+                    dgvDonThuocMoiNhat.DataSource = dtDonThuoc;
+
+                    // Use the actual column name returned by the query (TenBenhNhan), not "HoTen"
+                    if (dgvDonThuocMoiNhat.Columns.Contains("MaDonThuoc"))
+                        dgvDonThuocMoiNhat.Columns["MaDonThuoc"].HeaderText = "Mã Đơn Thuốc";
+                    if (dgvDonThuocMoiNhat.Columns.Contains("TenBenhNhan"))
+                        dgvDonThuocMoiNhat.Columns["TenBenhNhan"].HeaderText = "Họ Tên Bệnh Nhân";
+                    if (dgvDonThuocMoiNhat.Columns.Contains("NgayKeDon"))
+                        dgvDonThuocMoiNhat.Columns["NgayKeDon"].HeaderText = "Ngày Kê Đơn";
+
+                    // Bảng: Thuốc sắp hết hàng
+                    string sqlListHetHang = @"SELECT TOP 10 t.TenThuoc, tk.SoLuongTon, q.TenQuay 
+                              FROM TonKhoThuoc tk 
+                              JOIN Thuoc t ON tk.MaThuoc = t.MaThuoc 
+                              JOIN QuayThuoc q ON tk.MaQuayThuoc = q.MaQuayThuoc 
+                              WHERE tk.SoLuongTon < 10 
+                              ORDER BY tk.SoLuongTon ASC";
+                    SqlDataAdapter da2 = new SqlDataAdapter(sqlListHetHang, conn);
+                    DataTable dtHetHang = new DataTable();
+                    da2.Fill(dtHetHang);
+                    dgvThuocSapHetHang.DataSource = dtHetHang;
+
+                    if (dgvThuocSapHetHang.Columns.Contains("TenThuoc"))
+                        dgvThuocSapHetHang.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
+                    if (dgvThuocSapHetHang.Columns.Contains("SoLuongTon"))
+                        dgvThuocSapHetHang.Columns["SoLuongTon"].HeaderText = "SL Tồn";
+                    if (dgvThuocSapHetHang.Columns.Contains("TenQuay"))
+                        dgvThuocSapHetHang.Columns["TenQuay"].HeaderText = "Tên Quầy";
+
+                    // Bảng: Thuốc sắp hết hạn
+                    string sqlListHetHan = @"SELECT TOP 10 t.TenThuoc, tk.NgayHetHan, tk.SoLuongTon 
+                             FROM TonKhoThuoc tk 
+                             JOIN Thuoc t ON tk.MaThuoc = t.MaThuoc 
+                             WHERE tk.NgayHetHan <= DATEADD(month, 3, GETDATE()) 
+                             ORDER BY tk.NgayHetHan ASC";
+                    SqlDataAdapter da3 = new SqlDataAdapter(sqlListHetHan, conn);
+                    DataTable dtHetHan = new DataTable();
+                    da3.Fill(dtHetHan);
+                    dgvThuocSapHetHan.DataSource = dtHetHan;
+
+                    if (dgvThuocSapHetHan.Columns.Contains("TenThuoc"))
+                        dgvThuocSapHetHan.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
+                    if (dgvThuocSapHetHan.Columns.Contains("NgayHetHan"))
+                        dgvThuocSapHetHan.Columns["NgayHetHan"].HeaderText = "Ngày Hết Hạn";
+                    if (dgvThuocSapHetHan.Columns.Contains("SoLuongTon"))
+                        dgvThuocSapHetHan.Columns["SoLuongTon"].HeaderText = "SL Tồn";
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi kết nối: " + ex.Message);
-                }
-            }
-        }
-        public void LoadAllData()
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    conn.Open();
-
-                    // 1. Danh Mục Thuốc (Bảng bên trái - Trên)
-                    // Lấy dữ liệu từ bảng Thuoc
-                    string sqlDanhMuc = "SELECT MaThuoc, TenThuoc, HoatChat, DonViTinh, GiaBan FROM Thuoc";
-                    SqlDataAdapter da1 = new SqlDataAdapter(sqlDanhMuc, conn);
-                    DataTable dt1 = new DataTable();
-                    da1.Fill(dt1);
-                    dgvDanhMucThuoc.DataSource = dt1;
-
-                    // 2. Thuốc Sắp Hết Hàng (Bảng bên phải - Trên)
-                    // Liên kết bảng Thuoc và TonKhoThuoc để lấy số lượng tồn
-                    string sqlSapHetHang = @"SELECT T.TenThuoc, TK.SoLuongTon, T.DonViTinh 
-                                   FROM Thuoc T 
-                                   JOIN TonKhoThuoc TK ON T.MaThuoc = TK.MaThuoc 
-                                   WHERE TK.SoLuongTon < 10";
-                    SqlDataAdapter da2 = new SqlDataAdapter(sqlSapHetHang, conn);
-                    DataTable dt2 = new DataTable();
-                    da2.Fill(dt2);
-                    dgvThuocSapHetHang.DataSource = dt2;
-
-                    // 3. Đơn Thuốc Gần Đây (Bảng bên trái - Dưới)
-                    // Liên kết DonThuoc -> PhieuKham -> LichHen -> BenhNhan
-                    string sqlDonThuoc = @"SELECT TOP 10 DT.MaDonThuoc, BN.HoTen, DT.NgayKeDon, DT.TrangThai 
-                                 FROM DonThuoc DT 
-                                 JOIN PhieuKham PK ON DT.MaPhieuKham = PK.MaPhieuKham 
-                                 JOIN LichHen LH ON PK.MaLichHen = LH.MaLichHen 
-                                 JOIN BenhNhan BN ON LH.MaBenhNhan = BN.MaBenhNhan 
-                                 ORDER BY DT.NgayKeDon DESC";
-                    SqlDataAdapter da3 = new SqlDataAdapter(sqlDonThuoc, conn);
-                    DataTable dt3 = new DataTable();
-                    da3.Fill(dt3);
-                    dgvDonThuocGanDay.DataSource = dt3;
-
-                    // 4. Thuốc Sắp Hết Hạn (Bảng bên phải - Dưới)
-                    // Lọc các thuốc có HanSuDung trong vòng 30 ngày tới
-                    string sqlSapHetHan = "SELECT TenThuoc, HanSuDung, LoaiThuoc FROM Thuoc WHERE HanSuDung <= DATEADD(day, 30, GETDATE())";
-                    SqlDataAdapter da4 = new SqlDataAdapter(sqlSapHetHan, conn);
-                    DataTable dt4 = new DataTable();
-                    da4.Fill(dt4);
-                    dgvThuocSapHetHan.DataSource = dt4;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi khi tải dữ liệu: " + ex.Message);
+                    MessageBox.Show("Lỗi tải dữ liệu tổng quan: " + ex.Message);
                 }
             }
         }
     }
 }
-

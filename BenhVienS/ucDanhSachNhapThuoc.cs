@@ -17,7 +17,6 @@ namespace BenhVienS
         public ucDanhSachNhapThuoc()
         {
             InitializeComponent();
-
         }
         string connectionString = "Server = MSI\\SQLEXPRESS; Database = BENHVIENS; Trusted_Connection = True; TrustServerCertificate = True; ";
 
@@ -26,10 +25,6 @@ namespace BenhVienS
             LoadDataKho();
             FormatGridKho();
             LoadComboBoxQuay();
-            // ---> THÊM DÒNG NÀY ĐỂ KÍCH HOẠT LƯU TỰ ĐỘNG <---
-            dgvKho.RowValidating += dgvKho_RowValidating;
-            // Thêm dòng này để tạo giá trị mặc định (ngày, số lượng) khi nhập dòng mới
-            dgvKho.DefaultValuesNeeded += dgvKho_DefaultValuesNeeded;
         }
 
         private void LoadDataKho()
@@ -230,7 +225,6 @@ namespace BenhVienS
                     tongSoLuong = dgvKho.Rows.Count;
             }
 
-            // --- SỬA Ở ĐÂY: Cộng thêm chuỗi "Tổng mặt hàng: " vào trước số ---
             lbTongMatHang.Text = "Tổng mặt hàng: " + tongSoLuong.ToString();
 
             // 2. TÍNH SỐ LƯỢNG CẢNH BÁO
@@ -263,7 +257,6 @@ namespace BenhVienS
                 }
             }
 
-            // --- SỬA Ở ĐÂY: Cộng thêm chuỗi "Cảnh báo: " vào trước số ---
             if (soLuongCanhBao > 0)
             {
                 lbCanhBao.Text = "Cảnh báo: " + soLuongCanhBao.ToString();
@@ -343,66 +336,7 @@ namespace BenhVienS
             // Set cột Mã Lô là ReadOnly (vì tự tăng hoặc chưa có)
             if (dgvKho.Columns["MaTonKho"] != null) dgvKho.Columns["MaTonKho"].ReadOnly = true;
         }
-        private void dgvKho_RowValidating(object sender, DataGridViewCellCancelEventArgs e)
-        {
-            // Chỉ xử lý khi người dùng đang ở dòng mới thêm
-            if (dgvKho.Rows[e.RowIndex].IsNewRow) return;
-
-            // Kiểm tra xem dòng này đã có trong CSDL chưa (dựa vào MaTonKho)
-            // Nếu MaTonKho trống hoặc bằng 0 -> Là dòng mới nhập -> Thực hiện INSERT
-            var cellMa = dgvKho.Rows[e.RowIndex].Cells["MaTonKho"].Value;
-            bool isNew = (cellMa == null || string.IsNullOrEmpty(cellMa.ToString()) || cellMa.ToString() == "0");
-
-            if (isNew)
-            {
-                // Lấy dữ liệu từ các ô
-                var maThuoc = dgvKho.Rows[e.RowIndex].Cells["cbxTenThuoc"].Value;
-                var maQuay = dgvKho.Rows[e.RowIndex].Cells["cbxQuay"].Value;
-                var slTon = dgvKho.Rows[e.RowIndex].Cells["SoLuongTon"].Value;
-                var ngayHetHan = dgvKho.Rows[e.RowIndex].Cells["NgayHetHan"].Value;
-
-                // Validate cơ bản
-                if (maThuoc == null || maQuay == null || slTon == null)
-                {
-                    // Nếu thiếu dữ liệu thì chưa lưu, nhưng không chặn user di chuyển
-                    return;
-                }
-
-                try
-                {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    {
-                        conn.Open();
-                        string query = @"INSERT INTO TonKhoThuoc (MaThuoc, MaQuayThuoc, SoLuongTon, NgayHetHan, NgayNhap) 
-                                 VALUES (@MaThuoc, @MaQuay, @SL, @NgayHH, GETDATE())";
-
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@MaThuoc", maThuoc);
-                        cmd.Parameters.AddWithValue("@MaQuay", maQuay);
-                        cmd.Parameters.AddWithValue("@SL", slTon);
-                        // Xử lý ngày tháng (nếu null thì lấy mặc định)
-                        cmd.Parameters.AddWithValue("@NgayHH", ngayHetHan ?? DateTime.Now.AddYears(1));
-
-                        cmd.ExecuteNonQuery();
-                    }
-
-                    // Thông báo nhỏ hoặc đổi màu dòng để biết đã lưu
-                    dgvKho.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.LightCyan;
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi lưu dòng mới: " + ex.Message);
-                    e.Cancel = true; // Giữ con trỏ lại dòng lỗi
-                }
-            }
-        }
-        private void dgvKho_DefaultValuesNeeded(object sender, DataGridViewRowEventArgs e)
-        {
-            e.Row.Cells["NgayNhap"].Value = DateTime.Now;
-            e.Row.Cells["NgayHetHan"].Value = DateTime.Now.AddYears(2); // Mặc định hạn 2 năm
-            e.Row.Cells["SoLuongTon"].Value = 100; // Mặc định số lượng
-        }
-
+        
         private void btLuu_Click(object sender, EventArgs e)
         {
             // 1. Xác nhận dữ liệu đang nhập dở
