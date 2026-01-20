@@ -21,5 +21,15 @@ namespace BenhVienS
         {
 
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel7_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
