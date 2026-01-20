@@ -892,5 +892,15 @@ namespace BenhVienS.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap z7447109316691_a18290ee9f378b65c4059efb1374ca59 {
+            get {
+                object obj = ResourceManager.GetObject("z7447109316691_a18290ee9f378b65c4059efb1374ca59", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

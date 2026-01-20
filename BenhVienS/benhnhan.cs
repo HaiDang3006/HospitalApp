@@ -147,5 +147,35 @@ namespace BenhVienS
             f1.Show();
             this.Hide();
         }
+
+        private void btnXemTatCaLich_Click(object sender, EventArgs e)
+        {
+            uclichhensaptoi uc = new uclichhensaptoi();
+            showControl(uc);
+        }
+
+        private void btnGoLichHen_Click(object sender, EventArgs e)
+        {
+            ucqllichhen uc = new ucqllichhen();
+            showControl(uc);
+        }
+
+        private void btnGoDonThuoc_Click(object sender, EventArgs e)
+        {
+            uckedonthuoc uc = new uckedonthuoc();
+            showControl(uc);
+        }
+
+        private void btnGoHoSo_Click(object sender, EventArgs e)
+        {
+            uchsbenhan uc = new uchsbenhan();
+            showControl(uc);
+        }
+
+        private void btnGoThongTinBV_Click(object sender, EventArgs e)
+        {
+            ucttbv uc = new ucttbv();
+            showControl(uc);
+        }
     }
 }

@@ -60,7 +60,6 @@
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.panel17 = new System.Windows.Forms.Panel();
-            this.btnXemTatCaThongBao = new System.Windows.Forms.Button();
             this.label23 = new System.Windows.Forms.Label();
             this.label24 = new System.Windows.Forms.Label();
             this.panelLichHen = new System.Windows.Forms.Panel();
@@ -176,6 +175,7 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.Image = global::BenhVienS.Properties.Resources.z7423253179898_9b6c41dc24da3a870d79afae7e9cd959_removebg_preview;
             this.pictureBox5.Location = new System.Drawing.Point(3, 3);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(52, 55);
@@ -205,6 +205,7 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.Image = global::BenhVienS.Properties.Resources.hospital;
             this.pictureBox3.Location = new System.Drawing.Point(3, 3);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(52, 55);
@@ -234,6 +235,7 @@
             // 
             // pictureBox6
             // 
+            this.pictureBox6.Image = global::BenhVienS.Properties.Resources.patient_removebg_preview;
             this.pictureBox6.Location = new System.Drawing.Point(3, 3);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(52, 55);
@@ -263,6 +265,7 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.Image = global::BenhVienS.Properties.Resources.calendar_removebg_preview1;
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(52, 55);
@@ -293,6 +296,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.Image = global::BenhVienS.Properties.Resources.home_icon_silhouette1;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(52, 55);
@@ -322,6 +326,7 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.Image = global::BenhVienS.Properties.Resources.prescription_removebg_preview;
             this.pictureBox4.Location = new System.Drawing.Point(3, 3);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(52, 55);
@@ -413,6 +418,7 @@
             // 
             // pictureBox13
             // 
+            this.pictureBox13.Image = global::BenhVienS.Properties.Resources.z7423254199693_7288026db60d4b602cef61c3fe1e507e_removebg_preview;
             this.pictureBox13.Location = new System.Drawing.Point(12, 160);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(37, 35);
@@ -422,6 +428,7 @@
             // 
             // pictureBox14
             // 
+            this.pictureBox14.Image = global::BenhVienS.Properties.Resources.z7423253179898_9b6c41dc24da3a870d79afae7e9cd959_removebg_preview1;
             this.pictureBox14.Location = new System.Drawing.Point(12, 119);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(37, 35);
@@ -431,6 +438,7 @@
             // 
             // pictureBox15
             // 
+            this.pictureBox15.Image = global::BenhVienS.Properties.Resources.location_removebg_preview;
             this.pictureBox15.Location = new System.Drawing.Point(12, 78);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(37, 35);
@@ -440,6 +448,7 @@
             // 
             // pictureBox10
             // 
+            this.pictureBox10.Image = global::BenhVienS.Properties.Resources.hospital_removebg_preview1;
             this.pictureBox10.Location = new System.Drawing.Point(12, 37);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(37, 35);
@@ -460,27 +469,12 @@
             // 
             // panel17
             // 
-            this.panel17.Controls.Add(this.btnXemTatCaThongBao);
             this.panel17.Controls.Add(this.label23);
             this.panel17.Controls.Add(this.label24);
             this.panel17.Location = new System.Drawing.Point(10, 26);
             this.panel17.Name = "panel17";
             this.panel17.Size = new System.Drawing.Size(534, 150);
             this.panel17.TabIndex = 0;
-            // 
-            // btnXemTatCaThongBao
-            // 
-            this.btnXemTatCaThongBao.BackColor = System.Drawing.SystemColors.HotTrack;
-            this.btnXemTatCaThongBao.FlatAppearance.BorderSize = 0;
-            this.btnXemTatCaThongBao.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXemTatCaThongBao.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnXemTatCaThongBao.ForeColor = System.Drawing.Color.White;
-            this.btnXemTatCaThongBao.Location = new System.Drawing.Point(181, 96);
-            this.btnXemTatCaThongBao.Name = "btnXemTatCaThongBao";
-            this.btnXemTatCaThongBao.Size = new System.Drawing.Size(174, 42);
-            this.btnXemTatCaThongBao.TabIndex = 19;
-            this.btnXemTatCaThongBao.Text = "Xem Tất Cả";
-            this.btnXemTatCaThongBao.UseVisualStyleBackColor = false;
             // 
             // label23
             // 
@@ -522,6 +516,7 @@
             // pictureBox9
             // 
             this.pictureBox9.BackColor = System.Drawing.Color.AliceBlue;
+            this.pictureBox9.Image = global::BenhVienS.Properties.Resources.calendar_removebg_preview;
             this.pictureBox9.Location = new System.Drawing.Point(3, 19);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(49, 45);
@@ -554,6 +549,7 @@
             this.btnXemTatCaLich.TabIndex = 18;
             this.btnXemTatCaLich.Text = "Xem Tất Cả";
             this.btnXemTatCaLich.UseVisualStyleBackColor = false;
+            this.btnXemTatCaLich.Click += new System.EventHandler(this.btnXemTatCaLich_Click);
             // 
             // dataGridView1
             // 
@@ -614,6 +610,7 @@
             this.btnGoLichHen.TabIndex = 17;
             this.btnGoLichHen.Text = ">";
             this.btnGoLichHen.UseVisualStyleBackColor = true;
+            this.btnGoLichHen.Click += new System.EventHandler(this.btnGoLichHen_Click);
             // 
             // label12
             // 
@@ -653,6 +650,7 @@
             this.btnGoThongTinBV.TabIndex = 19;
             this.btnGoThongTinBV.Text = ">";
             this.btnGoThongTinBV.UseVisualStyleBackColor = true;
+            this.btnGoThongTinBV.Click += new System.EventHandler(this.btnGoThongTinBV_Click);
             // 
             // panel10
             // 
@@ -678,6 +676,7 @@
             // pictureBox8
             // 
             this.pictureBox8.BackColor = System.Drawing.Color.White;
+            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.medical_prescription_removebg_preview;
             this.pictureBox8.Location = new System.Drawing.Point(3, 18);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(49, 45);
@@ -709,6 +708,7 @@
             // pictureBox11
             // 
             this.pictureBox11.BackColor = System.Drawing.Color.White;
+            this.pictureBox11.Image = global::BenhVienS.Properties.Resources.hospital_removebg_preview;
             this.pictureBox11.Location = new System.Drawing.Point(3, 18);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(49, 45);
@@ -746,6 +746,7 @@
             this.btnGoDonThuoc.TabIndex = 18;
             this.btnGoDonThuoc.Text = ">";
             this.btnGoDonThuoc.UseVisualStyleBackColor = true;
+            this.btnGoDonThuoc.Click += new System.EventHandler(this.btnGoDonThuoc_Click);
             // 
             // panel13
             // 
@@ -765,6 +766,7 @@
             this.btnGoHoSo.TabIndex = 21;
             this.btnGoHoSo.Text = ">";
             this.btnGoHoSo.UseVisualStyleBackColor = true;
+            this.btnGoHoSo.Click += new System.EventHandler(this.btnGoHoSo_Click);
             // 
             // label19
             // 
@@ -800,6 +802,7 @@
             // pictureBox12
             // 
             this.pictureBox12.BackColor = System.Drawing.Color.AliceBlue;
+            this.pictureBox12.Image = global::BenhVienS.Properties.Resources.folder_removebg_preview;
             this.pictureBox12.Location = new System.Drawing.Point(0, 18);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(49, 45);
@@ -863,6 +866,7 @@
             // 
             // pictureBox7
             // 
+            this.pictureBox7.Image = global::BenhVienS.Properties.Resources.manager_removebg_preview;
             this.pictureBox7.Location = new System.Drawing.Point(798, 6);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(52, 55);
@@ -998,7 +1002,6 @@
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Panel panel17;
-        private System.Windows.Forms.Button btnXemTatCaThongBao;
         private System.Windows.Forms.Label label23;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.Panel panelLichHen;

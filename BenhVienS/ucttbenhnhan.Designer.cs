@@ -34,21 +34,21 @@
             this.btnSua = new System.Windows.Forms.Button();
             this.btnDong = new System.Windows.Forms.Button();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
-            this.textBox15 = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
-            this.textBox13 = new System.Windows.Forms.TextBox();
-            this.textBox12 = new System.Windows.Forms.TextBox();
-            this.textBox11 = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
-            this.textBox9 = new System.Windows.Forms.TextBox();
-            this.textBox8 = new System.Windows.Forms.TextBox();
-            this.textBox7 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtGioiTinh = new System.Windows.Forms.TextBox();
+            this.txtDiaChi = new System.Windows.Forms.TextBox();
+            this.txtNhomMau = new System.Windows.Forms.TextBox();
+            this.txtChieuCao = new System.Windows.Forms.TextBox();
+            this.txtNgheNghiep = new System.Windows.Forms.TextBox();
+            this.txtNgayDK = new System.Windows.Forms.TextBox();
+            this.txtTrangThai = new System.Windows.Forms.TextBox();
+            this.txtCanNang = new System.Windows.Forms.TextBox();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.txtSDT = new System.Windows.Forms.TextBox();
+            this.txtCCCD = new System.Windows.Forms.TextBox();
+            this.txtNgaySinh = new System.Windows.Forms.TextBox();
+            this.txtHoTen = new System.Windows.Forms.TextBox();
+            this.txtMaND = new System.Windows.Forms.TextBox();
+            this.txtMaBN = new System.Windows.Forms.TextBox();
             this.lblNgayDangKy = new System.Windows.Forms.Label();
             this.lblTrangThai = new System.Windows.Forms.Label();
             this.lblNgheNghiep = new System.Windows.Forms.Label();
@@ -98,21 +98,21 @@
             this.pnlLeft.Controls.Add(this.btnSua);
             this.pnlLeft.Controls.Add(this.btnDong);
             this.pnlLeft.Controls.Add(this.pictureBox7);
-            this.pnlLeft.Controls.Add(this.textBox15);
-            this.pnlLeft.Controls.Add(this.textBox14);
-            this.pnlLeft.Controls.Add(this.textBox13);
-            this.pnlLeft.Controls.Add(this.textBox12);
-            this.pnlLeft.Controls.Add(this.textBox11);
-            this.pnlLeft.Controls.Add(this.textBox10);
-            this.pnlLeft.Controls.Add(this.textBox9);
-            this.pnlLeft.Controls.Add(this.textBox8);
-            this.pnlLeft.Controls.Add(this.textBox7);
-            this.pnlLeft.Controls.Add(this.textBox6);
-            this.pnlLeft.Controls.Add(this.textBox5);
-            this.pnlLeft.Controls.Add(this.textBox4);
-            this.pnlLeft.Controls.Add(this.textBox3);
-            this.pnlLeft.Controls.Add(this.textBox2);
-            this.pnlLeft.Controls.Add(this.textBox1);
+            this.pnlLeft.Controls.Add(this.txtGioiTinh);
+            this.pnlLeft.Controls.Add(this.txtDiaChi);
+            this.pnlLeft.Controls.Add(this.txtNhomMau);
+            this.pnlLeft.Controls.Add(this.txtChieuCao);
+            this.pnlLeft.Controls.Add(this.txtNgheNghiep);
+            this.pnlLeft.Controls.Add(this.txtNgayDK);
+            this.pnlLeft.Controls.Add(this.txtTrangThai);
+            this.pnlLeft.Controls.Add(this.txtCanNang);
+            this.pnlLeft.Controls.Add(this.txtEmail);
+            this.pnlLeft.Controls.Add(this.txtSDT);
+            this.pnlLeft.Controls.Add(this.txtCCCD);
+            this.pnlLeft.Controls.Add(this.txtNgaySinh);
+            this.pnlLeft.Controls.Add(this.txtHoTen);
+            this.pnlLeft.Controls.Add(this.txtMaND);
+            this.pnlLeft.Controls.Add(this.txtMaBN);
             this.pnlLeft.Controls.Add(this.lblNgayDangKy);
             this.pnlLeft.Controls.Add(this.lblTrangThai);
             this.pnlLeft.Controls.Add(this.lblNgheNghiep);
@@ -144,6 +144,7 @@
             this.btnSua.TabIndex = 1;
             this.btnSua.Text = "Sửa đổi";
             this.btnSua.UseVisualStyleBackColor = false;
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnDong
             // 
@@ -154,9 +155,11 @@
             this.btnDong.TabIndex = 2;
             this.btnDong.Text = "Đóng";
             this.btnDong.UseVisualStyleBackColor = true;
+            this.btnDong.Click += new System.EventHandler(this.btnDong_Click);
             // 
             // pictureBox7
             // 
+            this.pictureBox7.Image = global::BenhVienS.Properties.Resources.manager_removebg_preview1;
             this.pictureBox7.Location = new System.Drawing.Point(661, 1);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(195, 139);
@@ -164,110 +167,110 @@
             this.pictureBox7.TabIndex = 30;
             this.pictureBox7.TabStop = false;
             // 
-            // textBox15
+            // txtGioiTinh
             // 
-            this.textBox15.Location = new System.Drawing.Point(412, 156);
-            this.textBox15.Name = "textBox15";
-            this.textBox15.Size = new System.Drawing.Size(137, 27);
-            this.textBox15.TabIndex = 29;
+            this.txtGioiTinh.Location = new System.Drawing.Point(412, 156);
+            this.txtGioiTinh.Name = "txtGioiTinh";
+            this.txtGioiTinh.Size = new System.Drawing.Size(137, 27);
+            this.txtGioiTinh.TabIndex = 29;
             // 
-            // textBox14
+            // txtDiaChi
             // 
-            this.textBox14.Location = new System.Drawing.Point(412, 205);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.Size = new System.Drawing.Size(137, 27);
-            this.textBox14.TabIndex = 28;
+            this.txtDiaChi.Location = new System.Drawing.Point(412, 205);
+            this.txtDiaChi.Name = "txtDiaChi";
+            this.txtDiaChi.Size = new System.Drawing.Size(137, 27);
+            this.txtDiaChi.TabIndex = 28;
             // 
-            // textBox13
+            // txtNhomMau
             // 
-            this.textBox13.Location = new System.Drawing.Point(412, 261);
-            this.textBox13.Name = "textBox13";
-            this.textBox13.Size = new System.Drawing.Size(137, 27);
-            this.textBox13.TabIndex = 27;
+            this.txtNhomMau.Location = new System.Drawing.Point(412, 261);
+            this.txtNhomMau.Name = "txtNhomMau";
+            this.txtNhomMau.Size = new System.Drawing.Size(137, 27);
+            this.txtNhomMau.TabIndex = 27;
             // 
-            // textBox12
+            // txtChieuCao
             // 
-            this.textBox12.Location = new System.Drawing.Point(412, 313);
-            this.textBox12.Name = "textBox12";
-            this.textBox12.Size = new System.Drawing.Size(137, 27);
-            this.textBox12.TabIndex = 26;
+            this.txtChieuCao.Location = new System.Drawing.Point(412, 313);
+            this.txtChieuCao.Name = "txtChieuCao";
+            this.txtChieuCao.Size = new System.Drawing.Size(137, 27);
+            this.txtChieuCao.TabIndex = 26;
             // 
-            // textBox11
+            // txtNgheNghiep
             // 
-            this.textBox11.Location = new System.Drawing.Point(412, 74);
-            this.textBox11.Name = "textBox11";
-            this.textBox11.Size = new System.Drawing.Size(137, 27);
-            this.textBox11.TabIndex = 25;
+            this.txtNgheNghiep.Location = new System.Drawing.Point(412, 74);
+            this.txtNgheNghiep.Name = "txtNgheNghiep";
+            this.txtNgheNghiep.Size = new System.Drawing.Size(137, 27);
+            this.txtNgheNghiep.TabIndex = 25;
             // 
-            // textBox10
+            // txtNgayDK
             // 
-            this.textBox10.Location = new System.Drawing.Point(412, 30);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.Size = new System.Drawing.Size(137, 27);
-            this.textBox10.TabIndex = 24;
+            this.txtNgayDK.Location = new System.Drawing.Point(412, 30);
+            this.txtNgayDK.Name = "txtNgayDK";
+            this.txtNgayDK.Size = new System.Drawing.Size(137, 27);
+            this.txtNgayDK.TabIndex = 24;
             // 
-            // textBox9
+            // txtTrangThai
             // 
-            this.textBox9.Location = new System.Drawing.Point(675, 265);
-            this.textBox9.Name = "textBox9";
-            this.textBox9.Size = new System.Drawing.Size(137, 27);
-            this.textBox9.TabIndex = 23;
+            this.txtTrangThai.Location = new System.Drawing.Point(675, 265);
+            this.txtTrangThai.Name = "txtTrangThai";
+            this.txtTrangThai.Size = new System.Drawing.Size(137, 27);
+            this.txtTrangThai.TabIndex = 23;
             // 
-            // textBox8
+            // txtCanNang
             // 
-            this.textBox8.Location = new System.Drawing.Point(412, 113);
-            this.textBox8.Name = "textBox8";
-            this.textBox8.Size = new System.Drawing.Size(137, 27);
-            this.textBox8.TabIndex = 22;
+            this.txtCanNang.Location = new System.Drawing.Point(412, 113);
+            this.txtCanNang.Name = "txtCanNang";
+            this.txtCanNang.Size = new System.Drawing.Size(137, 27);
+            this.txtCanNang.TabIndex = 22;
             // 
-            // textBox7
+            // txtEmail
             // 
-            this.textBox7.Location = new System.Drawing.Point(144, 317);
-            this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(137, 27);
-            this.textBox7.TabIndex = 21;
+            this.txtEmail.Location = new System.Drawing.Point(144, 317);
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(137, 27);
+            this.txtEmail.TabIndex = 21;
             // 
-            // textBox6
+            // txtSDT
             // 
-            this.textBox6.Location = new System.Drawing.Point(144, 264);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(137, 27);
-            this.textBox6.TabIndex = 20;
+            this.txtSDT.Location = new System.Drawing.Point(144, 264);
+            this.txtSDT.Name = "txtSDT";
+            this.txtSDT.Size = new System.Drawing.Size(137, 27);
+            this.txtSDT.TabIndex = 20;
             // 
-            // textBox5
+            // txtCCCD
             // 
-            this.textBox5.Location = new System.Drawing.Point(144, 212);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(137, 27);
-            this.textBox5.TabIndex = 19;
+            this.txtCCCD.Location = new System.Drawing.Point(144, 212);
+            this.txtCCCD.Name = "txtCCCD";
+            this.txtCCCD.Size = new System.Drawing.Size(137, 27);
+            this.txtCCCD.TabIndex = 19;
             // 
-            // textBox4
+            // txtNgaySinh
             // 
-            this.textBox4.Location = new System.Drawing.Point(144, 160);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(137, 27);
-            this.textBox4.TabIndex = 18;
+            this.txtNgaySinh.Location = new System.Drawing.Point(144, 160);
+            this.txtNgaySinh.Name = "txtNgaySinh";
+            this.txtNgaySinh.Size = new System.Drawing.Size(137, 27);
+            this.txtNgaySinh.TabIndex = 18;
             // 
-            // textBox3
+            // txtHoTen
             // 
-            this.textBox3.Location = new System.Drawing.Point(144, 117);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(137, 27);
-            this.textBox3.TabIndex = 17;
+            this.txtHoTen.Location = new System.Drawing.Point(144, 117);
+            this.txtHoTen.Name = "txtHoTen";
+            this.txtHoTen.Size = new System.Drawing.Size(137, 27);
+            this.txtHoTen.TabIndex = 17;
             // 
-            // textBox2
+            // txtMaND
             // 
-            this.textBox2.Location = new System.Drawing.Point(144, 74);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(137, 27);
-            this.textBox2.TabIndex = 16;
+            this.txtMaND.Location = new System.Drawing.Point(144, 74);
+            this.txtMaND.Name = "txtMaND";
+            this.txtMaND.Size = new System.Drawing.Size(137, 27);
+            this.txtMaND.TabIndex = 16;
             // 
-            // textBox1
+            // txtMaBN
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(137, 27);
-            this.textBox1.TabIndex = 15;
+            this.txtMaBN.Location = new System.Drawing.Point(144, 26);
+            this.txtMaBN.Name = "txtMaBN";
+            this.txtMaBN.Size = new System.Drawing.Size(137, 27);
+            this.txtMaBN.TabIndex = 15;
             // 
             // lblNgayDangKy
             // 
@@ -298,7 +301,6 @@
             this.lblNgheNghiep.Size = new System.Drawing.Size(107, 20);
             this.lblNgheNghiep.TabIndex = 12;
             this.lblNgheNghiep.Text = "Nghề nghiệp:";
-            this.lblNgheNghiep.Click += new System.EventHandler(this.lblNgheNghiep_Click);
             // 
             // lblCanNang
             // 
@@ -463,21 +465,21 @@
         private System.Windows.Forms.Button btnDong;
         private System.Windows.Forms.Button btnSua;
         private System.Windows.Forms.Label lblNgayDangKy;
-        private System.Windows.Forms.TextBox textBox14;
-        private System.Windows.Forms.TextBox textBox13;
-        private System.Windows.Forms.TextBox textBox12;
-        private System.Windows.Forms.TextBox textBox11;
-        private System.Windows.Forms.TextBox textBox10;
-        private System.Windows.Forms.TextBox textBox9;
-        private System.Windows.Forms.TextBox textBox8;
-        private System.Windows.Forms.TextBox textBox7;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox15;
+        private System.Windows.Forms.TextBox txtDiaChi;
+        private System.Windows.Forms.TextBox txtNhomMau;
+        private System.Windows.Forms.TextBox txtChieuCao;
+        private System.Windows.Forms.TextBox txtNgheNghiep;
+        private System.Windows.Forms.TextBox txtNgayDK;
+        private System.Windows.Forms.TextBox txtTrangThai;
+        private System.Windows.Forms.TextBox txtCanNang;
+        private System.Windows.Forms.TextBox txtEmail;
+        private System.Windows.Forms.TextBox txtSDT;
+        private System.Windows.Forms.TextBox txtCCCD;
+        private System.Windows.Forms.TextBox txtNgaySinh;
+        private System.Windows.Forms.TextBox txtHoTen;
+        private System.Windows.Forms.TextBox txtMaND;
+        private System.Windows.Forms.TextBox txtMaBN;
+        private System.Windows.Forms.TextBox txtGioiTinh;
         private System.Windows.Forms.PictureBox pictureBox7;
     }
 }

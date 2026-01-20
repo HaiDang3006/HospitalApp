@@ -743,7 +743,7 @@
             // 
             // pictureBox9
             // 
-            this.pictureBox9.Image = global::BenhVienS.Properties.Resources.settings1;
+           
             this.pictureBox9.Location = new System.Drawing.Point(3, 3);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(60, 38);
@@ -754,7 +754,7 @@
             // pictureBox2
             // 
             this.pictureBox2.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.pictureBox2.Image = global::BenhVienS.Properties.Resources.home_icon_silhouette2;
+           
             this.pictureBox2.Location = new System.Drawing.Point(3, 3);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(56, 37);
@@ -764,7 +764,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::BenhVienS.Properties.Resources.calendar__1_1;
+          
             this.pictureBox1.Location = new System.Drawing.Point(3, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(56, 45);
@@ -774,7 +774,7 @@
             // 
             // pictureBox7
             // 
-            this.pictureBox7.Image = global::BenhVienS.Properties.Resources.invoice1;
+        
             this.pictureBox7.Location = new System.Drawing.Point(0, 0);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(60, 45);
@@ -784,7 +784,7 @@
             // 
             // pictureBox4
             // 
-            this.pictureBox4.Image = global::BenhVienS.Properties.Resources.user1;
+
             this.pictureBox4.Location = new System.Drawing.Point(0, 3);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(60, 42);
@@ -794,7 +794,7 @@
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.stethoscope1;
+        
             this.pictureBox8.Location = new System.Drawing.Point(0, 0);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(60, 45);
@@ -813,7 +813,7 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = global::BenhVienS.Properties.Resources.document2;
+         
             this.pictureBox5.Location = new System.Drawing.Point(3, 1);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(56, 41);
@@ -823,7 +823,7 @@
             // 
             // pictureBox10
             // 
-            this.pictureBox10.Image = global::BenhVienS.Properties.Resources.medication1;
+          
             this.pictureBox10.Location = new System.Drawing.Point(3, 2);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(56, 41);
@@ -833,7 +833,7 @@
             // 
             // pictureBox13
             // 
-            this.pictureBox13.Image = global::BenhVienS.Properties.Resources.exam1;
+         
             this.pictureBox13.Location = new System.Drawing.Point(5, 11);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(63, 50);
@@ -843,7 +843,7 @@
             // 
             // pictureBox11
             // 
-            this.pictureBox11.Image = global::BenhVienS.Properties.Resources.wall_clock1;
+      
             this.pictureBox11.Location = new System.Drawing.Point(3, 9);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(63, 50);
@@ -853,7 +853,7 @@
             // 
             // pictureBox12
             // 
-            this.pictureBox12.Image = global::BenhVienS.Properties.Resources.medical1;
+           
             this.pictureBox12.Location = new System.Drawing.Point(4, 9);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(65, 50);
@@ -863,7 +863,7 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Image = global::BenhVienS.Properties.Resources.calendar1;
+     
             this.pictureBox6.Location = new System.Drawing.Point(4, 11);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(63, 50);
