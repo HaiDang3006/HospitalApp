@@ -57,8 +57,8 @@ namespace BenhVienS
         private void button2_Click(object sender, EventArgs e)
         {
             hsbnhan hsbnhan = new hsbnhan();
-            showControl
-
+            //showControl; 
+            //hsbnhan.ShowDialog();
         }
     }
 }

@@ -158,7 +158,9 @@
     <Compile Include="Lichhen.Designer.cs">
       <DependentUpon>Lichhen.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapperSql\DoctorMapper.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Doctor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="qlhosobenhnhan.cs">
@@ -174,7 +176,10 @@
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
     <Compile Include="MapperSql\AppointmentMapper.cs" />
-    <Compile Include="Service\LichHenService\LichHenService.cs" />
+    <Compile Include="Repository\AppointmentRepository.cs" />
+    <Compile Include="Repository\DoctorRepository.cs" />
+    <Compile Include="Service\AppointmentService\AppointmentService.cs" />
+    <Compile Include="Service\DoctorSerice\DoctorService.cs" />
     <Compile Include="thembenhnhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -481,5 +486,6 @@
     <Content Include="Resources\wall-clock.png" />
     <None Include="Resources\wall-clock2.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

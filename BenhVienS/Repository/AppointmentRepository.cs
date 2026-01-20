@@ -11,10 +11,10 @@ namespace BenhVienS.Repository
 {
     static class AppointmentRepository
     {
-        public static List<Appointment> AppointmentListByDoctor(int id)
+        public static int CountTodayByDoctor(int id)
         {
             string sql = @"
-                            SELECT *
+                            SELECT COUNT(*)
                             FROM LichHen
                             WHERE MaBacSi = @DoctorId
                             AND CAST(NgayHen AS DATE) = CAST(GETDATE() AS DATE)
@@ -24,9 +24,10 @@ namespace BenhVienS.Repository
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@DoctorId", id);
-                SqlDataReader result = cmd.ExecuteReader();
-                return AppointmentMapper.AppointmentListToMap(result);
+                object result = cmd.ExecuteScalar();
+                return Convert.ToInt32(result);
             }
+           
         }
     }
 }

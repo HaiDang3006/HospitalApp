@@ -42,7 +42,7 @@ namespace BenhVienS
             this.label5 = new System.Windows.Forms.Label();
             this.picNew = new System.Windows.Forms.PictureBox();
             this.lblNew = new System.Windows.Forms.Label();
-            this.lblNewCount = new System.Windows.Forms.Label();
+            this.lblQuantityAppointment = new System.Windows.Forms.Label();
             this.cardReturning = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.picReturning = new System.Windows.Forms.PictureBox();
@@ -357,7 +357,7 @@ namespace BenhVienS
             this.cardNew.Controls.Add(this.label5);
             this.cardNew.Controls.Add(this.picNew);
             this.cardNew.Controls.Add(this.lblNew);
-            this.cardNew.Controls.Add(this.lblNewCount);
+            this.cardNew.Controls.Add(this.lblQuantityAppointment);
             this.cardNew.Location = new System.Drawing.Point(0, 0);
             this.cardNew.Name = "cardNew";
             this.cardNew.Size = new System.Drawing.Size(260, 95);
@@ -396,15 +396,15 @@ namespace BenhVienS
             this.lblNew.TabIndex = 1;
             this.lblNew.Text = "Lịch Hẹn ";
             // 
-            // lblNewCount
+            // lblQuantityAppointment
             // 
-            this.lblNewCount.AutoSize = true;
-            this.lblNewCount.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblNewCount.Location = new System.Drawing.Point(80, 19);
-            this.lblNewCount.Name = "lblNewCount";
-            this.lblNewCount.Size = new System.Drawing.Size(46, 54);
-            this.lblNewCount.TabIndex = 2;
-            this.lblNewCount.Text = "3";
+            this.lblQuantityAppointment.AutoSize = true;
+            this.lblQuantityAppointment.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblQuantityAppointment.Location = new System.Drawing.Point(80, 19);
+            this.lblQuantityAppointment.Name = "lblQuantityAppointment";
+            this.lblQuantityAppointment.Size = new System.Drawing.Size(46, 54);
+            this.lblQuantityAppointment.TabIndex = 2;
+            this.lblQuantityAppointment.Text = "3";
             // 
             // cardReturning
             // 
@@ -914,7 +914,7 @@ namespace BenhVienS
         private System.Windows.Forms.Panel panelMain;
         private System.Windows.Forms.Panel panelStats;
         private System.Windows.Forms.Panel cardNew;
-        private System.Windows.Forms.Label lblNewCount;
+        private System.Windows.Forms.Label lblQuantityAppointment;
         private System.Windows.Forms.Label lblNew;
         private System.Windows.Forms.PictureBox picNew;
 

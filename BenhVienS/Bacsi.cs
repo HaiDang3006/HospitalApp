@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BenhVienS.Service.AppointmentService;
+using BenhVienS.Service.DoctorSerice;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,8 @@ namespace BenhVienS
 {
     public partial class Bacsi : Form
     {
+        DoctorService doctorService = new DoctorService();
+        AppointmentService appointmentService = new AppointmentService();
         private List<Control> _defaultPanelControls;
         string connectionString = @"Data Source=Huynhnhu;Initial Catalog = benhvienvs; Integrated Security = True; Trust Server Certificate=True";
         public Bacsi()
@@ -19,6 +23,8 @@ namespace BenhVienS
             InitializeComponent();
             _defaultPanelControls = panelMain.Controls.Cast<Control>().ToList();
             btnHome.Click += button5_Click;
+            //
+            Load += init;
         }
 
         private void showControl(Control control)
@@ -40,18 +46,24 @@ namespace BenhVienS
             }
         }
 
-        private void Bacsi_Load(object sender, EventArgs e)
+        private void init(object sender, EventArgs e)
         {
             appointmentInit();
-            LoadCongViec();
-            LoadNhatKy();
-            LoadThongTinBacSi();
+            //LoadCongViec();
+            //LoadNhatKy();
+            //LoadThongTinBacSi();
         }
 
         private void appointmentInit()
         {
-            int doctorId = 1;
-            
+            int doctorId = 1; // thay bằng token đăng nhập
+            // check id null o day
+            if (doctorService.DoctorById(doctorId) == null)
+                // sau nay xoa cookie va chuyen ra dang nhap
+                return;
+            // hàm này là set giá trị lên label trên giao diện 
+            // appointmentService.CountAppointmentTodayByDoctor là gọi hàm đè ctrl vào CountAppointmentTodayByDoctor để coi hàm được gọi
+            lblQuantityAppointment.Text = Convert.ToString(appointmentService.CountAppointmentTodayByDoctor(doctorId)); ;
         }
 
 
@@ -179,6 +191,11 @@ namespace BenhVienS
         {
             kdthuoc uc = new kdthuoc();
             showControl(uc);
+        }
+
+        private void btnHome_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
