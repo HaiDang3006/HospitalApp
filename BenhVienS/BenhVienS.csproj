@@ -340,8 +340,6 @@
     <EmbeddedResource Include="hsbnhan.resx">
       <DependentUpon>hsbnhan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="khbenh.resx">
-      <DependentUpon>khbenh.cs</DependentUpon>
     <EmbeddedResource Include="Helper_UI\FormInit.resx">
       <DependentUpon>FormInit.cs</DependentUpon>
     </EmbeddedResource>
