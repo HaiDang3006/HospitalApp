@@ -21,11 +21,7 @@ namespace BenhVienS
             _defaultPanelControls = panethongtin.Controls.Cast<Control>().ToList();
             btnTrang.Click += btnTrang_Click;
 
-            // Tự động hiện Form2 (Trang chủ) ngay khi vừa mở ứng dụng
-            this.Load += (s, e) => {
-                Form2 f2 = new Form2();
-                hienThiFormCon(f2);
-            };
+          
         }
         private void showControl(Control control)
         {
@@ -146,6 +142,36 @@ namespace BenhVienS
             Form1 f1 = new Form1();
             f1.Show();
             this.Hide();
+        }
+
+        private void btnXemTatCaLich_Click(object sender, EventArgs e)
+        {
+            uclichhensaptoi uc = new uclichhensaptoi();
+            showControl(uc);
+        }
+
+        private void btnGoLichHen_Click(object sender, EventArgs e)
+        {
+            ucqllichhen uc = new ucqllichhen();
+            showControl(uc);
+        }
+
+        private void btnGoDonThuoc_Click(object sender, EventArgs e)
+        {
+            uckedonthuoc uc = new uckedonthuoc();
+            showControl(uc);
+        }
+
+        private void btnGoHoSo_Click(object sender, EventArgs e)
+        {
+            uchsbenhan uc = new uchsbenhan();
+            showControl(uc);
+        }
+
+        private void btnGoThongTinBV_Click(object sender, EventArgs e)
+        {
+            ucttbv uc = new ucttbv();
+            showControl(uc);
         }
     }
 }
