@@ -125,17 +125,18 @@
             // 
             this.btnTieptuc.Location = new System.Drawing.Point(296, 334);
             this.btnTieptuc.Name = "btnTieptuc";
-            this.btnTieptuc.Size = new System.Drawing.Size(133, 23);
+            this.btnTieptuc.Size = new System.Drawing.Size(133, 39);
             this.btnTieptuc.TabIndex = 7;
             this.btnTieptuc.Text = "Tiếp tục";
             this.btnTieptuc.UseVisualStyleBackColor = true;
+            this.btnTieptuc.Click += new System.EventHandler(this.btnTieptuc_Click);
             // 
             // frmvaitro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(459, 355);
+            this.ClientSize = new System.Drawing.Size(459, 385);
             this.Controls.Add(this.btnTieptuc);
             this.Controls.Add(this.radBenhnhan);
             this.Controls.Add(this.radDuocsi);
@@ -146,6 +147,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "frmvaitro";
             this.Text = "frmvaitro";
+            this.Load += new System.EventHandler(this.frmvaitro_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
