@@ -38,7 +38,7 @@
             this.lbTongTien = new System.Windows.Forms.Label();
             this.btXacNhan = new System.Windows.Forms.Button();
             this.dgvChiTietDonThuoc = new System.Windows.Forms.DataGridView();
-            this.label5 = new System.Windows.Forms.Label();
+            this.lbBacSi = new System.Windows.Forms.Label();
             this.lbBenhNhan = new System.Windows.Forms.Label();
             this.lbMaDon = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -113,7 +113,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.lbTongTien);
             this.splitContainer1.Panel2.Controls.Add(this.btXacNhan);
             this.splitContainer1.Panel2.Controls.Add(this.dgvChiTietDonThuoc);
-            this.splitContainer1.Panel2.Controls.Add(this.label5);
+            this.splitContainer1.Panel2.Controls.Add(this.lbBacSi);
             this.splitContainer1.Panel2.Controls.Add(this.lbBenhNhan);
             this.splitContainer1.Panel2.Controls.Add(this.lbMaDon);
             this.splitContainer1.Panel2.Controls.Add(this.label2);
@@ -173,15 +173,15 @@
             this.dgvChiTietDonThuoc.Size = new System.Drawing.Size(443, 330);
             this.dgvChiTietDonThuoc.TabIndex = 6;
             // 
-            // label5
+            // lbBacSi
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 92);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 20);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Tên Bác Sĩ:";
+            this.lbBacSi.AutoSize = true;
+            this.lbBacSi.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBacSi.Location = new System.Drawing.Point(5, 92);
+            this.lbBacSi.Name = "lbBacSi";
+            this.lbBacSi.Size = new System.Drawing.Size(93, 20);
+            this.lbBacSi.TabIndex = 5;
+            this.lbBacSi.Text = "Tên Bác Sĩ:";
             // 
             // lbBenhNhan
             // 
@@ -250,7 +250,7 @@
         private System.Windows.Forms.DataGridView dgvDonThuoc;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lbBacSi;
         private System.Windows.Forms.Label lbBenhNhan;
         private System.Windows.Forms.Label lbMaDon;
         private System.Windows.Forms.DataGridView dgvChiTietDonThuoc;

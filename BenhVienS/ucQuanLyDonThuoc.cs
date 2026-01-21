@@ -15,16 +15,109 @@ namespace BenhVienS
     {
         // Chuỗi kết nối
         string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENV1;Trusted_Connection=True;TrustServerCertificate=True;";
-
-        // Giả định các thông số này được truyền từ Form Đăng nhập
-        private int maDuocSiHienTai = 1;
+        private int maDuocSi = 5;       // Giả sử ID Dược sĩ đang đăng nhập là 5
         private int maQuayHienTai = 1;
-
         public ucQuanLyDonThuoc()
         {
             InitializeComponent();
+            dgvDonThuoc.CellClick += dgvDonThuoc_CellClick;
+        }
+        private void dgvDonThuoc_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Kiểm tra xem người dùng có click vào dòng hợp lệ không (tránh click vào header)
+            if (e.RowIndex >= 0)
+            {
+                // Lấy dòng hiện tại đang chọn
+                DataGridViewRow row = dgvDonThuoc.Rows[e.RowIndex];
+
+                // Lấy MaDonThuoc từ cột đầu tiên (hoặc tên cột "MaDonThuoc")
+                // Lưu ý: Đảm bảo cột 0 là Mã đơn, nếu không hãy thay bằng row.Cells["TenCotMaDon"].Value
+                int maDonThuoc = Convert.ToInt32(row.Cells[0].Value);
+
+                // Gọi hàm hiển thị chi tiết
+                HienThiChiTietDonThuoc(maDonThuoc);
+            }
         }
 
+        private void HienThiChiTietDonThuoc(int maDonThuoc)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // --- BƯỚC 1: LẤY THÔNG TIN CHUNG (Tên BN, Tên BS) ---
+                    string queryInfo = @"
+                SELECT 
+                    DT.MaDonThuoc,
+                    ND_BN.HoTen AS TenBenhNhan,
+                    ND_BS.HoTen AS TenBacSi
+                FROM DonThuoc DT
+                JOIN PhieuKham PK ON DT.MaPhieuKham = PK.MaPhieuKham
+                JOIN LichHen LH ON PK.MaLichHen = LH.MaLichHen
+                JOIN BenhNhan BN ON LH.MaBenhNhan = BN.MaBenhNhan
+                JOIN NguoiDung ND_BN ON BN.MaNguoiDung = ND_BN.MaNguoiDung
+                JOIN BacSi BS ON DT.MaBacSi = BS.MaBacSi
+                JOIN NguoiDung ND_BS ON BS.MaNguoiDung = ND_BS.MaNguoiDung
+                WHERE DT.MaDonThuoc = @MaDonThuoc";
+
+                    SqlCommand cmdInfo = new SqlCommand(queryInfo, conn);
+                    cmdInfo.Parameters.AddWithValue("@MaDonThuoc", maDonThuoc);
+
+                    SqlDataReader reader = cmdInfo.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        // --- SỬA Ở ĐÂY: Thêm chuỗi tiêu đề vào trước dữ liệu ---
+                        lbMaDon.Text = "Mã Đơn: " + reader["MaDonThuoc"].ToString();
+                        lbBenhNhan.Text = "Tên Bệnh Nhân: " + reader["TenBenhNhan"].ToString();
+                        lbBacSi.Text = "Tên Bác Sĩ: " + reader["TenBacSi"].ToString();
+                    }
+                    reader.Close();
+
+                    // --- BƯỚC 2: LẤY DANH SÁCH THUỐC ĐỔ VÀO GRID BÊN PHẢI ---
+                    string queryThuoc = @"
+                SELECT 
+                    T.TenThuoc AS [Tên Thuốc],
+                    CT.SoLuong AS [SL],
+                    T.DonViTinh AS [ĐVT],
+                    CT.CachDung AS [Cách Dùng],
+                    FORMAT(CT.DonGia, '#,##0') AS [Đơn Giá],
+                    FORMAT(CT.ThanhTien, '#,##0') AS [Thành Tiền]
+                FROM ChiTietDonThuoc CT
+                JOIN Thuoc T ON CT.MaThuoc = T.MaThuoc
+                WHERE CT.MaDonThuoc = @MaDonThuoc";
+
+                    SqlDataAdapter da = new SqlDataAdapter(queryThuoc, conn);
+                    da.SelectCommand.Parameters.AddWithValue("@MaDonThuoc", maDonThuoc);
+
+                    DataTable dtChiTiet = new DataTable();
+                    da.Fill(dtChiTiet);
+
+                    dgvChiTietDonThuoc.DataSource = dtChiTiet;
+
+                    // --- BƯỚC 3: TÍNH TỔNG TIỀN ---
+                    decimal tongTien = 0;
+                    string queryTong = "SELECT SUM(ThanhTien) FROM ChiTietDonThuoc WHERE MaDonThuoc = @MaDonThuoc";
+                    SqlCommand cmdTong = new SqlCommand(queryTong, conn);
+                    cmdTong.Parameters.AddWithValue("@MaDonThuoc", maDonThuoc);
+
+                    object result = cmdTong.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        tongTien = Convert.ToDecimal(result);
+                    }
+
+                    // Cũng thêm tiêu đề cho tổng tiền nếu cần
+                    lbTongTien.Text = "Tổng Tiền: " + string.Format("{0:#,##0} VNĐ", tongTien);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi tải chi tiết: " + ex.Message);
+                }
+            }
+        }
         private void ucQuanLyDonThuoc_Load(object sender, EventArgs e)
         {
             LoadDanhSachDonThuoc();
@@ -80,52 +173,7 @@ namespace BenhVienS
         }
         #endregion
 
-        #region 2. Tải Chi Tiết Đơn Thuốc (Detail)
-        // Thay vì dùng CellContentClick, dùng CellClick để chính xác hơn khi chọn dòng
-        private void dgvDonThuoc_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvDonThuoc.Rows[e.RowIndex];
-                int maDon = Convert.ToInt32(row.Cells["MaDonThuoc"].Value);
-
-                // Cập nhật thông tin hiển thị nhanh
-                lbMaDon.Text = "Mã Đơn: " + maDon.ToString();
-                lbBenhNhan.Text = "BN: " + row.Cells["TenBenhNhan"].Value.ToString();
-
-                LoadChiTietDonThuoc(maDon);
-            }
-        }
-
-        private void LoadChiTietDonThuoc(int maDon)
-        {
-            using (SqlConnection conn = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    string query = @"
-                        SELECT t.TenThuoc, ct.SoLuong, t.DonViTinh, ct.DonGia, ct.ThanhTien, ct.CachDung
-                        FROM ChiTietDonThuoc ct
-                        INNER JOIN Thuoc t ON ct.MaThuoc = t.MaThuoc
-                        WHERE ct.MaDonThuoc = @MaDon";
-
-                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    da.SelectCommand.Parameters.AddWithValue("@MaDon", maDon);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-                    dgvChiTietDonThuoc.DataSource = dt;
-
-                    // Tính tổng tiền đơn thuốc
-                    decimal tongTien = 0;
-                    foreach (DataRow row in dt.Rows)
-                        tongTien += Convert.ToDecimal(row["ThanhTien"]);
-
-                    lbTongTien.Text = string.Format("{0:N0} VNĐ", tongTien);
-                }
-                catch (Exception ex) { MessageBox.Show("Lỗi tải chi tiết: " + ex.Message); }
-            }
-        }
-        #endregion
+     
 
         #region 3. Xác Nhận Xuất Thuốc (Transaction & Inventory)
         private void btXacNhan_Click(object sender, EventArgs e)
@@ -159,7 +207,7 @@ namespace BenhVienS
 
                     SqlCommand cmdXuat = new SqlCommand(sqlXuat, conn, trans);
                     cmdXuat.Parameters.AddWithValue("@MaDon", maDon);
-                    cmdXuat.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
+                    cmdXuat.Parameters.AddWithValue("@MaDS", maDuocSi);
                     cmdXuat.Parameters.AddWithValue("@MaQuay", maQuayHienTai);
                     cmdXuat.ExecuteNonQuery();
 
