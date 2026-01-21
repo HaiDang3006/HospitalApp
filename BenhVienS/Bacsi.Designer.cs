@@ -1,5 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using BenhVienS.Common;
+using BenhVienS.Enums;
+using System;
 using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 
 namespace BenhVienS
 {
@@ -179,6 +182,7 @@ namespace BenhVienS
             this.btnLogout.TabIndex = 3;
             this.btnLogout.Text = "Đăng Xuất";
             this.btnLogout.UseVisualStyleBackColor = false;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
             // 
             // panelLeft
             // 
@@ -194,6 +198,7 @@ namespace BenhVienS
             this.panelLeft.Padding = new System.Windows.Forms.Padding(10);
             this.panelLeft.Size = new System.Drawing.Size(250, 680);
             this.panelLeft.TabIndex = 1;
+            this.panelLeft.Paint += new System.Windows.Forms.PaintEventHandler(this.panelLeft_Paint);
             // 
             // btnHome
             // 
