@@ -30,14 +30,14 @@ namespace BenhVienS
                 InitializeComponent();
                 _defaultPanelControls = panelMain.Controls.Cast<Control>().ToList();
                 btnHome.Click += button5_Click;
-                 Load += init;
+                Load += init;
             }
             catch (UnauthorizedAccessException ex)
             {
                 MessageBox.Show(ex.Message);
                 this.Close();
             }
-
+        }
         private void showControl(Control control)
         {
             panelMain.Controls.Clear();
@@ -240,8 +240,8 @@ namespace BenhVienS
             Application.Restart();
         }
 
-        private void panelLeft_Paint(object sender, PaintEventArgs e)
-        {
+        private void panelLeft_Paint(object sender, PaintEventArgs e) { }
+        
 
         private void btnHome_Click(object sender, EventArgs e)
         {

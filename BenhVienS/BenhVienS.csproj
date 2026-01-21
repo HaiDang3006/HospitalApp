@@ -190,7 +190,6 @@
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
     <Compile Include="MapperSql\AppointmentMapper.cs" />
-    <Compile Include="MapperSql\LichHenMapper.cs" />
     <Compile Include="Service\AuthService\AuthService.cs" />
     <Compile Include="Service\LichHenService\LichHenService.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
