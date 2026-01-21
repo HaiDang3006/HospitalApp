@@ -5,14 +5,20 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using BenhVienS.Utils;
 using static BenhVienS.Form2;
 
 namespace BenhVienS
 {
     public partial class Form2 : Form
     {
+
         // Thêm dấu @ và bao quanh bằng dấu ngoặc kép ""
-        string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=benhvienvs;Integrated Security=True;TrustServerCertificate=True"; 
+        string connectionString =
+@"Data Source=localhost\SQLEXPRESS;
+Initial Catalog=BenhVienSv1;
+Integrated Security=True"";
+";
         public Form2()
         {
             InitializeComponent();
@@ -76,18 +82,24 @@ namespace BenhVienS
             LoadDanhSachBacSi();
 
             // Tải lịch làm việc hôm nay
-            LoadLichLamHomNay();
+            using (SqlConnection conn = DbUtils.GetConnection())
+            {
+                conn.Open();
+                MessageBox.Show("Kết nối thành công!");
+            }
+            string sql = "SELECT * FROM BacSi";
 
-            // Tùy chỉnh giao diện DataGridView (tùy chọn)
-            dgvDanhsachbacsi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvLichlamhomnay.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            LoadDanhSachBacSi();
-            TaoMaLichTuDong();
-            // Gán dữ liệu mặc định cho ComboBox Trạng thái
-            cbTragthai.Items.AddRange(new string[] { "Mới", "Đã xác nhận", "Đã khám", "Hủy" });
-            cbTragthai.SelectedIndex = 0;
+            using (SqlConnection conn = DbUtils.GetConnection())
+            {
+                conn.Open();
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvDanhsachbacsi.DataSource = dt; // đổ vào DataGridView
+            }
+
         }
-
         private void LoadDanhSachLichKham()
         {
             try
@@ -364,10 +376,7 @@ namespace BenhVienS
         }
 
         private void LoadDanhSachBacSi(string tenTim = "", int maChuyenKhoa = 0)
-
         {
-            
-
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -375,22 +384,22 @@ namespace BenhVienS
                     conn.Open();
 
                     string query = @"
-                SELECT 
-                    bs.MaBacSi,
-                    nd.HoTen AS TenBacSi,
-                    ck.TenChuyenKhoa,
-                    bs.BangCap,
-                    bs.ChuyenMon,
-                    bs.NamKinhNghiem,
-                    bs.DanhGia,
-                    CASE WHEN bs.TrangThai = 1 
-                         THEN N'Hoạt động' 
-                         ELSE N'Ngưng hoạt động' 
-                    END AS TrangThai
-                FROM BacSi bs
-                JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
-                JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
-                WHERE 1 = 1";
+            SELECT 
+                bs.MaBacSi,
+                nd.HoTen AS TenBacSi,
+                ck.TenChuyenKhoa,
+                bs.BangCap,
+                bs.ChuyenMon,
+                bs.NamKinhNghiem,
+                bs.DanhGia,
+                CASE 
+                    WHEN bs.TrangThai = 1 THEN N'Hoạt động'
+                    ELSE N'Ngưng hoạt động'
+                END AS TrangThai
+            FROM BacSi bs
+            JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
+            JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
+            WHERE bs.TrangThai = 1";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
 
@@ -414,7 +423,6 @@ namespace BenhVienS
 
                     dgvDanhsachbacsi.AutoGenerateColumns = false;
                     dgvDanhsachbacsi.DataSource = dt;
-                    dgvDanhsachbacsi.DataSource = dt;
                 }
             }
             catch (Exception ex)
@@ -422,6 +430,7 @@ namespace BenhVienS
                 MessageBox.Show("Lỗi tải danh sách bác sĩ: " + ex.Message);
             }
         }
+
 
 
         private void cbChuyenkhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -440,45 +449,7 @@ namespace BenhVienS
            
         }
 
-        private void LoadLichLamHomNay()
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    string query = @"
-                SELECT 
-                    bs.MaBacSi,
-                    nd.HoTen,
-                    ck.TenChuyenKhoa,
-                    ISNULL(ll.CaSang, 0)  AS CaSang,
-                    ISNULL(ll.CaTrua, 0)  AS CaTrua,
-                    ISNULL(ll.CaChieu, 0) AS CaChieu
-                FROM BacSi bs
-                JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
-                JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
-                LEFT JOIN LichLamViec ll 
-                    ON bs.MaBacSi = ll.MaBacSi 
-                   AND ll.Ngay = @Ngay";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Ngay", DateTime.Today);
-
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dgvLichlamhomnay.AutoGenerateColumns = false;
-                    dgvLichlamhomnay.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải lịch làm hôm nay: " + ex.Message);
-            }
-        }
+       
 
         private void LoadDanhSachDichVu()
         {
@@ -509,9 +480,37 @@ namespace BenhVienS
 
         }
 
-        private void dgvDanhsachbacsi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDanhsachbacsi_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0) return;
 
+            if (dgvDanhsachbacsi.Columns[e.ColumnIndex].Name == "colThaoTac")
+            {
+                int maBacSi = Convert.ToInt32(
+                    dgvDanhsachbacsi.Rows[e.RowIndex].Cells["MaBacSi"].Value
+                );
+
+                Rectangle cellRect = dgvDanhsachbacsi
+                    .GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, false);
+
+
+                int clickX = dgvDanhsachbacsi.PointToClient(System.Windows.Forms.Cursor.Position).X - cellRect.X;
+
+                int w = dgvDanhsachbacsi.Columns[e.ColumnIndex].Width;
+
+                if (clickX < w / 3)
+                {
+                    HienLichLam(maBacSi);
+                }
+                else if (clickX < w * 2 / 3)
+                {
+                    SuaThongTinBacSi(maBacSi);
+                }
+                else
+                {
+                    XoaBacSi(maBacSi);
+                }
+            }
         }
 
         private void dgvLichlamhomnay_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -685,7 +684,7 @@ namespace BenhVienS
 
         private void panelTongthuhomnay_Paint(object sender, PaintEventArgs e)
         {
-            ControlPaint.DrawBorder(e.Graphics, panelTongthuhomnay.ClientRectangle, Color.Gray, ButtonBorderStyle.Dotted);
+           
         }
 
         private void panelTongchihomnay_Paint(object sender, PaintEventArgs e)
@@ -782,8 +781,11 @@ namespace BenhVienS
         {
             LoadDanhSachDichVu();
         }
+        string sql = "SELECT * FROM BacSi";
 
-        private void dgvBangDV_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+
+private void dgvBangDV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
@@ -797,60 +799,14 @@ namespace BenhVienS
                 decimal tienBHYTChiTra = donGia * (decimal)tyLe;
                 decimal tienBenhNhanTra = donGia - tienBHYTChiTra;
 
-                // Thêm vào bảng khám bệnh phía dưới
-                dgvBangkhambenh.Rows.Add(maDV, (tyLe * 100) + "%", donGia, tienBenhNhanTra, tienBHYTChiTra, "Xóa");
             }
-
 
         }
 
-        private void dgvBangkhambenh_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 5 && e.RowIndex >= 0)
-            {
-                dgvBangkhambenh.Rows.RemoveAt(e.RowIndex);
-            }
-            if (e.RowIndex < 0) return;
-
-
-            if (dgvBangkhambenh.Columns[e.ColumnIndex].Name == "btnXoa")
-            {
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa dịch vụ này khỏi danh sách khám?",
-                                                    "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    dgvBangkhambenh.Rows.RemoveAt(e.RowIndex);
-                    TinhTongTienBenhNhan();
-                }
-            }
-            if (dgvBangkhambenh.Columns[e.ColumnIndex].Name == "btnSua")
-            {
-
-                dgvBangkhambenh.CurrentRow.ReadOnly = false;
-
-
-                dgvBangkhambenh.CurrentCell = dgvBangkhambenh.Rows[e.RowIndex].Cells["colPhantram"];
-                dgvBangkhambenh.BeginEdit(true);
-
-                MessageBox.Show("Vui lòng nhập giá trị mới và nhấn Enter để cập nhật.");
-            }
-        }
+        
         private void TinhTongTienBenhNhan()
         {
-            decimal tongCong = 0;
-
-            // Duyệt qua từng dòng trong bảng khám bệnh
-            foreach (DataGridViewRow row in dgvBangkhambenh.Rows)
-            {
-                // Kiểm tra dòng đó không phải dòng trống (NewRow) và có giá trị
-                if (row.Cells[3].Value != null)
-                {
-                    tongCong += Convert.ToDecimal(row.Cells[3].Value);
-                }
-            }
-
-            // Hiển thị lên Label với định dạng phân cách hàng nghìn
-            labelTongtien.Text = tongCong.ToString("N0") + " VNĐ";
+            
         }
 
         private void tabPageTongquan_Click(object sender, EventArgs e)
@@ -1510,6 +1466,227 @@ namespace BenhVienS
         {
 
         }
+
+       
+
+       
+        private void HienLichLam(int maBacSi)
+        {
+            string query = "SELECT NgayLamViec, CaLam FROM LichLamViec WHERE MaBacSi = @MaBacSi";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MaBacSi", maBacSi);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                // Giả sử bạn có một DataGridView tên là dgvLichLam
+                // dgvLichLam.DataSource = dt;
+            }
+
+        }
+
+        private void SuaThongTinBacSi(int maBacSi)
+        {
+            // 1. Lấy dòng hiện tại từ GridView
+            DataGridViewRow row = dgvDanhsachbacsi.CurrentRow;
+            if (row == null)
+            {
+                MessageBox.Show("Vui lòng chọn bác sĩ cần sửa!");
+                return;
+            }
+
+            // 2. Lấy giá trị từ các ô (Cells) - Đảm bảo tên cột trong Cells["..."] chính xác với thiết kế
+            string hoTen = row.Cells["colHotenbacsi"].Value?.ToString() ?? "";
+            string gioiTinh = row.Cells["colGioitinhbacsi"].Value?.ToString() ?? "";
+            DateTime ngaySinh = Convert.ToDateTime(row.Cells["colNgaysinhbacsi"].Value);
+            string chuyenKhoa = row.Cells["colChuyenkhoa"].Value?.ToString() ?? "";
+            string trinhDo = row.Cells["colTrinhdo"].Value?.ToString() ?? "";
+            string trangThai = row.Cells["colTrangThai"].Value?.ToString() ?? "";
+
+            // 3. Khai báo SQL (Đặt ở ngoài để dùng chung)
+            string query = @"UPDATE BacSi 
+                     SET HoTen = @HoTen, 
+                         GioiTinh = @GioiTinh, 
+                         NgaySinh = @NgaySinh, 
+                         ChuyenKhoa = @ChuyenKhoa, 
+                         TrinhDo = @TrinhDo, 
+                         TrangThai = @TrangThai 
+                     WHERE ID = @MaBS";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open(); // Chỉ mở kết nối một lần duy nhất
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    // 4. Truyền tham số (Phải khớp với tên biến đã khai báo ở mục 2)
+                    cmd.Parameters.AddWithValue("@HoTen", hoTen);
+                    cmd.Parameters.AddWithValue("@GioiTinh", gioiTinh);
+                    cmd.Parameters.AddWithValue("@NgaySinh", ngaySinh);
+                    cmd.Parameters.AddWithValue("@ChuyenKhoa", chuyenKhoa);
+                    cmd.Parameters.AddWithValue("@TrinhDo", trinhDo);
+                    cmd.Parameters.AddWithValue("@TrangThai", trangThai);
+                    cmd.Parameters.AddWithValue("@MaBS", maBacSi);
+
+                    int result = cmd.ExecuteNonQuery();
+
+                    if (result > 0)
+                    {
+                        MessageBox.Show("Cập nhật thông tin bác sĩ thành công!", "Thông báo");
+                        LoadDanhSachBacSi(); // Tải lại danh sách
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không tìm thấy bác sĩ cần sửa trong CSDL.", "Lỗi");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi thực thi: " + ex.Message);
+                }
+            }
+        }
+
+        private void XoaBacSi(int maBacSi)
+        {
+            string query = "DELETE FROM BacSi WHERE MaBacSi = @MaBacSi";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MaBacSi", maBacSi);
+
+                conn.Open();
+                int rows = cmd.ExecuteNonQuery();
+                if (rows > 0)
+                {
+                    MessageBox.Show("Đã xóa bác sĩ thành công.");
+                }
+                else
+                {
+                    MessageBox.Show("Không tìm thấy bác sĩ để xóa.");
+                }
+            }
+        }
+
+        private void dgvDanhsachbacsi_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            // Chỉ vẽ cho cột Thao tác và không phải dòng tiêu đề
+            if (e.RowIndex >= 0 && dgvDanhsachbacsi.Columns[e.ColumnIndex].Name == "colThaoTac")
+            {
+                e.Paint(e.CellBounds, DataGridViewPaintParts.All);
+
+                // Giả sử bạn có 3 ảnh trong Resources: lich_icon, sua_icon, xoa_icon
+                // Nếu chưa có ảnh, bạn có thể vẽ tạm bằng text hoặc hình khối
+                var w = e.CellBounds.Width / 3;
+                var h = e.CellBounds.Height;
+
+                // Vẽ 3 vùng icon (Đây là nơi bạn đưa ảnh vào)
+                // e.Graphics.DrawImage(Properties.Resources.lich_icon, e.CellBounds.X, e.CellBounds.Y);
+                // e.Graphics.DrawImage(Properties.Resources.sua_icon, e.CellBounds.X + w, e.CellBounds.Y);
+                // ...
+
+                // Vẽ đường kẻ phân cách giữa 3 nút cho dễ nhìn
+                e.Graphics.DrawLine(Pens.Gray, e.CellBounds.X + w, e.CellBounds.Y, e.CellBounds.X + w, e.CellBounds.Y + h);
+                e.Graphics.DrawLine(Pens.Gray, e.CellBounds.X + 2 * w, e.CellBounds.Y, e.CellBounds.X + 2 * w, e.CellBounds.Y + h);
+
+                e.Handled = true;
+            }
+        }
+
+        private void dgvDanhsachbacsi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            if (dgvDanhsachbacsi.Columns[e.ColumnIndex].Name == "colAction")
+            {
+                int maBacSi = Convert.ToInt32(
+                    dgvDanhsachbacsi.Rows[e.RowIndex].Cells["MaBacSi"].Value
+                );
+
+                // Lấy vị trí click trong cell
+                Rectangle cellRect = dgvDanhsachbacsi.GetCellDisplayRectangle(
+                    e.ColumnIndex, e.RowIndex, false);
+
+                int clickX = dgvDanhsachbacsi
+                    .PointToClient(System.Windows.Forms.Cursor.Position).X - cellRect.X;
+
+                int width = cellRect.Width / 3;
+
+                // 1️⃣ XEM LỊCH LÀM
+                if (clickX < width)
+                {
+                    LoadLichLamTheoBacSi(maBacSi);
+                }
+                // 2️⃣ SỬA
+                else if (clickX < width * 2)
+                {
+                    SuaBacSi(maBacSi);
+                }
+                // 3️⃣ XÓA
+                else
+                {
+                    if (MessageBox.Show(
+                        "Bạn có chắc muốn xóa bác sĩ này?",
+                        "Xác nhận",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning) == DialogResult.Yes)
+                    {
+                        XoaBacSi(maBacSi);
+                    }
+                }
+            }
+        }
+        private void SuaBacSi(int maBacSi)
+        {
+            MessageBox.Show("Sửa bác sĩ có mã: " + maBacSi);
+        }
+
+
+        private void LoadLichLamTheoBacSi(int maBacSi)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    string query = @"
+                SELECT 
+                    NgayLam,
+                    Ca,
+                    GioBatDau,
+                    GioKetThuc,
+                    CASE 
+                        WHEN TrangThai = 1 THEN N'Hoạt động'
+                        ELSE N'Ngưng'
+                    END AS TrangThai
+                FROM CaLamViec
+                WHERE MaBacSi = @MaBacSi
+                ORDER BY NgayLam";
+
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@MaBacSi", maBacSi);
+
+                    SqlDataAdapter da = new SqlDataAdapter(cmd);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
+
+                    dgvDanhsachlichlamcuamotbacsi.AutoGenerateColumns = false;
+                    dgvDanhsachlichlamcuamotbacsi.DataSource = dt;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi tải lịch làm: " + ex.Message);
+            }
+        }
+
     }
 }
 
