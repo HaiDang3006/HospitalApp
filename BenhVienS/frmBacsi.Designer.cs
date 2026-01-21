@@ -59,8 +59,8 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::BenhVienS.Properties.Resources.doctor11;
-            this.pictureBox1.Location = new System.Drawing.Point(22, 58);
+/*            this.pictureBox1.Image = global::BenhVienS.Properties.Resources.doctor11;
+*/            this.pictureBox1.Location = new System.Drawing.Point(22, 58);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(121, 146);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
