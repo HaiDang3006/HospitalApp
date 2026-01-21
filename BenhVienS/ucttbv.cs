@@ -31,5 +31,10 @@ namespace BenhVienS
         {
 
         }
+
+        private void btnTrang_Click(object sender, EventArgs e)
+        {
+            this.Hide(); // Ẩn trang hiện tại
+        }
     }
 }

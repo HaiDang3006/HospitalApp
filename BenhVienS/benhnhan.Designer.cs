@@ -378,7 +378,7 @@
             this.groupBox3.Size = new System.Drawing.Size(1088, 227);
             this.groupBox3.TabIndex = 19;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Thông Báo Từ Bệnh Viện";
+            this.groupBox3.Text = " ";
             // 
             // label28
             // 

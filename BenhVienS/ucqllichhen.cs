@@ -21,7 +21,7 @@ namespace BenhVienS
         private void ucqllichhen_Load(object sender, EventArgs e)
         {
             KhoiTaoBang();
-            LoadComboBox();
+            LoadComboBoxData(); // Đổi tên hàm cho rõ nghĩa
         }
 
         private void KhoiTaoBang()
@@ -44,9 +44,9 @@ namespace BenhVienS
 
             dgvLichHen.DataSource = dtLichHen;
 
-            // Mở khóa hoàn toàn để gõ trực tiếp
+            // Cấu hình DataGridView
             dgvLichHen.ReadOnly = false;
-            dgvLichHen.AllowUserToAddRows = true;
+            dgvLichHen.AllowUserToAddRows = false; // Tắt tự thêm dòng để tránh dòng trống dư thừa
             dgvLichHen.EditMode = DataGridViewEditMode.EditOnEnter;
 
             foreach (DataGridViewColumn col in dgvLichHen.Columns)
@@ -55,34 +55,76 @@ namespace BenhVienS
             }
         }
 
-        // --- NÚT ĐẶT LỊCH HẸN MỚI: NHẤN LÀ PHẢI HIỆN MESSBOX VÀ LƯU ---
+        private void LoadComboBoxData()
+        {
+            // Mã Bệnh Nhân
+            cboMaBenhNhan.Items.Clear();
+            cboMaBenhNhan.Items.AddRange(new object[] { "111", "222", "BN001" });
+
+            // Mã Bác Sĩ
+            cboMaBacSi.Items.Clear();
+            cboMaBacSi.Items.AddRange(new object[] { "BS001", "BS002" });
+
+            // Trạng Thái
+            cboTrangThai.Items.Clear();
+            cboTrangThai.Items.AddRange(new object[] { "Chờ khám", "Đã khám", "Hủy" });
+
+            // Hình Thức Đặt
+            cboHinhThucDat.Items.Clear();
+            cboHinhThucDat.Items.AddRange(new object[] { "Trực tiếp", "Qua điện thoại", "Online" });
+
+            // Lý Do Khám
+            cboLyDoKham.Items.Clear();
+            cboLyDoKham.Items.AddRange(new object[] { "Khám tổng quát", "Tái khám", "Cấp cứu" });
+
+            // Ghi Chú
+            cboGhiChu.Items.Clear();
+            cboGhiChu.Items.AddRange(new object[] { "Khách quen", "Ưu tiên", "Cần xét nghiệm máu" });
+        }
+
+        // --- NÚT ĐẶT LỊCH HẸN MỚI: LẤY TOÀN BỘ DỮ LIỆU TỪ CÁC Ô ---
         private void btnDatLichMoi_Click(object sender, EventArgs e)
         {
             try
             {
-                // 1. Ép bảng lưu dữ liệu đang gõ
-                dgvLichHen.EndEdit();
-                if (this.BindingContext[dtLichHen] != null)
+                // 1. Kiểm tra điều kiện bắt buộc (Ví dụ: phải chọn mã BN và mã BS)
+                if (string.IsNullOrEmpty(cboMaBenhNhan.Text) || string.IsNullOrEmpty(cboMaBacSi.Text))
                 {
-                    this.BindingContext[dtLichHen].EndCurrentEdit();
+                    MessageBox.Show("Vui lòng chọn Mã bệnh nhân và Mã bác sĩ!", "Nhắc nhở");
+                    return;
                 }
 
-                // 2. Ghi file vĩnh viễn
+                // 2. Tạo dòng mới và GÁN ĐẦY ĐỦ DỮ LIỆU từ các control
+                DataRow newRow = dtLichHen.NewRow();
+
+                // Cột tự động hoặc lấy từ control
+                newRow["MaLichHen"] = "LH" + (dtLichHen.Rows.Count + 1).ToString("000");
+
+                // Cột lấy từ ComboBox / DateTimePicker
+                newRow["MaBenhNhan"] = cboMaBenhNhan.Text;
+                newRow["MaBacSi"] = cboMaBacSi.Text;
+                newRow["NgayHen"] = dtpNgayHen.Value.ToShortDateString(); // Lấy từ ô Ngày hẹn
+                newRow["ThoiGianDen"] = dtpThoiGianDen.Value.ToString("HH:mm"); // Lấy từ ô Thời gian đến
+                newRow["LyDoKham"] = cboLyDoKham.Text;
+                newRow["HinhThucDat"] = cboHinhThucDat.Text;
+                newRow["TrangThai"] = cboTrangThai.Text;
+                newRow["GhiChu"] = cboGhiChu.Text;
+
+                // 3. Thêm vào DataTable
+                dtLichHen.Rows.Add(newRow);
+
+                // 4. Lưu file vĩnh viễn
                 dtLichHen.WriteXml(filePath);
 
-                // 3. HIỆN THÔNG BÁO XÁC NHẬN (Để bạn biết là code đã chạy)
-                MessageBox.Show("✅ Đã đặt lịch và lưu dữ liệu thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // 5. Thông báo và làm mới giao diện
+                MessageBox.Show("✅ Đã đặt lịch và lưu dữ liệu thành công!", "Thông báo");
 
-                // 4. Tạo dòng trống mới để nhập tiếp
-                DataRow newRow = dtLichHen.NewRow();
-                newRow["MaLichHen"] = "LH" + (dtLichHen.Rows.Count + 1).ToString("000");
-                newRow["NgayHen"] = DateTime.Now.ToShortDateString();
-                newRow["TrangThai"] = "Chờ khám";
-                dtLichHen.Rows.Add(newRow);
+                // (Tùy chọn) Xóa trắng các ô sau khi nhập xong để nhập ca tiếp theo
+                // ResetControls(); 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("❌ Lỗi lưu dữ liệu: " + ex.Message);
+                MessageBox.Show("❌ Lỗi: " + ex.Message);
             }
         }
 
@@ -91,17 +133,20 @@ namespace BenhVienS
             try
             {
                 dgvLichHen.EndEdit();
+                if (this.BindingContext[dtLichHen] != null)
+                    this.BindingContext[dtLichHen].EndCurrentEdit();
+
                 dtLichHen.WriteXml(filePath);
                 MessageBox.Show("✅ Đã cập nhật các thay đổi!", "Thông báo");
             }
             catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
         }
 
-        private void btnHuy_Click(object sender, EventArgs e)
+        private void btnXoa_Click(object sender, EventArgs e) // Đổi tên từ btnHuy thành btnXoa cho khớp ảnh
         {
-            if (dgvLichHen.CurrentRow != null && !dgvLichHen.CurrentRow.IsNewRow)
+            if (dgvLichHen.CurrentRow != null)
             {
-                if (MessageBox.Show("Xóa lịch hẹn này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("Bạn có chắc chắn muốn xóa lịch hẹn này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     dgvLichHen.Rows.RemoveAt(dgvLichHen.CurrentRow.Index);
                     dtLichHen.WriteXml(filePath);
@@ -114,24 +159,29 @@ namespace BenhVienS
         {
             if (dtLichHen == null) return;
             string filter = "";
+
+            // Tìm theo mã BN
             if (!string.IsNullOrEmpty(cboMaBenhNhan.Text))
                 filter += string.Format("MaBenhNhan LIKE '%{0}%'", cboMaBenhNhan.Text);
+
+            // Tìm theo Trạng thái (Lấy từ ô lọc cboTrangThai)
             if (!string.IsNullOrEmpty(cboTrangThai.Text))
             {
                 if (filter.Length > 0) filter += " AND ";
                 filter += string.Format("TrangThai LIKE '%{0}%'", cboTrangThai.Text);
             }
+
             dtLichHen.DefaultView.RowFilter = filter;
         }
 
-        private void LoadComboBox()
+        private void btnHuy_Click(object sender, EventArgs e)
         {
-            cboMaBenhNhan.Items.Clear();
-            cboMaBenhNhan.Items.AddRange(new object[] { "111", "222", "BN001" });
-            cboMaBacSi.Items.Clear();
-            cboMaBacSi.Items.AddRange(new object[] { "BS001", "BS002" });
-            cboTrangThai.Items.Clear();
-            cboTrangThai.Items.AddRange(new object[] { "Chờ khám", "Đã khám", "Hủy" });
+
+        }
+
+        private void dgvLichHen_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

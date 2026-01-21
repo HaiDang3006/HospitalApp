@@ -29,9 +29,7 @@
         private void InitializeComponent()
         {
             this.pnlThongTinBenhVien = new System.Windows.Forms.Panel();
-            this.btnCaiDat = new System.Windows.Forms.Button();
-            this.btnCapNhat = new System.Windows.Forms.Button();
-            this.btnOK = new System.Windows.Forms.Button();
+            this.btnTrang = new System.Windows.Forms.Button();
             this.lblKhanCap = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
             this.lblHenKham = new System.Windows.Forms.GroupBox();
@@ -39,17 +37,18 @@
             this.grpGioLamViec = new System.Windows.Forms.GroupBox();
             this.lblGioLamViec = new System.Windows.Forms.Label();
             this.lblTieuDe = new System.Windows.Forms.Label();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.pnlThongTinBenhVien.SuspendLayout();
             this.lblKhanCap.SuspendLayout();
             this.lblHenKham.SuspendLayout();
             this.grpGioLamViec.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlThongTinBenhVien
             // 
-            this.pnlThongTinBenhVien.Controls.Add(this.btnCaiDat);
-            this.pnlThongTinBenhVien.Controls.Add(this.btnCapNhat);
-            this.pnlThongTinBenhVien.Controls.Add(this.btnOK);
+            this.pnlThongTinBenhVien.Controls.Add(this.pictureBox11);
+            this.pnlThongTinBenhVien.Controls.Add(this.btnTrang);
             this.pnlThongTinBenhVien.Controls.Add(this.lblKhanCap);
             this.pnlThongTinBenhVien.Controls.Add(this.lblHenKham);
             this.pnlThongTinBenhVien.Controls.Add(this.grpGioLamViec);
@@ -60,53 +59,27 @@
             this.pnlThongTinBenhVien.Size = new System.Drawing.Size(1164, 707);
             this.pnlThongTinBenhVien.TabIndex = 0;
             // 
-            // btnCaiDat
+            // btnTrang
             // 
-            this.btnCaiDat.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnCaiDat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCaiDat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCaiDat.ForeColor = System.Drawing.Color.White;
-            this.btnCaiDat.Location = new System.Drawing.Point(818, 434);
-            this.btnCaiDat.Name = "btnCaiDat";
-            this.btnCaiDat.Size = new System.Drawing.Size(85, 47);
-            this.btnCaiDat.TabIndex = 7;
-            this.btnCaiDat.Text = "Cài đặt";
-            this.btnCaiDat.UseVisualStyleBackColor = false;
-            // 
-            // btnCapNhat
-            // 
-            this.btnCapNhat.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnCapNhat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCapNhat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCapNhat.ForeColor = System.Drawing.Color.White;
-            this.btnCapNhat.Location = new System.Drawing.Point(727, 434);
-            this.btnCapNhat.Name = "btnCapNhat";
-            this.btnCapNhat.Size = new System.Drawing.Size(85, 47);
-            this.btnCapNhat.TabIndex = 6;
-            this.btnCapNhat.Text = "Cập nhật";
-            this.btnCapNhat.UseVisualStyleBackColor = false;
-            // 
-            // btnOK
-            // 
-            this.btnOK.BackColor = System.Drawing.SystemColors.Highlight;
-            this.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOK.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnOK.ForeColor = System.Drawing.Color.White;
-            this.btnOK.Location = new System.Drawing.Point(909, 434);
-            this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(85, 47);
-            this.btnOK.TabIndex = 5;
-            this.btnOK.Text = "OK";
-            this.btnOK.UseVisualStyleBackColor = false;
-            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
+            this.btnTrang.BackColor = System.Drawing.SystemColors.Highlight;
+            this.btnTrang.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnTrang.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrang.ForeColor = System.Drawing.Color.White;
+            this.btnTrang.Location = new System.Drawing.Point(883, 418);
+            this.btnTrang.Name = "btnTrang";
+            this.btnTrang.Size = new System.Drawing.Size(111, 47);
+            this.btnTrang.TabIndex = 16;
+            this.btnTrang.Text = "Đóng";
+            this.btnTrang.UseVisualStyleBackColor = false;
+            this.btnTrang.Click += new System.EventHandler(this.btnTrang_Click);
             // 
             // lblKhanCap
             // 
             this.lblKhanCap.Controls.Add(this.label4);
             this.lblKhanCap.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKhanCap.Location = new System.Drawing.Point(535, 334);
+            this.lblKhanCap.Location = new System.Drawing.Point(535, 283);
             this.lblKhanCap.Name = "lblKhanCap";
-            this.lblKhanCap.Size = new System.Drawing.Size(459, 94);
+            this.lblKhanCap.Size = new System.Drawing.Size(459, 129);
             this.lblKhanCap.TabIndex = 4;
             this.lblKhanCap.TabStop = false;
             this.lblKhanCap.Text = "Liên Hệ Khẩn Cấp";
@@ -114,10 +87,10 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(26, 40);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(211, 20);
+            this.label4.Size = new System.Drawing.Size(254, 25);
             this.label4.TabIndex = 7;
             this.label4.Text = "Cấp cứu 24/7: 090-13-4867";
             // 
@@ -125,9 +98,9 @@
             // 
             this.lblHenKham.Controls.Add(this.label3);
             this.lblHenKham.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHenKham.Location = new System.Drawing.Point(46, 334);
+            this.lblHenKham.Location = new System.Drawing.Point(46, 283);
             this.lblHenKham.Name = "lblHenKham";
-            this.lblHenKham.Size = new System.Drawing.Size(459, 94);
+            this.lblHenKham.Size = new System.Drawing.Size(459, 129);
             this.lblHenKham.TabIndex = 3;
             this.lblHenKham.TabStop = false;
             this.lblHenKham.Text = "Hẹn Khám";
@@ -135,10 +108,10 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(26, 40);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(176, 20);
+            this.label3.Size = new System.Drawing.Size(213, 25);
             this.label3.TabIndex = 7;
             this.label3.Text = "Tổng đài: 080-123-867";
             // 
@@ -148,7 +121,7 @@
             this.grpGioLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpGioLamViec.Location = new System.Drawing.Point(46, 141);
             this.grpGioLamViec.Name = "grpGioLamViec";
-            this.grpGioLamViec.Size = new System.Drawing.Size(459, 113);
+            this.grpGioLamViec.Size = new System.Drawing.Size(459, 136);
             this.grpGioLamViec.TabIndex = 2;
             this.grpGioLamViec.TabStop = false;
             this.grpGioLamViec.Text = "Giờ Làm Việc";
@@ -156,10 +129,10 @@
             // lblGioLamViec
             // 
             this.lblGioLamViec.AutoSize = true;
-            this.lblGioLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGioLamViec.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblGioLamViec.Location = new System.Drawing.Point(26, 41);
             this.lblGioLamViec.Name = "lblGioLamViec";
-            this.lblGioLamViec.Size = new System.Drawing.Size(208, 40);
+            this.lblGioLamViec.Size = new System.Drawing.Size(248, 50);
             this.lblGioLamViec.TabIndex = 7;
             this.lblGioLamViec.Text = "Thứ 2 - Thứ 6: 7:30 - 17:00\r\nChủ nhật: Nghỉ";
             // 
@@ -172,6 +145,17 @@
             this.lblTieuDe.Size = new System.Drawing.Size(403, 38);
             this.lblTieuDe.TabIndex = 0;
             this.lblTieuDe.Text = "THÔNG TIN BỆNH VIỆN";
+            // 
+            // pictureBox11
+            // 
+            this.pictureBox11.BackColor = System.Drawing.Color.White;
+            this.pictureBox11.Image = global::BenhVienS.Properties.Resources.hospital_removebg_preview;
+            this.pictureBox11.Location = new System.Drawing.Point(797, 68);
+            this.pictureBox11.Name = "pictureBox11";
+            this.pictureBox11.Size = new System.Drawing.Size(197, 159);
+            this.pictureBox11.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox11.TabIndex = 17;
+            this.pictureBox11.TabStop = false;
             // 
             // ucttbv
             // 
@@ -189,6 +173,7 @@
             this.lblHenKham.PerformLayout();
             this.grpGioLamViec.ResumeLayout(false);
             this.grpGioLamViec.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -201,10 +186,9 @@
         private System.Windows.Forms.Label lblGioLamViec;
         private System.Windows.Forms.GroupBox lblHenKham;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnCaiDat;
-        private System.Windows.Forms.Button btnCapNhat;
-        private System.Windows.Forms.Button btnOK;
         private System.Windows.Forms.GroupBox lblKhanCap;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnTrang;
+        private System.Windows.Forms.PictureBox pictureBox11;
     }
 }
