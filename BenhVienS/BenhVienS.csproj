@@ -176,10 +176,6 @@
     <Compile Include="frmvaitro.Designer.cs">
       <DependentUpon>frmvaitro.cs</DependentUpon>
     </Compile>
-    <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
     <Compile Include="Helper_Service\CryptoHelper.cs" />
     <Compile Include="Helper_UI\FormInit.cs">
       <SubType>Form</SubType>
@@ -439,6 +435,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmvaitro.resx">
       <DependentUpon>frmvaitro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="hsbnhan.resx">
       <DependentUpon>hsbnhan.cs</DependentUpon>
     </EmbeddedResource>
@@ -506,17 +503,6 @@
     </None>
     <None Include="benhvienvsDataSet.xss">
       <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xsc">
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>HospitalManagementSystemDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xss">
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

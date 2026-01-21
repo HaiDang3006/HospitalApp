@@ -105,7 +105,7 @@ Integrated Security=True"";
                    FROM LichHen
                    WHERE CAST(NgayHen AS DATE) = CAST(GETDATE() AS DATE)";
 
-            using (SqlConnection conn = DbUtils.GetConnection())
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -122,7 +122,7 @@ Integrated Security=True"";
                    WHERE DaThanhToan = 1
                    AND CAST(NgayThanhToan AS DATE) = CAST(GETDATE() AS DATE)";
 
-            using (SqlConnection conn = DbUtils.GetConnection())
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -138,7 +138,7 @@ Integrated Security=True"";
                    FROM LichHen
                    WHERE CAST(NgayHen AS DATE) = CAST(GETDATE() AS DATE)";
 
-            using (SqlConnection conn = DbUtils.GetConnection())
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -176,7 +176,7 @@ Integrated Security=True"";
 
             decimal tong = 0;
 
-            using (SqlConnection conn = DbUtils.GetConnection())
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -223,7 +223,7 @@ Integrated Security=True"";
         WHERE CAST(lh.NgayHen AS DATE) = CAST(GETDATE() AS DATE)
         ORDER BY lh.ThoiGianDen";
 
-            using (SqlConnection conn = DbUtils.GetConnection())
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
@@ -1857,7 +1857,7 @@ private void dgvBangDV_CellContentClick(object sender, DataGridViewCellEventArgs
         {
             string sql = "SELECT COUNT(*) FROM BacSi WHERE TrangThai = 1";
 
-            using (SqlConnection conn = DbUtils.GetConnection())
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand(sql, conn);
