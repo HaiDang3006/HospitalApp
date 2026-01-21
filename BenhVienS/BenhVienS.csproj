@@ -272,6 +272,12 @@
     <Compile Include="uckedonthuoc.Designer.cs">
       <DependentUpon>uckedonthuoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="uclichhensaptoi.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="uclichhensaptoi.Designer.cs">
+      <DependentUpon>uclichhensaptoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucQlibacsi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -329,6 +335,9 @@
     <EmbeddedResource Include="Bacsi.resx">
       <DependentUpon>Bacsi.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="benhnhan.resx">
+      <DependentUpon>benhnhan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="caidat.resx">
       <DependentUpon>caidat.cs</DependentUpon>
     </EmbeddedResource>
@@ -381,6 +390,18 @@
     <EmbeddedResource Include="TrangchuBVS.resx">
       <DependentUpon>TrangchuBVS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uchotro.resx">
+      <DependentUpon>uchotro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uchsbenhan.resx">
+      <DependentUpon>uchsbenhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uckedonthuoc.resx">
+      <DependentUpon>uckedonthuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="uclichhensaptoi.resx">
+      <DependentUpon>uclichhensaptoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucQlibacsi.resx">
       <DependentUpon>ucQlibacsi.cs</DependentUpon>
     </EmbeddedResource>
@@ -389,11 +410,41 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucqllichkham.resx">
       <DependentUpon>ucqllichkham.cs</DependentUpon>
+    <EmbeddedResource Include="ucqllichhen.resx">
+      <DependentUpon>ucqllichhen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucQuanlibenhnhan.resx">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
+    <EmbeddedResource Include="ucttbenhnhan.resx">
+      <DependentUpon>ucttbenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucttbv.resx">
+      <DependentUpon>ucttbv.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="benhvienvsDataSet.xsc">
+      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="benhvienvsDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>benhvienvsDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="benhvienvsDataSet.xss">
+      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HospitalManagementSystemDataSet.xsc">
+      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="HospitalManagementSystemDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>HospitalManagementSystemDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="HospitalManagementSystemDataSet.xss">
+      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -422,6 +473,13 @@
     <Content Include="Resources\8a8ae6a0780f7797f831fd6ba635b7ba-removebg-preview.png" />
     <Content Include="Resources\business-continuity.png" />
     <Content Include="Resources\calendar %281%29.png" />
+    <None Include="Resources\z7447109316691_a18290ee9f378b65c4059efb1374ca59.jpg" />
+    <None Include="Resources\z7423253179898_9b6c41dc24da3a870d79afae7e9cd959-removebg-preview2.png" />
+    <None Include="Resources\z7423254199693_7288026db60d4b602cef61c3fe1e507e-removebg-preview.png" />
+    <None Include="Resources\z7423253179898_9b6c41dc24da3a870d79afae7e9cd959-removebg-preview1.png" />
+    <None Include="Resources\z7423253179898_9b6c41dc24da3a870d79afae7e9cd959-removebg-preview.png" />
+    <None Include="Resources\calendar-removebg-preview.png" />
+    <None Include="Resources\calendar-removebg-preview1.png" />
     <Content Include="Resources\calendar.png" />
     <Content Include="Resources\cash.png" />
     <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_35_05 PM.png" />
@@ -449,19 +507,27 @@
     <Content Include="Resources\e8c9b4913db521be37fdb019122d73bc-removebg-preview.png" />
     <Content Include="Resources\email.jpg" />
     <Content Include="Resources\exam.png" />
+    <None Include="Resources\folder-removebg-preview.png" />
     <Content Include="Resources\GIAO DIỆN.png" />
     <Content Include="Resources\group.png" />
     <Content Include="Resources\home-icon-silhouette.png" />
     <Content Include="Resources\home-icon-silhouette1.png" />
+    <None Include="Resources\hospital-removebg-preview.png" />
+    <None Include="Resources\hospital.png" />
+    <None Include="Resources\hospital-removebg-preview1.png" />
     <Content Include="Resources\hình nền.jpg" />
     <Content Include="Resources\icon ngươig.png" />
     <Content Include="Resources\icons8-profile.gif" />
     <Content Include="Resources\invoice.png" />
     <Content Include="Resources\khóa.png" />
+    <None Include="Resources\location-removebg-preview.png" />
     <Content Include="Resources\logo.png" />
     <Content Include="Resources\mail.png" />
+    <None Include="Resources\manager-removebg-preview.png" />
+    <None Include="Resources\manager-removebg-preview1.png" />
     <Content Include="Resources\manager.png" />
     <Content Include="Resources\Medical Care - Letter S Logo Template.jpg" />
+    <None Include="Resources\medical-prescription-removebg-preview.png" />
     <Content Include="Resources\medical.png" />
     <Content Include="Resources\medication.png" />
     <Content Include="Resources\OIP-removebg-preview.png" />
@@ -469,12 +535,14 @@
     <Content Include="Resources\OIP-removebg-preview2.png" />
     <Content Include="Resources\OIP-removebg-preview3.png" />
     <Content Include="Resources\password.png" />
+    <None Include="Resources\patient-removebg-preview.png" />
     <Content Include="Resources\pension.png" />
     <Content Include="Resources\phone icon.jpg" />
     <Content Include="Resources\phone-call.png" />
     <Content Include="Resources\phone-call1.png" />
     <Content Include="Resources\phone_icon-removebg-preview.png" />
     <Content Include="Resources\power.png" />
+    <None Include="Resources\prescription-removebg-preview.png" />
     <Content Include="Resources\report.png" />
     <Content Include="Resources\settings.png" />
     <Content Include="Resources\stethoscope.png" />
