@@ -91,7 +91,7 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(484, 30);
             this.txtTimKiem.TabIndex = 5;
-            this.txtTimKiem.Text = "Nhập mã đơn, họ tên bệnh nhân";
+            this.txtTimKiem.Text = "Tìm kiếm...";
             // 
             // btThem
             // 

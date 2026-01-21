@@ -24,10 +24,6 @@ namespace BenhVienS
         {
             InitializeComponent();
             _defaultPanelControls = panelBody.Controls.Cast<Control>().ToList();
-
-            // Khởi tạo vạch màu trang trí
-            leftBorderBtn = new Panel { Size = new Size(7, 60) };
-            panelMenu.Controls.Add(leftBorderBtn);
         }
 
         private void DuocSi_Load(object sender, EventArgs e)
@@ -37,30 +33,6 @@ namespace BenhVienS
 
         #region UI Logic (Chuyển đổi màn hình)
 
-        private void ActivateButton(object senderBtn)
-        {
-            if (senderBtn != null)
-            {
-                DisableButton();
-                currentBtn = (Button)senderBtn;
-                currentBtn.BackColor = Color.FromArgb(37, 36, 81);
-                currentBtn.ForeColor = Color.White;
-
-                leftBorderBtn.BackColor = Color.Orange;
-                leftBorderBtn.Location = new Point(0, currentBtn.Location.Y);
-                leftBorderBtn.Visible = true;
-                leftBorderBtn.BringToFront();
-            }
-        }
-
-        private void DisableButton()
-        {
-            if (currentBtn != null)
-            {
-                currentBtn.BackColor = Color.SteelBlue;
-                currentBtn.ForeColor = Color.White;
-            }
-        }
 
         private void showControl(Control control)
         {
@@ -85,31 +57,26 @@ namespace BenhVienS
 
         private void btTongquan_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
             RestorePanelThongTin();
         }
 
         private void btDMT_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
             showControl(new ucDanhMucThuoc());
         }
 
         private void btQLDT_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
             showControl(new ucQuanLyDonThuoc());
         }
 
         private void btDSNT_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
             showControl(new ucDanhSachNhapThuoc());
         }
 
         private void btcaidat_Click(object sender, EventArgs e)
         {
-            ActivateButton(sender);
             showControl(new ucCD());
         }
 

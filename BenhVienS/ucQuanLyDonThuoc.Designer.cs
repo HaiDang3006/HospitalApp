@@ -35,13 +35,13 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label4 = new System.Windows.Forms.Label();
             this.dgvDonThuoc = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.lbMaDon = new System.Windows.Forms.Label();
-            this.lbBenhNhan = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.dgvChiTietDonThuoc = new System.Windows.Forms.DataGridView();
-            this.btXacNhan = new System.Windows.Forms.Button();
             this.lbTongTien = new System.Windows.Forms.Label();
+            this.btXacNhan = new System.Windows.Forms.Button();
+            this.dgvChiTietDonThuoc = new System.Windows.Forms.DataGridView();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lbBenhNhan = new System.Windows.Forms.Label();
+            this.lbMaDon = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -81,7 +81,7 @@
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(442, 30);
             this.txtTimKiem.TabIndex = 7;
-            this.txtTimKiem.Text = "Tìm kiếm";
+            this.txtTimKiem.Text = "Tìm kiếm...";
             // 
             // btTimkiem
             // 
@@ -140,57 +140,16 @@
             this.dgvDonThuoc.RowTemplate.Height = 24;
             this.dgvDonThuoc.Size = new System.Drawing.Size(448, 451);
             this.dgvDonThuoc.TabIndex = 0;
-            this.dgvDonThuoc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDonThuoc_CellContentClick);
             // 
-            // label2
+            // lbTongTien
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(3, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(216, 27);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Chi Tiết Đơn Thuốc";
-            // 
-            // lbMaDon
-            // 
-            this.lbMaDon.AutoSize = true;
-            this.lbMaDon.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbMaDon.Location = new System.Drawing.Point(276, 13);
-            this.lbMaDon.Name = "lbMaDon";
-            this.lbMaDon.Size = new System.Drawing.Size(88, 23);
-            this.lbMaDon.TabIndex = 3;
-            this.lbMaDon.Text = "Mã Đơn:";
-            // 
-            // lbBenhNhan
-            // 
-            this.lbBenhNhan.AutoSize = true;
-            this.lbBenhNhan.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBenhNhan.Location = new System.Drawing.Point(4, 56);
-            this.lbBenhNhan.Name = "lbBenhNhan";
-            this.lbBenhNhan.Size = new System.Drawing.Size(132, 20);
-            this.lbBenhNhan.TabIndex = 4;
-            this.lbBenhNhan.Text = "Tên Bệnh Nhân:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(5, 92);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(93, 20);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Tên Bác Sĩ:";
-            // 
-            // dgvChiTietDonThuoc
-            // 
-            this.dgvChiTietDonThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvChiTietDonThuoc.Location = new System.Drawing.Point(3, 115);
-            this.dgvChiTietDonThuoc.Name = "dgvChiTietDonThuoc";
-            this.dgvChiTietDonThuoc.RowHeadersWidth = 51;
-            this.dgvChiTietDonThuoc.RowTemplate.Height = 24;
-            this.dgvChiTietDonThuoc.Size = new System.Drawing.Size(443, 330);
-            this.dgvChiTietDonThuoc.TabIndex = 6;
+            this.lbTongTien.AutoSize = true;
+            this.lbTongTien.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTongTien.Location = new System.Drawing.Point(212, 461);
+            this.lbTongTien.Name = "lbTongTien";
+            this.lbTongTien.Size = new System.Drawing.Size(92, 20);
+            this.lbTongTien.TabIndex = 8;
+            this.lbTongTien.Text = "Tổng Tiền:";
             // 
             // btXacNhan
             // 
@@ -204,15 +163,55 @@
             this.btXacNhan.UseVisualStyleBackColor = false;
             this.btXacNhan.Click += new System.EventHandler(this.btXacNhan_Click);
             // 
-            // lbTongTien
+            // dgvChiTietDonThuoc
             // 
-            this.lbTongTien.AutoSize = true;
-            this.lbTongTien.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTongTien.Location = new System.Drawing.Point(212, 461);
-            this.lbTongTien.Name = "lbTongTien";
-            this.lbTongTien.Size = new System.Drawing.Size(92, 20);
-            this.lbTongTien.TabIndex = 8;
-            this.lbTongTien.Text = "Tổng Tiền:";
+            this.dgvChiTietDonThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChiTietDonThuoc.Location = new System.Drawing.Point(3, 115);
+            this.dgvChiTietDonThuoc.Name = "dgvChiTietDonThuoc";
+            this.dgvChiTietDonThuoc.RowHeadersWidth = 51;
+            this.dgvChiTietDonThuoc.RowTemplate.Height = 24;
+            this.dgvChiTietDonThuoc.Size = new System.Drawing.Size(443, 330);
+            this.dgvChiTietDonThuoc.TabIndex = 6;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(5, 92);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(93, 20);
+            this.label5.TabIndex = 5;
+            this.label5.Text = "Tên Bác Sĩ:";
+            // 
+            // lbBenhNhan
+            // 
+            this.lbBenhNhan.AutoSize = true;
+            this.lbBenhNhan.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbBenhNhan.Location = new System.Drawing.Point(4, 56);
+            this.lbBenhNhan.Name = "lbBenhNhan";
+            this.lbBenhNhan.Size = new System.Drawing.Size(132, 20);
+            this.lbBenhNhan.TabIndex = 4;
+            this.lbBenhNhan.Text = "Tên Bệnh Nhân:";
+            // 
+            // lbMaDon
+            // 
+            this.lbMaDon.AutoSize = true;
+            this.lbMaDon.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbMaDon.Location = new System.Drawing.Point(276, 13);
+            this.lbMaDon.Name = "lbMaDon";
+            this.lbMaDon.Size = new System.Drawing.Size(88, 23);
+            this.lbMaDon.TabIndex = 3;
+            this.lbMaDon.Text = "Mã Đơn:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(3, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(216, 27);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Chi Tiết Đơn Thuốc";
             // 
             // ucQuanLyDonThuoc
             // 
