@@ -65,7 +65,6 @@ namespace BenhVienS
             // 
             // picLogo
             // 
-            this.picLogo.Image = global::BenhVienS.Properties.Resources.icons8_profile;
             this.picLogo.Location = new System.Drawing.Point(125, 150);
             this.picLogo.Name = "picLogo";
             this.picLogo.Size = new System.Drawing.Size(150, 150);
@@ -139,7 +138,6 @@ namespace BenhVienS
             // 
             // picIconEmail
             // 
-            this.picIconEmail.Image = global::BenhVienS.Properties.Resources.icon_ngươig;
             this.picIconEmail.Location = new System.Drawing.Point(15, 12);
             this.picIconEmail.Name = "picIconEmail";
             this.picIconEmail.Size = new System.Drawing.Size(25, 25);
@@ -176,7 +174,6 @@ namespace BenhVienS
             // 
             // picIconPassword
             // 
-            this.picIconPassword.Image = global::BenhVienS.Properties.Resources.khóa;
             this.picIconPassword.Location = new System.Drawing.Point(15, 12);
             this.picIconPassword.Name = "picIconPassword";
             this.picIconPassword.Size = new System.Drawing.Size(25, 25);

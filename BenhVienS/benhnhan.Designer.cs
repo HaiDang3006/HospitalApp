@@ -175,7 +175,6 @@
             // 
             // pictureBox5
             // 
-            this.pictureBox5.Image = global::BenhVienS.Properties.Resources.z7423253179898_9b6c41dc24da3a870d79afae7e9cd959_removebg_preview;
             this.pictureBox5.Location = new System.Drawing.Point(3, 3);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(52, 55);

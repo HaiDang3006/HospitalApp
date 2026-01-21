@@ -32,6 +32,10 @@ namespace BenhVienS.Common
                     nextForm = new DuocSi();
                     break;
 
+                case RoleEnum.Patient:
+                    nextForm = new benhnhan();
+                    break;
+
                 default:
                     nextForm = null;
                     break;

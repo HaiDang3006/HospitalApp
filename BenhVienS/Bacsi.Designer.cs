@@ -333,7 +333,6 @@ namespace BenhVienS
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(250)))), ((int)(((byte)(229)))));
-            this.pictureBox1.Image = global::BenhVienS.Properties.Resources.calendar__1_1;
             this.pictureBox1.Location = new System.Drawing.Point(20, 25);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";

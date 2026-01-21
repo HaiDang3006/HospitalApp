@@ -21,11 +21,7 @@ namespace BenhVienS
             _defaultPanelControls = panethongtin.Controls.Cast<Control>().ToList();
             btnTrang.Click += btnTrang_Click;
 
-            // Tự động hiện Form2 (Trang chủ) ngay khi vừa mở ứng dụng
-            this.Load += (s, e) => {
-                Form2 f2 = new Form2();
-                hienThiFormCon(f2);
-            };
+          
         }
         private void showControl(Control control)
         {
