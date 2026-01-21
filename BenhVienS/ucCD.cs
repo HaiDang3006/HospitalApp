@@ -13,10 +13,11 @@ namespace BenhVienS
 {
     public partial class ucCD : UserControl
     {
-        private string strCon;
-        private string maDuocSiHienTai; // Add this field
+        private string maDuocSiHienTai;
+        // Sử dụng một chuỗi kết nối duy nhất
+        private string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENV1;Trusted_Connection=True;TrustServerCertificate=True;";
 
-        public ucCD(string maDuocSi) // Add a constructor to set the value
+        public ucCD(string maDuocSi)
         {
             InitializeComponent();
             maDuocSiHienTai = maDuocSi;
@@ -25,48 +26,29 @@ namespace BenhVienS
         public ucCD()
         {
             InitializeComponent();
-
         }
 
         private void ucCD_Load(object sender, EventArgs e)
         {
-            LoadDataDuocSi();
-        }
-
-        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENS;Trusted_Connection=True;TrustServerCertificate=True;";
-
-        private void btdangxuat_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-               "Bạn có chắc muốn đăng xuất không?",
-               "Xác nhận",
-               MessageBoxButtons.YesNo,
-               MessageBoxIcon.Question
-            );
-
-            if (result == DialogResult.Yes)
+            if (!string.IsNullOrEmpty(maDuocSiHienTai))
             {
-                Form parentForm = this.FindForm(); // LẤY FORM CHA (FormDượcSĩ)
-
-                parentForm.Hide(); // ẨN TOÀN BỘ FORM DƯỢC SĨ
-
-                Form1 frmLogin = new Form1();
-                frmLogin.Show();
+                LoadDataDuocSi();
             }
         }
 
         private void LoadDataDuocSi()
         {
-            using (SqlConnection conn = new SqlConnection(strCon))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
+                    // Sửa lại Query: Bỏ KhoaPhong, ChuyenMon (không có trong SQL) và thêm ChungChiHanhNghe
                     string query = @"SELECT ds.MaDuocSi, nd.HoTen, nd.SoDienThoai, nd.Email, nd.DiaChi, 
-                                    ds.KhoaPhong, ds.BangCap, ds.ChuyenMon
-                             FROM DuocSi ds
-                             JOIN NguoiDung nd ON ds.MaNguoiDung = nd.MaNguoiDung
-                             WHERE ds.MaDuocSi = @MaDS";
+                                            ds.BangCap, ds.ChungChiHanhNghe
+                                     FROM DuocSi ds
+                                     JOIN NguoiDung nd ON ds.MaNguoiDung = nd.MaNguoiDung
+                                     WHERE ds.MaDuocSi = @MaDS";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
@@ -79,9 +61,9 @@ namespace BenhVienS
                         txtSDT.Text = reader["SoDienThoai"].ToString();
                         txtEmail.Text = reader["Email"].ToString();
                         txtDiaChi.Text = reader["DiaChi"].ToString();
-                        txtKhoaPhong.Text = reader["KhoaPhong"].ToString();
                         txtBangCap.Text = reader["BangCap"].ToString();
-                        txtChuyenMon.Text = reader["ChuyenMon"].ToString();
+                        // txtChuyenMon giờ sẽ hiển thị Chứng chỉ hành nghề
+                        txtChuyenMon.Text = reader["ChungChiHanhNghe"].ToString();
                     }
                 }
                 catch (Exception ex)
@@ -91,16 +73,18 @@ namespace BenhVienS
             }
         }
 
+        // 1. CẬP NHẬT THÔNG TIN CÁ NHÂN (Bảng NguoiDung)
         private void btCapNhatThongTin_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(strCon))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
+                    // Thêm cập nhật NgayCapNhat để đồng bộ với DB
                     string sql = @"UPDATE NguoiDung 
-                           SET SoDienThoai = @sdt, Email = @email, DiaChi = @dc
-                           WHERE MaNguoiDung = (SELECT MaNguoiDung FROM DuocSi WHERE MaDuocSi = @MaDS)";
+                                   SET SoDienThoai = @sdt, Email = @email, DiaChi = @dc, NgayCapNhat = GETDATE()
+                                   WHERE MaNguoiDung = (SELECT MaNguoiDung FROM DuocSi WHERE MaDuocSi = @MaDS)";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
                     cmd.Parameters.AddWithValue("@sdt", txtSDT.Text.Trim());
@@ -109,61 +93,38 @@ namespace BenhVienS
                     cmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
 
                     if (cmd.ExecuteNonQuery() > 0)
-                        MessageBox.Show("Cập nhật thông tin cá nhân thành công!");
+                        MessageBox.Show("Cập nhật thông tin cá nhân thành công!", "Thông báo");
                 }
                 catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
             }
         }
 
+        // 2. CẬP NHẬT CHUYÊN MÔN (Bảng DuocSi)
         private void btCapNhatChuyenMon_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra dữ liệu đầu vào cơ bản
-            if (string.IsNullOrWhiteSpace(txtBangCap.Text) || string.IsNullOrWhiteSpace(txtChuyenMon.Text))
-            {
-                MessageBox.Show("Vui lòng nhập đầy đủ Bằng cấp và Chuyên môn!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            using (SqlConnection conn = new SqlConnection(strCon)) // strCon là chuỗi kết nối của bạn
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
-
-                    // 2. Câu lệnh SQL cập nhật bảng DuocSi
+                    // Sửa lại theo đúng các cột trong bảng DuocSi (BangCap, ChungChiHanhNghe)
                     string sql = @"UPDATE DuocSi 
-                           SET KhoaPhong = @kp, 
-                               BangCap = @bc, 
-                               ChuyenMon = @cm 
-                           WHERE MaDuocSi = @maDS";
+                                   SET BangCap = @bc, ChungChiHanhNghe = @cc 
+                                   WHERE MaDuocSi = @maDS";
 
                     SqlCommand cmd = new SqlCommand(sql, conn);
-
-                    // 3. Truyền tham số để bảo mật (chống SQL Injection)
-                    cmd.Parameters.AddWithValue("@kp", txtKhoaPhong.Text.Trim());
                     cmd.Parameters.AddWithValue("@bc", txtBangCap.Text.Trim());
-                    cmd.Parameters.AddWithValue("@cm", txtChuyenMon.Text.Trim());
-                    cmd.Parameters.AddWithValue("@maDS", maDuocSiHienTai); // Mã dược sĩ đang đăng nhập
+                    cmd.Parameters.AddWithValue("@cc", txtChuyenMon.Text.Trim()); // Map txtChuyenMon sang ChungChiHanhNghe
+                    cmd.Parameters.AddWithValue("@maDS", maDuocSiHienTai);
 
-                    // 4. Thực thi và kiểm tra kết quả
-                    int rowsAffected = cmd.ExecuteNonQuery();
-
-                    if (rowsAffected > 0)
-                    {
-                        MessageBox.Show("Cập nhật thông tin chuyên môn thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không tìm thấy dữ liệu dược sĩ để cập nhật.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    if (cmd.ExecuteNonQuery() > 0)
+                        MessageBox.Show("Cập nhật chuyên môn thành công!");
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi kết nối Database: " + ex.Message, "Lỗi Hệ Thống", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
             }
         }
 
+        // 3. ĐỔI MẬT KHẨU (Dùng cột MatKhauHash trong SQL)
         private void btDoiMatKhau_Click(object sender, EventArgs e)
         {
             if (txtMatKhauMoi.Text != txtNhapLaiMKM.Text)
@@ -172,24 +133,24 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(strCon))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
                 {
                     conn.Open();
-                    // Kiểm tra mật khẩu cũ
+                    // Kiểm tra mật khẩu cũ (Sửa tên cột thành MatKhauHash)
                     string checkSql = @"SELECT COUNT(*) FROM NguoiDung nd 
-                                JOIN DuocSi ds ON nd.MaNguoiDung = ds.MaNguoiDung 
-                                WHERE ds.MaDuocSi = @MaDS AND nd.MatKhau = @oldPass";
+                                        JOIN DuocSi ds ON nd.MaNguoiDung = ds.MaNguoiDung 
+                                        WHERE ds.MaDuocSi = @MaDS AND nd.MatKhauHash = @oldPass";
+
                     SqlCommand checkCmd = new SqlCommand(checkSql, conn);
                     checkCmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
                     checkCmd.Parameters.AddWithValue("@oldPass", txtMatKhauCu.Text);
 
                     if ((int)checkCmd.ExecuteScalar() > 0)
                     {
-                        // Cập nhật mật khẩu mới
-                        string updateSql = @"UPDATE NguoiDung SET MatKhau = @newPass 
-                                     WHERE MaNguoiDung = (SELECT MaNguoiDung FROM DuocSi WHERE MaDuocSi = @MaDS)";
+                        string updateSql = @"UPDATE NguoiDung SET MatKhauHash = @newPass, NgayCapNhat = GETDATE()
+                                             WHERE MaNguoiDung = (SELECT MaNguoiDung FROM DuocSi WHERE MaDuocSi = @MaDS)";
                         SqlCommand updateCmd = new SqlCommand(updateSql, conn);
                         updateCmd.Parameters.AddWithValue("@newPass", txtMatKhauMoi.Text);
                         updateCmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
@@ -200,7 +161,16 @@ namespace BenhVienS
                     }
                     else { MessageBox.Show("Mật khẩu cũ không chính xác!"); }
                 }
-                catch (Exception ex) { MessageBox.Show("Lỗi bảo mật: " + ex.Message); }
+                catch (Exception ex) { MessageBox.Show("Lỗi: " + ex.Message); }
+            }
+        }
+
+        private void btdangxuat_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn đăng xuất?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.FindForm().Close(); // Đóng Form hiện tại
+                // Form1 (Login) nên được mở từ Program.cs hoặc Form cha để tránh chồng chéo memory
             }
         }
     }
