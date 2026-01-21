@@ -36,6 +36,8 @@
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
@@ -279,6 +281,9 @@
       <DependentUpon>uckedonthuoc.cs</DependentUpon>
     </Compile>
     <Compile Include="ucmkadmin.cs" />
+    <Compile Include="ucmkadmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="ucmkadmin.Designer.cs">
       <DependentUpon>ucmkadmin.cs</DependentUpon>
     </Compile>
@@ -423,9 +428,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucqltaikhoanvaphanquyen.resx">
       <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ucQuanlibenhnhan.resx">
-      <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="benhvienvsDataSet.xsc">
       <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
