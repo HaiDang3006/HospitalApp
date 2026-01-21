@@ -16,8 +16,8 @@ namespace BenhVienS.Repository
         {
             string sql = @"
                             SELECT *
-                            FROM BenhNhanh
-                            WHERE MaBenhNhanh = @id
+                            FROM BenhNhan
+                            WHERE MaBenhNhan = @id
                             AND TrangThai = 1
                         ";
             using (SqlConnection conn = dbUtils.GetConnection())

@@ -1,5 +1,6 @@
 ﻿using BenhVienS.Common;
 using BenhVienS.Enums;
+using BenhVienS.Helper_UI;
 using BenhVienS.Models;
 using BenhVienS.Service.AppointmentService;
 using BenhVienS.Service.DoctorSerice;
@@ -56,8 +57,21 @@ namespace BenhVienS
 
         private void init(object sender, EventArgs e)
         {
+            loadUI();
             appointmentInit();
             WaitingExamInit(); // Gọi để hiển thị danh sách chờ khám
+        }
+
+        private void loadUI()
+        {
+            GraphicsHelper.SetBorderRadius(cardNew, 10);
+            GraphicsHelper.SetBorderRadius(cardReturning, 10);
+            GraphicsHelper.SetBorderRadius(cardDone, 10);
+            GraphicsHelper.SetBorderRadius(panel1, 10);
+
+            // Bo tròn 2 danh sách
+            GraphicsHelper.SetBorderRadius(panelListWaitng, 12);
+            GraphicsHelper.SetBorderRadius(panel2, 12);
         }
 
         private void appointmentInit()
@@ -65,7 +79,7 @@ namespace BenhVienS
             int doctorId = 1; // thay bằng token đăng nhập
             if (doctorService.DoctorById(doctorId) == null)
                 return;
-            lblQuantityAppointment.Text = Convert.ToString(appointmentService.CountAppointmentTodayByStatusAndDoctor(doctorId, "DaDen"));
+            lblQuantityAppointment.Text = Convert.ToString(appointmentService.CountAppointmentTodayByStatusAndDoctor(doctorId, "DaXacNhan"));
         }
 
         private void WaitingExamInit()
@@ -118,6 +132,7 @@ namespace BenhVienS
             {
                 panelListWaitng.AutoScroll = true;
             }
+
         }
 
         private Panel CloneCardWaiting(Appointment appointment, int viTri)
@@ -128,7 +143,7 @@ namespace BenhVienS
                 BackColor = CardWaitingExam.BackColor,
                 Size = CardWaitingExam.Size,
                 Padding = CardWaitingExam.Padding,
-                Location = new Point(1, 48 + (viTri * 70)), // 48 = header height, 70 = card height + margin
+                Location = new Point(1, 48 + (viTri * 60)), // 48 = header height, 70 = card height + margin
                 Name = "card_" + viTri
             };
 
@@ -172,7 +187,7 @@ namespace BenhVienS
                 FlatStyle = btnCallExam.FlatStyle
             };
             btnGoi.FlatAppearance.BorderSize = 0;
-
+            GraphicsHelper.SetButtonRadius(btnGoi, 5);
             // Thêm event click cho button
             btnGoi.Click += (s, e) => GoiKhamBenhNhan(appointment);
 
@@ -180,10 +195,9 @@ namespace BenhVienS
             innerPanel.Controls.Add(lblTen);
             innerPanel.Controls.Add(lblLyDo);
             innerPanel.Controls.Add(btnGoi);
-
             // Thêm innerPanel vào newCard
             newCard.Controls.Add(innerPanel);
-
+            
             return newCard;
         }
 
@@ -224,7 +238,7 @@ namespace BenhVienS
 
         private void btnExamine_Click(object sender, EventArgs e)
         {
-            khbenh uc = new khbenh();
+            khbenh uc = new khbenh(); 
             showControl(uc);
         }
 
@@ -248,5 +262,7 @@ namespace BenhVienS
             // Refresh lại danh sách khi click Home
             WaitingExamInit();
         }
+
+        
     }
 }
