@@ -71,8 +71,6 @@ namespace BenhVienS
         private void LoadDataToGrid()
         {
             dataGridView1.Rows.Clear();
-            dataGridView1.Rows.Add("20/04/2024 09:30", "BS. Trần Thị B", "Khoa Nhi");
-            dataGridView1.Rows.Add("25/04/2024 14:00", "BS. Lê Văn C", "Khoa Da Liễu");
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
