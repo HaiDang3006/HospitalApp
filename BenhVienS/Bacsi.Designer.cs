@@ -51,20 +51,15 @@ namespace BenhVienS
             this.cardDone = new System.Windows.Forms.Panel();
             this.picDone = new System.Windows.Forms.PictureBox();
             this.lblDone = new System.Windows.Forms.Label();
-            this.lblDoneCount = new System.Windows.Forms.Label();
+            this.lblQuantityWaiting = new System.Windows.Forms.Label();
             this.panelContent = new System.Windows.Forms.Panel();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel11 = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.panelListWaitng = new System.Windows.Forms.Panel();
+            this.CardWaitingExam = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.panel9 = new System.Windows.Forms.Panel();
+            this.btnCallExam = new System.Windows.Forms.Button();
+            this.lblReasonsExamination = new System.Windows.Forms.Label();
+            this.lblNamePatient = new System.Windows.Forms.Label();
+            this.panelHeaderWaiting = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -89,12 +84,10 @@ namespace BenhVienS
             this.cardDone.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDone)).BeginInit();
             this.panelContent.SuspendLayout();
-            this.panel6.SuspendLayout();
-            this.panel10.SuspendLayout();
-            this.panel11.SuspendLayout();
-            this.panel7.SuspendLayout();
+            this.panelListWaitng.SuspendLayout();
+            this.CardWaitingExam.SuspendLayout();
             this.panel8.SuspendLayout();
-            this.panel9.SuspendLayout();
+            this.panelHeaderWaiting.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
@@ -108,6 +101,7 @@ namespace BenhVienS
             this.panelTop.Controls.Add(this.panelUser);
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
+            this.panelTop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(1400, 70);
             this.panelTop.TabIndex = 0;
@@ -130,16 +124,18 @@ namespace BenhVienS
             this.panelUser.Controls.Add(this.lblUserRole);
             this.panelUser.Controls.Add(this.btnLogout);
             this.panelUser.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panelUser.Location = new System.Drawing.Point(1050, 0);
+            this.panelUser.Location = new System.Drawing.Point(1051, 0);
+            this.panelUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelUser.Name = "panelUser";
-            this.panelUser.Size = new System.Drawing.Size(350, 70);
+            this.panelUser.Size = new System.Drawing.Size(349, 70);
             this.panelUser.TabIndex = 1;
             // 
             // picUser
             // 
             this.picUser.Location = new System.Drawing.Point(20, 10);
+            this.picUser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picUser.Name = "picUser";
-            this.picUser.Size = new System.Drawing.Size(50, 50);
+            this.picUser.Size = new System.Drawing.Size(51, 50);
             this.picUser.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picUser.TabIndex = 0;
             this.picUser.TabStop = false;
@@ -173,7 +169,8 @@ namespace BenhVienS
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnLogout.ForeColor = System.Drawing.Color.White;
-            this.btnLogout.Location = new System.Drawing.Point(230, 20);
+            this.btnLogout.Location = new System.Drawing.Point(229, 20);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(100, 30);
             this.btnLogout.TabIndex = 3;
@@ -190,9 +187,10 @@ namespace BenhVienS
             this.panelLeft.Controls.Add(this.btnPrescription);
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.panelLeft.Location = new System.Drawing.Point(0, 70);
+            this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelLeft.Name = "panelLeft";
-            this.panelLeft.Padding = new System.Windows.Forms.Padding(10);
-            this.panelLeft.Size = new System.Drawing.Size(250, 680);
+            this.panelLeft.Padding = new System.Windows.Forms.Padding(11, 10, 11, 10);
+            this.panelLeft.Size = new System.Drawing.Size(251, 680);
             this.panelLeft.TabIndex = 1;
             // 
             // btnHome
@@ -202,9 +200,10 @@ namespace BenhVienS
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnHome.ForeColor = System.Drawing.Color.White;
-            this.btnHome.Location = new System.Drawing.Point(10, 20);
+            this.btnHome.Location = new System.Drawing.Point(11, 20);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(230, 45);
+            this.btnHome.Size = new System.Drawing.Size(229, 46);
             this.btnHome.TabIndex = 0;
             this.btnHome.Text = "🏠  Trang Chủ";
             this.btnHome.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -218,9 +217,10 @@ namespace BenhVienS
             this.btnSchedule.FlatAppearance.BorderSize = 0;
             this.btnSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSchedule.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnSchedule.Location = new System.Drawing.Point(10, 75);
+            this.btnSchedule.Location = new System.Drawing.Point(11, 75);
+            this.btnSchedule.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSchedule.Name = "btnSchedule";
-            this.btnSchedule.Size = new System.Drawing.Size(230, 45);
+            this.btnSchedule.Size = new System.Drawing.Size(229, 46);
             this.btnSchedule.TabIndex = 1;
             this.btnSchedule.Text = "📅  Lịch Hẹn Khám";
             this.btnSchedule.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -233,9 +233,10 @@ namespace BenhVienS
             this.btnPatientList.FlatAppearance.BorderSize = 0;
             this.btnPatientList.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPatientList.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnPatientList.Location = new System.Drawing.Point(10, 130);
+            this.btnPatientList.Location = new System.Drawing.Point(11, 130);
+            this.btnPatientList.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPatientList.Name = "btnPatientList";
-            this.btnPatientList.Size = new System.Drawing.Size(230, 45);
+            this.btnPatientList.Size = new System.Drawing.Size(229, 46);
             this.btnPatientList.TabIndex = 2;
             this.btnPatientList.Text = "📋  Danh Sách Bệnh Nhân";
             this.btnPatientList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -248,9 +249,10 @@ namespace BenhVienS
             this.btnExamine.FlatAppearance.BorderSize = 0;
             this.btnExamine.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExamine.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnExamine.Location = new System.Drawing.Point(10, 185);
+            this.btnExamine.Location = new System.Drawing.Point(11, 185);
+            this.btnExamine.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnExamine.Name = "btnExamine";
-            this.btnExamine.Size = new System.Drawing.Size(230, 45);
+            this.btnExamine.Size = new System.Drawing.Size(229, 46);
             this.btnExamine.TabIndex = 3;
             this.btnExamine.Text = "🩺  Khám Bệnh";
             this.btnExamine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -263,9 +265,10 @@ namespace BenhVienS
             this.btnPrescription.FlatAppearance.BorderSize = 0;
             this.btnPrescription.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrescription.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.btnPrescription.Location = new System.Drawing.Point(10, 240);
+            this.btnPrescription.Location = new System.Drawing.Point(11, 240);
+            this.btnPrescription.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrescription.Name = "btnPrescription";
-            this.btnPrescription.Size = new System.Drawing.Size(230, 45);
+            this.btnPrescription.Size = new System.Drawing.Size(229, 46);
             this.btnPrescription.TabIndex = 4;
             this.btnPrescription.Text = "💊  Kê Đơn Thuốc";
             this.btnPrescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -278,10 +281,11 @@ namespace BenhVienS
             this.panelMain.Controls.Add(this.panelStats);
             this.panelMain.Controls.Add(this.panelContent);
             this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(250, 70);
+            this.panelMain.Location = new System.Drawing.Point(251, 70);
+            this.panelMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(20);
-            this.panelMain.Size = new System.Drawing.Size(1150, 680);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
+            this.panelMain.Size = new System.Drawing.Size(1149, 680);
             this.panelMain.TabIndex = 2;
             // 
             // panelStats
@@ -292,8 +296,9 @@ namespace BenhVienS
             this.panelStats.Controls.Add(this.cardDone);
             this.panelStats.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelStats.Location = new System.Drawing.Point(20, 20);
+            this.panelStats.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelStats.Name = "panelStats";
-            this.panelStats.Size = new System.Drawing.Size(1110, 100);
+            this.panelStats.Size = new System.Drawing.Size(1109, 100);
             this.panelStats.TabIndex = 0;
             // 
             // panel1
@@ -304,6 +309,7 @@ namespace BenhVienS
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Location = new System.Drawing.Point(849, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(260, 95);
             this.panel1.TabIndex = 3;
@@ -313,7 +319,7 @@ namespace BenhVienS
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label3.ForeColor = System.Drawing.Color.Gray;
-            this.label3.Location = new System.Drawing.Point(145, 49);
+            this.label3.Location = new System.Drawing.Point(143, 50);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(50, 23);
             this.label3.TabIndex = 3;
@@ -324,18 +330,20 @@ namespace BenhVienS
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(250)))), ((int)(((byte)(229)))));
             this.pictureBox1.Image = global::BenhVienS.Properties.Resources.calendar__1_1;
             this.pictureBox1.Location = new System.Drawing.Point(20, 25);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(45, 45);
+            this.pictureBox1.Size = new System.Drawing.Size(45, 46);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            //this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(144, 27);
+            this.label1.Location = new System.Drawing.Point(139, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 23);
             this.label1.TabIndex = 1;
@@ -345,7 +353,7 @@ namespace BenhVienS
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(82, 18);
+            this.label2.Location = new System.Drawing.Point(83, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 54);
             this.label2.TabIndex = 2;
@@ -359,6 +367,7 @@ namespace BenhVienS
             this.cardNew.Controls.Add(this.lblNew);
             this.cardNew.Controls.Add(this.lblQuantityAppointment);
             this.cardNew.Location = new System.Drawing.Point(0, 0);
+            this.cardNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cardNew.Name = "cardNew";
             this.cardNew.Size = new System.Drawing.Size(260, 95);
             this.cardNew.TabIndex = 0;
@@ -368,7 +377,7 @@ namespace BenhVienS
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label5.ForeColor = System.Drawing.Color.Gray;
-            this.label5.Location = new System.Drawing.Point(150, 48);
+            this.label5.Location = new System.Drawing.Point(149, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(82, 23);
             this.label5.TabIndex = 3;
@@ -378,8 +387,9 @@ namespace BenhVienS
             // 
             this.picNew.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(243)))), ((int)(((byte)(205)))));
             this.picNew.Location = new System.Drawing.Point(20, 25);
+            this.picNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picNew.Name = "picNew";
-            this.picNew.Size = new System.Drawing.Size(45, 45);
+            this.picNew.Size = new System.Drawing.Size(45, 46);
             this.picNew.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picNew.TabIndex = 0;
             this.picNew.TabStop = false;
@@ -390,7 +400,7 @@ namespace BenhVienS
             this.lblNew.AutoSize = true;
             this.lblNew.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblNew.ForeColor = System.Drawing.Color.Gray;
-            this.lblNew.Location = new System.Drawing.Point(150, 24);
+            this.lblNew.Location = new System.Drawing.Point(149, 25);
             this.lblNew.Name = "lblNew";
             this.lblNew.Size = new System.Drawing.Size(81, 23);
             this.lblNew.TabIndex = 1;
@@ -400,7 +410,7 @@ namespace BenhVienS
             // 
             this.lblQuantityAppointment.AutoSize = true;
             this.lblQuantityAppointment.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblQuantityAppointment.Location = new System.Drawing.Point(80, 19);
+            this.lblQuantityAppointment.Location = new System.Drawing.Point(80, 18);
             this.lblQuantityAppointment.Name = "lblQuantityAppointment";
             this.lblQuantityAppointment.Size = new System.Drawing.Size(46, 54);
             this.lblQuantityAppointment.TabIndex = 2;
@@ -414,6 +424,7 @@ namespace BenhVienS
             this.cardReturning.Controls.Add(this.lblReturning);
             this.cardReturning.Controls.Add(this.lblReturningCount);
             this.cardReturning.Location = new System.Drawing.Point(280, 0);
+            this.cardReturning.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cardReturning.Name = "cardReturning";
             this.cardReturning.Size = new System.Drawing.Size(260, 95);
             this.cardReturning.TabIndex = 1;
@@ -433,8 +444,9 @@ namespace BenhVienS
             // 
             this.picReturning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(230)))), ((int)(((byte)(250)))));
             this.picReturning.Location = new System.Drawing.Point(20, 25);
+            this.picReturning.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picReturning.Name = "picReturning";
-            this.picReturning.Size = new System.Drawing.Size(45, 45);
+            this.picReturning.Size = new System.Drawing.Size(45, 46);
             this.picReturning.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picReturning.TabIndex = 0;
             this.picReturning.TabStop = false;
@@ -466,8 +478,9 @@ namespace BenhVienS
             this.cardDone.BackColor = System.Drawing.Color.White;
             this.cardDone.Controls.Add(this.picDone);
             this.cardDone.Controls.Add(this.lblDone);
-            this.cardDone.Controls.Add(this.lblDoneCount);
+            this.cardDone.Controls.Add(this.lblQuantityWaiting);
             this.cardDone.Location = new System.Drawing.Point(569, 0);
+            this.cardDone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cardDone.Name = "cardDone";
             this.cardDone.Size = new System.Drawing.Size(260, 95);
             this.cardDone.TabIndex = 2;
@@ -476,8 +489,9 @@ namespace BenhVienS
             // 
             this.picDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(209)))), ((int)(((byte)(250)))), ((int)(((byte)(229)))));
             this.picDone.Location = new System.Drawing.Point(20, 25);
+            this.picDone.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.picDone.Name = "picDone";
-            this.picDone.Size = new System.Drawing.Size(45, 45);
+            this.picDone.Size = new System.Drawing.Size(45, 46);
             this.picDone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.picDone.TabIndex = 0;
             this.picDone.TabStop = false;
@@ -488,171 +502,119 @@ namespace BenhVienS
             this.lblDone.AutoSize = true;
             this.lblDone.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblDone.ForeColor = System.Drawing.Color.Gray;
-            this.lblDone.Location = new System.Drawing.Point(138, 36);
+            this.lblDone.Location = new System.Drawing.Point(139, 36);
             this.lblDone.Name = "lblDone";
             this.lblDone.Size = new System.Drawing.Size(90, 23);
             this.lblDone.TabIndex = 1;
             this.lblDone.Text = "Chờ Khám";
             // 
-            // lblDoneCount
+            // lblQuantityWaiting
             // 
-            this.lblDoneCount.AutoSize = true;
-            this.lblDoneCount.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.lblDoneCount.Location = new System.Drawing.Point(76, 19);
-            this.lblDoneCount.Name = "lblDoneCount";
-            this.lblDoneCount.Size = new System.Drawing.Size(46, 54);
-            this.lblDoneCount.TabIndex = 2;
-            this.lblDoneCount.Text = "0";
+            this.lblQuantityWaiting.AutoSize = true;
+            this.lblQuantityWaiting.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
+            this.lblQuantityWaiting.Location = new System.Drawing.Point(76, 18);
+            this.lblQuantityWaiting.Name = "lblQuantityWaiting";
+            this.lblQuantityWaiting.Size = new System.Drawing.Size(46, 54);
+            this.lblQuantityWaiting.TabIndex = 2;
+            this.lblQuantityWaiting.Text = "0";
             // 
             // panelContent
             // 
-            this.panelContent.Controls.Add(this.panel6);
+            this.panelContent.Controls.Add(this.panelListWaitng);
             this.panelContent.Controls.Add(this.panel2);
             this.panelContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelContent.Location = new System.Drawing.Point(20, 20);
+            this.panelContent.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelContent.Name = "panelContent";
-            this.panelContent.Size = new System.Drawing.Size(1110, 640);
+            this.panelContent.Size = new System.Drawing.Size(1109, 640);
             this.panelContent.TabIndex = 1;
             // 
-            // panel6
+            // panelListWaitng
             // 
-            this.panel6.BackColor = System.Drawing.Color.White;
-            this.panel6.Controls.Add(this.panel10);
-            this.panel6.Controls.Add(this.panel7);
-            this.panel6.Controls.Add(this.panel9);
-            this.panel6.Location = new System.Drawing.Point(0, 106);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(541, 534);
-            this.panel6.TabIndex = 5;
+            this.panelListWaitng.BackColor = System.Drawing.Color.White;
+            this.panelListWaitng.Controls.Add(this.CardWaitingExam);
+            this.panelListWaitng.Controls.Add(this.panelHeaderWaiting);
+            this.panelListWaitng.Location = new System.Drawing.Point(0, 106);
+            this.panelListWaitng.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelListWaitng.Name = "panelListWaitng";
+            this.panelListWaitng.Size = new System.Drawing.Size(541, 534);
+            this.panelListWaitng.TabIndex = 5;
             // 
-            // panel10
+            // CardWaitingExam
             // 
-            this.panel10.BackColor = System.Drawing.Color.White;
-            this.panel10.Controls.Add(this.panel11);
-            this.panel10.Location = new System.Drawing.Point(0, 136);
-            this.panel10.Name = "panel10";
-            this.panel10.Padding = new System.Windows.Forms.Padding(0, 10, 10, 0);
-            this.panel10.Size = new System.Drawing.Size(539, 77);
-            this.panel10.TabIndex = 5;
-            // 
-            // panel11
-            // 
-            this.panel11.BackColor = System.Drawing.Color.White;
-            this.panel11.Controls.Add(this.button3);
-            this.panel11.Controls.Add(this.label8);
-            this.panel11.Controls.Add(this.label13);
-            this.panel11.Location = new System.Drawing.Point(9, 9);
-            this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(521, 59);
-            this.panel11.TabIndex = 4;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.Blue;
-            this.button3.FlatAppearance.BorderSize = 0;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.button3.ForeColor = System.Drawing.Color.White;
-            this.button3.Location = new System.Drawing.Point(403, 15);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 30);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "Gọi Khám";
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label8.ForeColor = System.Drawing.Color.Gray;
-            this.label8.Location = new System.Drawing.Point(22, 32);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(284, 23);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "Đau nữa đầu, sốt nhẹ, chóng mặt ...";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(20, 5);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(147, 28);
-            this.label13.TabIndex = 2;
-            this.label13.Text = "Nguyễn Văn A";
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.White;
-            this.panel7.Controls.Add(this.panel8);
-            this.panel7.Location = new System.Drawing.Point(1, 59);
-            this.panel7.Name = "panel7";
-            this.panel7.Padding = new System.Windows.Forms.Padding(0, 10, 10, 0);
-            this.panel7.Size = new System.Drawing.Size(539, 77);
-            this.panel7.TabIndex = 3;
+            this.CardWaitingExam.BackColor = System.Drawing.Color.White;
+            this.CardWaitingExam.Controls.Add(this.panel8);
+            this.CardWaitingExam.Location = new System.Drawing.Point(1, 59);
+            this.CardWaitingExam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CardWaitingExam.Name = "CardWaitingExam";
+            this.CardWaitingExam.Padding = new System.Windows.Forms.Padding(0, 10, 11, 0);
+            this.CardWaitingExam.Size = new System.Drawing.Size(539, 78);
+            this.CardWaitingExam.TabIndex = 3;
             // 
             // panel8
             // 
             this.panel8.BackColor = System.Drawing.Color.White;
-            this.panel8.Controls.Add(this.button2);
-            this.panel8.Controls.Add(this.label10);
-            this.panel8.Controls.Add(this.label11);
+            this.panel8.Controls.Add(this.btnCallExam);
+            this.panel8.Controls.Add(this.lblReasonsExamination);
+            this.panel8.Controls.Add(this.lblNamePatient);
             this.panel8.Location = new System.Drawing.Point(9, 9);
+            this.panel8.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel8.Name = "panel8";
             this.panel8.Size = new System.Drawing.Size(521, 59);
             this.panel8.TabIndex = 4;
             // 
-            // button2
+            // btnCallExam
             // 
-            this.button2.BackColor = System.Drawing.Color.Blue;
-            this.button2.FlatAppearance.BorderSize = 0;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.button2.ForeColor = System.Drawing.Color.White;
-            this.button2.Location = new System.Drawing.Point(403, 15);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 30);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Gọi Khám";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnCallExam.BackColor = System.Drawing.Color.Blue;
+            this.btnCallExam.FlatAppearance.BorderSize = 0;
+            this.btnCallExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCallExam.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnCallExam.ForeColor = System.Drawing.Color.White;
+            this.btnCallExam.Location = new System.Drawing.Point(403, 15);
+            this.btnCallExam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCallExam.Name = "btnCallExam";
+            this.btnCallExam.Size = new System.Drawing.Size(100, 30);
+            this.btnCallExam.TabIndex = 4;
+            this.btnCallExam.Text = "Gọi Khám";
+            this.btnCallExam.UseVisualStyleBackColor = false;
             // 
-            // label10
+            // lblReasonsExamination
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label10.ForeColor = System.Drawing.Color.Gray;
-            this.label10.Location = new System.Drawing.Point(22, 32);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(284, 23);
-            this.label10.TabIndex = 3;
-            this.label10.Text = "Đau nữa đầu, sốt nhẹ, chóng mặt ...";
+            this.lblReasonsExamination.AutoSize = true;
+            this.lblReasonsExamination.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.lblReasonsExamination.ForeColor = System.Drawing.Color.Gray;
+            this.lblReasonsExamination.Location = new System.Drawing.Point(21, 32);
+            this.lblReasonsExamination.Name = "lblReasonsExamination";
+            this.lblReasonsExamination.Size = new System.Drawing.Size(284, 23);
+            this.lblReasonsExamination.TabIndex = 3;
+            this.lblReasonsExamination.Text = "Đau nữa đầu, sốt nhẹ, chóng mặt ...";
             // 
-            // label11
+            // lblNamePatient
             // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(20, 5);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(147, 28);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "Nguyễn Văn A";
+            this.lblNamePatient.AutoSize = true;
+            this.lblNamePatient.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNamePatient.ForeColor = System.Drawing.Color.Black;
+            this.lblNamePatient.Location = new System.Drawing.Point(20, 5);
+            this.lblNamePatient.Name = "lblNamePatient";
+            this.lblNamePatient.Size = new System.Drawing.Size(147, 28);
+            this.lblNamePatient.TabIndex = 2;
+            this.lblNamePatient.Text = "Nguyễn Văn A";
             // 
-            // panel9
+            // panelHeaderWaiting
             // 
-            this.panel9.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.panel9.Controls.Add(this.label12);
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(541, 57);
-            this.panel9.TabIndex = 4;
+            this.panelHeaderWaiting.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.panelHeaderWaiting.Controls.Add(this.label12);
+            this.panelHeaderWaiting.Location = new System.Drawing.Point(0, 0);
+            this.panelHeaderWaiting.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelHeaderWaiting.Name = "panelHeaderWaiting";
+            this.panelHeaderWaiting.Size = new System.Drawing.Size(541, 57);
+            this.panelHeaderWaiting.TabIndex = 4;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label12.Location = new System.Drawing.Point(16, 13);
+            this.label12.Location = new System.Drawing.Point(16, 14);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(233, 28);
             this.label12.TabIndex = 5;
@@ -664,6 +626,7 @@ namespace BenhVienS
             this.panel2.Controls.Add(this.panel4);
             this.panel2.Controls.Add(this.panel3);
             this.panel2.Location = new System.Drawing.Point(569, 106);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(541, 534);
             this.panel2.TabIndex = 3;
@@ -673,9 +636,10 @@ namespace BenhVienS
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.Controls.Add(this.panel5);
             this.panel4.Location = new System.Drawing.Point(1, 59);
+            this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Padding = new System.Windows.Forms.Padding(0, 10, 10, 0);
-            this.panel4.Size = new System.Drawing.Size(539, 77);
+            this.panel4.Padding = new System.Windows.Forms.Padding(0, 10, 11, 0);
+            this.panel4.Size = new System.Drawing.Size(539, 78);
             this.panel4.TabIndex = 3;
             // 
             // panel5
@@ -685,6 +649,7 @@ namespace BenhVienS
             this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.label6);
             this.panel5.Location = new System.Drawing.Point(9, 9);
+            this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(521, 59);
             this.panel5.TabIndex = 4;
@@ -697,6 +662,7 @@ namespace BenhVienS
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.White;
             this.button1.Location = new System.Drawing.Point(403, 15);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 30);
             this.button1.TabIndex = 4;
@@ -708,7 +674,7 @@ namespace BenhVienS
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label9.ForeColor = System.Drawing.Color.Gray;
-            this.label9.Location = new System.Drawing.Point(22, 32);
+            this.label9.Location = new System.Drawing.Point(21, 32);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(284, 23);
             this.label9.TabIndex = 3;
@@ -730,6 +696,7 @@ namespace BenhVienS
             this.panel3.BackColor = System.Drawing.Color.WhiteSmoke;
             this.panel3.Controls.Add(this.label7);
             this.panel3.Location = new System.Drawing.Point(1, 0);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(539, 57);
             this.panel3.TabIndex = 4;
@@ -738,7 +705,7 @@ namespace BenhVienS
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.label7.Location = new System.Drawing.Point(14, 13);
+            this.label7.Location = new System.Drawing.Point(13, 14);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(282, 28);
             this.label7.TabIndex = 4;
@@ -752,6 +719,7 @@ namespace BenhVienS
             this.Controls.Add(this.panelMain);
             this.Controls.Add(this.panelLeft);
             this.Controls.Add(this.panelTop);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Bacsi";
             this.Text = "Hệ Thống Bác Sĩ - Bệnh Viện S";
             this.panelTop.ResumeLayout(false);
@@ -775,15 +743,12 @@ namespace BenhVienS
             this.cardDone.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDone)).EndInit();
             this.panelContent.ResumeLayout(false);
-            this.panel6.ResumeLayout(false);
-            this.panel10.ResumeLayout(false);
-            this.panel11.ResumeLayout(false);
-            this.panel11.PerformLayout();
-            this.panel7.ResumeLayout(false);
+            this.panelListWaitng.ResumeLayout(false);
+            this.CardWaitingExam.ResumeLayout(false);
             this.panel8.ResumeLayout(false);
             this.panel8.PerformLayout();
-            this.panel9.ResumeLayout(false);
-            this.panel9.PerformLayout();
+            this.panelHeaderWaiting.ResumeLayout(false);
+            this.panelHeaderWaiting.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
@@ -924,7 +889,7 @@ namespace BenhVienS
         private System.Windows.Forms.PictureBox picReturning;
 
         private System.Windows.Forms.Panel cardDone;
-        private System.Windows.Forms.Label lblDoneCount;
+        private System.Windows.Forms.Label lblQuantityWaiting;
         private System.Windows.Forms.Label lblDone;
         private System.Windows.Forms.PictureBox picDone;
 
@@ -944,19 +909,14 @@ namespace BenhVienS
         private Label label6;
         private Label label9;
         private Button button1;
-        private Panel panel6;
-        private Panel panel7;
+        private Panel panelListWaitng;
+        private Panel CardWaitingExam;
         private Panel panel8;
-        private Button button2;
-        private Label label10;
-        private Label label11;
-        private Panel panel9;
+        private Button btnCallExam;
+        private Label lblReasonsExamination;
+        private Label lblNamePatient;
+        private Panel panelHeaderWaiting;
         private Label label12;
-        private Panel panel10;
-        private Panel panel11;
-        private Button button3;
-        private Label label8;
-        private Label label13;
     }
 
 

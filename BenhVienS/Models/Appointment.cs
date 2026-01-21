@@ -84,5 +84,23 @@ namespace BenhVienS.Models
             else
                 _status = 4;
         }
+
+        public string GetStatusMap()
+        {
+            switch (_status)
+            {
+                case 0:
+                    return "DaDat";
+                case 1:
+                    return "ChoXacNhan";
+                case 2:
+                    return "XacNhan";
+                case 3:
+                    return "DaDen";
+                default:
+                    return "Huy";
+            }
+        }
+
     }
 }

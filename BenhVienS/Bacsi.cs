@@ -1,13 +1,13 @@
-﻿using BenhVienS.Service.AppointmentService;
+﻿using BenhVienS.Models;
+using BenhVienS.Service.AppointmentService;
 using BenhVienS.Service.DoctorSerice;
+using BenhVienS.Service.PatientService;
+using BenhVienS.Service.UserService;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace BenhVienS
@@ -16,14 +16,16 @@ namespace BenhVienS
     {
         DoctorService doctorService = new DoctorService();
         AppointmentService appointmentService = new AppointmentService();
+        PatientService patientService = new PatientService();
+        UserService userService = new UserService();
+
         private List<Control> _defaultPanelControls;
-        string connectionString = @"Data Source=Huynhnhu;Initial Catalog = benhvienvs; Integrated Security = True; Trust Server Certificate=True";
+
         public Bacsi()
         {
             InitializeComponent();
             _defaultPanelControls = panelMain.Controls.Cast<Control>().ToList();
             btnHome.Click += button5_Click;
-            //
             Load += init;
         }
 
@@ -36,10 +38,7 @@ namespace BenhVienS
 
         private void RestorePanelMenu()
         {
-            // Remove any runtime control(s)
             panelMain.Controls.Clear();
-            // Re-add the original controls in the same order they were captured.
-            // Controls keep their properties (Location, Dock, Size, etc.), so they will appear as designed.
             foreach (var ctrl in _defaultPanelControls)
             {
                 panelMain.Controls.Add(ctrl);
@@ -49,124 +48,157 @@ namespace BenhVienS
         private void init(object sender, EventArgs e)
         {
             appointmentInit();
-            //LoadCongViec();
-            //LoadNhatKy();
-            //LoadThongTinBacSi();
+            WaitingExamInit(); // Gọi để hiển thị danh sách chờ khám
         }
 
         private void appointmentInit()
         {
             int doctorId = 1; // thay bằng token đăng nhập
-            // check id null o day
             if (doctorService.DoctorById(doctorId) == null)
-                // sau nay xoa cookie va chuyen ra dang nhap
                 return;
-            // hàm này là set giá trị lên label trên giao diện 
-            // appointmentService.CountAppointmentTodayByDoctor là gọi hàm đè ctrl vào CountAppointmentTodayByDoctor để coi hàm được gọi
-            lblQuantityAppointment.Text = Convert.ToString(appointmentService.CountAppointmentTodayByDoctor(doctorId)); ;
+            lblQuantityAppointment.Text = Convert.ToString(appointmentService.CountAppointmentTodayByStatusAndDoctor(doctorId, "DaDen"));
         }
 
-
-
-
-
-        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        private void WaitingExamInit()
         {
+            int doctorId = 1;
 
-            /*dgvLichkhambenh.Columns.Add("BenhNhan", "Bệnh Nhân");
-            dgvLichkhambenh.Columns.Add("ThoiGian", "Thời Gian");
-            dgvLichkhambenh.Columns.Add("LoaiKham", "Loại Khám");
-            dgvLichkhambenh.Columns.Add("PhongKham", "Phòng Khám");
-            dgvLichkhambenh.Columns.Add("TrangThai", "Trạng Thái");
-            dgvLichkhambenh.Rows.Add("Nguyễn Văn B", "08:00", "Nội Khoa", "Phòng 101", "Đã Khám");
-            dgvLichkhambenh.Rows.Add("Trần Thị C", "08:45", "Nội Khoa", "Phòng 101", "Chờ Khám");
-            dgvLichkhambenh.Rows.Add("Hoàng Văn D", "09:30", "Nội Khoa", "Phòng 101", "Chưa Khám");
+            List<Appointment> appointmentList = appointmentService.AppointmentTodayByStatusAndDoctor(doctorId, "DaDen");
 
+            // Hiển thị danh sách lên giao diện
+            FillCardWaiting(appointmentList);
+        }
 
+        // Method hiển thị danh sách bệnh nhân
+        private void FillCardWaiting(List<Appointment> appointmentList)
+        {
+            // Ẩn card mẫu ban đầu
+            CardWaitingExam.Visible = false;
 
-            foreach (DataGridViewRow row in dgvLichkhambenh.Rows)
+            // Xóa các card cũ (giữ lại panelHeaderWaiting)
+            var cardsToRemove = panelListWaitng.Controls
+                .OfType<Panel>()
+                .Where(p => p != panelHeaderWaiting && p != CardWaitingExam)
+                .ToList();
+
+            foreach (var card in cardsToRemove)
             {
-                string status = row.Cells["TrangThai"].Value?.ToString();
-                if (status == "Đã Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightGreen;
-                else if (status == "Chờ Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.Orange;
-                else
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightBlue;
-            }*/
+                panelListWaitng.Controls.Remove(card);
+                card.Dispose();
             }
 
-     
+            // Kiểm tra nếu không có bệnh nhân
+            if (appointmentList == null || appointmentList.Count == 0)
+            {
+                lblQuantityWaiting.Text = "0";
+                return;
+            }
+
+            // Tạo card mới cho từng bệnh nhân
+            for (int i = 0; i < appointmentList.Count; i++)
+            {
+                Panel card = CloneCardWaiting(appointmentList[i], i);
+                panelListWaitng.Controls.Add(card);
+            }
+
+            // Cập nhật số lượng
+            lblQuantityWaiting.Text = appointmentList.Count.ToString();
+
+            // Bật AutoScroll nếu có nhiều bệnh nhân
+            if (appointmentList.Count > 5)
+            {
+                panelListWaitng.AutoScroll = true;
+            }
+        }
+
+        private Panel CloneCardWaiting(Appointment appointment, int viTri)
+        {
+            // Clone panel chính
+            Panel newCard = new Panel
+            {
+                BackColor = CardWaitingExam.BackColor,
+                Size = CardWaitingExam.Size,
+                Padding = CardWaitingExam.Padding,
+                Location = new Point(1, 48 + (viTri * 70)), // 48 = header height, 70 = card height + margin
+                Name = "card_" + viTri
+            };
+
+            // Clone panel8 bên trong
+            Panel innerPanel = new Panel
+            {
+                BackColor = panel8.BackColor,
+                Size = panel8.Size,
+                Location = panel8.Location
+            };
+
+            // Clone và cập nhật label tên bệnh nhân
+            Label lblTen = new Label
+            {
+                Text = userService.UserById(patientService.PatientById(appointment.PatientId).Id).FullName ?? "Chưa có tên", // Sử dụng thuộc tính Ten của Appointment
+                Font = lblNamePatient.Font,
+                ForeColor = lblNamePatient.ForeColor,
+                Location = lblNamePatient.Location,
+                AutoSize = lblNamePatient.AutoSize
+            };
+
+            // Clone và cập nhật label lý do khám
+            Label lblLyDo = new Label
+            {
+                Text = appointment.Reasion ?? "Chưa có lý do", // Sử dụng thuộc tính LyDoKham
+                Font = lblReasonsExamination.Font,
+                ForeColor = lblReasonsExamination.ForeColor,
+                Location = lblReasonsExamination.Location,
+                AutoSize = lblReasonsExamination.AutoSize
+            };
+
+            // Clone button gọi khám
+            Button btnGoi = new Button
+            {
+                Text = btnCallExam.Text,
+                BackColor = btnCallExam.BackColor,
+                ForeColor = btnCallExam.ForeColor,
+                Font = btnCallExam.Font,
+                Size = btnCallExam.Size,
+                Location = btnCallExam.Location,
+                FlatStyle = btnCallExam.FlatStyle
+            };
+            btnGoi.FlatAppearance.BorderSize = 0;
+
+            // Thêm event click cho button
+            btnGoi.Click += (s, e) => GoiKhamBenhNhan(appointment);
+
+            // Thêm controls vào innerPanel
+            innerPanel.Controls.Add(lblTen);
+            innerPanel.Controls.Add(lblLyDo);
+            innerPanel.Controls.Add(btnGoi);
+
+            // Thêm innerPanel vào newCard
+            newCard.Controls.Add(innerPanel);
+
+            return newCard;
+        }
+
+        // Xử lý khi click button "Gọi Khám"
+        private void GoiKhamBenhNhan(Appointment appointment)
+        {
+            MessageBox.Show(
+                $"Đang gọi bệnh nhân: {appointment.Id}\nLý do: {appointment.Reasion}",
+                "Gọi Khám",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information
+            );
+
+            // Thêm logic xử lý của bạn ở đây
+            // Ví dụ: 
+            // - Chuyển sang form khám bệnh
+            // - Cập nhật trạng thái appointment thành "DangKham"
+            // - appointmentService.UpdateStatus(appointment.Id, "DangKham");
+            // - Load lại danh sách
+        }
 
         private void button5_Click(object sender, EventArgs e)
         {
             RestorePanelMenu();
-        }
-
-        private void LoadLichKham()
-        {
-            /*dgvLichkhambenh.Columns.Clear();
-            dgvLichkhambenh.Rows.Clear();
-
-            dgvLichkhambenh.Columns.Add("BenhNhan", "Bệnh Nhân");
-            dgvLichkhambenh.Columns.Add("ThoiGian", "Thời Gian");
-            dgvLichkhambenh.Columns.Add("LoaiKham", "Loại Khám");
-            dgvLichkhambenh.Columns.Add("PhongKham", "Phòng Khám");
-            dgvLichkhambenh.Columns.Add("TrangThai", "Trạng Thái");
-
-            dgvLichkhambenh.Rows.Add("Nguyễn Văn B", "08:00", "Nội Khoa", "Phòng 101", "Đã Khám");
-            dgvLichkhambenh.Rows.Add("Trần Thị C", "08:45", "Nội Khoa", "Phòng 101", "Chờ Khám");
-            dgvLichkhambenh.Rows.Add("Hoàng Văn D", "09:30", "Nội Khoa", "Phòng 101", "Chưa Khám");
-
-            foreach (DataGridViewRow row in dgvLichkhambenh.Rows)
-            {
-                if (row.Cells["TrangThai"].Value == null) continue;
-
-                string status = row.Cells["TrangThai"].Value.ToString();
-                if (status == "Đã Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightGreen;
-                else if (status == "Chờ Khám")
-                    row.Cells["TrangThai"].Style.BackColor = Color.Orange;
-                else
-                    row.Cells["TrangThai"].Style.BackColor = Color.LightBlue;
-            }*/
-        }
-
-
-        private void LoadCongViec()
-        {
-           /* listView1.Clear();
-            listView1.View = View.Details;
-
-            listView1.Columns.Add("Công Việc", 350);
-
-            listView1.Items.Add("Xử lý kết quả xét nghiệm cho bệnh nhân Phạm Thị H");
-            listView1.Items.Add("Đọc kết quả siêu âm tim của Trần Văn E");
-            listView1.Items.Add("Trao đổi với bệnh nhân Lê Thị F đã nhập viện hôm qua");
-            listView1.Items.Add("Kiểm tra phản ứng thuốc của bệnh nhân Nguyễn Văn B");*/
-        }
-
-
-        private void LoadNhatKy()
-        {
-            //dgvLog.Columns.Clear();
-            //dgvLog.Rows.Clear();
-
-            //dgvLog.Columns.Add("Time", "Thời Gian");
-            //dgvLog.Columns.Add("NoiDung", "Hoạt Động");
-
-            //dgvLog.Rows.Add("08:30", "Kê đơn thuốc cho Nguyễn Văn B");
-            //dgvLog.Rows.Add("07:45", "Trần Văn E đã xuất viện");
-            //dgvLog.Rows.Add("17:20", "Hồ Thị C tiến hành siêu âm tim");
-        }
-
-
-        private void LoadThongTinBacSi()
-        {
-            //txtHoten.Text = "Bs. Nguyễn Văn A";
-            //txtChuyenkhoa.Text = "Bác Sĩ Nội Khoa";
-            //txtSDT.Text = "0123 456 789";
-            //txtEmail.Text = "nguyenvanabc@benhvienabc.com";
         }
 
         private void btnSchedule_Click(object sender, EventArgs e)
@@ -195,7 +227,8 @@ namespace BenhVienS
 
         private void btnHome_Click(object sender, EventArgs e)
         {
-
+            // Refresh lại danh sách khi click Home
+            WaitingExamInit();
         }
     }
 }
