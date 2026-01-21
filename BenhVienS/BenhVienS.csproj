@@ -131,6 +131,58 @@
     <Compile Include="Helper_Service\CryptoHelper.cs" />
     <Compile Include="Helper_UI\FormInit.cs">
       <SubType>Form</SubType>
+    <Compile Include="frmbenhnhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmbenhnhan.Designer.cs">
+      <DependentUpon>frmbenhnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDuocsi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDuocsi.Designer.cs">
+      <DependentUpon>frmDuocsi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLetan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLetan.Designer.cs">
+      <DependentUpon>frmLetan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThemBS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThemBS.Designer.cs">
+      <DependentUpon>frmThemBS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmthemmoinguoidung.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmthemmoinguoidung.Designer.cs">
+      <DependentUpon>frmthemmoinguoidung.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmthemvaitromoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmthemvaitromoi.Designer.cs">
+      <DependentUpon>frmthemvaitromoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThungan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThungan.Designer.cs">
+      <DependentUpon>frmThungan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmvaitro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmvaitro.Designer.cs">
+      <DependentUpon>frmvaitro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Helper_UI\FormInit.Designer.cs">
       <DependentUpon>FormInit.cs</DependentUpon>
@@ -369,6 +421,29 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Helper_UI\FormInit.resx">
       <DependentUpon>FormInit.cs</DependentUpon>
+    <EmbeddedResource Include="frmbenhnhan.resx">
+      <DependentUpon>frmbenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDuocsi.resx">
+      <DependentUpon>frmDuocsi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLetan.resx">
+      <DependentUpon>frmLetan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThemBS.resx">
+      <DependentUpon>frmThemBS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmthemmoinguoidung.resx">
+      <DependentUpon>frmthemmoinguoidung.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmthemvaitromoi.resx">
+      <DependentUpon>frmthemvaitromoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThungan.resx">
+      <DependentUpon>frmThungan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmvaitro.resx">
+      <DependentUpon>frmvaitro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
