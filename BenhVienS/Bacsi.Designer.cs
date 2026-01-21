@@ -557,6 +557,7 @@ namespace BenhVienS
             this.panelListWaitng.Name = "panelListWaitng";
             this.panelListWaitng.Size = new System.Drawing.Size(406, 434);
             this.panelListWaitng.TabIndex = 5;
+            this.panelListWaitng.Paint += new System.Windows.Forms.PaintEventHandler(this.panelListWaitng_Paint);
             // 
             // CardWaitingExam
             // 

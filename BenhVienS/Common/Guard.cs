@@ -1,10 +1,6 @@
 ﻿using BenhVienS.Enums;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+
 
 namespace BenhVienS.Common
 {
@@ -22,6 +18,9 @@ namespace BenhVienS.Common
 
             if (!_auth.Require(roles))
                 throw new UnauthorizedAccessException("Không có quyền");
+
+             if (_auth.CurrentUser.ExpiredAt < DateTime.Now)
+                throw new UnauthorizedAccessException("Phiên bản đăng nhập hết hạn");
         }
     }
 }
