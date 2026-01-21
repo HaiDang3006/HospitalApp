@@ -214,6 +214,12 @@
     <Compile Include="thembenhnhan.Designer.cs">
       <DependentUpon>thembenhnhan.cs</DependentUpon>
     </Compile>
+    <Compile Include="themdichvu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="themdichvu.Designer.cs">
+      <DependentUpon>themdichvu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Thungan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -280,7 +286,6 @@
     <Compile Include="uckedonthuoc.Designer.cs">
       <DependentUpon>uckedonthuoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucmkadmin.cs" />
     <Compile Include="ucmkadmin.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -316,12 +321,6 @@
     </Compile>
     <Compile Include="ucqltaikhoanvaphanquyen.Designer.cs">
       <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ucQuanlibenhnhan.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="ucQuanlibenhnhan.Designer.cs">
-      <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
     </Compile>
     <Compile Include="ucQuanLyDonThuoc.cs">
       <SubType>UserControl</SubType>
@@ -413,6 +412,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="thembenhnhan.resx">
       <DependentUpon>thembenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="themdichvu.resx">
+      <DependentUpon>themdichvu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrangchuBVS.resx">
       <DependentUpon>TrangchuBVS.cs</DependentUpon>
