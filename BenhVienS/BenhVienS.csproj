@@ -33,11 +33,21 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Guna.UI2, Version=2.0.4.7, Culture=neutral, PublicKeyToken=8b9d14aa5142e261, processorArchitecture=MSIL">
+      <HintPath>..\packages\Guna.UI2.WinForms.2.0.4.7\lib\net472\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -62,17 +72,17 @@
     <Compile Include="benhnhan.Designer.cs">
       <DependentUpon>benhnhan.cs</DependentUpon>
     </Compile>
-    <Compile Include="benhvienvsDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="caidat.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="caidat.Designer.cs">
       <DependentUpon>caidat.cs</DependentUpon>
     </Compile>
+    <Compile Include="Common\AppContext.cs" />
+    <Compile Include="Common\AuthContext.cs" />
+    <Compile Include="Common\Guard.cs" />
+    <Compile Include="Common\NavigationService.cs" />
+    <Compile Include="Common\SessionManager.cs" />
     <Compile Include="DangKi.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +95,7 @@
     <Compile Include="Dangnhap.Designer.cs">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </Compile>
+    <Compile Include="dbUtils.cs" />
     <Compile Include="dskham.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -97,6 +108,8 @@
     <Compile Include="DuocSi.Designer.cs">
       <DependentUpon>DuocSi.cs</DependentUpon>
     </Compile>
+    <Compile Include="Enums\RoleEnum.cs" />
+    <Compile Include="Enums\Status.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,11 +122,20 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
+    <Compile Include="frmBacsi.cs">
+      <SubType>Form</SubType>
     </Compile>
+    <Compile Include="frmBacsi.Designer.cs">
+      <DependentUpon>frmBacsi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper_Service\CryptoHelper.cs" />
+    <Compile Include="Helper_UI\FormInit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Helper_UI\FormInit.Designer.cs">
+      <DependentUpon>FormInit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Helper_UI\HelperUi.cs" />
     <Compile Include="hsbnhan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -144,8 +166,22 @@
     <Compile Include="Lichhen.Designer.cs">
       <DependentUpon>Lichhen.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapperSql\DoctorMapper.cs" />
+    <Compile Include="MapperSql\PatientMapper.cs" />
+    <Compile Include="MapperSql\UserMapper.cs" />
+    <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\UserSession.cs" />
+    <Compile Include="Models\Doctor.cs" />
+    <Compile Include="Models\Patient.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="qlhosobenhnhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +194,17 @@
     <Compile Include="QuenMK.Designer.cs">
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapperSql\AppointmentMapper.cs" />
+    <Compile Include="Service\AuthService\AuthService.cs" />
+    <Compile Include="Service\LichHenService\LichHenService.cs" />
+    <Compile Include="Repository\AppointmentRepository.cs" />
+    <Compile Include="Repository\DoctorRepository.cs" />
+    <Compile Include="Repository\PatientRepository.cs" />
+    <Compile Include="Repository\UserRepository.cs" />
+    <Compile Include="Service\AppointmentService\AppointmentService.cs" />
+    <Compile Include="Service\DoctorSerice\DoctorService.cs" />
+    <Compile Include="Service\PatientService\PatientService.cs" />
+    <Compile Include="Service\UserService\UserService.cs" />
     <Compile Include="thembenhnhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -305,25 +352,32 @@
     <EmbeddedResource Include="Dangnhap.resx">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dskham.resx">
+      <DependentUpon>dskham.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmBacsi.resx">
+      <DependentUpon>frmBacsi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="hsbnhan.resx">
+      <DependentUpon>hsbnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Helper_UI\FormInit.resx">
+      <DependentUpon>FormInit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="qlhosobenhnhan.resx">
       <DependentUpon>qlhosobenhnhan.cs</DependentUpon>
     </EmbeddedResource>
@@ -360,6 +414,7 @@
     <EmbeddedResource Include="ucQuanlibenhnhan.resx">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <EmbeddedResource Include="ucttbenhnhan.resx">
       <DependentUpon>ucttbenhnhan.cs</DependentUpon>
     </EmbeddedResource>
@@ -402,9 +457,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\09e450ee99ad374d695f94a7548eed5f-removebg-preview.png" />
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview.png" />
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview1.png" />
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview2.png" />
+    <None Include="Resources\4a8bae08568f81029a018d1fdd439a4d-removebg-preview.png" />
     <Content Include="Resources\5248a67978b9ac609717e0cdd691c7a9-removebg-preview.png" />
     <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview.png" />
     <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview1.png" />
@@ -426,6 +483,7 @@
     <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_35_05 PM.png" />
     <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_50_57 PM.png" />
     <Content Include="Resources\checked.png" />
+    <None Include="Resources\checked2.png" />
     <Content Include="Resources\doctor.png" />
     <Content Include="Resources\doctor1.png" />
     <Content Include="Resources\doctor2.png" />
@@ -434,6 +492,8 @@
     <Content Include="Resources\Doctor_with_stethoscope_icon_design__Physician_doctor_flat_vector_icon_for_apps_and_websites__doctor_logo_illustration-removebg-preview2.png" />
     <Content Include="Resources\document.png" />
     <Content Include="Resources\document1.png" />
+    <None Include="Resources\document3.png" />
+    <None Include="Resources\document4.png" />
     <Content Include="Resources\download-removebg-preview-removebg-preview.png" />
     <Content Include="Resources\download-removebg-preview-removebg-preview1.png" />
     <Content Include="Resources\download-removebg-preview.png" />
@@ -485,7 +545,11 @@
     <Content Include="Resources\settings.png" />
     <Content Include="Resources\stethoscope.png" />
     <Content Include="Resources\user.png" />
+    <None Include="Resources\user2.png" />
+    <None Include="Resources\user3.png" />
     <Content Include="Resources\wall-clock.png" />
+    <None Include="Resources\wall-clock2.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
