@@ -16,6 +16,7 @@ namespace BenhVienS.Models
         // Parameterless constructor
         public Doctor()
         {
+
         }
 
         // Full constructor

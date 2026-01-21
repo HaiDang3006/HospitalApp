@@ -70,9 +70,10 @@ namespace BenhVienS
 
         private void WaitingExamInit()
         {
-            int doctorId = 1;
-
-            List<Appointment> appointmentList = appointmentService.AppointmentTodayByStatusAndDoctor(doctorId, "DaDen");
+            var session = SessionManager.Load();
+            User user = AppContextCustom.Instance.Auth.getInfoUserLogin(session);
+            Console.Write(user.UserId);
+            List<Appointment> appointmentList = appointmentService.AppointmentTodayByStatusAndDoctor(user.UserId, "DaDen");
 
             // Hiển thị danh sách lên giao diện
             FillCardWaiting(appointmentList);
@@ -237,7 +238,7 @@ namespace BenhVienS
         private void btnLogout_Click(object sender, EventArgs e)
         {
             AppContextCustom.Instance.Auth.Clear();
-            Application.Restart();
+            
         }
 
         private void panelLeft_Paint(object sender, PaintEventArgs e) { }
@@ -247,6 +248,11 @@ namespace BenhVienS
         {
             // Refresh lại danh sách khi click Home
             WaitingExamInit();
+        }
+
+        private void panelListWaitng_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

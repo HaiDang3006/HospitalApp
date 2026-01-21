@@ -1,7 +1,9 @@
 ﻿using BenhVienS.Enums;
 using BenhVienS.Models;
+using BenhVienS.Service.UserService;
 using System;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace BenhVienS.Common
 {
@@ -23,7 +25,21 @@ namespace BenhVienS.Common
             SessionManager.Clear();
         }
 
-        public  bool Require(params RoleEnum[] roles)
+        public User getInfoUserLogin(UserSession session)
+        {
+            if (session != null && session.ExpiredAt > DateTime.Now)
+            {
+                UserService userService = new UserService();
+                return userService.UserById(session.UserId);
+            } else
+            {
+                MessageBox.Show("Phiên bản đăng nhập không hợp lệ");
+                Application.Restart();
+                return null;
+            }
+        }
+
+        public bool Require(params RoleEnum[] roles)
         {
             if (CurrentUser == null)
                 return false;
@@ -32,6 +48,7 @@ namespace BenhVienS.Common
                 return false;
 
             var userRole = (RoleEnum)CurrentUser.Role;
+
             return roles.Contains(userRole);
         }
 
