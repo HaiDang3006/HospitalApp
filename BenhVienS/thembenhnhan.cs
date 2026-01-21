@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -18,15 +19,40 @@ namespace BenhVienS
     public partial class thembenhnhan : Form
     {
         public void SetBenhNhanData(int maBenhNhan, int maNguoiDung, string hoTen, DateTime ngaySinh, string gioiTinh, string soDienThoai, string diaChi)
+
+        int _maBenhNhan = 0;
+        int _maNguoiDung = 0;
+        bool _isEdit = false;
+
+        string connStr = ConfigurationManager
+            .ConnectionStrings["BenhVienV1ConnectionString"]
+            .ConnectionString;
+        public void SetBenhNhanData(
+            int maBenhNhan,
+            int maNguoiDung,
+            string hoTen,
+            DateTime ngaySinh,
+            string gioiTinh,
+            string soDienThoai,
+            string diaChi)
         {
+            _isEdit = true;
+            _maBenhNhan = maBenhNhan;
+            _maNguoiDung = maNguoiDung;
+
             txtmabn.Text = maBenhNhan.ToString();
             // If you have a field for MaNguoiDung, set it here (e.g., txtMaNguoiDung.Text = maNguoiDung.ToString();)
+            txtmabn.Enabled = false;
+
             txthoten.Text = hoTen;
             dtpngaysinh.Value = ngaySinh;
+
             if (gioiTinh == "Nam")
                 rdoNam.Checked = true;
             else if (gioiTinh == "Nữ")
+            else
                 rdoNu.Checked = true;
+
             txtSDT.Text = soDienThoai;
             txtdiachi.Text = diaChi;
         }
@@ -154,6 +180,49 @@ namespace BenhVienS
         private void bthuy_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btluu_Click(object sender, EventArgs e)
+        {
+            if (_isEdit)
+                CapNhatBenhNhan();
+            else
+                ThemBenhNhanMoi();
+
+            this.Close();
+        }
+
+        void CapNhatBenhNhan()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string sql = @"
+                UPDATE NguoiDung SET
+                    HoTen = @HoTen,
+                    SoDienThoai = @SDT,
+                    DiaChi = @DiaChi,
+                    NgaySinh = @NgaySinh,
+                    GioiTinh = @GioiTinh,
+                    NgayCapNhat = GETDATE()
+                WHERE MaNguoiDung = @MaNguoiDung";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@HoTen", txthoten.Text);
+                cmd.Parameters.AddWithValue("@SDT", txtSDT.Text);
+                cmd.Parameters.AddWithValue("@DiaChi", txtdiachi.Text);
+                cmd.Parameters.AddWithValue("@NgaySinh", dtpngaysinh.Value);
+                cmd.Parameters.AddWithValue("@GioiTinh", rdoNam.Checked);
+                cmd.Parameters.AddWithValue("@MaNguoiDung", _maNguoiDung);
+
+                cmd.ExecuteNonQuery();
+                MessageBox.Show("Cập nhật bệnh nhân thành công");
+            }
+        }
+        void ThemBenhNhanMoi()
+        {
+            MessageBox.Show("Chức năng thêm sẽ xử lý sau");
         }
     }
 }

@@ -255,7 +255,7 @@
             // 
             // txtcccd
             // 
-            this.txtcccd.Location = new System.Drawing.Point(642, 128);
+            this.txtcccd.Location = new System.Drawing.Point(703, 63);
             this.txtcccd.Name = "txtcccd";
             this.txtcccd.Size = new System.Drawing.Size(225, 28);
             this.txtcccd.TabIndex = 19;
@@ -263,8 +263,10 @@
             // txtemail
             // 
             this.txtemail.Location = new System.Drawing.Point(561, 82);
+            this.txtemail.Location = new System.Drawing.Point(703, 17);
             this.txtemail.Name = "txtemail";
             this.txtemail.Size = new System.Drawing.Size(262, 28);
+            this.txtemail.Size = new System.Drawing.Size(225, 28);
             this.txtemail.TabIndex = 18;
             // 
             // label3
@@ -273,6 +275,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(495, 128);
+            this.label3.Location = new System.Drawing.Point(556, 63);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(141, 20);
             this.label3.TabIndex = 17;
@@ -284,6 +287,7 @@
             this.lblemail.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblemail.ForeColor = System.Drawing.Color.Black;
             this.lblemail.Location = new System.Drawing.Point(495, 84);
+            this.lblemail.Location = new System.Drawing.Point(556, 19);
             this.lblemail.Name = "lblemail";
             this.lblemail.Size = new System.Drawing.Size(62, 20);
             this.lblemail.TabIndex = 16;
@@ -330,9 +334,11 @@
             // txtdiachi
             // 
             this.txtdiachi.Location = new System.Drawing.Point(77, 271);
+            this.txtdiachi.Location = new System.Drawing.Point(560, 149);
             this.txtdiachi.Multiline = true;
             this.txtdiachi.Name = "txtdiachi";
             this.txtdiachi.Size = new System.Drawing.Size(398, 150);
+            this.txtdiachi.Size = new System.Drawing.Size(368, 225);
             this.txtdiachi.TabIndex = 10;
             // 
             // dtpngaysinh
@@ -365,6 +371,7 @@
             this.lbldiachi.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbldiachi.ForeColor = System.Drawing.Color.Black;
             this.lbldiachi.Location = new System.Drawing.Point(6, 271);
+            this.lbldiachi.Location = new System.Drawing.Point(556, 126);
             this.lbldiachi.Name = "lbldiachi";
             this.lbldiachi.Size = new System.Drawing.Size(74, 20);
             this.lbldiachi.TabIndex = 4;
@@ -447,6 +454,7 @@
             this.lblttbn.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblttbn.ForeColor = System.Drawing.Color.White;
             this.lblttbn.Location = new System.Drawing.Point(297, 17);
+            this.lblttbn.Location = new System.Drawing.Point(308, 13);
             this.lblttbn.Name = "lblttbn";
             this.lblttbn.Size = new System.Drawing.Size(251, 29);
             this.lblttbn.TabIndex = 0;

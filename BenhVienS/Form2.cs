@@ -77,6 +77,9 @@ namespace BenhVienS
 
             // Tải lịch làm việc hôm nay
             LoadLichLamHomNay();
+            LoadDanhSachBenhNhan();
+
+            LoadDanhSachVaiTro();
 
             // Tùy chỉnh giao diện DataGridView (tùy chọn)
             dgvDanhsachbacsi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -491,7 +494,7 @@ namespace BenhVienS
         }
         void ExitAddMode()
         {
-            isAddMode = false;
+            //isAddMode = false;
 
             EnableInput(false);
             dataGridView1.Enabled = true;
@@ -578,7 +581,7 @@ namespace BenhVienS
 
         private void btThem_Click(object sender, EventArgs e)
         {
-            isAddMode = true;
+            //isAddMode = true;
 
             // Cho phép nhập
             EnableInput(true);
@@ -683,10 +686,7 @@ namespace BenhVienS
 
         }
 
-        private void panelTongthuhomnay_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, panelTongthuhomnay.ClientRectangle, Color.Gray, ButtonBorderStyle.Dotted);
-        }
+        
 
         private void panelTongchihomnay_Paint(object sender, PaintEventArgs e)
         {
@@ -783,76 +783,10 @@ namespace BenhVienS
             LoadDanhSachDichVu();
         }
 
-        private void dgvBangDV_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                // Lấy thông tin hàng vừa click
-                DataGridViewRow row = dgvBangDV.Rows[e.RowIndex];
-                string maDV = row.Cells["MaDV"].Value.ToString();
-                decimal donGia = Convert.ToDecimal(row.Cells["DonGia"].Value);
-                double tyLe = Convert.ToDouble(row.Cells["TyLeBHYT"].Value);
+        
 
-                // Tính toán số tiền
-                decimal tienBHYTChiTra = donGia * (decimal)tyLe;
-                decimal tienBenhNhanTra = donGia - tienBHYTChiTra;
-
-                // Thêm vào bảng khám bệnh phía dưới
-                dgvBangkhambenh.Rows.Add(maDV, (tyLe * 100) + "%", donGia, tienBenhNhanTra, tienBHYTChiTra, "Xóa");
-            }
-
-
-        }
-
-        private void dgvBangkhambenh_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 5 && e.RowIndex >= 0)
-            {
-                dgvBangkhambenh.Rows.RemoveAt(e.RowIndex);
-            }
-            if (e.RowIndex < 0) return;
-
-
-            if (dgvBangkhambenh.Columns[e.ColumnIndex].Name == "btnXoa")
-            {
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa dịch vụ này khỏi danh sách khám?",
-                                                    "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    dgvBangkhambenh.Rows.RemoveAt(e.RowIndex);
-                    TinhTongTienBenhNhan();
-                }
-            }
-            if (dgvBangkhambenh.Columns[e.ColumnIndex].Name == "btnSua")
-            {
-
-                dgvBangkhambenh.CurrentRow.ReadOnly = false;
-
-
-                dgvBangkhambenh.CurrentCell = dgvBangkhambenh.Rows[e.RowIndex].Cells["colPhantram"];
-                dgvBangkhambenh.BeginEdit(true);
-
-                MessageBox.Show("Vui lòng nhập giá trị mới và nhấn Enter để cập nhật.");
-            }
-        }
-        private void TinhTongTienBenhNhan()
-        {
-            decimal tongCong = 0;
-
-            // Duyệt qua từng dòng trong bảng khám bệnh
-            foreach (DataGridViewRow row in dgvBangkhambenh.Rows)
-            {
-                // Kiểm tra dòng đó không phải dòng trống (NewRow) và có giá trị
-                if (row.Cells[3].Value != null)
-                {
-                    tongCong += Convert.ToDecimal(row.Cells[3].Value);
-                }
-            }
-
-            // Hiển thị lên Label với định dạng phân cách hàng nghìn
-            labelTongtien.Text = tongCong.ToString("N0") + " VNĐ";
-        }
-
+        
+        
         private void tabPageTongquan_Click(object sender, EventArgs e)
         {
             try
@@ -1104,7 +1038,7 @@ namespace BenhVienS
             LoadDanhSachBacSi();
         }
 
-        bool isAddMode = false;
+       /// bool isAddMode = false;
 
         private void pnQlilichkham_Paint(object sender, PaintEventArgs e)
         {
@@ -1209,7 +1143,7 @@ namespace BenhVienS
 
         private void btHuy_Click(object sender, EventArgs e)
         {
-            isAddMode = false;
+            //isAddMode = false;
 
             EnableInput(false);
             dataGridView1.Enabled = true;
@@ -1512,6 +1446,149 @@ namespace BenhVienS
         }
 
         private void tabPage12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnthemmoinguoidung_Click(object sender, EventArgs e)
+        {
+            frmvaitro f = new frmvaitro();
+            f.ShowDialog();
+        }
+
+        private void dgvAlldanhsachlichlam_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvDanhsachvaitro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvmenu_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvbacsi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnThemmoivaitro_Click(object sender, EventArgs e)
+        {
+            frmthemvaitromoi frm = new frmthemvaitromoi();
+
+            // 🔥 đăng ký lắng nghe event
+            frm.VaiTroDaThayDoi += LoadDanhSachVaiTro;
+
+            frm.ShowDialog();
+        }
+
+        private void LoadDanhSachVaiTro()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string sql = "SELECT MaVaiTro, TenVaiTro, MoTa, TrangThai FROM VaiTro";
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvDanhsachvaitro.DataSource = dt;
+
+                // cập nhật số lượng
+                lblSoluongvaitro.Text = dt.Rows.Count.ToString();
+            }
+        }
+        
+
+        private void btcaidat_Click(object sender, EventArgs e)
+        {
+            caidat f = new caidat();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
+
+        void LoadBenhNhan()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(
+                    "SELECT * FROM BenhNhan WHERE TrangThai = 1", conn);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvbenhnhan.DataSource = dt;
+            }
+        }
+
+        void LoadDanhSachBenhNhan()
+        {
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            string sql = @"
+        SELECT 
+            bn.MaBenhNhan,
+            bn.MaNguoiDung,
+            nd.HoTen,
+            nd.SoDienThoai,
+            nd.DiaChi,
+            nd.NgaySinh,
+            CASE WHEN nd.GioiTinh = 1 THEN N'Nam' ELSE N'Nữ' END AS GioiTinh
+        FROM BenhNhan bn
+        JOIN NguoiDung nd ON bn.MaNguoiDung = nd.MaNguoiDung
+    ";
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvbenhnhan.AutoGenerateColumns = true; // QUAN TRỌNG
+                dgvbenhnhan.DataSource = dt;
+            }
+        }
+        private void btSuaa_Click(object sender, EventArgs e)
+        {
+            if (dgvbenhnhan.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn bệnh nhân cần sửa");
+                return;
+            }
+
+            thembenhnhan frm = new thembenhnhan();
+
+            frm.SetBenhNhanData(
+                Convert.ToInt32(dgvbenhnhan.CurrentRow.Cells["MaBenhNhan"].Value),
+                Convert.ToInt32(dgvbenhnhan.CurrentRow.Cells["MaNguoiDung"].Value),
+                dgvbenhnhan.CurrentRow.Cells["HoTen"].Value.ToString(),
+                Convert.ToDateTime(dgvbenhnhan.CurrentRow.Cells["NgaySinh"].Value),
+                dgvbenhnhan.CurrentRow.Cells["GioiTinh"].Value.ToString(),
+                dgvbenhnhan.CurrentRow.Cells["SoDienThoai"].Value.ToString(),
+                dgvbenhnhan.CurrentRow.Cells["DiaChi"].Value.ToString()
+            );
+
+            frm.ShowDialog();
+            LoadDanhSachBenhNhan(); // reload dgv
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvbenhnhan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gbdsbenhnhan_Enter(object sender, EventArgs e)
         {
 
         }
