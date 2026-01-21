@@ -12,18 +12,18 @@ namespace BenhVienS.Service
         {
             var appointment = new Appointment
             {
-                Id = Convert.ToInt32(reader["Id"]),
-                PatientId = Convert.ToInt32(reader["PatientId"]),
-                DoctorId = Convert.ToInt32(reader["DoctorId"]),
-                WorkScheduleId = Convert.ToInt32(reader["WorkScheduleId"]),
-                DateAppointment = Convert.ToDateTime(reader["DateAppointment"]),
-                Reasion = reader["Reasion"]?.ToString(),
-                ReceptionId = Convert.ToInt32(reader["ReceptionId"]),
-                Note = reader["Note"]?.ToString(),
-                CreateDate = Convert.ToDateTime(reader["CreateDate"]),
+                Id = Convert.ToInt32(reader["MaLichHen"]),
+                PatientId = Convert.ToInt32(reader["MaBenhNhan"]),
+                DoctorId = Convert.ToInt32(reader["MaBacSi"]),
+                WorkScheduleId = Convert.ToInt32(reader["MaLichLamViec"]),
+                DateAppointment = Convert.ToDateTime(reader["NgayHen"]),
+                Reasion = reader["LyDoKham"]?.ToString(),
+                ReceptionId = Convert.ToInt32(reader["MaLeTen"]),
+                Note = reader["GhiChu"]?.ToString(),
+                CreateDate = Convert.ToDateTime(reader["NgayTao"]),
             };
-            appointment.SetOrderType(reader["OrderType"].ToString());
-            appointment.SetStatus(reader["Status"].ToString());
+            appointment.SetOrderType(reader["HinhThucDat"].ToString());
+            appointment.SetStatus(reader["TrangThai"].ToString());
             return appointment;
         }
         // map dìa một danh sách model 
