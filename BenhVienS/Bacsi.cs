@@ -1,4 +1,7 @@
-﻿using System;
+﻿using BenhVienS.Common;
+using BenhVienS.Enums;
+using BenhVienS.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,12 +16,20 @@ namespace BenhVienS
     public partial class Bacsi : Form
     {
         private List<Control> _defaultPanelControls;
-        string connectionString = @"Data Source=Huynhnhu;Initial Catalog = benhvienvs; Integrated Security = True; Trust Server Certificate=True";
         public Bacsi()
         {
-            InitializeComponent();
-            _defaultPanelControls = panelMain.Controls.Cast<Control>().ToList();
-            btnHome.Click += button5_Click;
+            try
+            {
+                new Guard(AppContextCustom.Instance.Auth).Require(RoleEnum.Doctor);
+                InitializeComponent();
+                _defaultPanelControls = panelMain.Controls.Cast<Control>().ToList();
+                btnHome.Click += button5_Click;
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show(ex.Message);
+                this.Close();
+            }
         }
 
         private void showControl(Control control)
@@ -179,6 +190,17 @@ namespace BenhVienS
         {
             kdthuoc uc = new kdthuoc();
             showControl(uc);
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            AppContextCustom.Instance.Auth.Clear();
+            Application.Restart();
+        }
+
+        private void panelLeft_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

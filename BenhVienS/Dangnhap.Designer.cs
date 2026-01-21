@@ -19,7 +19,6 @@ namespace BenhVienS
 
         #region Windows Form Designer generated code
 
-      
 
         private void InitializeComponent()
         {
