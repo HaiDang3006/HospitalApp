@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-using BenhVienS.Utils;
+
 using static BenhVienS.Form2;
 
 namespace BenhVienS
@@ -82,24 +82,156 @@ Integrated Security=True"";
             LoadDanhSachBacSi();
 
             // Tải lịch làm việc hôm nay
-            using (SqlConnection conn = DbUtils.GetConnection())
+            LoadLichHenHomNay();
+
+            for (int i = 2020; i <= DateTime.Now.Year; i++)
             {
-                conn.Open();
-                MessageBox.Show("Kết nối thành công!");
+                cboNam.Items.Add(i);
             }
-            string sql = "SELECT * FROM BacSi";
+
+            cboNam.SelectedItem = DateTime.Now.Year;
+
+            // Load chart ngay
+            LoadDoanhThuTheoNam(DateTime.Now.Year);
+
+            LoadTongBacSi();
+            LoadLichHenHomNay();
+            LoadDoanhThuHomNay();
+            LoadTongBenhNhanHomNay();
+        }
+        private void LoadTongBenhNhanHomNay()
+        {
+            string sql = @"SELECT COUNT(DISTINCT MaBenhNhan)
+                   FROM LichHen
+                   WHERE CAST(NgayHen AS DATE) = CAST(GETDATE() AS DATE)";
 
             using (SqlConnection conn = DbUtils.GetConnection())
             {
                 conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                int tongBN = (int)cmd.ExecuteScalar();
+
+                lblTongbenhnnhan.Text = tongBN.ToString();
+            }
+        }
+
+        private void LoadDoanhThuHomNay()
+        {
+            string sql = @"SELECT ISNULL(SUM(TongTien), 0)
+                   FROM HoaDon
+                   WHERE DaThanhToan = 1
+                   AND CAST(NgayThanhToan AS DATE) = CAST(GETDATE() AS DATE)";
+
+            using (SqlConnection conn = DbUtils.GetConnection())
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                decimal doanhThu = (decimal)cmd.ExecuteScalar();
+
+                lbldoanhthumotngay.Text = doanhThu.ToString("N0") + " VNĐ";
+            }
+        }
+
+        private void LoadSoLuongLichHenHomNay()
+        {
+            string sql = @"SELECT COUNT(*) 
+                   FROM LichHen
+                   WHERE CAST(NgayHen AS DATE) = CAST(GETDATE() AS DATE)";
+
+            using (SqlConnection conn = DbUtils.GetConnection())
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                int soLuong = (int)cmd.ExecuteScalar();
+
+                lblLichkhamhomnay.Text = soLuong.ToString();
+            }
+        }
+
+        private void LoadDoanhThuTheoNam(int nam)
+        {
+            chartDoanhthu.Series.Clear();
+
+            Series series = new Series("Doanh thu");
+            series.ChartType = SeriesChartType.Column;
+            series.IsValueShownAsLabel = true;
+
+            string sql = @"
+        WITH Thang AS (
+            SELECT 1 AS Thang UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL
+            SELECT 4 UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL
+            SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9 UNION ALL
+            SELECT 10 UNION ALL SELECT 11 UNION ALL SELECT 12
+        )
+        SELECT 
+            t.Thang,
+            ISNULL(SUM(h.TongTien), 0) AS DoanhThu
+        FROM Thang t
+        LEFT JOIN HoaDon h 
+            ON MONTH(h.NgayThanhToan) = t.Thang
+            AND YEAR(h.NgayThanhToan) = @Nam
+            AND h.DaThanhToan = 1
+        GROUP BY t.Thang
+        ORDER BY t.Thang;";
+
+            decimal tong = 0;
+
+            using (SqlConnection conn = DbUtils.GetConnection())
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Nam", nam);
+
+                SqlDataReader rd = cmd.ExecuteReader();
+                while (rd.Read())
+                {
+                    decimal doanhThu = Convert.ToDecimal(rd["DoanhThu"]);
+                    tong += doanhThu;
+
+                    series.Points.AddXY(
+                        "Tháng " + rd["Thang"],
+                        doanhThu
+                    );
+                }
+            }
+            chartDoanhthu.Series.Add(series);
+            chartDoanhthu.ChartAreas[0].AxisY.LabelStyle.Format = "#,##0";
+            series.LabelFormat = "#,##0 VNĐ";
+
+           
+            
+        }
+
+        private void LoadLichHenHomNay()
+        {
+            string sql = @"
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY lh.ThoiGianDen) AS STT,
+            CONVERT(VARCHAR(5), lh.ThoiGianDen, 108) AS GioKham,
+            nd_bn.HoTen AS HoTen,
+            nd_bs.HoTen AS BacSi,
+            lh.TrangThai,
+            CASE 
+                WHEN lh.HinhThucDat = 'online' THEN N'Khám online'
+                ELSE N'Khám trực tiếp'
+            END AS LoaiBenhNhan
+        FROM LichHen lh
+        JOIN BenhNhan bn ON lh.MaBenhNhan = bn.MaBenhNhan
+        JOIN NguoiDung nd_bn ON bn.MaNguoiDung = nd_bn.MaNguoiDung
+        LEFT JOIN BacSi bs ON lh.MaBacSi = bs.MaBacSi
+        LEFT JOIN NguoiDung nd_bs ON bs.MaNguoiDung = nd_bs.MaNguoiDung
+        WHERE CAST(lh.NgayHen AS DATE) = CAST(GETDATE() AS DATE)
+        ORDER BY lh.ThoiGianDen";
+
+            using (SqlConnection conn = DbUtils.GetConnection())
+            {
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
-
-                dgvDanhsachbacsi.DataSource = dt; // đổ vào DataGridView
+                dgvLichhenhomnay.DataSource = dt;
             }
-
         }
+
         private void LoadDanhSachLichKham()
         {
             try
@@ -302,8 +434,9 @@ Integrated Security=True"";
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvLichhenhomnay_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+
 
         }
 
@@ -322,7 +455,7 @@ Integrated Security=True"";
 
         }
 
-        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvDanhsachbenhnhanmoi_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
@@ -465,7 +598,7 @@ Integrated Security=True"";
             isAddMode = false;
 
             EnableInput(false);
-            dataGridView1.Enabled = true;
+            dgvLichhenhomnay.Enabled = true;
 
             btThem.Enabled = true;
             btSua.Enabled = true;
@@ -586,7 +719,7 @@ Integrated Security=True"";
             ClearInput();
 
             // Khóa bảng danh sách
-            dataGridView1.Enabled = false;
+            dgvLichhenhomnay.Enabled = false;
 
             btThem.Enabled = false;
             btSua.Enabled = false;
@@ -1168,7 +1301,7 @@ private void dgvBangDV_CellContentClick(object sender, DataGridViewCellEventArgs
             isAddMode = false;
 
             EnableInput(false);
-            dataGridView1.Enabled = true;
+            dgvLichhenhomnay.Enabled = true;
 
             btThem.Enabled = true;
             btSua.Enabled = true;
@@ -1687,6 +1820,62 @@ private void dgvBangDV_CellContentClick(object sender, DataGridViewCellEventArgs
             }
         }
 
+        private void dgvDanhsachbenhnhanmoi_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvLichhenhomnay_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            dgvLichhenhomnay.Columns["STT"].HeaderText = "STT";
+            dgvLichhenhomnay.Columns["GioKham"].HeaderText = "Giờ khám";
+            dgvLichhenhomnay.Columns["HoTen"].HeaderText = "Họ tên";
+            dgvLichhenhomnay.Columns["BacSi"].HeaderText = "Bác sĩ";
+            dgvLichhenhomnay.Columns["TrangThai"].HeaderText = "Trạng thái";
+            
+
+        }
+
+        private void chartDoanhthu_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboNam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboNam.SelectedItem == null) return;
+
+            int nam = Convert.ToInt32(cboNam.SelectedItem);
+            LoadDoanhThuTheoNam(nam);
+        }
+        private void LoadTongBacSi()
+        {
+            string sql = "SELECT COUNT(*) FROM BacSi WHERE TrangThai = 1";
+
+            using (SqlConnection conn = DbUtils.GetConnection())
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                int tongBacSi = (int)cmd.ExecuteScalar();
+                lblBacsihienco.Text = tongBacSi.ToString();
+            }
+        }
+
+
+        private void lblBacsihienco_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbldoanhthumotngay_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
