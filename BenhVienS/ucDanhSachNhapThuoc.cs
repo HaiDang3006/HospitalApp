@@ -40,6 +40,7 @@ namespace BenhVienS
                     q.TenQuay,
                     tk.SoLuongTon,
                     tk.SoLuongToiThieu,
+                    tk.SoLuongToiDa,
                     t.DonViTinh,
                     tk.NgayNhap,
                     tk.NgayHetHan,
@@ -106,6 +107,7 @@ namespace BenhVienS
                 dgvKho.Columns["TenQuay"].HeaderText = "Vị Trí";
                 dgvKho.Columns["SoLuongTon"].HeaderText = "SL Tồn";
                 dgvKho.Columns["SoLuongToiThieu"].HeaderText = "Mức T.Thiểu";
+                dgvKho.Columns["SoLuongToiDa"].HeaderText = "Mức T.Đa";
                 dgvKho.Columns["DonViTinh"].HeaderText = "ĐVT";
                 dgvKho.Columns["NgayNhap"].HeaderText = "Ngày Nhập";
                 dgvKho.Columns["NgayHetHan"].HeaderText = "Hạn Dùng";
