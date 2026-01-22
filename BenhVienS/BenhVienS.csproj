@@ -42,6 +42,8 @@
     <Reference Include="System">
       <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
     </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Management" />
@@ -131,6 +133,58 @@
     <Compile Include="Helper_Service\CryptoHelper.cs" />
     <Compile Include="Helper_UI\FormInit.cs">
       <SubType>Form</SubType>
+    <Compile Include="frmbenhnhan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmbenhnhan.Designer.cs">
+      <DependentUpon>frmbenhnhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmDuocsi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDuocsi.Designer.cs">
+      <DependentUpon>frmDuocsi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLetan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmLetan.Designer.cs">
+      <DependentUpon>frmLetan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThemBS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThemBS.Designer.cs">
+      <DependentUpon>frmThemBS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThemSuaLichLamViec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThemSuaLichLamViec.Designer.cs">
+      <DependentUpon>frmThemSuaLichLamViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmthemvaitromoi.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmthemvaitromoi.Designer.cs">
+      <DependentUpon>frmthemvaitromoi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmThungan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmThungan.Designer.cs">
+      <DependentUpon>frmThungan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmvaitro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmvaitro.Designer.cs">
+      <DependentUpon>frmvaitro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Helper_UI\FormInit.Designer.cs">
       <DependentUpon>FormInit.cs</DependentUpon>
@@ -211,6 +265,12 @@
     <Compile Include="thembenhnhan.Designer.cs">
       <DependentUpon>thembenhnhan.cs</DependentUpon>
     </Compile>
+    <Compile Include="themdichvu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="themdichvu.Designer.cs">
+      <DependentUpon>themdichvu.cs</DependentUpon>
+    </Compile>
     <Compile Include="Thungan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -282,6 +342,11 @@
     </Compile>
     <Compile Include="uclichhensaptoi.Designer.cs">
       <DependentUpon>uclichhensaptoi.cs</DependentUpon>
+    <Compile Include="ucmkadmin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucmkadmin.Designer.cs">
+      <DependentUpon>ucmkadmin.cs</DependentUpon>
     </Compile>
     <Compile Include="ucQlibacsi.cs">
       <SubType>UserControl</SubType>
@@ -307,11 +372,11 @@
     <Compile Include="ucqllichkham.Designer.cs">
       <DependentUpon>ucqllichkham.cs</DependentUpon>
     </Compile>
-    <Compile Include="ucQuanlibenhnhan.cs">
+    <Compile Include="ucqltaikhoanvaphanquyen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="ucQuanlibenhnhan.Designer.cs">
-      <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
+    <Compile Include="ucqltaikhoanvaphanquyen.Designer.cs">
+      <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
     </Compile>
     <Compile Include="ucQuanLyDonThuoc.cs">
       <SubType>UserControl</SubType>
@@ -372,9 +437,35 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Helper_UI\FormInit.resx">
       <DependentUpon>FormInit.cs</DependentUpon>
+    <EmbeddedResource Include="frmbenhnhan.resx">
+      <DependentUpon>frmbenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDuocsi.resx">
+      <DependentUpon>frmDuocsi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmLetan.resx">
+      <DependentUpon>frmLetan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThemBS.resx">
+      <DependentUpon>frmThemBS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThemSuaLichLamViec.resx">
+      <DependentUpon>frmThemSuaLichLamViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmthemvaitromoi.resx">
+      <DependentUpon>frmthemvaitromoi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmThungan.resx">
+      <DependentUpon>frmThungan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmvaitro.resx">
+      <DependentUpon>frmvaitro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Lichhen.resx">
+      <DependentUpon>Lichhen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -389,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="thembenhnhan.resx">
       <DependentUpon>thembenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="themdichvu.resx">
+      <DependentUpon>themdichvu.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TrangchuBVS.resx">
       <DependentUpon>TrangchuBVS.cs</DependentUpon>
@@ -413,6 +507,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucDanhSachNhapThuoc.resx">
       <DependentUpon>ucDanhSachNhapThuoc.cs</DependentUpon>
+    <EmbeddedResource Include="ucmkadmin.resx">
+      <DependentUpon>ucmkadmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucQlibacsi.resx">
       <DependentUpon>ucQlibacsi.cs</DependentUpon>
@@ -425,6 +521,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucQuanlibenhnhan.resx">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
+    <EmbeddedResource Include="ucqltaikhoanvaphanquyen.resx">
+      <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <EmbeddedResource Include="ucttbenhnhan.resx">

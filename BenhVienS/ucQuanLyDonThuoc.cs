@@ -21,6 +21,8 @@ namespace BenhVienS
             dgvDonThuoc.CellClick += dgvDonThuoc_CellClick;
         }
         private void dgvDonThuoc_CellClick(object sender, DataGridViewCellEventArgs e)
+        string connectionString = "Server=localhost\\SQLEXPRESS02;Initial Catalog=BenhVienV1;Integrated Security=True";
+        public void LoadData()
         {
             // Kiểm tra xem người dùng có click vào dòng hợp lệ không (tránh click vào header)
             if (e.RowIndex >= 0)

@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace BenhVienS
 {
-    public partial class Lichhen : UserControl
+    public partial class frmThungan : Form
     {
-        public Lichhen()
+        public frmThungan()
         {
             InitializeComponent();
         }
@@ -22,12 +22,7 @@ namespace BenhVienS
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void Lichhen_Load(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

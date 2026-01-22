@@ -6,13 +6,14 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using static BenhVienS.Form2;
+using System.Configuration;
 
 namespace BenhVienS
 {
     public partial class Form2 : Form
     {
         // Thêm dấu @ và bao quanh bằng dấu ngoặc kép ""
-        string connectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=benhvienvs;Integrated Security=True;TrustServerCertificate=True"; 
+        string connectionString = @"Data Source=localhost\SQLEXPRESS02;Initial Catalog=BenhVienV1;Integrated Security=True;"; 
         public Form2()
         {
             InitializeComponent();
@@ -21,7 +22,103 @@ namespace BenhVienS
 
         }
 
+        //code của trang tổng quan//
 
+        private void LoadTongBenhNhanHomNay()
+        {
+            string sql = "SELECT COUNT(DISTINCT MaBenhNhan) FROM LichHen WHERE CAST(NgayHen AS DATE) = CAST(GETDATE() AS DATE)";
+            lbltongsobenhnhan.Text = GetScalarInt(sql).ToString();
+        }
+
+        private void LoadDoanhThuHomNay()
+        {
+            string sql = "SELECT ISNULL(SUM(TongTien), 0) FROM HoaDon WHERE DaThanhToan = 1 AND CAST(NgayThanhToan AS DATE) = CAST(GETDATE() AS DATE)";
+            decimal doanhThu = GetScalarDecimal(sql);
+            lbldoanhthu23.Text = doanhThu.ToString("N0") + " VNĐ";
+        }
+
+        private int GetScalarInt(string sql)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                return (int)cmd.ExecuteScalar();
+            }
+        }
+
+        private decimal GetScalarDecimal(string sql)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                conn.Open();
+                object res = cmd.ExecuteScalar();
+                return res != DBNull.Value ? Convert.ToDecimal(res) : 0;
+            }
+        }
+
+        private void LoadDoanhThuTheoNam(int nam)
+        {
+            chartDoanhthu.Series.Clear();
+            Series series = new Series("Doanh thu");
+            series.ChartType = SeriesChartType.Column;
+
+            string sql = @"
+          WITH Thang AS (
+              SELECT 1 AS T UNION ALL SELECT T+1 FROM Thang WHERE T < 12
+          )
+          SELECT T.T as Thang, ISNULL(SUM(h.TongTien), 0) AS DoanhThu
+          FROM Thang T
+          LEFT JOIN HoaDon h ON MONTH(h.NgayThanhToan) = T.T AND YEAR(h.NgayThanhToan) = @Nam AND h.DaThanhToan = 1
+          GROUP BY T.T ORDER BY T.T";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Nam", nam);
+                conn.Open();
+                SqlDataReader rd = cmd.ExecuteReader();
+                while (rd.Read())
+                {
+                    series.Points.AddXY("Tháng " + rd["Thang"], rd["DoanhThu"]);
+                }
+            }
+            chartDoanhthu.Series.Add(series);
+            series.LabelFormat = "#,##0";
+        }
+
+        public void LoadLichHenHomNay()
+        {
+            string query = @"SELECT LH.MaLichHen, BN.SoCCCD, LH.NgayHen, LH.LyDoKham, LH.TrangThai 
+             FROM LichHen LH 
+             JOIN BenhNhan BN ON LH.MaBenhNhan = BN.MaBenhNhan 
+             WHERE CAST(LH.NgayHen AS DATE) = CAST(GETDATE() AS DATE)
+             ORDER BY LH.NgayHen ASC";
+
+            DataTable dt = new DataTable();
+            try
+            {
+                using (System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(connectionString))
+                {
+                    System.Data.SqlClient.SqlDataAdapter adapter = new System.Data.SqlClient.SqlDataAdapter(query, conn);
+                    adapter.Fill(dt);
+                }
+                dgvLichhenhomnay.DataSource = dt;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi kết nối: " + ex.Message);
+            }
+        }
+
+        private void cboNam_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboNam.SelectedItem != null)
+                LoadDoanhThuTheoNam(Convert.ToInt32(cboNam.SelectedItem));
+        }
+
+        //code của trang tổng quan//
 
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -63,10 +160,9 @@ namespace BenhVienS
 
 
 
-        private void btTongquan_Click(object sender, EventArgs e)
-        {
+     
+        
 
-        }
 
         private void Form2_Load(object sender, EventArgs e)
         {
@@ -77,10 +173,31 @@ namespace BenhVienS
 
             // Tải lịch làm việc hôm nay
             LoadLichLamHomNay();
+            LoadDanhSachBenhNhan();
+            
+            //load dịch vụ//
+            LoadLoaiDichVu();
+            LoadDichVu();
 
-            // Tùy chỉnh giao diện DataGridView (tùy chọn)
-            dgvDanhsachbacsi.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvLichlamhomnay.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            //Trang tổng quan//
+            LoadTongBenhNhanHomNay();
+            LoadLichHenHomNay();
+            LoadDoanhThuHomNay();
+            for (int i = 2020; i <= DateTime.Now.Year; i++)//khởi tạo combo load năm//
+
+            {
+                cboNam.Items.Add(i);
+            }
+            cboNam.SelectedItem = DateTime.Now.Year;
+            LoadDoanhThuTheoNam(DateTime.Now.Year);
+
+            //Tab quản lí lịch làm//
+            LoadLichLamViec();
+            LoadBacSi();
+
+            LoadDanhSachVaiTro();
+
+          
             LoadDanhSachBacSi();
             TaoMaLichTuDong();
             // Gán dữ liệu mặc định cho ComboBox Trạng thái
@@ -90,33 +207,7 @@ namespace BenhVienS
 
         private void LoadDanhSachLichKham()
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    // Câu lệnh SQL Join 2 bảng: LichKham và BacSi
-                    string sql = @"SELECT L.MaLich, L.TenBN, B.HoTen, B.ChuyenKhoa, L.NgayKham, L.TrangThai 
-                           FROM LichKham L
-                           INNER JOIN BacSi B ON L.MaBS = B.MaBS";
-
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    // Giả sử bạn có một DataGridView tên là dgvLichKham
-                    dgvDanhsachlichkham.DataSource = dt;
-
-                    // Tùy chỉnh tiêu đề cột cho đẹp
-                    dgvDanhsachlichkham.Columns["MaLich"].HeaderText = "Mã Lịch";
-                    dgvDanhsachlichkham.Columns["TenBN"].HeaderText = "Bệnh Nhân";
-                    dgvDanhsachlichkham.Columns["HoTen"].HeaderText = "Bác Sĩ";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
-            }
+           
         }
         private void LoadBacSiVaoCombo()
         {
@@ -442,59 +533,15 @@ namespace BenhVienS
 
         private void LoadLichLamHomNay()
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-
-                    string query = @"
-                SELECT 
-                    bs.MaBacSi,
-                    nd.HoTen,
-                    ck.TenChuyenKhoa,
-                    ISNULL(ll.CaSang, 0)  AS CaSang,
-                    ISNULL(ll.CaTrua, 0)  AS CaTrua,
-                    ISNULL(ll.CaChieu, 0) AS CaChieu
-                FROM BacSi bs
-                JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
-                JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
-                LEFT JOIN LichLamViec ll 
-                    ON bs.MaBacSi = ll.MaBacSi 
-                   AND ll.Ngay = @Ngay";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@Ngay", DateTime.Today);
-
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dgvLichlamhomnay.AutoGenerateColumns = false;
-                    dgvLichlamhomnay.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải lịch làm hôm nay: " + ex.Message);
-            }
+           
         }
 
-        private void LoadDanhSachDichVu()
-        {
-
-            List<DichVu> ds = new List<DichVu>() {
-        new DichVu { MaDV = "DV01", TenDV = "Siêu âm tổng quát", DonGia = 200000, TyLeBHYT = 0.8 },
-        new DichVu { MaDV = "DV02", TenDV = "Xét nghiệm máu", DonGia = 150000, TyLeBHYT = 1.0 }
-    };
-            dgvBangDV.DataSource = ds;
-        }
         void ExitAddMode()
         {
-            isAddMode = false;
+            //isAddMode = false;
 
             EnableInput(false);
-            dataGridView1.Enabled = true;
+            dgvLichhenhomnay.Enabled = true;
 
             btThem.Enabled = true;
             btSua.Enabled = true;
@@ -578,7 +625,7 @@ namespace BenhVienS
 
         private void btThem_Click(object sender, EventArgs e)
         {
-            isAddMode = true;
+            //isAddMode = true;
 
             // Cho phép nhập
             EnableInput(true);
@@ -587,7 +634,7 @@ namespace BenhVienS
             ClearInput();
 
             // Khóa bảng danh sách
-            dataGridView1.Enabled = false;
+            dgvLichhenhomnay.Enabled = false;
 
             btThem.Enabled = false;
             btSua.Enabled = false;
@@ -683,10 +730,7 @@ namespace BenhVienS
 
         }
 
-        private void panelTongthuhomnay_Paint(object sender, PaintEventArgs e)
-        {
-            ControlPaint.DrawBorder(e.Graphics, panelTongthuhomnay.ClientRectangle, Color.Gray, ButtonBorderStyle.Dotted);
-        }
+        
 
         private void panelTongchihomnay_Paint(object sender, PaintEventArgs e)
         {
@@ -780,79 +824,13 @@ namespace BenhVienS
         }
         private void tabQlidichvu_Click(object sender, EventArgs e)
         {
-            LoadDanhSachDichVu();
+          
         }
 
-        private void dgvBangDV_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                // Lấy thông tin hàng vừa click
-                DataGridViewRow row = dgvBangDV.Rows[e.RowIndex];
-                string maDV = row.Cells["MaDV"].Value.ToString();
-                decimal donGia = Convert.ToDecimal(row.Cells["DonGia"].Value);
-                double tyLe = Convert.ToDouble(row.Cells["TyLeBHYT"].Value);
+        
 
-                // Tính toán số tiền
-                decimal tienBHYTChiTra = donGia * (decimal)tyLe;
-                decimal tienBenhNhanTra = donGia - tienBHYTChiTra;
-
-                // Thêm vào bảng khám bệnh phía dưới
-                dgvBangkhambenh.Rows.Add(maDV, (tyLe * 100) + "%", donGia, tienBenhNhanTra, tienBHYTChiTra, "Xóa");
-            }
-
-
-        }
-
-        private void dgvBangkhambenh_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == 5 && e.RowIndex >= 0)
-            {
-                dgvBangkhambenh.Rows.RemoveAt(e.RowIndex);
-            }
-            if (e.RowIndex < 0) return;
-
-
-            if (dgvBangkhambenh.Columns[e.ColumnIndex].Name == "btnXoa")
-            {
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa dịch vụ này khỏi danh sách khám?",
-                                                    "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result == DialogResult.Yes)
-                {
-                    dgvBangkhambenh.Rows.RemoveAt(e.RowIndex);
-                    TinhTongTienBenhNhan();
-                }
-            }
-            if (dgvBangkhambenh.Columns[e.ColumnIndex].Name == "btnSua")
-            {
-
-                dgvBangkhambenh.CurrentRow.ReadOnly = false;
-
-
-                dgvBangkhambenh.CurrentCell = dgvBangkhambenh.Rows[e.RowIndex].Cells["colPhantram"];
-                dgvBangkhambenh.BeginEdit(true);
-
-                MessageBox.Show("Vui lòng nhập giá trị mới và nhấn Enter để cập nhật.");
-            }
-        }
-        private void TinhTongTienBenhNhan()
-        {
-            decimal tongCong = 0;
-
-            // Duyệt qua từng dòng trong bảng khám bệnh
-            foreach (DataGridViewRow row in dgvBangkhambenh.Rows)
-            {
-                // Kiểm tra dòng đó không phải dòng trống (NewRow) và có giá trị
-                if (row.Cells[3].Value != null)
-                {
-                    tongCong += Convert.ToDecimal(row.Cells[3].Value);
-                }
-            }
-
-            // Hiển thị lên Label với định dạng phân cách hàng nghìn
-            labelTongtien.Text = tongCong.ToString("N0") + " VNĐ";
-        }
-
+        
+        
         private void tabPageTongquan_Click(object sender, EventArgs e)
         {
             try
@@ -1104,7 +1082,7 @@ namespace BenhVienS
             LoadDanhSachBacSi();
         }
 
-        bool isAddMode = false;
+       /// bool isAddMode = false;
 
         private void pnQlilichkham_Paint(object sender, PaintEventArgs e)
         {
@@ -1209,10 +1187,10 @@ namespace BenhVienS
 
         private void btHuy_Click(object sender, EventArgs e)
         {
-            isAddMode = false;
+            //isAddMode = false;
 
             EnableInput(false);
-            dataGridView1.Enabled = true;
+            dgvLichhenhomnay.Enabled = true;
 
             btThem.Enabled = true;
             btSua.Enabled = true;
@@ -1380,91 +1358,55 @@ namespace BenhVienS
 
         private void chartBaocaothuchi_Click(object sender, EventArgs e)
         {
-            chartBaocaothuchi.Series.Clear();
-            chartBaocaothuchi.Titles.Clear();
-            chartBaocaothuchi.Titles.Add("Báo Cáo Thu Chi Theo Tháng");
-
-            // 2. Tạo Series cho Khoản Thu
-            Series seriesThu = chartBaocaothuchi.Series.Add("Tổng Thu");
-            seriesThu.ChartType = SeriesChartType.Column;
-            seriesThu.Color = Color.Green; // Màu xanh cho doanh thu
-
-            // 3. Tạo Series cho Khoản Chi
-            Series seriesChi = chartBaocaothuchi.Series.Add("Tổng Chi");
-            seriesChi.ChartType = SeriesChartType.Column;
-            seriesChi.Color = Color.Red; // Màu đỏ cho chi phí
-
-            // Giả sử lấy dữ liệu từ Database (Thay thế bằng các biến lấy từ SQL của bạn)
-            // Ví dụ: thống kê 3 tháng gần nhất
-            string[] months = { "Tháng 11", "Tháng 12", "Tháng 01" };
-            double[] dataThu = { 150000000, 185000000, 160000000 };
-            double[] dataChi = { 90000000, 110000000, 95000000 };
-
-            for (int i = 0; i < months.Length; i++)
-            {
-                seriesThu.Points.AddXY(months[i], dataThu[i]);
-                seriesChi.Points.AddXY(months[i], dataChi[i]);
-            }
-
-            // Hiển thị con số cụ thể trên mỗi cột
-            seriesThu.IsValueShownAsLabel = true;
-            seriesChi.IsValueShownAsLabel = true;
-
-            // Định dạng đơn vị tiền tệ cho nhãn (VNĐ)
-            seriesThu.LabelFormat = "{#,##0} VNĐ";
-            seriesChi.LabelFormat = "{#,##0} VNĐ";
-
         }
 
         private void chartBieudodoanhthu_Click(object sender, EventArgs e)
         {
-            chartBieudodoanhthu.Series.Clear();
-            Series s = chartBieudodoanhthu.Series.Add("Doanh thu");
-            s.ChartType = SeriesChartType.Column; // Biểu đồ cột
-
-            // Ví dụ nạp dữ liệu thủ công hoặc từ DataTable
-            s.Points.AddXY("Tháng 1", 5000000);
-            s.Points.AddXY("Tháng 2", 7500000);
-            s.Points.AddXY("Tháng 3", 6200000);
+           
         }
 
         private void chartBieudoluotkham_Click(object sender, EventArgs e)
         {
-            chartBieudoluotkham.Series.Clear();
-            chartBieudoluotkham.Titles.Clear();
-            chartBieudoluotkham.Titles.Add("Biểu Đồ Xu Hướng Lượt Khám");
-
-            // 2. Tạo Series biểu đồ đường (Line Chart)
-            Series seriesLuotKham = chartBieudoluotkham.Series.Add("Số lượt khám");
-            seriesLuotKham.ChartType = SeriesChartType.Line; // Dạng đường kẻ
-            seriesLuotKham.BorderWidth = 3;
-            seriesLuotKham.MarkerStyle = MarkerStyle.Circle; // Thêm điểm chấm tròn
-            seriesLuotKham.MarkerSize = 8;
-            seriesLuotKham.Color = Color.DodgerBlue;
-
-            // 3. Dữ liệu giả lập (Bạn nên thay bằng dữ liệu từ SQL)
-            // Giả sử thống kê lượt khám trong 7 ngày gần nhất
-            string[] ngay = { "12/01", "13/01", "14/01", "15/01", "16/01", "17/01", "18/01" };
-            int[] soLuot = { 45, 32, 58, 70, 42, 25, 60 };
-
-            for (int i = 0; i < ngay.Length; i++)
-            {
-                seriesLuotKham.Points.AddXY(ngay[i], soLuot[i]);
-            }
-
-            // 4. Cấu hình thêm cho trục tọa độ
-            chartBieudoluotkham.ChartAreas[0].AxisX.Title = "Ngày";
-            chartBieudoluotkham.ChartAreas[0].AxisY.Title = "Số bệnh nhân";
-
-            // Hiển thị nhãn giá trị trên từng điểm
-            seriesLuotKham.IsValueShownAsLabel = true;
+            
         }
 
         private void dateLocngay_ValueChanged(object sender, EventArgs e)
         {
             DateTime selectedDate = dateLocngay.Value.Date;
         }
+        void LoadDanhSachBacSi()
+        {
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
 
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(@"
+            SELECT
+                bs.MaBacSi,
+                nd.HoTen,
+                nd.Email,
+                nd.SoDienThoai,
+                CASE 
+                    WHEN nd.GioiTinh = 1 THEN N'Nam'
+                    ELSE N'Nữ'
+                END AS GioiTinh,
+                ck.TenChuyenKhoa,
+                bs.BangCap,
+                bs.TrangThai
+            FROM BacSi bs
+            JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
+            JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
+            WHERE nd.TrangThai = 1",
+                    conn);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvbacsi.DataSource = dt;
+            }
+        }
         private void dateDenngay_ValueChanged(object sender, EventArgs e)
         {
             DateTime selectedDate = dateDenngay.Value.Date;
@@ -1491,7 +1433,663 @@ namespace BenhVienS
             // CapNhatTatCaBieuDo(tuNgay, denNgay);
         }
 
+
         private void panel14_Paint(object sender, PaintEventArgs e)
+        { }
+
+        private void bthem_Click(object sender, EventArgs e)
+
+        {
+
+        }
+
+        private void txtnhaphoten_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabPage12_Click(object sender, EventArgs e)
+        {
+
+        }
+        //của quản lí bệnh nhân nè//
+        private void btnthemmoinguoidung_Click(object sender, EventArgs e)
+        {
+            frmvaitro f = new frmvaitro();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                LoadDanhSachBacSi(); // reload dgv
+            }
+        }
+        //của quản lí bệnh nhân nè//
+        private void dgvAlldanhsachlichlam_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvDanhsachvaitro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvmenu_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void dgvbacsi_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnThemmoivaitro_Click(object sender, EventArgs e)
+        {
+            frmthemvaitromoi frm = new frmthemvaitromoi();
+
+            //  đăng ký lắng nghe event
+            frm.VaiTroDaThayDoi += LoadDanhSachVaiTro;
+
+            frm.ShowDialog();
+        }
+
+        private void LoadDanhSachVaiTro()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string sql = "SELECT MaVaiTro, TenVaiTro, MoTa, TrangThai FROM VaiTro";
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvDanhsachvaitro.DataSource = dt;
+
+                // cập nhật số lượng
+                lblSoluongvaitro.Text = dt.Rows.Count.ToString();
+            }
+        }
+        
+
+        private void btcaidat_Click(object sender, EventArgs e)
+        {
+            caidat f = new caidat();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+
+            }
+        }
+
+        void LoadBenhNhan()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(
+                    "SELECT * FROM BenhNhan WHERE TrangThai = 1", conn);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvbenhnhan.DataSource = dt;
+            }
+        }
+
+        void LoadDanhSachBenhNhan()
+        {
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            string sql = @"
+        SELECT 
+            bn.MaBenhNhan,
+            bn.MaNguoiDung,
+            nd.HoTen,
+            nd.SoDienThoai,
+            nd.DiaChi,
+            nd.NgaySinh,
+            CASE WHEN nd.GioiTinh = 1 THEN N'Nam' ELSE N'Nữ' END AS GioiTinh
+        FROM BenhNhan bn
+        JOIN NguoiDung nd ON bn.MaNguoiDung = nd.MaNguoiDung
+    ";
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvbenhnhan.AutoGenerateColumns = true; // QUAN TRỌNG
+                dgvbenhnhan.DataSource = dt;
+            }
+        }
+        private void btSuaa_Click(object sender, EventArgs e)
+        {
+            if (dgvbenhnhan.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn bệnh nhân cần sửa");
+                return;
+            }
+
+            thembenhnhan frm = new thembenhnhan();
+
+            frm.SetBenhNhanData(
+                Convert.ToInt32(dgvbenhnhan.CurrentRow.Cells["MaBenhNhan"].Value),
+                Convert.ToInt32(dgvbenhnhan.CurrentRow.Cells["MaNguoiDung"].Value),
+                dgvbenhnhan.CurrentRow.Cells["HoTen"].Value.ToString(),
+                Convert.ToDateTime(dgvbenhnhan.CurrentRow.Cells["NgaySinh"].Value),
+                dgvbenhnhan.CurrentRow.Cells["GioiTinh"].Value.ToString(),
+                dgvbenhnhan.CurrentRow.Cells["SoDienThoai"].Value.ToString(),
+                dgvbenhnhan.CurrentRow.Cells["DiaChi"].Value.ToString()
+            );
+
+            frm.ShowDialog();
+            LoadDanhSachBenhNhan(); // reload dgv
+        }
+
+        private void tabPage2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvbenhnhan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void gbdsbenhnhan_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TimBenhNhan();
+        }
+
+        void TimBenhNhan()
+        {
+            string keyword = txtTim.Text.Trim();
+
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            string sql = @"
+        SELECT 
+            bn.MaBenhNhan,
+            bn.MaNguoiDung,
+            nd.HoTen,
+            nd.SoDienThoai,
+            nd.DiaChi,
+            nd.NgaySinh,
+            CASE WHEN nd.GioiTinh = 1 THEN N'Nam' ELSE N'Nữ' END AS GioiTinh
+        FROM BenhNhan bn
+        JOIN NguoiDung nd ON bn.MaNguoiDung = nd.MaNguoiDung
+        WHERE nd.HoTen LIKE N'%' + @kw + '%'
+           OR nd.SoDienThoai LIKE '%' + @kw + '%'
+    ";
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                da.SelectCommand.Parameters.AddWithValue("@kw", keyword);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvbenhnhan.DataSource = dt;
+            }
+        }
+
+        private void txtTim_TextChanged(object sender, EventArgs e)
+        {
+            
+                TimBenhNhan();
+            
+        }
+
+        private void btlammoi_Click(object sender, EventArgs e)
+        {
+            txtTim.Clear();
+            LoadDanhSachBenhNhan();
+        }
+
+        ///Quản lí dịch vụ ///
+        void LoadDichVu()
+        {
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"
+            SELECT 
+                MaDichVu,
+                TenDichVu,
+                LoaiDichVu,
+                DonGia,
+                CASE WHEN ApDungBHYT = 1 THEN N'Có' ELSE N'Không' END AS ApDungBHYT,
+                ThoiGianThucHien,
+                CASE WHEN TrangThai = 1 THEN N'Đang áp dụng' ELSE N'Ngưng' END AS TrangThai
+            FROM DichVu";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvDichVu.DataSource = dt;
+            }
+        }
+
+        private void bthemdv_Click(object sender, EventArgs e)
+        {
+            themdichvu frm = new themdichvu();
+            if (frm.ShowDialog() == DialogResult.OK)
+                LoadDichVu();
+        }
+
+        private void btsuadv_Click(object sender, EventArgs e)
+        {
+            int ma = Convert.ToInt32(dgvDichVu.CurrentRow.Cells["MaDichVu"].Value);
+            themdichvu frm = new themdichvu(ma);
+            if (frm.ShowDialog() == DialogResult.OK)
+                LoadDichVu();
+        }
+
+        private void btngungdv_Click(object sender, EventArgs e)
+        {
+
+            string connStr = ConfigurationManager
+               .ConnectionStrings["BenhVienV1ConnectionString"]
+               .ConnectionString;
+            if (dgvDichVu.CurrentRow == null)
+            {
+                MessageBox.Show("Vui lòng chọn dịch vụ");
+                return;
+            }
+
+            int ma = Convert.ToInt32(
+                dgvDichVu.CurrentRow.Cells["MaDichVu"].Value);
+
+            DialogResult dr = MessageBox.Show(
+                "Bạn có chắc muốn NGƯNG dịch vụ này?",
+                "Xác nhận",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.No) return;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE DichVu SET TrangThai = 0 WHERE MaDichVu = @Ma";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Ma", ma);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            LoadDichVu();
+        }
+
+        private void bttimdichvu_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTimTenDV_TextChanged(object sender, EventArgs e)
+        {
+            string connStr = ConfigurationManager
+              .ConnectionStrings["BenhVienV1ConnectionString"]
+              .ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"
+            SELECT *
+            FROM DichVu
+            WHERE TenDichVu LIKE @ten";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@ten", "%" + txtTimTenDV.Text + "%");
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvDichVu.DataSource = dt;
+            }
+        }
+
+        private void cobtatcadichvu_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cobtatcadichvu.SelectedItem == null) return;
+
+            string loai = cobtatcadichvu.SelectedItem.ToString();
+
+            if (loai == "Tất cả")
+            {
+                LoadDichVu();
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(
+                ConfigurationManager.ConnectionStrings["BenhVienV1ConnectionString"].ConnectionString))
+            {
+                string sql = "SELECT * FROM DichVu WHERE LoaiDichVu = @Loai";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Loai", loai);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvDichVu.DataSource = dt;
+            }
+        }
+
+        private void chbapdungbhyt_CheckedChanged(object sender, EventArgs e)
+        {
+            string connStr = ConfigurationManager
+              .ConnectionStrings["BenhVienV1ConnectionString"]
+              .ConnectionString;
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"
+            SELECT *
+            FROM DichVu
+            WHERE ApDungBHYT = @bhyt";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@bhyt", chbapdungbhyt.Checked ? 1 : 0);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvDichVu.DataSource = dt;
+            }
+        }
+
+        private void btlmmoidv_Click(object sender, EventArgs e)
+        {
+            txtTimTenDV.Clear();
+            cobtatcadichvu.SelectedIndex = 0;
+            chbapdungbhyt.Checked = false;
+            LoadDichVu();
+        }
+
+        private void LoadLoaiDichVu()
+        {
+            cobtatcadichvu.Items.Clear();
+            cobtatcadichvu.Items.Add("Tất cả");   // chỉ dùng để load full
+            cobtatcadichvu.Items.Add("Kham");
+            cobtatcadichvu.Items.Add("XetNghiem");
+            cobtatcadichvu.Items.Add("SieuAm");
+            cobtatcadichvu.Items.Add("ChupXQuang");
+            cobtatcadichvu.Items.Add("NoiSoi");
+            cobtatcadichvu.Items.Add("Khac");
+
+            cobtatcadichvu.SelectedIndex = 0;
+        }
+
+        private void btkichhoat_Click(object sender, EventArgs e)
+        {
+            string connStr = ConfigurationManager
+             .ConnectionStrings["BenhVienV1ConnectionString"]
+             .ConnectionString;
+            if (dgvDichVu.CurrentRow == null) return;
+
+            int maDV = Convert.ToInt32(
+                dgvDichVu.CurrentRow.Cells["MaDichVu"].Value);
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE DichVu SET TrangThai = 1 WHERE MaDichVu = @MaDV";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@MaDV", maDV);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            LoadDichVu();
+        }
+
+        //code quản lí lịch làm việc//
+        private void dgvLichLamViec_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void btthmlich_Click(object sender, EventArgs e)
+        {
+            frmThemSuaLichLamViec frm = new frmThemSuaLichLamViec();
+            if (frm.ShowDialog() == DialogResult.OK)
+                LoadLichLamViec();
+        }
+
+        private void btsualich_Click(object sender, EventArgs e)
+        {
+            if (dgvLichLamViec.CurrentRow == null) return;
+
+            int ma = Convert.ToInt32(
+                dgvLichLamViec.CurrentRow.Cells["MaLichLamViec"].Value);
+
+            frmThemSuaLichLamViec frm = new frmThemSuaLichLamViec(ma);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                LoadLichLamViec();
+            }
+        }
+
+        void LoadLichLamViec()
+        {
+            string connStr = ConfigurationManager
+        .ConnectionStrings["BenhVienV1ConnectionString"]
+        .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"
+                SELECT
+                    llv.MaLichLamViec,
+                    bs.MaNguoiDung,
+                    pk.TenPhong,
+                    c.TenCa,
+                    llv.NgayLamViec,
+                    llv.TrangThai
+                FROM LichLamViec llv
+                JOIN BacSi bs ON llv.MaBacSi = bs.MaBacSi
+                JOIN PhongKham pk ON llv.MaPhong = pk.MaPhong
+                JOIN CaLamViec c ON llv.MaCa = c.MaCa
+                ORDER BY llv.NgayLamViec DESC"; 
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvLichLamViec.DataSource = dt;
+            }
+        }
+
+        void LoadBacSi()
+        {
+            string connStr = ConfigurationManager
+        .ConnectionStrings["BenhVienV1ConnectionString"]
+        .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"
+        SELECT 
+            bs.MaBacSi,
+            nd.HoTen
+        FROM BacSi bs
+        JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
+        WHERE bs.TrangThai = 1";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cbobacsi.DataSource = dt;
+                cbobacsi.DisplayMember = "HoTen";   // ✔ có thật
+                cbobacsi.ValueMember = "MaBacSi";  // ✔ int
+                cbobacsi.SelectedIndex = -1;
+            }
+        }
+
+        private void cbobacsi_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbobacsi.SelectedIndex == -1) return;
+            if (cbobacsi.SelectedValue == null) return;
+            if (!(cbobacsi.SelectedValue is int)) return; // 🔒 chặn DataRowView
+
+            int maBacSi = (int)cbobacsi.SelectedValue;
+
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"
+        SELECT
+            llv.MaLichLamViec,
+            bs.MaNguoiDung,
+            pk.TenPhong,
+            c.TenCa,
+            llv.NgayLamViec,
+            llv.TrangThai
+        FROM LichLamViec llv
+        JOIN BacSi bs ON llv.MaBacSi = bs.MaBacSi
+        JOIN PhongKham pk ON llv.MaPhong = pk.MaPhong
+        JOIN CaLamViec c ON llv.MaCa = c.MaCa
+        WHERE llv.MaBacSi = @MaBacSi
+        ORDER BY llv.NgayLamViec DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add("@MaBacSi", SqlDbType.Int).Value = maBacSi;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvLichLamViec.DataSource = dt;
+            }
+        }
+
+        private void dtpngay_ValueChanged(object sender, EventArgs e)
+        {
+            string connStr = ConfigurationManager
+        .ConnectionStrings["BenhVienV1ConnectionString"]
+        .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = @"
+            SELECT
+                llv.MaLichLamViec,
+                bs.MaNguoiDung,
+                pk.TenPhong,
+                c.TenCa,
+                llv.NgayLamViec,
+                llv.TrangThai
+            FROM LichLamViec llv
+            JOIN BacSi bs ON llv.MaBacSi = bs.MaBacSi
+            JOIN PhongKham pk ON llv.MaPhong = pk.MaPhong
+            JOIN CaLamViec c ON llv.MaCa = c.MaCa
+            WHERE llv.NgayLamViec = @Ngay
+            ORDER BY llv.NgayLamViec DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add("@Ngay", SqlDbType.Date)
+                              .Value = dtpngay.Value.Date;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvLichLamViec.DataSource = dt;
+            }
+        }
+
+        private void btlmoi_Click(object sender, EventArgs e)
+        {
+            cbobacsi.SelectedIndex = -1;
+            dtpngay.Value = DateTime.Today;
+            LoadLichLamViec();
+        }
+
+        private void btngunglich_Click(object sender, EventArgs e)
+        {
+            if (dgvLichLamViec.CurrentRow == null) return;
+
+            int ma = Convert.ToInt32(
+                dgvLichLamViec.CurrentRow.Cells["MaLichLamViec"].Value);
+
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE LichLamViec SET TrangThai = 0 WHERE MaLichLamViec = @Ma";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add("@Ma", SqlDbType.Int).Value = ma;
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            LoadLichLamViec();
+        }
+
+        private void btkkichhoatlich_Click(object sender, EventArgs e)
+        {
+            if (dgvLichLamViec.CurrentRow == null) return;
+
+            int ma = Convert.ToInt32(
+                dgvLichLamViec.CurrentRow.Cells["MaLichLamViec"].Value);
+
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string sql = "UPDATE LichLamViec SET TrangThai = 1 WHERE MaLichLamViec = @Ma";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.Add("@Ma", SqlDbType.Int).Value = ma;
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            LoadLichLamViec();
+        }
+
+        private void dgvLichLamViec_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dgvLichLamViec.Columns[e.ColumnIndex].Name == "TrangThai" && e.Value != null)
+            {
+                string trangThai = e.Value.ToString();
+
+                if (trangThai == "SanSang")
+                    e.Value = "Sẵn sàng";
+                else if (trangThai == "DaKham")
+                    e.Value = "Đã khám";
+                else if (trangThai == "Nghi")
+                    e.Value = "Nghỉ";
+
+                e.FormattingApplied = true;
+            }
+        }
+        //quản lí người dùng//
+        private void dgvbenhan_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

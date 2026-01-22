@@ -22,6 +22,7 @@ namespace BenhVienS
         UserService userService = new UserService();
 
         private List<Control> _defaultPanelControls;
+       // string connectionString =  @"Data Source=localhost\SQLEXPRESS02;Initial Catalog=benhviens;Integrated Security=True";
         public Bacsi()
         {
             try
