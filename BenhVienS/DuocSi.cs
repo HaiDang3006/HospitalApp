@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BenhVienS.Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -120,6 +121,8 @@ namespace BenhVienS
         {
             ucCD uc = new ucCD();
             showControl(uc);
+            AppContextCustom.Instance.Auth.Clear();
+            Application.Restart();
         }
     }
 }
