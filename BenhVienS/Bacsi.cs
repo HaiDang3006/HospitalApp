@@ -190,31 +190,45 @@ namespace BenhVienS
             btnGoi.FlatAppearance.BorderSize = 0;
             GraphicsHelper.SetButtonRadius(btnGoi, 5);
             // Thêm event click cho button
-            btnGoi.Click += (s, e) => GoiKhamBenhNhan(appointment);
+            btnGoi.Click += (s, e) => CallExamina(appointment);
 
             // Thêm controls vào innerPanel
             innerPanel.Controls.Add(lblTen);
             innerPanel.Controls.Add(lblLyDo);
             innerPanel.Controls.Add(btnGoi);
+            GraphicsHelper.SetPanelBorder(newCard, 0, 0, 0, 1, Color.Blue, 1);
             // Thêm innerPanel vào newCard
             newCard.Controls.Add(innerPanel);
             
+
             return newCard;
         }
 
         // Xử lý khi click button "Gọi Khám"
-        private void GoiKhamBenhNhan(Appointment appointment)
+        private void CallExamina(Appointment appointment)
         {
-            khbenh khbenh = new khbenh(examinationFormService.ExaminationFormByAppointmentId(appointment.Id));
-            khbenh.Show();
+            User user = userService.UserById(appointment.PatientId);
+            // Hiển thị hộp thoại xác nhận
+            var result = MessageBox.Show(
+                "Bạn đang gọi?   " + user.FullName.ToUpper() + "    Ngày sinh (" + user.DateOfBirth + ")", // Thông báo
+                "Xác nhận", // Tiêu đề
+                MessageBoxButtons.YesNo, // Các nút chọn
+                MessageBoxIcon.Question // Biểu tượng của hộp thoại
+            );
 
-            // Thêm logic xử lý của bạn ở đây
-            // Ví dụ: 
-            // - Chuyển sang form khám bệnh
-            // - Cập nhật trạng thái appointment thành "DangKham"
-            // - appointmentService.UpdateStatus(appointment.Id, "DangKham");
-            // - Load lại danh sách
+            // Nếu người dùng chọn "Yes"
+            if (result == DialogResult.Yes)
+            {
+                ExaminationForm u = examinationFormService.ExaminationFormByAppointmentId(appointment.Id);
+                khbenh khbenh = new khbenh(u);
+                showControl(khbenh);
+            }
+            else
+            {
+                return;
+            }
         }
+
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -233,11 +247,6 @@ namespace BenhVienS
             showControl(uc);
         }
 
-        private void btnExamine_Click(object sender, EventArgs e)
-        {
-            khbenh uc = new khbenh(); 
-            showControl(uc);
-        }
 
         private void btnPrescription_Click(object sender, EventArgs e)
         {
@@ -257,7 +266,7 @@ namespace BenhVienS
         private void btnHome_Click(object sender, EventArgs e)
         {
             // Refresh lại danh sách khi click Home
-            WaitingExamInit();
+           
         }
 
         private void panelListWaitng_Paint(object sender, PaintEventArgs e)

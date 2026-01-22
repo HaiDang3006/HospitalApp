@@ -1,4 +1,7 @@
 ﻿using BenhVienS.Models;
+using BenhVienS.Service.AppointmentService;
+using BenhVienS.Service.PatientService;
+using BenhVienS.Service.UserService;
 using System;
 using System.Windows.Forms;
 
@@ -6,23 +9,29 @@ namespace BenhVienS
 {
     public partial class khbenh : UserControl
     {
+        private ExaminationForm examinationForm;
+        PatientService patientService = new PatientService();
+        UserService userService = new UserService();
+        AppointmentService appointmentService = new AppointmentService();
         public khbenh() : this(new ExaminationForm())
         {
         }
         public khbenh(ExaminationForm examinationForm)
         {
             InitializeComponent();
-        }
-        
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            this.examinationForm = examinationForm;
+             init();
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
+        private void init()
         {
+            loadData();
 
+        }
+
+        private void loadData()
+        {
+            txtNamePatient.Text = userService.UserByExaminaId(examinationForm.Id).FullName ?? "Chưa có tên";
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -56,5 +65,7 @@ namespace BenhVienS
             //showControl; 
             //hsbnhan.ShowDialog();
         }
+
+       
     }
 }

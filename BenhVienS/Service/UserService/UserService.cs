@@ -28,5 +28,23 @@ namespace BenhVienS.Service.UserService
                 throw;
             }
         }
+
+        public User UserByExaminaId(int ExaminaId)
+        {
+            try
+            {
+                return UserRepository.UserByExaminaId(ExaminaId);
+            }
+            catch (SqlException ex)
+            {
+                return null;
+                throw new Exception(" // log error", ex);
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw;
+            }
+        }
     }
 }

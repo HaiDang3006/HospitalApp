@@ -43,5 +43,23 @@ namespace BenhVienS.Service.AppointmentService
                 throw;
             }
         }
+
+        public Appointment AppointmentById(int id)
+        {
+            try
+            {
+                return AppointmentRepository.AppointmentById(id);
+            }
+            catch (SqlException ex)
+            {
+                return new Appointment();
+                throw new Exception("Lỗi khi lấy số lượng lịch hẹn hôm nay của bác sĩ", ex);
+            }
+            catch (Exception ex)
+            {
+                return new Appointment();
+                throw;
+            }
+        }
     }
 }

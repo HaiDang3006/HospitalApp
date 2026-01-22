@@ -360,6 +360,9 @@
     <EmbeddedResource Include="Helper_UI\FormInit.resx">
       <DependentUpon>FormInit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="khbenh.resx">
+      <DependentUpon>khbenh.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
     </EmbeddedResource>
