@@ -4,6 +4,7 @@ using BenhVienS.Helper_UI;
 using BenhVienS.Models;
 using BenhVienS.Service.AppointmentService;
 using BenhVienS.Service.DoctorSerice;
+using BenhVienS.Service.ExaminationFormService;
 using BenhVienS.Service.PatientService;
 using BenhVienS.Service.UserService;
 using System;
@@ -12,6 +13,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using static System.Collections.Specialized.BitVector32;
 
 namespace BenhVienS
 {
@@ -21,7 +23,9 @@ namespace BenhVienS
         AppointmentService appointmentService = new AppointmentService();
         PatientService patientService = new PatientService();
         UserService userService = new UserService();
+        ExaminationFormService examinationFormService = new ExaminationFormService();
 
+        UserSession session = SessionManager.Load();
         private List<Control> _defaultPanelControls;
         public Bacsi()
         {
@@ -32,6 +36,7 @@ namespace BenhVienS
                 _defaultPanelControls = panelMain.Controls.Cast<Control>().ToList();
                 btnHome.Click += button5_Click;
                 Load += init;
+                lblUserName.Text = session.Username;
             }
             catch (UnauthorizedAccessException ex)
             {
@@ -76,18 +81,13 @@ namespace BenhVienS
 
         private void appointmentInit()
         {
-            int doctorId = 1; // thay bằng token đăng nhập
-            if (doctorService.DoctorById(doctorId) == null)
-                return;
-            lblQuantityAppointment.Text = Convert.ToString(appointmentService.CountAppointmentTodayByStatusAndDoctor(doctorId, "DaXacNhan"));
+            lblQuantityAppointment.Text = Convert.ToString(appointmentService.CountAppointmentTodayByStatusAndDoctor(
+                                                                doctorService.DoctorByUserId(SessionManager.Load().UserId).Id, "DaXacNhan"));
         }
 
         private void WaitingExamInit()
         {
-            var session = SessionManager.Load();
-            User user = AppContextCustom.Instance.Auth.getInfoUserLogin(session);
-            Console.Write(user.UserId);
-            List<Appointment> appointmentList = appointmentService.AppointmentTodayByStatusAndDoctor(user.UserId, "DaDen");
+            List<Appointment> appointmentList = appointmentService.AppointmentTodayByStatusAndDoctor(doctorService.DoctorByUserId(session.UserId).Id, "DaDen");
 
             // Hiển thị danh sách lên giao diện
             FillCardWaiting(appointmentList);
@@ -205,12 +205,8 @@ namespace BenhVienS
         // Xử lý khi click button "Gọi Khám"
         private void GoiKhamBenhNhan(Appointment appointment)
         {
-            MessageBox.Show(
-                $"Đang gọi bệnh nhân: {appointment.Id}\nLý do: {appointment.Reasion}",
-                "Gọi Khám",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Information
-            );
+            khbenh khbenh = new khbenh(examinationFormService.ExaminationFormByAppointmentId(appointment.Id));
+            khbenh.Show();
 
             // Thêm logic xử lý của bạn ở đây
             // Ví dụ: 

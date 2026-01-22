@@ -1,12 +1,14 @@
-﻿namespace BenhVienS
+﻿using BenhVienS.Models;
+
+namespace BenhVienS
 {
-    partial class khbenh
+    partial class khbenh 
     {
         /// <summary> 
         /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
-
+        Appointment appointment;
         /// <summary> 
         /// Clean up any resources being used.
         /// </summary>

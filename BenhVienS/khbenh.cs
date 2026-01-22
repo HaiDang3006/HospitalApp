@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BenhVienS.Models;
+using System;
 using System.Windows.Forms;
 
 namespace BenhVienS
 {
     public partial class khbenh : UserControl
     {
-        public khbenh()
+        public khbenh() : this(new ExaminationForm())
         {
-
+        }
+        public khbenh(ExaminationForm examinationForm)
+        {
             InitializeComponent();
         }
         
