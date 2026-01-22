@@ -248,5 +248,10 @@ namespace BenhVienS
             // Refresh lại danh sách khi click Home
             WaitingExamInit();
         }
+
+        private void panelMain_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
