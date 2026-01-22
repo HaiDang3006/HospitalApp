@@ -18,7 +18,7 @@ namespace BenhVienS.Service
                 WorkScheduleId = Convert.ToInt32(reader["MaLichLamViec"]),
                 DateAppointment = Convert.ToDateTime(reader["NgayHen"]),
                 Reasion = reader["LyDoKham"]?.ToString(),
-                ReceptionId = Convert.ToInt32(reader["MaLeTen"]),
+                ReceptionId = Convert.ToInt32(reader["MaLeTan"]),
                 Note = reader["GhiChu"]?.ToString(),
                 CreateDate = Convert.ToDateTime(reader["NgayTao"]),
             };

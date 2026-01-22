@@ -28,5 +28,23 @@ namespace BenhVienS.Service.DoctorSerice
                 throw;
             }
         }
+        public Doctor DoctorByUserId(int userId)
+        {
+            try
+            {
+                return DoctorRepository.DoctorByUserId(userId);
+            }
+            catch (SqlException ex)
+            {
+                return null;
+                throw new Exception("Lỗi khi lấy số lượng lịch hẹn hôm nay của bác sĩ", ex);
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw;
+            }
+        }
     }
+
 }

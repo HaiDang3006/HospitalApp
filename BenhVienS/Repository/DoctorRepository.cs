@@ -38,5 +38,33 @@ namespace BenhVienS.Repository
             return null; 
         }
 
+        public static Doctor DoctorByUserId(int userId)
+        {
+            Doctor doctor = new Doctor();
+            string sql = @"
+                            SELECT *
+                            FROM BacSi
+                            WHERE MaNguoiDung = @userId
+                            AND TrangThai = 1
+                        ";
+            using (SqlConnection conn = dbUtils.GetConnection())
+            {
+                conn.Open();
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@userId", userId);
+
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            doctor = DoctorMapper.DoctorToMap(reader);
+                        }
+                    }
+                }
+            }
+            return doctor;
+        }
+
     }
 }

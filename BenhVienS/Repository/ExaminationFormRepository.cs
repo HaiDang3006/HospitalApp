@@ -1,6 +1,5 @@
 ﻿using BenhVienS.MapperSql;
 using BenhVienS.Models;
-using BenhVienS.Service;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,28 +9,27 @@ using System.Threading.Tasks;
 
 namespace BenhVienS.Repository
 {
-    internal class PatientRepository
+    internal class ExaminationFormRepository
     {
-        public static Patient PatientById(int id)
+        public static ExaminationForm ExaminationFormByAppointmentId(int appointmentId)
         {
             string sql = @"
                             SELECT *
-                            FROM BenhNhan
-                            WHERE MaBenhNhan = @id
-                            AND TrangThai = 1
+                            FROM PhieuKham
+                            WHERE MaLichHen = @appointmentId
                         ";
             using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@appointmentId", appointmentId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader())
                     {
                         if (reader.Read())
                         {
-                            return PatientMapper.PatientToMap(reader);
+                            return ExaminationFormMapper.ExaminationFormToMap(reader);
                         }
                     }
                 }

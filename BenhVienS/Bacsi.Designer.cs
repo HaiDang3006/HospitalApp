@@ -59,7 +59,6 @@ namespace BenhVienS
             this.panelListWaitng = new System.Windows.Forms.Panel();
             this.CardWaitingExam = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.btnCallExam = new System.Windows.Forms.Button();
             this.lblReasonsExamination = new System.Windows.Forms.Label();
             this.lblNamePatient = new System.Windows.Forms.Label();
             this.panelHeaderWaiting = new System.Windows.Forms.Panel();
@@ -68,10 +67,11 @@ namespace BenhVienS
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.button1 = new System.Windows.Forms.Button();
-            this.label9 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
+            this.btnCallExam = new System.Windows.Forms.Button();
             this.panelTop.SuspendLayout();
             this.panelUser.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUser)).BeginInit();
@@ -289,7 +289,7 @@ namespace BenhVienS
             this.panelMain.Location = new System.Drawing.Point(251, 70);
             this.panelMain.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panelMain.Name = "panelMain";
-            this.panelMain.Padding = new System.Windows.Forms.Padding(20);
+            this.panelMain.Padding = new System.Windows.Forms.Padding(20, 20, 20, 20);
             this.panelMain.Size = new System.Drawing.Size(1149, 680);
             this.panelMain.TabIndex = 2;
             // 
@@ -326,9 +326,9 @@ namespace BenhVienS
             this.label3.ForeColor = System.Drawing.Color.Gray;
             this.label3.Location = new System.Drawing.Point(143, 50);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 23);
+            this.label3.Size = new System.Drawing.Size(80, 23);
             this.label3.TabIndex = 3;
-            this.label3.Text = "Xử Lý";
+            this.label3.Text = "Dùng DV";
             // 
             // pictureBox1
             // 
@@ -346,17 +346,17 @@ namespace BenhVienS
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label1.ForeColor = System.Drawing.Color.Gray;
-            this.label1.Location = new System.Drawing.Point(139, 27);
+            this.label1.Location = new System.Drawing.Point(141, 27);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 23);
+            this.label1.Size = new System.Drawing.Size(77, 23);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Kết Quả Cần";
+            this.label1.Text = "BN đang";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold);
-            this.label2.Location = new System.Drawing.Point(83, 18);
+            this.label2.Location = new System.Drawing.Point(79, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 54);
             this.label2.TabIndex = 2;
@@ -567,21 +567,6 @@ namespace BenhVienS
             this.panel8.Size = new System.Drawing.Size(521, 59);
             this.panel8.TabIndex = 4;
             // 
-            // btnCallExam
-            // 
-            this.btnCallExam.BackColor = System.Drawing.Color.Blue;
-            this.btnCallExam.FlatAppearance.BorderSize = 0;
-            this.btnCallExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCallExam.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
-            this.btnCallExam.ForeColor = System.Drawing.Color.White;
-            this.btnCallExam.Location = new System.Drawing.Point(403, 15);
-            this.btnCallExam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCallExam.Name = "btnCallExam";
-            this.btnCallExam.Size = new System.Drawing.Size(100, 30);
-            this.btnCallExam.TabIndex = 4;
-            this.btnCallExam.Text = "Gọi Khám";
-            this.btnCallExam.UseVisualStyleBackColor = false;
-            // 
             // lblReasonsExamination
             // 
             this.lblReasonsExamination.AutoSize = true;
@@ -639,19 +624,19 @@ namespace BenhVienS
             // 
             this.panel4.BackColor = System.Drawing.Color.White;
             this.panel4.Controls.Add(this.panel5);
-            this.panel4.Location = new System.Drawing.Point(1, 59);
+            this.panel4.Location = new System.Drawing.Point(1, 66);
             this.panel4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(0, 10, 11, 0);
             this.panel4.Size = new System.Drawing.Size(539, 78);
-            this.panel4.TabIndex = 3;
+            this.panel4.TabIndex = 5;
             // 
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.Color.White;
             this.panel5.Controls.Add(this.button1);
-            this.panel5.Controls.Add(this.label9);
             this.panel5.Controls.Add(this.label6);
+            this.panel5.Controls.Add(this.label8);
             this.panel5.Location = new System.Drawing.Point(9, 9);
             this.panel5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.panel5.Name = "panel5";
@@ -665,35 +650,35 @@ namespace BenhVienS
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.button1.ForeColor = System.Drawing.Color.White;
-            this.button1.Location = new System.Drawing.Point(403, 15);
+            this.button1.Location = new System.Drawing.Point(372, 15);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 30);
+            this.button1.Size = new System.Drawing.Size(131, 30);
             this.button1.TabIndex = 4;
-            this.button1.Text = "Gọi Khám";
+            this.button1.Text = "Chuẩn đoán";
             this.button1.UseVisualStyleBackColor = false;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.label9.ForeColor = System.Drawing.Color.Gray;
-            this.label9.Location = new System.Drawing.Point(21, 32);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(284, 23);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Đau nữa đầu, sốt nhẹ, chóng mặt ...";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(20, 5);
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label6.ForeColor = System.Drawing.Color.Gray;
+            this.label6.Location = new System.Drawing.Point(21, 32);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(147, 28);
-            this.label6.TabIndex = 2;
-            this.label6.Text = "Nguyễn Văn A";
+            this.label6.Size = new System.Drawing.Size(63, 23);
+            this.label6.TabIndex = 3;
+            this.label6.Text = "Tên div";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(20, 5);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(147, 28);
+            this.label8.TabIndex = 2;
+            this.label8.Text = "Nguyễn Văn A";
             // 
             // panel3
             // 
@@ -711,9 +696,24 @@ namespace BenhVienS
             this.label7.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.label7.Location = new System.Drawing.Point(13, 14);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(282, 28);
+            this.label7.Size = new System.Drawing.Size(361, 28);
             this.label7.TabIndex = 4;
-            this.label7.Text = "🧪 Bệnh nhân đã có kết quả";
+            this.label7.Text = "🧪 Bệnh Nhân đã có kết quả dịch vụ\r\n";
+            // 
+            // btnCallExam
+            // 
+            this.btnCallExam.BackColor = System.Drawing.Color.Blue;
+            this.btnCallExam.FlatAppearance.BorderSize = 0;
+            this.btnCallExam.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCallExam.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btnCallExam.ForeColor = System.Drawing.Color.White;
+            this.btnCallExam.Location = new System.Drawing.Point(403, 15);
+            this.btnCallExam.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCallExam.Name = "btnCallExam";
+            this.btnCallExam.Size = new System.Drawing.Size(100, 30);
+            this.btnCallExam.TabIndex = 4;
+            this.btnCallExam.Text = "Gọi Khám";
+            this.btnCallExam.UseVisualStyleBackColor = false;
             // 
             // Bacsi
             // 
@@ -908,19 +908,19 @@ namespace BenhVienS
         private Panel panel2;
         private Panel panel3;
         private Label label7;
-        private Panel panel4;
-        private Panel panel5;
-        private Label label6;
-        private Label label9;
-        private Button button1;
         private Panel panelListWaitng;
         private Panel CardWaitingExam;
         private Panel panel8;
-        private Button btnCallExam;
         private Label lblReasonsExamination;
         private Label lblNamePatient;
         private Panel panelHeaderWaiting;
         private Label label12;
+        private Panel panel4;
+        private Panel panel5;
+        private Button button1;
+        private Label label6;
+        private Label label8;
+        private Button btnCallExam;
     }
 
 
