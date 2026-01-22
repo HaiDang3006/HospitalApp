@@ -30,6 +30,7 @@
         {
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cboChuyenKhoa = new System.Windows.Forms.ComboBox();
             this.btnThembacsi = new System.Windows.Forms.Button();
             this.cbCapnhatbacsi = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -43,7 +44,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtHoten = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.cboChuyenKhoa = new System.Windows.Forms.ComboBox();
+            this.rbtnam = new System.Windows.Forms.RadioButton();
+            this.rbtnu = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +63,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.rbtnu);
+            this.groupBox1.Controls.Add(this.rbtnam);
             this.groupBox1.Controls.Add(this.cboChuyenKhoa);
             this.groupBox1.Controls.Add(this.btnThembacsi);
             this.groupBox1.Controls.Add(this.cbCapnhatbacsi);
@@ -83,6 +87,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thêm mới bác sĩ";
             // 
+            // cboChuyenKhoa
+            // 
+            this.cboChuyenKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboChuyenKhoa.FormattingEnabled = true;
+            this.cboChuyenKhoa.Location = new System.Drawing.Point(23, 306);
+            this.cboChuyenKhoa.Name = "cboChuyenKhoa";
+            this.cboChuyenKhoa.Size = new System.Drawing.Size(263, 28);
+            this.cboChuyenKhoa.TabIndex = 13;
+            // 
             // btnThembacsi
             // 
             this.btnThembacsi.Location = new System.Drawing.Point(505, 373);
@@ -96,7 +109,7 @@
             // cbCapnhatbacsi
             // 
             this.cbCapnhatbacsi.AutoSize = true;
-            this.cbCapnhatbacsi.Location = new System.Drawing.Point(372, 264);
+            this.cbCapnhatbacsi.Location = new System.Drawing.Point(356, 316);
             this.cbCapnhatbacsi.Name = "cbCapnhatbacsi";
             this.cbCapnhatbacsi.Size = new System.Drawing.Size(106, 24);
             this.cbCapnhatbacsi.TabIndex = 11;
@@ -106,7 +119,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(368, 226);
+            this.label6.Location = new System.Drawing.Point(352, 278);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(100, 20);
             this.label6.TabIndex = 10;
@@ -114,7 +127,7 @@
             // 
             // txtTrinhdo
             // 
-            this.txtTrinhdo.Location = new System.Drawing.Point(368, 174);
+            this.txtTrinhdo.Location = new System.Drawing.Point(352, 226);
             this.txtTrinhdo.Name = "txtTrinhdo";
             this.txtTrinhdo.Size = new System.Drawing.Size(263, 27);
             this.txtTrinhdo.TabIndex = 9;
@@ -123,7 +136,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label5.Location = new System.Drawing.Point(365, 144);
+            this.label5.Location = new System.Drawing.Point(349, 196);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 18);
             this.label5.TabIndex = 8;
@@ -131,7 +144,7 @@
             // 
             // txtEmail
             // 
-            this.txtEmail.Location = new System.Drawing.Point(368, 81);
+            this.txtEmail.Location = new System.Drawing.Point(352, 133);
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(263, 27);
             this.txtEmail.TabIndex = 7;
@@ -140,7 +153,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.label4.Location = new System.Drawing.Point(365, 47);
+            this.label4.Location = new System.Drawing.Point(349, 99);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 18);
             this.label4.TabIndex = 6;
@@ -197,14 +210,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Họ và tên:";
             // 
-            // cboChuyenKhoa
+            // rbtnam
             // 
-            this.cboChuyenKhoa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboChuyenKhoa.FormattingEnabled = true;
-            this.cboChuyenKhoa.Location = new System.Drawing.Point(23, 306);
-            this.cboChuyenKhoa.Name = "cboChuyenKhoa";
-            this.cboChuyenKhoa.Size = new System.Drawing.Size(263, 28);
-            this.cboChuyenKhoa.TabIndex = 13;
+            this.rbtnam.AutoSize = true;
+            this.rbtnam.Location = new System.Drawing.Point(431, 81);
+            this.rbtnam.Name = "rbtnam";
+            this.rbtnam.Size = new System.Drawing.Size(68, 24);
+            this.rbtnam.TabIndex = 14;
+            this.rbtnam.TabStop = true;
+            this.rbtnam.Text = "Nam";
+            this.rbtnam.UseVisualStyleBackColor = true;
+            // 
+            // rbtnu
+            // 
+            this.rbtnu.AutoSize = true;
+            this.rbtnu.Location = new System.Drawing.Point(535, 81);
+            this.rbtnu.Name = "rbtnu";
+            this.rbtnu.Size = new System.Drawing.Size(53, 24);
+            this.rbtnu.TabIndex = 15;
+            this.rbtnu.TabStop = true;
+            this.rbtnu.Text = "Nữ";
+            this.rbtnu.UseVisualStyleBackColor = true;
             // 
             // frmThemBS
             // 
@@ -214,6 +240,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "frmThemBS";
             this.Text = "frmThemBS";
+            this.Load += new System.EventHandler(this.frmThemBS_Load);
             this.panel1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -239,5 +266,7 @@
         private System.Windows.Forms.Button btnThembacsi;
         private System.Windows.Forms.CheckBox cbCapnhatbacsi;
         private System.Windows.Forms.ComboBox cboChuyenKhoa;
+        private System.Windows.Forms.RadioButton rbtnu;
+        private System.Windows.Forms.RadioButton rbtnam;
     }
 }

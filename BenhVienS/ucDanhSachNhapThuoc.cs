@@ -18,7 +18,7 @@ namespace BenhVienS
             InitializeComponent();
             LoadData();
         }
-        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENS;Trusted_Connection=True;TrustServerCertificate=True;";
+        string connectionString = "Server=localhost\\SQLEXPRESS02;Initial Catalog=BenhVienV1;Integrated Security=True";
 
         // Hàm tải dữ liệu lên DataGridView
         public void LoadData()

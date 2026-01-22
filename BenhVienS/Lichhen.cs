@@ -26,5 +26,10 @@ namespace BenhVienS
         {
 
         }
+
+        private void Lichhen_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

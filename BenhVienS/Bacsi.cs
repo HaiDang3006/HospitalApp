@@ -13,7 +13,7 @@ namespace BenhVienS
     public partial class Bacsi : Form
     {
         private List<Control> _defaultPanelControls;
-        string connectionString = @"Data Source=Huynhnhu;Initial Catalog = benhvienvs; Integrated Security = True; Trust Server Certificate=True";
+       // string connectionString =  @"Data Source=localhost\SQLEXPRESS02;Initial Catalog=benhviens;Integrated Security=True";
         public Bacsi()
         {
             InitializeComponent();

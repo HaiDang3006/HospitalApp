@@ -39,6 +39,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtHotenTN = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.rbtnu = new System.Windows.Forms.RadioButton();
+            this.rbtnam = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -56,6 +58,8 @@
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+            this.groupBox1.Controls.Add(this.rbtnu);
+            this.groupBox1.Controls.Add(this.rbtnam);
             this.groupBox1.Controls.Add(this.btnThemthungan);
             this.groupBox1.Controls.Add(this.cbCapnhatthungan);
             this.groupBox1.Controls.Add(this.label4);
@@ -154,6 +158,28 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Họ và tên:";
             // 
+            // rbtnu
+            // 
+            this.rbtnu.AutoSize = true;
+            this.rbtnu.Location = new System.Drawing.Point(125, 255);
+            this.rbtnu.Name = "rbtnu";
+            this.rbtnu.Size = new System.Drawing.Size(50, 22);
+            this.rbtnu.TabIndex = 17;
+            this.rbtnu.TabStop = true;
+            this.rbtnu.Text = "Nữ";
+            this.rbtnu.UseVisualStyleBackColor = true;
+            // 
+            // rbtnam
+            // 
+            this.rbtnam.AutoSize = true;
+            this.rbtnam.Location = new System.Drawing.Point(21, 255);
+            this.rbtnam.Name = "rbtnam";
+            this.rbtnam.Size = new System.Drawing.Size(64, 22);
+            this.rbtnam.TabIndex = 16;
+            this.rbtnam.TabStop = true;
+            this.rbtnam.Text = "Nam";
+            this.rbtnam.UseVisualStyleBackColor = true;
+            // 
             // frmThungan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -182,5 +208,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.CheckBox cbCapnhatthungan;
         private System.Windows.Forms.Button btnThemthungan;
+        private System.Windows.Forms.RadioButton rbtnu;
+        private System.Windows.Forms.RadioButton rbtnam;
     }
 }

@@ -207,33 +207,7 @@ namespace BenhVienS
 
         private void LoadDanhSachLichKham()
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
-                    // Câu lệnh SQL Join 2 bảng: LichKham và BacSi
-                    string sql = @"SELECT L.MaLich, L.TenBN, B.HoTen, B.ChuyenKhoa, L.NgayKham, L.TrangThai 
-                           FROM LichKham L
-                           INNER JOIN BacSi B ON L.MaBS = B.MaBS";
-
-                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    // Giả sử bạn có một DataGridView tên là dgvLichKham
-                    dgvDanhsachlichkham.DataSource = dt;
-
-                    // Tùy chỉnh tiêu đề cột cho đẹp
-                    dgvDanhsachlichkham.Columns["MaLich"].HeaderText = "Mã Lịch";
-                    dgvDanhsachlichkham.Columns["TenBN"].HeaderText = "Bệnh Nhân";
-                    dgvDanhsachlichkham.Columns["HoTen"].HeaderText = "Bác Sĩ";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi load dữ liệu: " + ex.Message);
-            }
+           
         }
         private void LoadBacSiVaoCombo()
         {
@@ -1400,7 +1374,39 @@ namespace BenhVienS
         {
             DateTime selectedDate = dateLocngay.Value.Date;
         }
+        void LoadDanhSachBacSi()
+        {
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
 
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(@"
+            SELECT
+                bs.MaBacSi,
+                nd.HoTen,
+                nd.Email,
+                nd.SoDienThoai,
+                CASE 
+                    WHEN nd.GioiTinh = 1 THEN N'Nam'
+                    ELSE N'Nữ'
+                END AS GioiTinh,
+                ck.TenChuyenKhoa,
+                bs.BangCap,
+                bs.TrangThai
+            FROM BacSi bs
+            JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
+            JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
+            WHERE nd.TrangThai = 1",
+                    conn);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dgvbacsi.DataSource = dt;
+            }
+        }
         private void dateDenngay_ValueChanged(object sender, EventArgs e)
         {
             DateTime selectedDate = dateDenngay.Value.Date;
@@ -1451,13 +1457,16 @@ namespace BenhVienS
         {
 
         }
-
+        //của quản lí bệnh nhân nè//
         private void btnthemmoinguoidung_Click(object sender, EventArgs e)
         {
             frmvaitro f = new frmvaitro();
-            f.ShowDialog();
+            if (f.ShowDialog() == DialogResult.OK)
+            {
+                LoadDanhSachBacSi(); // reload dgv
+            }
         }
-
+        //của quản lí bệnh nhân nè//
         private void dgvAlldanhsachlichlam_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -2078,6 +2087,11 @@ namespace BenhVienS
 
                 e.FormattingApplied = true;
             }
+        }
+        //quản lí người dùng//
+        private void dgvbenhan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

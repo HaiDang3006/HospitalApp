@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -14,11 +15,7 @@ namespace BenhVienS
     
     public partial class frmThemBS : Form
     {
-        public static class Basics
-        {
-            public static string connectionString =
-                @"Data Source=localhost\SQLEXPRESS02;Initial Catalog=BenhVienV1;Integrated Security=True";
-        }
+      
         public frmThemBS()
         {
             InitializeComponent();
@@ -31,62 +28,68 @@ namespace BenhVienS
 
         private void btnThembacsi_Click(object sender, EventArgs e)
         {
-            if (txtHoten.Text.Trim() == "")
+            if (string.IsNullOrWhiteSpace(txtHoten.Text))
             {
                 MessageBox.Show("Vui lòng nhập họ tên");
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(Basics.connectionString))
+            if (cboChuyenKhoa.SelectedIndex == -1)
+            {
+                MessageBox.Show("Vui lòng chọn chuyên khoa");
+                return;
+            }
+
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
                 SqlTransaction tran = conn.BeginTransaction();
 
                 try
                 {
-                    // =======================
-                    // 1. THÊM NGƯỜI DÙNG
-                    // =======================
-                    string sqlNguoiDung = @"
-            INSERT INTO NguoiDung
-            (TenDangNhap, MatKhauHash, HoTen, Email, SoDienThoai, MaVaiTro, TrangThai)
-            VALUES
-            (@TenDangNhap, @MatKhauHash, @HoTen, @Email, @SDT, @MaVaiTro, @TrangThai);
-            SELECT SCOPE_IDENTITY();";
+                    bool gioiTinh = rbtnam.Checked;
 
-                    SqlCommand cmdND = new SqlCommand(sqlNguoiDung, conn, tran);
-                    cmdND.Parameters.AddWithValue("@TenDangNhap", txtEmail.Text.Trim());
-                    cmdND.Parameters.AddWithValue("@MatKhauHash", "123456"); // demo
-                    cmdND.Parameters.AddWithValue("@HoTen", txtHoten.Text.Trim());
-                    cmdND.Parameters.AddWithValue("@Email", txtEmail.Text.Trim());
-                    cmdND.Parameters.AddWithValue("@SDT", txtSDT.Text.Trim());
-                    cmdND.Parameters.AddWithValue("@MaVaiTro", 2); // 1 = Bác sĩ
-                    cmdND.Parameters.AddWithValue("@TrangThai", cbCapnhatbacsi.Checked);
+                    SqlCommand cmdND = new SqlCommand(@"
+                INSERT INTO NguoiDung
+                (TenDangNhap, MatKhauHash, HoTen, Email, SoDienThoai,
+                 GioiTinh, MaVaiTro, TrangThai, NgayTao)
+                OUTPUT INSERTED.MaNguoiDung
+                VALUES
+                (@TenDN,@MK,@HoTen,@Email,@SDT,
+                 @GioiTinh,2,1,GETDATE())",
+                        conn, tran);
 
-                    int maNguoiDung = Convert.ToInt32(cmdND.ExecuteScalar());
+                    cmdND.Parameters.AddWithValue("@TenDN", "bs_" + DateTime.Now.Ticks);
+                    cmdND.Parameters.AddWithValue("@MK", "123456");
+                    cmdND.Parameters.AddWithValue("@HoTen", txtHoten.Text);
+                    cmdND.Parameters.AddWithValue("@Email", txtEmail.Text);
+                    cmdND.Parameters.AddWithValue("@SDT", txtSDT.Text);
+                    cmdND.Parameters.AddWithValue("@GioiTinh", gioiTinh);
 
-                    // =======================
-                    // 2. THÊM BÁC SĨ
-                    // =======================
-                    string sqlBacSi = @"
-            INSERT INTO BacSi
-            (MaNguoiDung, MaChuyenKhoa, BangCap, ChuyenMon, TrangThai)
-            VALUES
-            (@MaNguoiDung, @MaChuyenKhoa, @BangCap, @ChuyenMon, @TrangThai)";
+                    int maNguoiDung = (int)cmdND.ExecuteScalar();
 
-                    SqlCommand cmdBS = new SqlCommand(sqlBacSi, conn, tran);
-                    cmdBS.Parameters.AddWithValue("@MaNguoiDung", maNguoiDung);
-                    cmdBS.Parameters.AddWithValue("@MaChuyenKhoa", cboChuyenKhoa.SelectedValue);
-                    cmdBS.Parameters.AddWithValue("@BangCap", txtTrinhdo.Text.Trim());
-                    cmdBS.Parameters.AddWithValue("@ChuyenMon", txtChuyenkhoa.Text.Trim());
+                    SqlCommand cmdBS = new SqlCommand(@"
+                INSERT INTO BacSi
+                (MaNguoiDung, MaChuyenKhoa, BangCap, TrangThai)
+                VALUES
+                (@MaND,@MaCK,@BangCap,@TrangThai)",
+                        conn, tran);
+
+                    cmdBS.Parameters.AddWithValue("@MaND", maNguoiDung);
+                    cmdBS.Parameters.AddWithValue("@MaCK", cboChuyenKhoa.SelectedValue);
+                    cmdBS.Parameters.AddWithValue("@BangCap", txtTrinhdo.Text);
                     cmdBS.Parameters.AddWithValue("@TrangThai", cbCapnhatbacsi.Checked);
 
                     cmdBS.ExecuteNonQuery();
 
                     tran.Commit();
 
-                    MessageBox.Show("Thêm bác sĩ thành công");
-                    this.Close();
+                    DialogResult = DialogResult.OK;
+                    Close();
                 }
                 catch (Exception ex)
                 {
@@ -94,6 +97,36 @@ namespace BenhVienS
                     MessageBox.Show("Lỗi: " + ex.Message);
                 }
             }
+        }
+
+        void LoadChuyenKhoa()
+        {
+            string connStr = ConfigurationManager
+                .ConnectionStrings["BenhVienV1ConnectionString"]
+                .ConnectionString;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                SqlDataAdapter da = new SqlDataAdapter(
+                    "SELECT MaChuyenKhoa, TenChuyenKhoa FROM ChuyenKhoa",
+                    conn);
+
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                cboChuyenKhoa.DataSource = dt;
+                cboChuyenKhoa.DisplayMember = "TenChuyenKhoa";
+                cboChuyenKhoa.ValueMember = "MaChuyenKhoa";
+                cboChuyenKhoa.SelectedIndex = -1;
+            }
+
+        }      
+            
+
+        private void frmThemBS_Load(object sender, EventArgs e)
+        {
+            LoadChuyenKhoa();
+              rbtnam.Checked = true;
         }
     }
 }

@@ -73,5 +73,10 @@ namespace BenhVienS
         {
             RestorePanelThongTin();
         }
+
+        private void caidat_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
