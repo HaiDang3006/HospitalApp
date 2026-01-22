@@ -27,6 +27,6 @@ namespace BenhVienS.Service.PatientService
                 return null;
                 throw;
             }
-        }
+        }  
     }
 }

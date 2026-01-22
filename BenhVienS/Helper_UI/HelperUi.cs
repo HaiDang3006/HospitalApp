@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace BenhVienS.Helper_UI
 {
-    public static class GraphicsHelper
+    public static class GraphicsHelpers
     {
         public static void SetBorderRadius(Panel panel, int radius)
         {
@@ -61,6 +61,92 @@ namespace BenhVienS.Helper_UI
             path.CloseFigure();
             button.Region = new Region(path);
         }
+        /// <summary>
+        /// tạo viền panel 
+        /// borderColor mã màu 
+        /// borderWidth là độ dàuy
+        /// </summary>
+        public static void SetPanelBorder(Panel panel, int left, int top, int right, int bottom, Color borderColor, int borderWidth)
+        {
+            using (Graphics g = panel.CreateGraphics())
+            {
+                using (Pen pen = new Pen(borderColor, borderWidth))
+                {
+                    // Vẽ viền trái
+                    if (left > 0)
+                        g.DrawLine(pen, 0, 0, 0, panel.Height);
+
+                    // Vẽ viền trên
+                    if (top > 0)
+                        g.DrawLine(pen, 0, 0, panel.Width, 0);
+
+                    // Vẽ viền phải
+                    if (right > 0)
+                        g.DrawLine(pen, panel.Width, 0, panel.Width, panel.Height);
+
+                    // Vẽ viền dưới
+                    if (bottom > 0)
+                        g.DrawLine(pen, 0, panel.Height, panel.Width, panel.Height);
+                }
+            }
+        }
+
+        public static void SetPanelBorder(PaintEventArgs e, Panel panel, int left, int top, int right, int bottom, Color borderColor, int borderWidth)
+        {
+            using (Pen pen = new Pen(borderColor, borderWidth))
+            {
+                // Vẽ viền trái
+                if (left > 0)
+                    e.Graphics.DrawLine(pen, 0, 0, 0, panel.Height);
+
+                // Vẽ viền trên
+                if (top > 0)
+                    e.Graphics.DrawLine(pen, 0, 0, panel.Width, 0);
+
+                // Vẽ viền phải
+                if (right > 0)
+                    e.Graphics.DrawLine(pen, panel.Width, 0, panel.Width, panel.Height);
+
+                // Vẽ viền dưới
+                if (bottom > 0)
+                    e.Graphics.DrawLine(pen, 0, panel.Height, panel.Width, panel.Height);
+            }
+        }
+
+
+
+        /// <summary>
+        /// tạo viền button 
+        /// borderColor mã màu 
+        /// borderWidth là độ dàuy
+        /// </summary>
+        public static void SetButtonBorder(Button button, int left, int top, int right, int bottom, Color borderColor, int borderWidth)
+        {
+            using (Graphics g = button.CreateGraphics())
+            {
+                using (Pen pen = new Pen(borderColor, borderWidth))
+                {
+                    // Vẽ viền trái
+                    if (left > 0)
+                        g.DrawLine(pen, 0, 0, 0, button.Height);
+
+                    // Vẽ viền trên
+                    if (top > 0)
+                        g.DrawLine(pen, 0, 0, button.Width, 0);
+
+                    // Vẽ viền phải
+                    if (right > 0)
+                        g.DrawLine(pen, button.Width, 0, button.Width, button.Height);
+
+                    // Vẽ viền dưới
+                    if (bottom > 0)
+                        g.DrawLine(pen, 0, button.Height, button.Width, button.Height);
+                }
+            }
+        }
     }
 }
+
+
+
 

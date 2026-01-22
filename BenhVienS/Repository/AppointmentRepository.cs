@@ -52,5 +52,23 @@ namespace BenhVienS.Repository
             }
 
         }
+
+        public static Appointment AppointmentById(int id)
+        {
+            string sql = @"
+                            SELECT *
+                            FROM LichHen
+                            WHERE MaLichHen = @id
+                        ";
+            using (SqlConnection conn = dbUtils.GetConnection())
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@id", id);
+                SqlDataReader result = cmd.ExecuteReader();
+                return AppointmentMapper.AppointmentToMap(result);
+            }
+
+        }
     }
 }

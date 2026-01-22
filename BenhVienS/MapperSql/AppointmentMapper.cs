@@ -7,7 +7,6 @@ namespace BenhVienS.Service
 {
     public static class AppointmentMapper
     {
-        // map dìa một model 
         public static Appointment AppointmentToMap(SqlDataReader reader)
         {
             var appointment = new Appointment
@@ -16,25 +15,37 @@ namespace BenhVienS.Service
                 PatientId = Convert.ToInt32(reader["MaBenhNhan"]),
                 DoctorId = Convert.ToInt32(reader["MaBacSi"]),
                 WorkScheduleId = Convert.ToInt32(reader["MaLichLamViec"]),
+
                 DateAppointment = Convert.ToDateTime(reader["NgayHen"]),
                 Reasion = reader["LyDoKham"]?.ToString(),
-                ReceptionId = Convert.ToInt32(reader["MaLeTan"]),
+
+                ReceptionId = reader["MaLeTan"] != DBNull.Value
+                                ? Convert.ToInt32(reader["MaLeTan"])
+                                : 0,
+
                 Note = reader["GhiChu"]?.ToString(),
-                CreateDate = Convert.ToDateTime(reader["NgayTao"]),
+
+                CreateDate = reader["NgayTao"] != DBNull.Value
+                                ? Convert.ToDateTime(reader["NgayTao"])
+                                : DateTime.Now
             };
-            appointment.SetOrderType(reader["HinhThucDat"].ToString());
-            appointment.SetStatus(reader["TrangThai"].ToString());
+
+            appointment.SetOrderType(reader["HinhThucDat"]?.ToString());
+            appointment.SetStatus(reader["TrangThai"]?.ToString());
+
             return appointment;
         }
-        // map dìa một danh sách model 
+
         public static List<Appointment> AppointmentListToMap(SqlDataReader reader)
         {
             var list = new List<Appointment>();
+
             while (reader.Read())
             {
                 list.Add(AppointmentToMap(reader));
             }
+
             return list;
-        }   
+        }
     }
 }

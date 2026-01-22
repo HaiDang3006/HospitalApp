@@ -7,39 +7,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BenhVienS.Service.UserService
+namespace BenhVienS.Service.MedicineService
 {
-    internal class UserService
+    internal class MedicineService
     {
-        public User UserById(int id)
+        public List<Medicine> getMedicineList()
         {
             try
             {
-                return UserRepository.UserById(id);
+                return MedicineRepository.findAll();
             }
             catch (SqlException ex)
             {
                 return null;
-                throw new Exception(" // log error", ex);
+                throw new Exception("Lỗi khi lấy số lượng lịch hẹn hôm nay của bác sĩ", ex);
             }
             catch (Exception ex)
             {
-                
                 return null;
                 throw;
             }
         }
 
-        public User UserByExaminaId(int ExaminaId)
+        public List<Medicine> searchMedicineByName( string key)
         {
             try
             {
-                return UserRepository.UserByExaminaId(ExaminaId);
+                return MedicineRepository.searchMedicine(key);
             }
             catch (SqlException ex)
             {
                 return null;
-                throw new Exception(" // log error", ex);
+                throw new Exception("Lỗi khi lấy số lượng lịch hẹn hôm nay của bác sĩ", ex);
             }
             catch (Exception ex)
             {
