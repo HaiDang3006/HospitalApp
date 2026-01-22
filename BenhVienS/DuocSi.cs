@@ -16,6 +16,16 @@ namespace BenhVienS
         private Button currentBtn;
         private Panel leftBorderBtn;
         private List<Control> _defaultPanelControls;
+        private ucCD _ucCD;
+        private int maDuocSiDangNhap=1;
+
+        public DuocSi(int maNguoiDung)
+        {
+            InitializeComponent();
+
+            // Lưu mã số nhận được vào biến toàn cục để dùng sau này
+            this.maDuocSiDangNhap = maNguoiDung;
+        }
 
         public DuocSi()
         {
@@ -74,7 +84,25 @@ namespace BenhVienS
 
         private void btcaidat_Click(object sender, EventArgs e)
         {
-            showControl(new ucCD());
+            // 1. Nếu chưa có giao diện Cài đặt thì tạo mới
+            if (_ucCD == null)
+            {
+                _ucCD = new ucCD();
+            }
+
+            // 2. Hiển thị lên (dùng hàm showControl của bạn)
+            showControl(_ucCD);
+
+            // 3. Truyền mã dược sĩ vào để tải dữ liệu lên
+            if (this.maDuocSiDangNhap > 0)
+            {
+                // Truyền đúng biến 'maDuocSiDangNhap' (kiểu số)
+                _ucCD.ThietLapThongTin(this.maDuocSiDangNhap);
+            }
+            else
+            {
+                MessageBox.Show("Chưa nhận được mã người dùng (ID = 0)!");
+            }
         }
 
         #endregion

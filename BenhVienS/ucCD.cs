@@ -14,24 +14,24 @@ namespace BenhVienS
     public partial class ucCD : UserControl
     {
         private string maDuocSiHienTai;
-
+        private int maNguoiDungHienTai=5;
         public ucCD(string maDuocSi)
         {
             InitializeComponent();
-            maDuocSiHienTai = maDuocSi;
+            this.maDuocSiHienTai = maDuocSi;
+            LoadDataDuocSi();
         }
+        public void ThietLapThongTin(int maSo)
+        {
+            // Chuyển int sang string để khớp với biến maDuocSiHienTai bạn đang khai báo
+            this.maDuocSiHienTai = maSo.ToString();
 
+            // Gọi hàm tải dữ liệu của bạn
+            LoadDataDuocSi();
+        }
         public ucCD()
         {
             InitializeComponent();
-        }
-
-        private void ucCD_Load(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(maDuocSiHienTai))
-            {
-                LoadDataDuocSi();
-            }
         }
 
         #region 1. Tải dữ liệu Dược sĩ (Profile)
@@ -42,73 +42,88 @@ namespace BenhVienS
                 try
                 {
                     conn.Open();
-                    // Query sửa đổi: Thay KhoaPhong, ChuyenMon bằng ChungChiHanhNghe cho khớp SQL
-                    string query = @"SELECT ds.MaDuocSi, nd.HoTen, nd.SoDienThoai, nd.Email, nd.DiaChi, 
-                                            ds.BangCap, ds.ChungChiHanhNghe
-                                     FROM DuocSi ds
-                                     INNER JOIN NguoiDung nd ON ds.MaNguoiDung = nd.MaNguoiDung
-                                     WHERE ds.MaDuocSi = @MaDS";
+                    // Join bảng DuocSi và NguoiDung để lấy đủ thông tin
+                    string query = @"
+                        SELECT d.MaDuocSi, d.BangCap, d.ChungChiHanhNghe, 
+                               n.MaNguoiDung,n.TenDangNhap ,n.HoTen, n.NgaySinh, n.SoDienThoai, n.Email, n.DiaChi 
+                        FROM DuocSi d
+                        JOIN NguoiDung n ON d.MaNguoiDung = n.MaNguoiDung
+                        WHERE d.MaDuocSi = @MaDuocSi";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
-                    SqlDataReader reader = cmd.ExecuteReader();
+                    cmd.Parameters.AddWithValue("@MaDuocSi", maDuocSiHienTai);
 
+                    SqlDataReader reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
+                        // Lưu MaNguoiDung để dùng cho lệnh Update sau này
+                        maNguoiDungHienTai = Convert.ToInt32(reader["MaNguoiDung"]);
+
+                        // Tab Thông tin cá nhân
                         txtMaDuocSi.Text = reader["MaDuocSi"].ToString();
+                        txtTenDangNhap.Text = reader["TenDangNhap"].ToString();
                         txtHoTen.Text = reader["HoTen"].ToString();
+
+                        // Xử lý ngày sinh (Hiển thị dd/MM/yyyy)
+                        if (reader["NgaySinh"] != DBNull.Value)
+                        {
+                            DateTime ns = Convert.ToDateTime(reader["NgaySinh"]);
+                            txtNgaySinh.Text = ns.ToString("dd/MM/yyyy");
+                        }
+
                         txtSDT.Text = reader["SoDienThoai"].ToString();
                         txtEmail.Text = reader["Email"].ToString();
                         txtDiaChi.Text = reader["DiaChi"].ToString();
 
+                        // Tab Chuyên môn
                         txtBangCap.Text = reader["BangCap"].ToString();
-                        // Ánh xạ ChungChiHanhNghe vào ô Chuyên môn trên giao diện
-                        txtChuyenMon.Text = reader["ChungChiHanhNghe"].ToString();
+                        txtChungChiHanhNghe.Text = reader["ChungChiHanhNghe"].ToString();
+
+                        // Khóa các trường không được sửa theo yêu cầu
+                        txtMaDuocSi.ReadOnly = true;
+                        txtTenDangNhap.ReadOnly = true;
+                        txtNgaySinh.ReadOnly = true; // Hoặc Enabled = false
                     }
-                    reader.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi khi tải dữ liệu cá nhân: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Lỗi tải dữ liệu: " + ex.Message);
                 }
             }
         }
+        
         #endregion
 
         #region 2. Cập nhật thông tin cá nhân (NguoiDung)
         private void btCapNhatThongTin_Click(object sender, EventArgs e)
         {
-            // Kiểm tra trống
-            if (string.IsNullOrWhiteSpace(txtSDT.Text))
-            {
-                MessageBox.Show("Số điện thoại không được để trống!", "Thông báo");
-                return;
-            }
-
             using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
                     conn.Open();
-                    // Cập nhật các trường liên lạc và cập nhật luôn thời gian NgayCapNhat
-                    string sql = @"UPDATE NguoiDung 
-                                   SET SoDienThoai = @sdt, Email = @email, DiaChi = @dc, NgayCapNhat = GETDATE()
-                                   WHERE MaNguoiDung = (SELECT MaNguoiDung FROM DuocSi WHERE MaDuocSi = @MaDS)";
+                    string query = @"UPDATE NguoiDung 
+                                     SET HoTen = @HoTen, 
+                                         SoDienThoai = @SDT, 
+                                         Email = @Email, 
+                                         DiaChi = @DiaChi,
+                                         NgayCapNhat = GETDATE()
+                                     WHERE MaNguoiDung = @MaNguoiDung";
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@sdt", txtSDT.Text.Trim());
-                    cmd.Parameters.AddWithValue("@email", txtEmail.Text.Trim());
-                    cmd.Parameters.AddWithValue("@dc", txtDiaChi.Text.Trim());
-                    cmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@HoTen", txtHoTen.Text);
+                    cmd.Parameters.AddWithValue("@SDT", txtSDT.Text);
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
+                    cmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDungHienTai);
 
-                    if (cmd.ExecuteNonQuery() > 0)
-                    {
-                        MessageBox.Show("Cập nhật thông tin cá nhân thành công!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    int result = cmd.ExecuteNonQuery();
+                    if (result > 0) MessageBox.Show("Cập nhật thông tin cá nhân thành công!");
+                    else MessageBox.Show("Không thể cập nhật.");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi cập nhật thông tin: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Lỗi: " + ex.Message);
                 }
             }
         }
@@ -117,40 +132,27 @@ namespace BenhVienS
         #region 3. Cập nhật thông tin nghề nghiệp (DuocSi)
         private void btCapNhatChuyenMon_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtBangCap.Text))
-            {
-                MessageBox.Show("Vui lòng nhập thông tin Bằng cấp!", "Thông báo");
-                return;
-            }
-
             using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
                     conn.Open();
-                    // SQL sửa đổi: Chỉ cập nhật BangCap và ChungChiHanhNghe (vì bảng DuocSi chỉ có 2 cột này)
-                    string sql = @"UPDATE DuocSi 
-                                   SET BangCap = @bc, 
-                                       ChungChiHanhNghe = @cc
-                                   WHERE MaDuocSi = @maDS";
+                    string query = @"UPDATE DuocSi 
+                                     SET BangCap = @BangCap, 
+                                         ChungChiHanhNghe = @ChungChi 
+                                     WHERE MaDuocSi = @MaDuocSi";
 
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@bc", txtBangCap.Text.Trim());
-                    cmd.Parameters.AddWithValue("@cc", txtChuyenMon.Text.Trim()); // Lấy từ ô chuyên môn
-                    cmd.Parameters.AddWithValue("@maDS", maDuocSiHienTai);
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@BangCap", txtBangCap.Text);
+                    cmd.Parameters.AddWithValue("@ChungChi", txtChungChiHanhNghe.Text);
+                    cmd.Parameters.AddWithValue("@MaDuocSi", maDuocSiHienTai);
 
-                    if (cmd.ExecuteNonQuery() > 0)
-                    {
-                        MessageBox.Show("Cập nhật hồ sơ nghề nghiệp thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không tìm thấy mã dược sĩ phù hợp.", "Lỗi");
-                    }
+                    int result = cmd.ExecuteNonQuery();
+                    if (result > 0) MessageBox.Show("Cập nhật chuyên môn thành công!");
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi kết nối cơ sở dữ liệu: " + ex.Message);
+                    MessageBox.Show("Lỗi: " + ex.Message);
                 }
             }
         }
@@ -160,15 +162,15 @@ namespace BenhVienS
         private void btDoiMatKhau_Click(object sender, EventArgs e)
         {
             // Kiểm tra hợp lệ form
-            if (string.IsNullOrWhiteSpace(txtMatKhauCu.Text) || string.IsNullOrWhiteSpace(txtMatKhauMoi.Text))
+            if (string.IsNullOrEmpty(txtMatKhauCu.Text) || string.IsNullOrEmpty(txtMatKhauMoi.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ mật khẩu cũ và mới!");
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin mật khẩu.");
                 return;
             }
 
             if (txtMatKhauMoi.Text != txtNhapLaiMKM.Text)
             {
-                MessageBox.Show("Mật khẩu mới nhập lại không khớp!", "Lỗi xác nhận");
+                MessageBox.Show("Mật khẩu mới và nhập lại không khớp.");
                 return;
             }
 
@@ -177,37 +179,40 @@ namespace BenhVienS
                 try
                 {
                     conn.Open();
-                    // 1. Kiểm tra mật khẩu cũ (Sửa cột MatKhau thành MatKhauHash)
-                    string checkSql = @"SELECT COUNT(*) FROM NguoiDung nd 
-                                        INNER JOIN DuocSi ds ON nd.MaNguoiDung = ds.MaNguoiDung 
-                                        WHERE ds.MaDuocSi = @MaDS AND nd.MatKhauHash = @oldPass";
 
-                    SqlCommand checkCmd = new SqlCommand(checkSql, conn);
-                    checkCmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
-                    checkCmd.Parameters.AddWithValue("@oldPass", txtMatKhauCu.Text);
+                    // Bước 1: Kiểm tra mật khẩu cũ có đúng không
+                    string checkQuery = "SELECT COUNT(*) FROM NguoiDung WHERE MaNguoiDung = @MaNguoiDung AND MatKhauHash = @MatKhauCu";
+                    SqlCommand checkCmd = new SqlCommand(checkQuery, conn);
+                    checkCmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDungHienTai);
+                    checkCmd.Parameters.AddWithValue("@MatKhauCu", txtMatKhauCu.Text); // Lưu ý: Nếu thực tế có mã hóa thì phải mã hóa text này trước khi so sánh
 
-                    if ((int)checkCmd.ExecuteScalar() > 0)
+                    int count = (int)checkCmd.ExecuteScalar();
+
+                    if (count > 0)
                     {
-                        // 2. Cập nhật mật khẩu mới và thời gian thay đổi
-                        string updateSql = @"UPDATE NguoiDung 
-                                             SET MatKhauHash = @newPass, NgayCapNhat = GETDATE()
-                                             WHERE MaNguoiDung = (SELECT MaNguoiDung FROM DuocSi WHERE MaDuocSi = @MaDS)";
+                        // Bước 2: Cập nhật mật khẩu mới
+                        string updateQuery = "UPDATE NguoiDung SET MatKhauHash = @MatKhauMoi WHERE MaNguoiDung = @MaNguoiDung";
+                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@MatKhauMoi", txtMatKhauMoi.Text);
+                        updateCmd.Parameters.AddWithValue("@MaNguoiDung", maNguoiDungHienTai);
 
-                        SqlCommand updateCmd = new SqlCommand(updateSql, conn);
-                        updateCmd.Parameters.AddWithValue("@newPass", txtMatKhauMoi.Text);
-                        updateCmd.Parameters.AddWithValue("@MaDS", maDuocSiHienTai);
                         updateCmd.ExecuteNonQuery();
+                        MessageBox.Show("Đổi mật khẩu thành công!");
 
-                        MessageBox.Show("Đổi mật khẩu thành công!", "Thông báo");
-                        // Xóa trắng ô nhập
-                        txtMatKhauCu.Clear(); txtMatKhauMoi.Clear(); txtNhapLaiMKM.Clear();
+                        // Xóa trắng các ô mật khẩu
+                        txtMatKhauCu.Clear();
+                        txtMatKhauMoi.Clear();
+                        txtNhapLaiMKM.Clear();
                     }
                     else
                     {
-                        MessageBox.Show("Mật khẩu cũ không chính xác!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Mật khẩu cũ không chính xác.");
                     }
                 }
-                catch (Exception ex) { MessageBox.Show("Lỗi bảo mật: " + ex.Message); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                }
             }
         }
         #endregion
