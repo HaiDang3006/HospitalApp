@@ -13,7 +13,7 @@ namespace BenhVienS.Common
             switch (role)
             {
                 case RoleEnum.Admin:
-                    nextForm = new DuocSi();
+                    nextForm = new Form2();
                     break;
 
                 case RoleEnum.Doctor:

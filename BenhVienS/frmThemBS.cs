@@ -44,7 +44,7 @@ namespace BenhVienS
                 .ConnectionStrings["BenhVienV1ConnectionString"]
                 .ConnectionString;
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlTransaction tran = conn.BeginTransaction();
@@ -101,11 +101,8 @@ namespace BenhVienS
 
         void LoadChuyenKhoa()
         {
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
-
-            using (SqlConnection conn = new SqlConnection(connStr))
+            
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlDataAdapter da = new SqlDataAdapter(
                     "SELECT MaChuyenKhoa, TenChuyenKhoa FROM ChuyenKhoa",

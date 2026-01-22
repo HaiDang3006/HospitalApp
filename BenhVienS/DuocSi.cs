@@ -30,7 +30,6 @@ namespace BenhVienS
 
         #region UI Logic (Chuyển đổi màn hình)
 
-
         private void showControl(Control control)
         {
             panelBody.Controls.Clear();

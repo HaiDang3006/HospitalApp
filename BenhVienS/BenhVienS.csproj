@@ -133,6 +133,7 @@
     <Compile Include="Helper_Service\CryptoHelper.cs" />
     <Compile Include="Helper_UI\FormInit.cs">
       <SubType>Form</SubType>
+    </Compile>
     <Compile Include="frmbenhnhan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,11 +181,6 @@
     </Compile>
     <Compile Include="frmvaitro.Designer.cs">
       <DependentUpon>frmvaitro.cs</DependentUpon>
-    </Compile>
-    <Compile Include="HospitalManagementSystemDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="Helper_UI\FormInit.Designer.cs">
       <DependentUpon>FormInit.cs</DependentUpon>
@@ -342,6 +338,7 @@
     </Compile>
     <Compile Include="uclichhensaptoi.Designer.cs">
       <DependentUpon>uclichhensaptoi.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucmkadmin.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -437,6 +434,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Helper_UI\FormInit.resx">
       <DependentUpon>FormInit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmbenhnhan.resx">
       <DependentUpon>frmbenhnhan.cs</DependentUpon>
     </EmbeddedResource>
@@ -507,6 +505,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucDanhSachNhapThuoc.resx">
       <DependentUpon>ucDanhSachNhapThuoc.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucmkadmin.resx">
       <DependentUpon>ucmkadmin.cs</DependentUpon>
     </EmbeddedResource>
@@ -519,8 +518,6 @@
     <EmbeddedResource Include="ucqllichhen.resx">
       <DependentUpon>ucqllichhen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucQuanlibenhnhan.resx">
-      <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
     <EmbeddedResource Include="ucqltaikhoanvaphanquyen.resx">
       <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
     </EmbeddedResource>
@@ -534,28 +531,6 @@
     <EmbeddedResource Include="ucQuanLyDonThuoc.resx">
       <DependentUpon>ucQuanLyDonThuoc.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="benhvienvsDataSet.xsc">
-      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="benhvienvsDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>benhvienvsDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="benhvienvsDataSet.xss">
-      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xsc">
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>HospitalManagementSystemDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xss">
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

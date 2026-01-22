@@ -15,14 +15,12 @@ namespace BenhVienS
     public partial class themdichvu : Form
     {
         int _maDichVu = 0;
-        string connStr = ConfigurationManager
-    .ConnectionStrings["BenhVienV1ConnectionString"]
-    .ConnectionString;
 
         public themdichvu()
         {
             InitializeComponent();
         }
+
         public themdichvu(int maDichVu)
         {
             InitializeComponent();
@@ -43,7 +41,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlCommand cmd;
 
@@ -129,7 +127,7 @@ namespace BenhVienS
         }
         private void LoadDichVuSua()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlCommand cmd = new SqlCommand(
                     "SELECT * FROM DichVu WHERE MaDichVu=@Ma", conn);

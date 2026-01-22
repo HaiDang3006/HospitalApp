@@ -24,6 +24,7 @@ namespace BenhVienS.Service.UserService
             }
             catch (Exception ex)
             {
+                
                 return null;
                 throw;
             }

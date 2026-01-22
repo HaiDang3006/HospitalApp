@@ -1162,73 +1162,7 @@
             this.dgvDanhsachbacsi.Size = new System.Drawing.Size(1138, 184);
             this.dgvDanhsachbacsi.TabIndex = 0;
             this.dgvDanhsachbacsi.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDanhsachbacsi_CellContentClick);
-            // 
-            // colID
-            // 
-            this.colID.HeaderText = "ID";
-            this.colID.MinimumWidth = 6;
-            this.colID.Name = "colID";
-            // 
-            // colHotenbacsi
-            // 
-            this.colHotenbacsi.HeaderText = "Họ tên ";
-            this.colHotenbacsi.MinimumWidth = 6;
-            this.colHotenbacsi.Name = "colHotenbacsi";
-            // 
-            // colGioitinhbacsi
-            // 
-            this.colGioitinhbacsi.HeaderText = "Giới tính";
-            this.colGioitinhbacsi.MinimumWidth = 6;
-            this.colGioitinhbacsi.Name = "colGioitinhbacsi";
-            // 
-            // colNgaysinhbacsi
-            // 
-            this.colNgaysinhbacsi.HeaderText = "Ngày sinh";
-            this.colNgaysinhbacsi.MinimumWidth = 6;
-            this.colNgaysinhbacsi.Name = "colNgaysinhbacsi";
-            // 
-            // colChuyenkhoa
-            // 
-            this.colChuyenkhoa.HeaderText = "Chuyên khoa";
-            this.colChuyenkhoa.MinimumWidth = 6;
-            this.colChuyenkhoa.Name = "colChuyenkhoa";
-            // 
-            // colTrinhdo
-            // 
-            this.colTrinhdo.HeaderText = "Trình độ";
-            this.colTrinhdo.MinimumWidth = 6;
-            this.colTrinhdo.Name = "colTrinhdo";
-            // 
-            // colTrangthailamviec
-            // 
-            this.colTrangthailamviec.HeaderText = "Trạng thái";
-            this.colTrangthailamviec.MinimumWidth = 6;
-            this.colTrangthailamviec.Name = "colTrangthailamviec";
-            this.colTrangthailamviec.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colTrangthailamviec.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // colThaotac
-            // 
-            this.colThaotac.HeaderText = "Thao tác";
-            this.colThaotac.MinimumWidth = 6;
-            this.colThaotac.Name = "colThaotac";
-            this.colThaotac.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.colThaotac.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            // 
-            // tabQlilichkham
-            // 
-            this.tabQlilichkham.Controls.Add(this.panel11);
-            this.tabQlilichkham.Controls.Add(this.pnQlilichkham);
-            this.tabQlilichkham.Location = new System.Drawing.Point(4, 29);
-            this.tabQlilichkham.Name = "tabQlilichkham";
-            this.tabQlilichkham.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQlilichkham.Size = new System.Drawing.Size(1170, 630);
-            this.tabQlilichkham.TabIndex = 3;
-            this.tabQlilichkham.Text = "Quản lí lịch khám";
-            this.tabQlilichkham.UseVisualStyleBackColor = true;
-            // 
-            // panel11
-            // 
+           
             this.panel11.Controls.Add(this.dgvDanhsachlichkham);
             this.panel11.Location = new System.Drawing.Point(388, 0);
             this.panel11.Name = "panel11";
@@ -1299,38 +1233,7 @@
             this.Trangthai.HeaderText = "Trạng thái";
             this.Trangthai.MinimumWidth = 6;
             this.Trangthai.Name = "Trangthai";
-            // 
-            // pnQlilichkham
-            // 
-            this.pnQlilichkham.Controls.Add(this.btHuy);
-            this.pnQlilichkham.Controls.Add(this.btLuuthongtin);
-            this.pnQlilichkham.Controls.Add(this.btTimkiem);
-            this.pnQlilichkham.Controls.Add(this.btXoa);
-            this.pnQlilichkham.Controls.Add(this.btSua);
-            this.pnQlilichkham.Controls.Add(this.btThem);
-            this.pnQlilichkham.Controls.Add(this.label18);
-            this.pnQlilichkham.Controls.Add(this.cbTragthai);
-            this.pnQlilichkham.Controls.Add(this.label19);
-            this.pnQlilichkham.Controls.Add(this.txtSDT);
-            this.pnQlilichkham.Controls.Add(this.label17);
-            this.pnQlilichkham.Controls.Add(this.txtTenbenhnhan);
-            this.pnQlilichkham.Controls.Add(this.label16);
-            this.pnQlilichkham.Controls.Add(this.cbKhunggio);
-            this.pnQlilichkham.Controls.Add(this.label15);
-            this.pnQlilichkham.Controls.Add(this.dtpNgayKham);
-            this.pnQlilichkham.Controls.Add(this.cboChuyenkhoa);
-            this.pnQlilichkham.Controls.Add(this.label14);
-            this.pnQlilichkham.Controls.Add(this.label13);
-            this.pnQlilichkham.Controls.Add(this.cbBacsi);
-            this.pnQlilichkham.Controls.Add(this.label12);
-            this.pnQlilichkham.Controls.Add(this.txtMalich);
-            this.pnQlilichkham.Controls.Add(this.label11);
-            this.pnQlilichkham.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pnQlilichkham.Location = new System.Drawing.Point(3, 3);
-            this.pnQlilichkham.Name = "pnQlilichkham";
-            this.pnQlilichkham.Size = new System.Drawing.Size(379, 624);
-            this.pnQlilichkham.TabIndex = 0;
-            this.pnQlilichkham.Paint += new System.Windows.Forms.PaintEventHandler(this.pnQlilichkham_Paint);
+          
             // 
             // btHuy
             // 
@@ -1568,26 +1471,7 @@
             this.label11.TabIndex = 0;
             this.label11.Text = "QUẢN LÍ LỊCH KHÁM ";
             this.label11.Click += new System.EventHandler(this.label11_Click);
-            // 
-            // tabQlithuchi
-            // 
-            this.tabQlithuchi.Controls.Add(this.groupBox7);
-            this.tabQlithuchi.Controls.Add(this.groupBox6);
-            this.tabQlithuchi.Controls.Add(this.groupBox5);
-            this.tabQlithuchi.Controls.Add(this.label20);
-            this.tabQlithuchi.Controls.Add(this.panelTongloinhuan);
-            this.tabQlithuchi.Controls.Add(this.panelTongchihomnay);
-            this.tabQlithuchi.Controls.Add(this.panelTongthuhomnay);
-            this.tabQlithuchi.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.tabQlithuchi.ForeColor = System.Drawing.Color.Black;
-            this.tabQlithuchi.Location = new System.Drawing.Point(4, 29);
-            this.tabQlithuchi.Name = "tabQlithuchi";
-            this.tabQlithuchi.Padding = new System.Windows.Forms.Padding(3);
-            this.tabQlithuchi.Size = new System.Drawing.Size(1170, 630);
-            this.tabQlithuchi.TabIndex = 4;
-            this.tabQlithuchi.Text = "Quản lí thu chi";
-            this.tabQlithuchi.UseVisualStyleBackColor = true;
-            this.tabQlithuchi.Click += new System.EventHandler(this.tabQlithuchi_Click);
+            
             // 
             // groupBox7
             // 
@@ -1598,24 +1482,9 @@
             this.groupBox7.TabIndex = 5;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Thống kê tài chính";
-            // 
-            // chartThongketaichinh
-            // 
-            chartArea17.Name = "ChartArea1";
-            this.chartThongketaichinh.ChartAreas.Add(chartArea17);
-            this.chartThongketaichinh.Dock = System.Windows.Forms.DockStyle.Fill;
-            legend17.Name = "Legend1";
-            this.chartThongketaichinh.Legends.Add(legend17);
-            this.chartThongketaichinh.Location = new System.Drawing.Point(3, 20);
-            this.chartThongketaichinh.Name = "chartThongketaichinh";
-            this.chartThongketaichinh.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.SeaGreen;
-            series18.ChartArea = "ChartArea1";
-            series18.Legend = "Legend1";
-            series18.Name = "Series1";
-            this.chartThongketaichinh.Series.Add(series18);
-            this.chartThongketaichinh.Size = new System.Drawing.Size(396, 380);
-            this.chartThongketaichinh.TabIndex = 0;
-            this.chartThongketaichinh.Text = "chartThongketaichinh";
+
+          
+
             // 
             // groupBox6
             // 
@@ -1736,18 +1605,7 @@
             this.label20.Size = new System.Drawing.Size(174, 22);
             this.label20.TabIndex = 2;
             this.label20.Text = "QUẢN LÍ THU CHI";
-            // 
-            // panelTongloinhuan
-            // 
-            this.panelTongloinhuan.BackColor = System.Drawing.Color.LightBlue;
-            this.panelTongloinhuan.Controls.Add(this.btnLoinhuanhomnay);
-            this.panelTongloinhuan.Controls.Add(this.label23);
-            this.panelTongloinhuan.Controls.Add(this.pictureBox8);
-            this.panelTongloinhuan.Location = new System.Drawing.Point(794, 41);
-            this.panelTongloinhuan.Name = "panelTongloinhuan";
-            this.panelTongloinhuan.Size = new System.Drawing.Size(341, 143);
-            this.panelTongloinhuan.TabIndex = 1;
-            this.panelTongloinhuan.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTongloinhuan_Paint);
+            
             // 
             // btnLoinhuanhomnay
             // 
@@ -1778,18 +1636,7 @@
             this.pictureBox8.TabIndex = 2;
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Click += new System.EventHandler(this.pictureBox8_Click_1);
-            // 
-            // panelTongchihomnay
-            // 
-            this.panelTongchihomnay.BackColor = System.Drawing.Color.LightBlue;
-            this.panelTongchihomnay.Controls.Add(this.txtTongchihomnay);
-            this.panelTongchihomnay.Controls.Add(this.label22);
-            this.panelTongchihomnay.Controls.Add(this.pictureBox7);
-            this.panelTongchihomnay.Location = new System.Drawing.Point(412, 41);
-            this.panelTongchihomnay.Name = "panelTongchihomnay";
-            this.panelTongchihomnay.Size = new System.Drawing.Size(362, 143);
-            this.panelTongchihomnay.TabIndex = 1;
-            this.panelTongchihomnay.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTongchihomnay_Paint);
+           
             // 
             // txtTongchihomnay
             // 
@@ -1818,18 +1665,7 @@
             this.pictureBox7.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox7.TabIndex = 1;
             this.pictureBox7.TabStop = false;
-            // 
-            // panelTongthuhomnay
-            // 
-            this.panelTongthuhomnay.BackColor = System.Drawing.Color.LightBlue;
-            this.panelTongthuhomnay.Controls.Add(this.txtTongdoanhthuhomnay);
-            this.panelTongthuhomnay.Controls.Add(this.label21);
-            this.panelTongthuhomnay.Controls.Add(this.pictureBox6);
-            this.panelTongthuhomnay.Location = new System.Drawing.Point(27, 41);
-            this.panelTongthuhomnay.Name = "panelTongthuhomnay";
-            this.panelTongthuhomnay.Size = new System.Drawing.Size(362, 143);
-            this.panelTongthuhomnay.TabIndex = 0;
-            this.panelTongthuhomnay.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTongthuhomnay_Paint);
+           
             // 
             // txtTongdoanhthuhomnay
             // 
@@ -4146,7 +3982,6 @@
             // 
             // pictureBox6
             // 
-            this.pictureBox6.Image = global::BenhVienS.Properties.Resources._4a8bae08568f81029a018d1fdd439a4d_removebg_preview;
             this.pictureBox6.Location = new System.Drawing.Point(19, 13);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(66, 88);
@@ -4156,7 +3991,6 @@
             // 
             // pictureBox7
             // 
-            this.pictureBox7.Image = global::BenhVienS.Properties.Resources._09e450ee99ad374d695f94a7548eed5f_removebg_preview;
             this.pictureBox7.Location = new System.Drawing.Point(17, 13);
             this.pictureBox7.Name = "pictureBox7";
             this.pictureBox7.Size = new System.Drawing.Size(61, 88);
@@ -4166,7 +4000,6 @@
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.business_continuity1;
             this.pictureBox8.Location = new System.Drawing.Point(18, 13);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(52, 74);

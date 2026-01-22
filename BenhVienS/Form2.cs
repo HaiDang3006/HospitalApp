@@ -12,8 +12,6 @@ namespace BenhVienS
 {
     public partial class Form2 : Form
     {
-        // Thêm dấu @ và bao quanh bằng dấu ngoặc kép ""
-        string connectionString = @"Data Source=localhost\SQLEXPRESS02;Initial Catalog=BenhVienV1;Integrated Security=True;"; 
         public Form2()
         {
             InitializeComponent();
@@ -39,7 +37,7 @@ namespace BenhVienS
 
         private int GetScalarInt(string sql)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
@@ -49,7 +47,7 @@ namespace BenhVienS
 
         private decimal GetScalarDecimal(string sql)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 conn.Open();
@@ -73,7 +71,7 @@ namespace BenhVienS
           LEFT JOIN HoaDon h ON MONTH(h.NgayThanhToan) = T.T AND YEAR(h.NgayThanhToan) = @Nam AND h.DaThanhToan = 1
           GROUP BY T.T ORDER BY T.T";
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Nam", nam);
@@ -99,7 +97,7 @@ namespace BenhVienS
             DataTable dt = new DataTable();
             try
             {
-                using (System.Data.SqlClient.SqlConnection conn = new System.Data.SqlClient.SqlConnection(connectionString))
+                using (System.Data.SqlClient.SqlConnection conn = dbUtils.GetConnection())
                 {
                     System.Data.SqlClient.SqlDataAdapter adapter = new System.Data.SqlClient.SqlDataAdapter(query, conn);
                     adapter.Fill(dt);
@@ -213,7 +211,7 @@ namespace BenhVienS
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
                     string query = "SELECT HoTen FROM BacSi WHERE TrangThai = N'Đang làm việc'";
@@ -461,7 +459,7 @@ namespace BenhVienS
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
 
@@ -578,7 +576,7 @@ namespace BenhVienS
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
                     string query = "SELECT HoTen FROM BacSi";
@@ -649,7 +647,7 @@ namespace BenhVienS
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
                     string query = "UPDATE LichKham SET BacSi=@BS, ChuyenKhoa=@Khoa, NgayKham=@Ngay, " +
@@ -686,7 +684,7 @@ namespace BenhVienS
             {
                 try
                 {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
+                    using (SqlConnection conn = dbUtils.GetConnection())
                     {
                         conn.Open();
                         string query = "DELETE FROM LichKham WHERE MaLich = @Ma";
@@ -758,7 +756,7 @@ namespace BenhVienS
             DataTable dt = new DataTable();
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -960,7 +958,7 @@ namespace BenhVienS
 
         private void tabPageDoanhthu_Click(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
 
@@ -1103,7 +1101,7 @@ namespace BenhVienS
         {
             string key = btTimkiem.Text.Trim();
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
 
@@ -1153,7 +1151,7 @@ namespace BenhVienS
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
                     string query = @"INSERT INTO LichKham
@@ -1259,7 +1257,7 @@ namespace BenhVienS
         {
             string query = "SELECT COUNT(*) FROM BacSi";
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -1276,7 +1274,7 @@ namespace BenhVienS
            
             string query = "SELECT COUNT(*) FROM BenhNhan";
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -1293,7 +1291,7 @@ namespace BenhVienS
         {
             string query = "SELECT COUNT(*) FROM Doanhthu";
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -1376,11 +1374,9 @@ namespace BenhVienS
         }
         void LoadDanhSachBacSi()
         {
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
+            
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlDataAdapter da = new SqlDataAdapter(@"
             SELECT
@@ -1499,7 +1495,7 @@ namespace BenhVienS
 
         private void LoadDanhSachVaiTro()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = "SELECT MaVaiTro, TenVaiTro, MoTa, TrangThai FROM VaiTro";
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
@@ -1525,7 +1521,7 @@ namespace BenhVienS
 
         void LoadBenhNhan()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlDataAdapter da = new SqlDataAdapter(
                     "SELECT * FROM BenhNhan WHERE TrangThai = 1", conn);
@@ -1538,24 +1534,22 @@ namespace BenhVienS
 
         void LoadDanhSachBenhNhan()
         {
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
+           
 
             string sql = @"
-        SELECT 
-            bn.MaBenhNhan,
-            bn.MaNguoiDung,
-            nd.HoTen,
-            nd.SoDienThoai,
-            nd.DiaChi,
-            nd.NgaySinh,
-            CASE WHEN nd.GioiTinh = 1 THEN N'Nam' ELSE N'Nữ' END AS GioiTinh
-        FROM BenhNhan bn
-        JOIN NguoiDung nd ON bn.MaNguoiDung = nd.MaNguoiDung
-    ";
+                SELECT 
+                    bn.MaBenhNhan,
+                    bn.MaNguoiDung,
+                    nd.HoTen,
+                    nd.SoDienThoai,
+                    nd.DiaChi,
+                    nd.NgaySinh,
+                    CASE WHEN nd.GioiTinh = 1 THEN N'Nam' ELSE N'Nữ' END AS GioiTinh
+                FROM BenhNhan bn
+                JOIN NguoiDung nd ON bn.MaNguoiDung = nd.MaNguoiDung
+            ";
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
@@ -1613,9 +1607,7 @@ namespace BenhVienS
         {
             string keyword = txtTim.Text.Trim();
 
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
+           
 
             string sql = @"
         SELECT 
@@ -1632,7 +1624,7 @@ namespace BenhVienS
            OR nd.SoDienThoai LIKE '%' + @kw + '%'
     ";
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                 da.SelectCommand.Parameters.AddWithValue("@kw", keyword);
@@ -1660,10 +1652,8 @@ namespace BenhVienS
         ///Quản lí dịch vụ ///
         void LoadDichVu()
         {
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connStr))
+           
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = @"
             SELECT 
@@ -1701,9 +1691,7 @@ namespace BenhVienS
         private void btngungdv_Click(object sender, EventArgs e)
         {
 
-            string connStr = ConfigurationManager
-               .ConnectionStrings["BenhVienV1ConnectionString"]
-               .ConnectionString;
+           
             if (dgvDichVu.CurrentRow == null)
             {
                 MessageBox.Show("Vui lòng chọn dịch vụ");
@@ -1721,7 +1709,7 @@ namespace BenhVienS
 
             if (dr == DialogResult.No) return;
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = "UPDATE DichVu SET TrangThai = 0 WHERE MaDichVu = @Ma";
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -1741,10 +1729,8 @@ namespace BenhVienS
 
         private void txtTimTenDV_TextChanged(object sender, EventArgs e)
         {
-            string connStr = ConfigurationManager
-              .ConnectionStrings["BenhVienV1ConnectionString"]
-              .ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connStr))
+           
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = @"
             SELECT *
@@ -1774,8 +1760,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(
-                ConfigurationManager.ConnectionStrings["BenhVienV1ConnectionString"].ConnectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = "SELECT * FROM DichVu WHERE LoaiDichVu = @Loai";
 
@@ -1792,10 +1777,8 @@ namespace BenhVienS
 
         private void chbapdungbhyt_CheckedChanged(object sender, EventArgs e)
         {
-            string connStr = ConfigurationManager
-              .ConnectionStrings["BenhVienV1ConnectionString"]
-              .ConnectionString;
-            using (SqlConnection conn = new SqlConnection(connStr))
+           
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = @"
             SELECT *
@@ -1837,15 +1820,13 @@ namespace BenhVienS
 
         private void btkichhoat_Click(object sender, EventArgs e)
         {
-            string connStr = ConfigurationManager
-             .ConnectionStrings["BenhVienV1ConnectionString"]
-             .ConnectionString;
+            
             if (dgvDichVu.CurrentRow == null) return;
 
             int maDV = Convert.ToInt32(
                 dgvDichVu.CurrentRow.Cells["MaDichVu"].Value);
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = "UPDATE DichVu SET TrangThai = 1 WHERE MaDichVu = @MaDV";
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -1887,11 +1868,9 @@ namespace BenhVienS
 
         void LoadLichLamViec()
         {
-            string connStr = ConfigurationManager
-        .ConnectionStrings["BenhVienV1ConnectionString"]
-        .ConnectionString;
+           
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = @"
                 SELECT
@@ -1917,11 +1896,9 @@ namespace BenhVienS
 
         void LoadBacSi()
         {
-            string connStr = ConfigurationManager
-        .ConnectionStrings["BenhVienV1ConnectionString"]
-        .ConnectionString;
+           
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = @"
         SELECT 
@@ -1950,11 +1927,9 @@ namespace BenhVienS
 
             int maBacSi = (int)cbobacsi.SelectedValue;
 
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
+           
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = @"
         SELECT
@@ -1984,11 +1959,9 @@ namespace BenhVienS
 
         private void dtpngay_ValueChanged(object sender, EventArgs e)
         {
-            string connStr = ConfigurationManager
-        .ConnectionStrings["BenhVienV1ConnectionString"]
-        .ConnectionString;
+           
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = @"
             SELECT
@@ -2031,11 +2004,9 @@ namespace BenhVienS
             int ma = Convert.ToInt32(
                 dgvLichLamViec.CurrentRow.Cells["MaLichLamViec"].Value);
 
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
+          
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = "UPDATE LichLamViec SET TrangThai = 0 WHERE MaLichLamViec = @Ma";
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -2055,11 +2026,9 @@ namespace BenhVienS
             int ma = Convert.ToInt32(
                 dgvLichLamViec.CurrentRow.Cells["MaLichLamViec"].Value);
 
-            string connStr = ConfigurationManager
-                .ConnectionStrings["BenhVienV1ConnectionString"]
-                .ConnectionString;
+          
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 string sql = "UPDATE LichLamViec SET TrangThai = 1 WHERE MaLichLamViec = @Ma";
                 SqlCommand cmd = new SqlCommand(sql, conn);

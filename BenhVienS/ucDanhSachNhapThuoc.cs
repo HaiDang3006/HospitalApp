@@ -20,7 +20,6 @@ namespace BenhVienS
         {
             InitializeComponent();
         }
-        string connectionString = "Server=localhost\\SQLEXPRESS02;Initial Catalog=BenhVienV1;Integrated Security=True";
 
         private void ucDanhSachNhapThuoc_Load(object sender, EventArgs e)
         {
