@@ -160,11 +160,11 @@
     <Compile Include="LeTan.Designer.cs">
       <DependentUpon>LeTan.cs</DependentUpon>
     </Compile>
-    <Compile Include="Lichhen.cs">
+    <Compile Include="uctaolichhen.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Lichhen.Designer.cs">
-      <DependentUpon>Lichhen.cs</DependentUpon>
+    <Compile Include="uctaolichhen.Designer.cs">
+      <DependentUpon>uctaolichhen.cs</DependentUpon>
     </Compile>
     <Compile Include="MapperSql\DoctorMapper.cs" />
     <Compile Include="MapperSql\PatientMapper.cs" />
@@ -272,6 +272,12 @@
     <Compile Include="uckedonthuoc.Designer.cs">
       <DependentUpon>uckedonthuoc.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucletanbenhnhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucletanbenhnhan.Designer.cs">
+      <DependentUpon>ucletanbenhnhan.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucQlibacsi.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -359,6 +365,9 @@
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="uctaolichhen.resx">
+      <DependentUpon>uctaolichhen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -381,6 +390,9 @@
     <EmbeddedResource Include="TrangchuBVS.resx">
       <DependentUpon>TrangchuBVS.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucletanbenhnhan.resx">
+      <DependentUpon>ucletanbenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucQlibacsi.resx">
       <DependentUpon>ucQlibacsi.cs</DependentUpon>
     </EmbeddedResource>
@@ -392,6 +404,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucQuanlibenhnhan.resx">
       <DependentUpon>ucQuanlibenhnhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucttbenhnhan.resx">
+      <DependentUpon>ucttbenhnhan.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -422,7 +437,13 @@
     <Content Include="Resources\8a8ae6a0780f7797f831fd6ba635b7ba-removebg-preview.png" />
     <Content Include="Resources\business-continuity.png" />
     <Content Include="Resources\calendar %281%29.png" />
+    <None Include="Resources\calendar %281%292.png" />
+    <None Include="Resources\calendar %281%293.png" />
     <Content Include="Resources\calendar.png" />
+    <None Include="Resources\calendar2.png" />
+    <None Include="Resources\calendar3.png" />
+    <None Include="Resources\calendar4.png" />
+    <None Include="Resources\calendar5.png" />
     <Content Include="Resources\cash.png" />
     <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_35_05 PM.png" />
     <Content Include="Resources\ChatGPT Image Jan 10, 2026, 02_50_57 PM.png" />
@@ -438,6 +459,7 @@
     <Content Include="Resources\document1.png" />
     <None Include="Resources\document3.png" />
     <None Include="Resources\document4.png" />
+    <None Include="Resources\document5.png" />
     <Content Include="Resources\download-removebg-preview-removebg-preview.png" />
     <Content Include="Resources\download-removebg-preview-removebg-preview1.png" />
     <Content Include="Resources\download-removebg-preview.png" />
@@ -453,6 +475,10 @@
     <Content Include="Resources\group.png" />
     <Content Include="Resources\home-icon-silhouette.png" />
     <Content Include="Resources\home-icon-silhouette1.png" />
+    <None Include="Resources\home-icon-silhouette3.png" />
+    <None Include="Resources\hourglass-removebg-preview.png" />
+    <None Include="Resources\hourglass-removebg-preview1.png" />
+    <None Include="Resources\hourglass.png" />
     <Content Include="Resources\hình nền.jpg" />
     <Content Include="Resources\icon ngươig.png" />
     <Content Include="Resources\icons8-profile.gif" />
@@ -462,13 +488,23 @@
     <Content Include="Resources\mail.png" />
     <Content Include="Resources\manager.png" />
     <Content Include="Resources\Medical Care - Letter S Logo Template.jpg" />
+    <None Include="Resources\medical-records-removebg-preview %281%29.png" />
+    <None Include="Resources\medical-records-removebg-preview %281%291.png" />
+    <None Include="Resources\medical-records-removebg-preview %281%292.png" />
     <Content Include="Resources\medical.png" />
     <Content Include="Resources\medication.png" />
     <Content Include="Resources\OIP-removebg-preview.png" />
     <Content Include="Resources\OIP-removebg-preview1.png" />
     <Content Include="Resources\OIP-removebg-preview2.png" />
     <Content Include="Resources\OIP-removebg-preview3.png" />
+    <None Include="Resources\on-off-button-removebg-preview.png" />
+    <None Include="Resources\on-off-button-removebg-preview1.png" />
+    <None Include="Resources\on-off-button-removebg-preview2.png" />
     <Content Include="Resources\password.png" />
+    <None Include="Resources\patient__1_-removebg-preview.png" />
+    <None Include="Resources\patient__1_-removebg-preview1.png" />
+    <None Include="Resources\patient__1_-removebg-preview2.png" />
+    <None Include="Resources\patient__1_-removebg-preview3.png" />
     <Content Include="Resources\pension.png" />
     <Content Include="Resources\phone icon.jpg" />
     <Content Include="Resources\phone-call.png" />
@@ -477,10 +513,16 @@
     <Content Include="Resources\power.png" />
     <Content Include="Resources\report.png" />
     <Content Include="Resources\settings.png" />
+    <None Include="Resources\settings2.png" />
+    <None Include="Resources\settings3.png" />
+    <None Include="Resources\settings4.png" />
     <Content Include="Resources\stethoscope.png" />
     <Content Include="Resources\user.png" />
     <None Include="Resources\user2.png" />
     <None Include="Resources\user3.png" />
+    <None Include="Resources\user4.png" />
+    <None Include="Resources\user5.png" />
+    <None Include="Resources\user6.png" />
     <Content Include="Resources\wall-clock.png" />
     <None Include="Resources\wall-clock2.png" />
   </ItemGroup>

@@ -40,7 +40,6 @@
             this.cboTrangThai = new System.Windows.Forms.ComboBox();
             this.lblNgayHen = new System.Windows.Forms.Label();
             this.dtpNgayHen = new System.Windows.Forms.DateTimePicker();
-            this.btnTimKiem = new System.Windows.Forms.Button();
             this.btnDatLichMoi = new System.Windows.Forms.Button();
             this.dgvLichHen = new System.Windows.Forms.DataGridView();
             this.colMaLichHen = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,7 +98,6 @@
             // grpFilter
             // 
             this.grpFilter.Controls.Add(this.btnDatLichMoi);
-            this.grpFilter.Controls.Add(this.btnTimKiem);
             this.grpFilter.Controls.Add(this.dtpNgayHen);
             this.grpFilter.Controls.Add(this.lblNgayHen);
             this.grpFilter.Controls.Add(this.cboTrangThai);
@@ -190,18 +188,7 @@
             // 
             // btnTimKiem
             // 
-            this.btnTimKiem.BackColor = System.Drawing.Color.Lime;
-            this.btnTimKiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTimKiem.ForeColor = System.Drawing.Color.Transparent;
-            this.btnTimKiem.Location = new System.Drawing.Point(598, 14);
-            this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(94, 32);
-            this.btnTimKiem.TabIndex = 8;
-            this.btnTimKiem.Text = "Tìm kiếm";
-            this.btnTimKiem.UseVisualStyleBackColor = false;
-            // 
-            // btnDatLichMoi
+           
             // 
             this.btnDatLichMoi.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnDatLichMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -369,7 +356,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colTrangThai;
         private System.Windows.Forms.DataGridViewTextBoxColumn colGhiChu;
         private System.Windows.Forms.Button btnDatLichMoi;
-        private System.Windows.Forms.Button btnTimKiem;
         private System.Windows.Forms.Button btnHuy;
         private System.Windows.Forms.Button btnSua;
     }
