@@ -10,19 +10,14 @@ using System.Windows.Forms;
 
 namespace BenhVienS
 {
-    public partial class Lichhen : UserControl
+    public partial class ucLetan_Benhnhan : UserControl
     {
-        public Lichhen()
+        public ucLetan_Benhnhan()
         {
             InitializeComponent();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
         }

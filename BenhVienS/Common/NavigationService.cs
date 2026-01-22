@@ -21,7 +21,7 @@ namespace BenhVienS.Common
                     break;
 
                 case RoleEnum.Receptionist:
-                    nextForm = new LeTan();
+                    nextForm = new DuocSi();
                     break;
 
                 case RoleEnum.Cashier:
