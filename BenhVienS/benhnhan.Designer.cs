@@ -1,6 +1,6 @@
 ﻿namespace BenhVienS
 {
-    partial class ExaminaDialog
+    partial class benhnhan
     {
         /// <summary>
         /// Required designer variable.

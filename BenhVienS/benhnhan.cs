@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace BenhVienS
 {
-    public partial class ExaminaDialog : Form
+    public partial class benhnhan : Form
     {
         private List<Control> _defaultPanelControls;
-        public ExaminaDialog()
+        public benhnhan()
         {
             InitializeComponent();
             LoadDataToGrid();
