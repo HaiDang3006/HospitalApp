@@ -69,7 +69,7 @@ namespace BenhVienS
 
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(query, conn);
@@ -117,7 +117,7 @@ namespace BenhVienS
                 dgvKho.Columns["TongTienNhap"].HeaderText = "Thành Tiền";
                 dgvKho.Columns["TongTienNhap"].ReadOnly = true; // Tự động tính, không cho nhập tay
                
-                dgvKho.Columns["SoLuongToiThieu"].HeaderText = "Mức Min";                
+                dgvKho.Columns["SoLuongToiThieu"].HeaderText = "SL Tối Thiểu";                
                 dgvKho.Columns["DonViTinh"].HeaderText = "ĐVT";
                 dgvKho.Columns["NgayNhap"].HeaderText = "Ngày Nhập";
                 dgvKho.Columns["NgayHetHan"].HeaderText = "Hạn Dùng";
@@ -201,7 +201,7 @@ namespace BenhVienS
         {
             if (dgvKho.Columns["cbxTenThuoc"] != null) return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 // Cột ComboBox chọn Thuốc
@@ -238,7 +238,7 @@ namespace BenhVienS
             dgvKho.EndEdit(); // Kết thúc mọi chỉnh sửa trên lưới
             int rowsSaved = 0;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlTransaction trans = conn.BeginTransaction();
@@ -333,7 +333,7 @@ namespace BenhVienS
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     conn.Open();
                     SqlDataAdapter da = new SqlDataAdapter("SELECT MaQuayThuoc, TenQuay FROM QuayThuoc WHERE TrangThai = 1", conn);

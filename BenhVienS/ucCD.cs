@@ -14,7 +14,7 @@ namespace BenhVienS
     public partial class ucCD : UserControl
     {
         private string maDuocSiHienTai;
-        private int maNguoiDungHienTai=5;
+        private int maNguoiDungHienTai=9;
         public ucCD(string maDuocSi)
         {
             InitializeComponent();
