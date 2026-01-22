@@ -118,7 +118,53 @@ namespace BenhVienS
 
         //code của trang tổng quan//
 
+        private void LoadDanhSachBacSi(string tenTim = "", int maChuyenKhoa = 0)
+        {
+            string sql = @"
+    SELECT 
+        bs.MaBacSi,
+        nd.HoTen AS TenBacSi,
+        nd.Email,
+        nd.SoDienThoai,
+        CASE WHEN nd.GioiTinh = 1 THEN N'Nam' ELSE N'Nữ' END AS GioiTinh,
+        ck.TenChuyenKhoa,
+        bs.BangCap,
+        bs.NamKinhNghiem
+    FROM BacSi bs
+    JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
+    LEFT JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
+    WHERE bs.TrangThai = 1
+    ";
 
+            using (SqlConnection conn = dbUtils.GetConnection())
+            using (SqlCommand cmd = new SqlCommand())
+            {
+                if (!string.IsNullOrWhiteSpace(tenTim))
+                {
+                    sql += " AND nd.HoTen LIKE @Ten";
+                    cmd.Parameters.AddWithValue("@Ten", "%" + tenTim + "%");
+                }
+
+                if (maChuyenKhoa > 0)
+                {
+                    sql += " AND bs.MaChuyenKhoa = @MaCK";
+                    cmd.Parameters.AddWithValue("@MaCK", maChuyenKhoa);
+                }
+
+                cmd.CommandText = sql;
+                cmd.Connection = conn;
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+
+                conn.Open();
+                da.Fill(dt);
+
+                // ⭐ GÁN CÙNG DATA
+                dgvDanhsachbacsi.DataSource = dt;
+                dgvbacsi.DataSource = dt;
+            }
+        }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
 
@@ -166,8 +212,7 @@ namespace BenhVienS
         {
             LoadChuyenmon();
 
-            // Tải toàn bộ danh sách bác sĩ khi form mở
-            LoadDanhSachBacSi();
+            
 
             // Tải lịch làm việc hôm nay
             LoadLichLamHomNay();
@@ -195,7 +240,7 @@ namespace BenhVienS
 
             LoadDanhSachVaiTro();
 
-          
+
             LoadDanhSachBacSi();
             TaoMaLichTuDong();
             // Gán dữ liệu mặc định cho ComboBox Trạng thái
@@ -443,88 +488,15 @@ namespace BenhVienS
 
         private void txtTimtenbacsi_TextChanged(object sender, EventArgs e)
         {
-            string ten = txtTimtenbacsi.Text.Trim();
-
-            int maCK = 0;
-            if (cbChuyenkhoa.SelectedValue != null)
-                maCK = Convert.ToInt32(cbChuyenkhoa.SelectedValue);
-
-            LoadDanhSachBacSi(ten, maCK);
+           
         }
 
-        private void LoadDanhSachBacSi(string tenTim = "", int maChuyenKhoa = 0)
-
-        {
-            
-
-            try
-            {
-                using (SqlConnection conn = dbUtils.GetConnection())
-                {
-                    conn.Open();
-
-                    string query = @"
-                        SELECT 
-                            bs.MaBacSi,
-                            nd.HoTen AS TenBacSi,
-                            ck.TenChuyenKhoa,
-                            bs.BangCap,
-                            bs.ChuyenMon,
-                            bs.NamKinhNghiem,
-                            bs.DanhGia,
-                            CASE WHEN bs.TrangThai = 1 
-                                 THEN N'Hoạt động' 
-                                 ELSE N'Ngưng hoạt động' 
-                            END AS TrangThai
-                        FROM BacSi bs
-                        JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
-                        JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
-                        WHERE 1 = 1";
-
-                    SqlCommand cmd = new SqlCommand(query, conn);
-
-                    if (!string.IsNullOrWhiteSpace(tenTim))
-                    {
-                        query += " AND nd.HoTen LIKE @Ten";
-                        cmd.Parameters.AddWithValue("@Ten", "%" + tenTim + "%");
-                    }
-
-                    if (maChuyenKhoa > 0)
-                    {
-                        query += " AND bs.MaChuyenKhoa = @MaChuyenKhoa";
-                        cmd.Parameters.AddWithValue("@MaChuyenKhoa", maChuyenKhoa);
-                    }
-
-                    cmd.CommandText = query;
-
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    dgvDanhsachbacsi.AutoGenerateColumns = false;
-                    dgvDanhsachbacsi.DataSource = dt;
-                    dgvDanhsachbacsi.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải danh sách bác sĩ: " + ex.Message);
-            }
-        }
+       
 
 
         private void cbChuyenkhoa_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string ten = txtTimtenbacsi.Text.Trim();
-
-            int maCK = 0;
-            
-            if (cbChuyenkhoa.SelectedValue != null && int.TryParse(cbChuyenkhoa.SelectedValue.ToString(), out int result))
-            {
-                maCK = result;
-            }
-
-            LoadDanhSachBacSi(ten, maCK);
+           
 
            
         }
@@ -708,17 +680,6 @@ namespace BenhVienS
         {
 
 
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dgvDanhsachlichkham.Rows[e.RowIndex];
-                txtMalich.Text = row.Cells["MaLich"].Value.ToString();
-                txtTenbenhnhan.Text = row.Cells["TenBenhNhan"].Value.ToString();
-                cbBacsi.Text = row.Cells["BacSi"].Value.ToString();
-                cbChuyenkhoa.Text = row.Cells["ChuyenKhoa"].Value.ToString();
-                dtpNgayKham.Value = Convert.ToDateTime(row.Cells["NgayKham"].Value);
-                cbKhunggio.Text = row.Cells["KhungGio"].Value.ToString();
-                cbTragthai.Text = row.Cells["TrangThai"].Value.ToString();
-            }
         }
 
 
@@ -783,10 +744,7 @@ namespace BenhVienS
 
         private void chartThongketaichinh_Click(object sender, EventArgs e)
         {
-            // Xóa dữ liệu cũ
-            chartThongketaichinh.Series.Clear();
-            chartThongketaichinh.Titles.Clear();
-            chartThongketaichinh.Titles.Add("Thống kê tài chính hôm nay");
+           
 
             // Lấy dữ liệu an toàn
             double doanhThu = 0, chiPhi = 0;
@@ -801,15 +759,14 @@ namespace BenhVienS
             series.Points.AddXY("Doanh thu", doanhThu);
             series.Points.AddXY("Chi phí", chiPhi);
 
-            // Thêm vào biểu đồ
-            chartThongketaichinh.Series.Add(series);
+           
         }
 
         private void LoadDataThuChi()
         {
 
             DateTime today = DateTime.Today;
-            dgvDanhsachkhoanthuhomnay.DataSource = GetDanhSachThu(today);
+           
 
 
         }
@@ -1041,43 +998,55 @@ namespace BenhVienS
 
         private void btThemBS_Click(object sender, EventArgs e)
         {
-            frmBacsi frm = new frmBacsi();
-            frm.State = "Them";
-            if (frm.ShowDialog() == DialogResult.OK)
+            frmBacsi f = new frmBacsi();
+            f.State = "Them";
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
-                LoadDanhSachBacSi(); // Load lại GridView ở Form2
+                LoadDanhSachBacSi();
             }
         }
 
         private void btSuaBS_Click(object sender, EventArgs e)
         {
-            if (dgvDanhsachbacsi.CurrentRow != null) // Nếu đã chọn một dòng trên GridView
+            if (dgvDanhsachbacsi.CurrentRow == null) return;
+
+            int maBS = Convert.ToInt32(dgvDanhsachbacsi.CurrentRow.Cells["MaBacSi"].Value);
+
+            frmBacsi f = new frmBacsi();
+            f.State = "Sua";
+            f.MaBacSi = maBS;
+
+            if (f.ShowDialog() == DialogResult.OK)
             {
-                frmBacsi frm = new frmBacsi();
-                frm.State = "Sua";
-
-                // Truyền dữ liệu từ dòng đang chọn sang Form con
-                frm.txtID.Text = dgvDanhsachbacsi.CurrentRow.Cells["ID"].Value.ToString();
-                frm.txtHoten.Text = dgvDanhsachbacsi.CurrentRow.Cells["HoTen"].Value.ToString();
-                frm.cbChuyenkhoa.Text = dgvDanhsachbacsi.CurrentRow.Cells["ChuyenKhoa"].Value.ToString();
-                frm.txtTrinhdo.Text = dgvDanhsachbacsi.CurrentRow.Cells["TrinhDo"].Value.ToString();
-                frm.txtKinhnghiem.Text = dgvDanhsachbacsi.CurrentRow.Cells["KinhNghiem"].Value.ToString();
-                frm.txtSDT.Text = dgvDanhsachbacsi.CurrentRow.Cells["SDT"].Value.ToString();
-                frm.txtEmail.Text = dgvDanhsachbacsi.CurrentRow.Cells["Email"].Value.ToString();
-
-                // ... truyền tiếp các trường khác
-
-                if (frm.ShowDialog() == DialogResult.OK)
-                {
-                    LoadDanhSachBacSi();
-                }
+                LoadDanhSachBacSi();
             }
         }
 
         private void btXoaBS_Click(object sender, EventArgs e)
         {
-            
-            LoadDanhSachBacSi();
+            if (dgvDanhsachbacsi.CurrentRow == null) return;
+
+            int maBS = Convert.ToInt32(dgvDanhsachbacsi.CurrentRow.Cells["MaBacSi"].Value);
+
+            if (MessageBox.Show("Xóa bác sĩ này?", "Xác nhận",
+                MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                using (SqlConnection conn = dbUtils.GetConnection())
+                {
+                    string sql = @"
+            UPDATE BacSi SET TrangThai = 0 WHERE MaBacSi = @Ma;
+            UPDATE NguoiDung SET TrangThai = 0
+            WHERE MaNguoiDung = (SELECT MaNguoiDung FROM BacSi WHERE MaBacSi=@Ma)";
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@Ma", maBS);
+
+                    conn.Open();
+                    cmd.ExecuteNonQuery();
+                }
+
+                LoadDanhSachBacSi();
+            }
         }
 
        /// bool isAddMode = false;
@@ -1117,7 +1086,7 @@ namespace BenhVienS
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                dgvDanhsachlichkham.DataSource = dt;
+               
             }
         }
 
@@ -1372,42 +1341,12 @@ namespace BenhVienS
         {
             DateTime selectedDate = dateLocngay.Value.Date;
         }
-        void LoadDanhSachBacSi()
-        {
-            
-
-            using (SqlConnection conn = dbUtils.GetConnection())
-            {
-                SqlDataAdapter da = new SqlDataAdapter(@"
-            SELECT
-                bs.MaBacSi,
-                nd.HoTen,
-                nd.Email,
-                nd.SoDienThoai,
-                CASE 
-                    WHEN nd.GioiTinh = 1 THEN N'Nam'
-                    ELSE N'Nữ'
-                END AS GioiTinh,
-                ck.TenChuyenKhoa,
-                bs.BangCap,
-                bs.TrangThai
-            FROM BacSi bs
-            JOIN NguoiDung nd ON bs.MaNguoiDung = nd.MaNguoiDung
-            JOIN ChuyenKhoa ck ON bs.MaChuyenKhoa = ck.MaChuyenKhoa
-            WHERE nd.TrangThai = 1",
-                    conn);
-
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-
-                dgvbacsi.DataSource = dt;
-            }
-        }
+        
         private void dateDenngay_ValueChanged(object sender, EventArgs e)
         {
             DateTime selectedDate = dateDenngay.Value.Date;
         }
-
+        
         private void btnTimkiemngay_Click(object sender, EventArgs e)
         {
             DateTime tuNgay = dateLocngay.Value.Date;
