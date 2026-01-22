@@ -17,9 +17,6 @@ namespace BenhVienS
         private Panel leftBorderBtn;
         private List<Control> _defaultPanelControls;
 
-        // Chuỗi kết nối (Nên để ở một file cấu hình riêng nhưng tạm thời giữ đây theo code của bạn)
-        private string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENV1;Trusted_Connection=True;TrustServerCertificate=True;";
-
         public DuocSi()
         {
             InitializeComponent();
@@ -86,7 +83,7 @@ namespace BenhVienS
 
         private void LoadDashboardStats()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {

@@ -13,8 +13,6 @@ namespace BenhVienS
 {
     public partial class ucCD : UserControl
     {
-        // Sử dụng một chuỗi kết nối duy nhất để tránh nhầm lẫn
-        private string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENV1;Trusted_Connection=True;TrustServerCertificate=True;";
         private string maDuocSiHienTai;
 
         public ucCD(string maDuocSi)
@@ -39,7 +37,7 @@ namespace BenhVienS
         #region 1. Tải dữ liệu Dược sĩ (Profile)
         private void LoadDataDuocSi()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
@@ -87,7 +85,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
@@ -125,7 +123,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
@@ -174,7 +172,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {

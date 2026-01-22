@@ -172,6 +172,7 @@
             this.dgvChiTietDonThuoc.RowTemplate.Height = 24;
             this.dgvChiTietDonThuoc.Size = new System.Drawing.Size(443, 330);
             this.dgvChiTietDonThuoc.TabIndex = 6;
+            this.dgvChiTietDonThuoc.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChiTietDonThuoc_CellContentClick);
             // 
             // lbBacSi
             // 

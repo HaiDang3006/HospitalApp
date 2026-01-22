@@ -354,6 +354,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dskham.resx">
       <DependentUpon>dskham.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DuocSi.resx">
       <DependentUpon>DuocSi.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,6 +404,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uclichhensaptoi.resx">
       <DependentUpon>uclichhensaptoi.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucCD.resx">
       <DependentUpon>ucCD.cs</DependentUpon>
     </EmbeddedResource>
@@ -430,6 +432,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucttbv.resx">
       <DependentUpon>ucttbv.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucQuanLyDonThuoc.resx">
       <DependentUpon>ucQuanLyDonThuoc.cs</DependentUpon>
     </EmbeddedResource>

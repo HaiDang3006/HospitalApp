@@ -13,8 +13,6 @@ namespace BenhVienS
 {
     public partial class ucQuanLyDonThuoc : UserControl
     {
-        // Chuỗi kết nối
-        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENV1;Trusted_Connection=True;TrustServerCertificate=True;";
         private int maDuocSi = 5;       // Giả sử ID Dược sĩ đang đăng nhập là 5
         private int maQuayHienTai = 1;
         public ucQuanLyDonThuoc()
@@ -41,7 +39,7 @@ namespace BenhVienS
 
         private void HienThiChiTietDonThuoc(int maDonThuoc)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
@@ -127,7 +125,7 @@ namespace BenhVienS
         #region 1. Tải Danh Sách Đơn Thuốc (Master)
         private void LoadDanhSachDonThuoc()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
@@ -193,7 +191,7 @@ namespace BenhVienS
             if (MessageBox.Show("Xác nhận xuất thuốc cho đơn này và trừ tồn kho?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
                 return;
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 conn.Open();
                 SqlTransaction trans = conn.BeginTransaction();
@@ -258,6 +256,11 @@ namespace BenhVienS
             // Ngăn chặn người dùng thêm dòng trực tiếp trên lưới
             dgvDonThuoc.AllowUserToAddRows = false;
             dgvChiTietDonThuoc.AllowUserToAddRows = false;
+        }
+
+        private void dgvChiTietDonThuoc_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

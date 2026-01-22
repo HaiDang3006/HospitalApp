@@ -13,8 +13,6 @@ namespace BenhVienS
 {
     public partial class ucDanhMucThuoc : UserControl
     {
-        // Chuỗi kết nối đến Database
-        string connectionString = "Server=MSI\\SQLEXPRESS;Database=BENHVIENV1;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public ucDanhMucThuoc()
         {
@@ -26,7 +24,7 @@ namespace BenhVienS
         // Hàm tải dữ liệu lên DataGridView (Lấy đầy đủ các cột từ SQL Schema mới)
         public void LoadData()
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
@@ -108,7 +106,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
@@ -147,7 +145,7 @@ namespace BenhVienS
             DataGridViewRow row = dgvDanhMucThuoc.CurrentRow;
             int maThuoc = Convert.ToInt32(row.Cells["MaThuoc"].Value);
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = new SqlConnection())
             {
                 try
                 {
@@ -190,7 +188,7 @@ namespace BenhVienS
 
             if (MessageBox.Show($"Bạn có chắc muốn xóa thuốc {tenThuoc}?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = dbUtils.GetConnection())
                 {
                     try
                     {
@@ -227,7 +225,7 @@ namespace BenhVienS
                 return;
             }
 
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            using (SqlConnection conn = dbUtils.GetConnection())
             {
                 try
                 {
