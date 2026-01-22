@@ -40,6 +40,7 @@ namespace BenhVienS.Repository
 
         public static Doctor DoctorByUserId(int userId)
         {
+            Doctor doctor = new Doctor();
             string sql = @"
                             SELECT *
                             FROM BacSi
@@ -57,12 +58,12 @@ namespace BenhVienS.Repository
                     {
                         if (reader.Read())
                         {
-                            return DoctorMapper.DoctorToMap(reader);
+                            doctor = DoctorMapper.DoctorToMap(reader);
                         }
                     }
                 }
             }
-            return null;
+            return doctor;
         }
 
     }

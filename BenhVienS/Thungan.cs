@@ -68,5 +68,31 @@ namespace BenhVienS
         {
 
         }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (dgvChuaThuTien.CurrentRow == null)
+            {
+                MessageBox.Show("Chọn đơn thuốc cần xử lý!");
+                return;
+            }
+
+            DataGridViewRow row = dgvChuaThuTien.CurrentRow;
+
+            // Clone dòng
+            int index = dgvCanXuLy.Rows.Add();
+            for (int i = 0; i < row.Cells.Count; i++)
+            {
+                dgvCanXuLy.Rows[index].Cells[i].Value = row.Cells[i].Value;
+            }
+
+            // Xóa khỏi bảng cũ
+            dgvChuaThuTien.Rows.Remove(row);
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

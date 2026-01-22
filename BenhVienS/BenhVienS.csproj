@@ -96,6 +96,12 @@
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </Compile>
     <Compile Include="dbUtils.cs" />
+    <Compile Include="dshoadon.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="dshoadon.Designer.cs">
+      <DependentUpon>dshoadon.cs</DependentUpon>
+    </Compile>
     <Compile Include="dskham.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -342,6 +348,9 @@
     <EmbeddedResource Include="Dangnhap.resx">
       <DependentUpon>Dangnhap.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="dshoadon.resx">
+      <DependentUpon>dshoadon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="dskham.resx">
       <DependentUpon>dskham.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,8 +394,14 @@
     <EmbeddedResource Include="thembenhnhan.resx">
       <DependentUpon>thembenhnhan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Thungan.resx">
+      <DependentUpon>Thungan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TrangchuBVS.resx">
       <DependentUpon>TrangchuBVS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ttvphi.resx">
+      <DependentUpon>ttvphi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucQlibacsi.resx">
       <DependentUpon>ucQlibacsi.cs</DependentUpon>
