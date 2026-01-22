@@ -44,6 +44,7 @@
             this.lbCanhBao = new System.Windows.Forms.Label();
             this.btNhapMoi = new System.Windows.Forms.Button();
             this.btLuu = new System.Windows.Forms.Button();
+            this.lbTongTien = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -187,7 +188,7 @@
             // 
             this.lbCanhBao.AutoSize = true;
             this.lbCanhBao.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCanhBao.Location = new System.Drawing.Point(315, 569);
+            this.lbCanhBao.Location = new System.Drawing.Point(214, 567);
             this.lbCanhBao.Name = "lbCanhBao";
             this.lbCanhBao.Size = new System.Drawing.Size(86, 20);
             this.lbCanhBao.TabIndex = 5;
@@ -215,11 +216,22 @@
             this.btLuu.UseVisualStyleBackColor = true;
             this.btLuu.Click += new System.EventHandler(this.btLuu_Click);
             // 
+            // lbTongTien
+            // 
+            this.lbTongTien.AutoSize = true;
+            this.lbTongTien.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbTongTien.Location = new System.Drawing.Point(352, 567);
+            this.lbTongTien.Name = "lbTongTien";
+            this.lbTongTien.Size = new System.Drawing.Size(92, 20);
+            this.lbTongTien.TabIndex = 9;
+            this.lbTongTien.Text = "Tổng Tiền:";
+            // 
             // ucDanhSachNhapThuoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.Controls.Add(this.lbTongTien);
             this.Controls.Add(this.btLuu);
             this.Controls.Add(this.btNhapMoi);
             this.Controls.Add(this.lbCanhBao);
@@ -259,5 +271,6 @@
         private System.Windows.Forms.Label lbCanhBao;
         private System.Windows.Forms.Button btNhapMoi;
         private System.Windows.Forms.Button btLuu;
+        private System.Windows.Forms.Label lbTongTien;
     }
 }

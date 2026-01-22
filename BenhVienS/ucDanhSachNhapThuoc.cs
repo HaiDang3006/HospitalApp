@@ -38,14 +38,15 @@ namespace BenhVienS
                     t.TenThuoc,
                     t.HoatChat,
                     q.TenQuay,
-                    tk.SoLuongTon,
+                    tk.SoLuongTon,      -- Tồn kho hiện tại
+                    tk.SoLuongNhap,     -- Cột Mới: Số lượng vừa nhập
+                    tk.TongTienNhap,    -- Cột Mới: Thành tiền nhập
                     tk.SoLuongToiThieu,
-                    tk.SoLuongToiDa,
                     t.DonViTinh,
                     tk.NgayNhap,
                     tk.NgayHetHan,
                     t.GiaBan,
-                    t.GiaNhap
+                    t.GiaNhap           -- Cần cột này để tính tiền
                 FROM TonKhoThuoc tk
                 INNER JOIN Thuoc t ON tk.MaThuoc = t.MaThuoc
                 INNER JOIN QuayThuoc q ON tk.MaQuayThuoc = q.MaQuayThuoc
@@ -64,7 +65,7 @@ namespace BenhVienS
             if (chkSapHetHang.Checked)
                 query += " AND tk.SoLuongTon < tk.SoLuongToiThieu "; // So sánh với cột tối thiểu trong DB
 
-            query += " ORDER BY tk.NgayHetHan ASC, tk.SoLuongTon ASC";
+            query += " ORDER BY tk.NgayNhap DESC";
 
             try
             {
@@ -105,15 +106,28 @@ namespace BenhVienS
                 dgvKho.Columns["TenThuoc"].HeaderText = "Tên Thuốc";
                 dgvKho.Columns["HoatChat"].HeaderText = "Hoạt Chất";
                 dgvKho.Columns["TenQuay"].HeaderText = "Vị Trí";
-                dgvKho.Columns["SoLuongTon"].HeaderText = "SL Tồn";
-                dgvKho.Columns["SoLuongToiThieu"].HeaderText = "Mức T.Thiểu";
-                dgvKho.Columns["SoLuongToiDa"].HeaderText = "Mức T.Đa";
+                dgvKho.Columns["SoLuongTon"].HeaderText = "Tồn Kho";
+               
+                dgvKho.Columns["SoLuongTon"].ReadOnly = true; // Chỉ xem, không sửa trực tiếp
+                dgvKho.Columns["SoLuongTon"].DefaultCellStyle.BackColor = Color.LightGray; // Làm xám để biết là read-only
+
+                dgvKho.Columns["SoLuongNhap"].HeaderText = "SL Nhập Mới";
+                dgvKho.Columns["SoLuongNhap"].DefaultCellStyle.BackColor = Color.LightYellow; // Làm nổi bật ô cần nhập
+
+                dgvKho.Columns["TongTienNhap"].HeaderText = "Thành Tiền";
+                dgvKho.Columns["TongTienNhap"].ReadOnly = true; // Tự động tính, không cho nhập tay
+               
+                dgvKho.Columns["SoLuongToiThieu"].HeaderText = "Mức Min";                
                 dgvKho.Columns["DonViTinh"].HeaderText = "ĐVT";
                 dgvKho.Columns["NgayNhap"].HeaderText = "Ngày Nhập";
                 dgvKho.Columns["NgayHetHan"].HeaderText = "Hạn Dùng";
                 dgvKho.Columns["GiaBan"].HeaderText = "Giá Bán";
+                dgvKho.Columns["GiaNhap"].HeaderText = "Giá Nhập";
+
 
                 dgvKho.Columns["GiaBan"].DefaultCellStyle.Format = "N0";
+                dgvKho.Columns["GiaNhap"].DefaultCellStyle.Format = "N0";
+                dgvKho.Columns["TongTienNhap"].DefaultCellStyle.Format = "N0";
                 dgvKho.Columns["NgayNhap"].DefaultCellStyle.Format = "dd/MM/yyyy";
                 dgvKho.Columns["NgayHetHan"].DefaultCellStyle.Format = "dd/MM/yyyy";
 
@@ -127,6 +141,7 @@ namespace BenhVienS
             lbTongMatHang.Text = "Tổng mặt hàng: " + (tongMatHang < 0 ? 0 : tongMatHang);
 
             int soLuongCanhBao = 0;
+            decimal tongTienCaKho = 0;
 
             foreach (DataGridViewRow row in dgvKho.Rows)
             {
@@ -151,9 +166,17 @@ namespace BenhVienS
                     row.DefaultCellStyle.BackColor = Color.White;
                     row.DefaultCellStyle.ForeColor = Color.Black;
                 }
+
+                if (row.Cells["TongTienNhap"].Value != null)
+                {
+                    decimal tienRow = 0;
+                    decimal.TryParse(row.Cells["TongTienNhap"].Value.ToString(), out tienRow);
+                    tongTienCaKho += tienRow;
+                }
             }
             lbCanhBao.Text = "Cảnh báo: " + soLuongCanhBao;
             lbCanhBao.ForeColor = soLuongCanhBao > 0 ? Color.Red : Color.Green;
+            lbTongTien.Text = "Tổng vốn nhập: " + tongTienCaKho.ToString("N0") + " đ";
         }
         #endregion
 
@@ -161,8 +184,14 @@ namespace BenhVienS
         private void btNhapMoi_Click(object sender, EventArgs e)
         {
             TaoCotNhapLieu();
+            if (dgvKho.Columns.Contains("SoLuongNhap"))
+            {
+                dgvKho.Columns["SoLuongNhap"].DefaultCellStyle.BackColor = Color.LightYellow;
+            }
+
             if (dgvKho.RowCount > 0)
             {
+                // Focus vào ô chọn thuốc dòng cuối
                 dgvKho.CurrentCell = dgvKho.Rows[dgvKho.RowCount - 1].Cells["cbxTenThuoc"];
                 dgvKho.BeginEdit(true);
             }
@@ -206,7 +235,7 @@ namespace BenhVienS
         #region 4. Lưu dữ liệu (Transaction & Upsert Logic)
         private void btLuu_Click(object sender, EventArgs e)
         {
-            dgvKho.EndEdit();
+            dgvKho.EndEdit(); // Kết thúc mọi chỉnh sửa trên lưới
             int rowsSaved = 0;
 
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -219,46 +248,81 @@ namespace BenhVienS
                     {
                         if (row.IsNewRow) continue;
 
-                        // Chỉ lưu những dòng chưa có ID
+                        // CHỈ XỬ LÝ DÒNG ĐANG NHẬP MỚI (Dòng chưa có Mã Tồn Kho)
                         if (row.Cells["MaTonKho"].Value == null || string.IsNullOrEmpty(row.Cells["MaTonKho"].Value.ToString()))
                         {
                             var maThuoc = row.Cells["cbxTenThuoc"].Value;
                             var maQuay = row.Cells["cbxQuay"].Value;
-                            var sl = row.Cells["SoLuongTon"].Value ?? 0;
+
+                            // 1. Lấy Số lượng NHẬP (Lưu ý: lấy từ cột SoLuongNhap, không phải SoLuongTon)
+                            int slNhap = 0;
+                            if (row.Cells["SoLuongNhap"].Value != null)
+                                int.TryParse(row.Cells["SoLuongNhap"].Value.ToString(), out slNhap);
+
+                            if (maThuoc == null || maQuay == null || slNhap <= 0) continue;
+
                             var ngayHH = row.Cells["NgayHetHan"].Value ?? DateTime.Now.AddYears(1);
 
-                            if (maThuoc == null || maQuay == null) continue;
+                            // 2. Lấy Giá Nhập từ lưới (đã được load lên từ hàm HienThi)
+                            decimal giaNhap = 0;
+                            if (row.Cells["GiaNhap"].Value != null)
+                                decimal.TryParse(row.Cells["GiaNhap"].Value.ToString(), out giaNhap);
 
-                            // Logic UPSERT: Tránh lỗi trùng MaThuoc-MaQuay theo Unique Constraint trong SQL
+                            // 3. Tính Thành Tiền
+                            decimal thanhTien = slNhap * giaNhap;
+
+                            // 4. Thực thi SQL
                             string sql = @"
-                                IF EXISTS (SELECT 1 FROM TonKhoThuoc WHERE MaThuoc = @MaT AND MaQuayThuoc = @MaQ)
-                                BEGIN
-                                    UPDATE TonKhoThuoc SET SoLuongTon = SoLuongTon + @SL, NgayHetHan = @HSD
-                                    WHERE MaThuoc = @MaT AND MaQuayThuoc = @MaQ
-                                END
-                                ELSE
-                                BEGIN
-                                    INSERT INTO TonKhoThuoc (MaThuoc, MaQuayThuoc, SoLuongTon, NgayHetHan, NgayNhap)
-                                    VALUES (@MaT, @MaQ, @SL, @HSD, GETDATE())
-                                END";
+                        IF EXISTS (SELECT 1 FROM TonKhoThuoc WHERE MaThuoc = @MaT AND MaQuayThuoc = @MaQ)
+                        BEGIN
+                            -- UPDATE: Cộng dồn tồn kho, cập nhật thông tin nhập lần cuối
+                            UPDATE TonKhoThuoc 
+                            SET SoLuongTon = SoLuongTon + @SL, 
+                                SoLuongNhap = @SL,             
+                                TongTienNhap = @ThanhTien,     
+                                NgayHetHan = @HSD,
+                                NgayNhap = GETDATE()
+                            WHERE MaThuoc = @MaT AND MaQuayThuoc = @MaQ
+                        END
+                        ELSE
+                        BEGIN
+                            -- INSERT: Thêm mới hoàn toàn (Lúc này Tồn kho = SL Nhập)
+                            INSERT INTO TonKhoThuoc (MaThuoc, MaQuayThuoc, SoLuongTon, SoLuongNhap, TongTienNhap, NgayHetHan, NgayNhap)
+                            VALUES (@MaT, @MaQ, @SL, @SL, @ThanhTien, @HSD, GETDATE())
+                        END";
 
                             SqlCommand cmd = new SqlCommand(sql, conn, trans);
                             cmd.Parameters.AddWithValue("@MaT", maThuoc);
                             cmd.Parameters.AddWithValue("@MaQ", maQuay);
-                            cmd.Parameters.AddWithValue("@SL", sl);
+                            cmd.Parameters.AddWithValue("@SL", slNhap);        // Số lượng nhập
+                            cmd.Parameters.AddWithValue("@ThanhTien", thanhTien); // Tổng tiền
                             cmd.Parameters.AddWithValue("@HSD", ngayHH);
+
                             cmd.ExecuteNonQuery();
                             rowsSaved++;
                         }
                     }
                     trans.Commit();
-                    MessageBox.Show($"Đã xử lý thành công {rowsSaved} mục tồn kho!");
-                    HienThiDanhSachKho();
+
+                    if (rowsSaved > 0)
+                    {
+                        MessageBox.Show($"Đã nhập kho {rowsSaved} phiếu thành công!", "Thông báo");
+
+                        // 1. Tải lại dữ liệu mới nhất từ Database
+                        HienThiDanhSachKho();
+
+                        // 2. Trả giao diện về ban đầu (Xóa cột nhập, hiện cột xem)
+                        ResetGiaoDien();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Không có dữ liệu mới để lưu.", "Cảnh báo");
+                    }
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    MessageBox.Show("Lỗi khi lưu: " + ex.Message);
+                    MessageBox.Show("Lỗi: " + ex.Message);
                 }
             }
         }
@@ -290,5 +354,26 @@ namespace BenhVienS
             catch (Exception ex) { MessageBox.Show("Lỗi load quầy: " + ex.Message); }
         }
         #endregion
+
+        private void ResetGiaoDien()
+        {
+            // 1. Xóa cột ComboBox chọn thuốc/quầy nếu đang tồn tại
+            if (dgvKho.Columns.Contains("cbxTenThuoc"))
+                dgvKho.Columns.Remove("cbxTenThuoc");
+
+            if (dgvKho.Columns.Contains("cbxQuay"))
+                dgvKho.Columns.Remove("cbxQuay");
+
+            // 2. Hiện lại cột Tên Thuốc và Vị Trí (dạng text) để xem
+            if (dgvKho.Columns.Contains("TenThuoc"))
+                dgvKho.Columns["TenThuoc"].Visible = true;
+
+            if (dgvKho.Columns.Contains("TenQuay"))
+                dgvKho.Columns["TenQuay"].Visible = true;
+
+            // 3. Reset màu nền của cột Số lượng nhập về mặc định (trắng)
+            if (dgvKho.Columns.Contains("SoLuongNhap"))
+                dgvKho.Columns["SoLuongNhap"].DefaultCellStyle.BackColor = Color.White;
+        }
     }
 }
