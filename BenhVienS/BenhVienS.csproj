@@ -168,9 +168,15 @@
     </Compile>
     <Compile Include="MapperSql\DoctorMapper.cs" />
     <Compile Include="MapperSql\ExaminationFormMapper.cs" />
+    <Compile Include="MapperSql\MedicineMapper.cs" />
     <Compile Include="MapperSql\PatientMapper.cs" />
+    <Compile Include="MapperSql\PrescriptionDetailMapper.cs" />
+    <Compile Include="MapperSql\PrescriptionMapper.cs" />
     <Compile Include="MapperSql\UserMapper.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\Medicine.cs" />
+    <Compile Include="Models\Prescription.cs" />
+    <Compile Include="Models\PrescriptionDetail.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UserSession.cs" />
     <Compile Include="Models\Doctor.cs" />
@@ -192,6 +198,8 @@
     </Compile>
     <Compile Include="MapperSql\AppointmentMapper.cs" />
     <Compile Include="Repository\ExaminationFormRepository.cs" />
+    <Compile Include="Repository\MedicineRepository.cs" />
+    <Compile Include="Repository\PrescriptionRepository.cs" />
     <Compile Include="Service\AuthService\AuthService.cs" />
     <Compile Include="Service\ExamianForm.cs" />
     <Compile Include="Service\ExaminationFormService\ExaminationFormService.cs" />
@@ -202,7 +210,9 @@
     <Compile Include="Repository\UserRepository.cs" />
     <Compile Include="Service\AppointmentService\AppointmentService.cs" />
     <Compile Include="Service\DoctorSerice\DoctorService.cs" />
+    <Compile Include="Service\MedicineService\MedicineService.cs" />
     <Compile Include="Service\PatientService\PatientService.cs" />
+    <Compile Include="Service\Prescription\PrescriptionService.cs" />
     <Compile Include="Service\UserService\UserService.cs" />
     <Compile Include="thembenhnhan.cs">
       <SubType>Form</SubType>

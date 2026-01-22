@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace BenhVienS.Helper_UI
 {
-    public static class GraphicsHelper
+    public static class GraphicsHelpers
     {
         public static void SetBorderRadius(Panel panel, int radius)
         {
