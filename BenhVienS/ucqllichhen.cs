@@ -61,9 +61,9 @@ namespace BenhVienS
             cboLyDoKham.Items.Clear();
             cboLyDoKham.Items.AddRange(new object[]
             {
-        "Khám tổng quát",
-        "Tái khám",
-        "Khám chuyên khoa"
+                    "Khám tổng quát",
+                    "Tái khám",
+                    "Khám chuyên khoa"
             });
 
             // ===== TRẠNG THÁI (ĐỒNG BỘ VỚI DATABASE) =====
@@ -234,6 +234,11 @@ namespace BenhVienS
                 }
             }
             catch (Exception ex) { MessageBox.Show("Lỗi cập nhật: " + ex.Message); }
+        }
+
+        private void ucqllichhen_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -359,6 +359,7 @@
     </Compile>
     <Compile Include="ucmkadmin.Designer.cs">
       <DependentUpon>ucmkadmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucletanbenhnhan.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -486,8 +487,6 @@
     <EmbeddedResource Include="LeTan.resx">
       <DependentUpon>LeTan.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Lichhen.resx">
-      <DependentUpon>Lichhen.cs</DependentUpon>
     <EmbeddedResource Include="uctaolichhen.resx">
       <DependentUpon>uctaolichhen.cs</DependentUpon>
     </EmbeddedResource>
@@ -534,6 +533,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucmkadmin.resx">
       <DependentUpon>ucmkadmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucletanbenhnhan.resx">
       <DependentUpon>ucletanbenhnhan.cs</DependentUpon>
     </EmbeddedResource>
@@ -549,13 +549,11 @@
     <EmbeddedResource Include="ucqltaikhoanvaphanquyen.resx">
       <DependentUpon>ucqltaikhoanvaphanquyen.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ucttbenhnhan.resx">
-      <DependentUpon>ucttbenhnhan.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <EmbeddedResource Include="ucttbenhnhan.resx">
       <DependentUpon>ucttbenhnhan.cs</DependentUpon>
     </EmbeddedResource>
+
     <EmbeddedResource Include="ucttbv.resx">
       <DependentUpon>ucttbv.cs</DependentUpon>
     </EmbeddedResource>

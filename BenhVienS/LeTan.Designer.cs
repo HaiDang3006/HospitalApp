@@ -160,7 +160,6 @@
             // 
             // pictureBox11
             // 
-            this.pictureBox11.Image = global::BenhVienS.Properties.Resources.on_off_button_removebg_preview2;
             this.pictureBox11.Location = new System.Drawing.Point(2, 556);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(58, 54);
@@ -180,7 +179,6 @@
             // 
             // pictureBox8
             // 
-            this.pictureBox8.Image = global::BenhVienS.Properties.Resources.document5;
             this.pictureBox8.Location = new System.Drawing.Point(3, 116);
             this.pictureBox8.Name = "pictureBox8";
             this.pictureBox8.Size = new System.Drawing.Size(58, 54);
@@ -190,7 +188,6 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::BenhVienS.Properties.Resources.calendar2;
             this.pictureBox2.Location = new System.Drawing.Point(0, 56);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(58, 54);
@@ -220,7 +217,6 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::BenhVienS.Properties.Resources.patient__1__removebg_preview2;
             this.pictureBox3.Location = new System.Drawing.Point(3, 3);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(53, 50);
