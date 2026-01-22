@@ -31,14 +31,14 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.dgvDonThuoc = new System.Windows.Forms.DataGridView();
-            this.btTimkiem = new System.Windows.Forms.Button();
-            this.txtTimkiem = new System.Windows.Forms.TextBox();
+            this.dgvDanhMucThuoc = new System.Windows.Forms.DataGridView();
+            this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.btThem = new System.Windows.Forms.Button();
             this.btSua = new System.Windows.Forms.Button();
             this.btXoa = new System.Windows.Forms.Button();
+            this.btTimkiem = new System.Windows.Forms.Button();
             this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDonThuoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDanhMucThuoc)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -52,14 +52,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "DANH MỤC THUỐC";
             // 
-            // directorySearcher1
-            // 
-       
-            // 
-            // directorySearcher2
-            // 
-          
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
@@ -71,50 +63,35 @@
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Controls.Add(this.dgvDonThuoc);
+            this.panel3.Controls.Add(this.dgvDanhMucThuoc);
             this.panel3.Location = new System.Drawing.Point(0, 110);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(907, 422);
             this.panel3.TabIndex = 10;
             // 
-            // dgvDonThuoc
+            // dgvDanhMucThuoc
             // 
-            this.dgvDonThuoc.AllowUserToAddRows = false;
-            this.dgvDonThuoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvDonThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDonThuoc.Location = new System.Drawing.Point(3, 0);
-            this.dgvDonThuoc.Name = "dgvDonThuoc";
-            this.dgvDonThuoc.ReadOnly = true;
-            this.dgvDonThuoc.RowHeadersVisible = false;
-            this.dgvDonThuoc.RowHeadersWidth = 51;
-            this.dgvDonThuoc.RowTemplate.Height = 24;
-            this.dgvDonThuoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvDonThuoc.Size = new System.Drawing.Size(889, 410);
-            this.dgvDonThuoc.TabIndex = 1;
+            this.dgvDanhMucThuoc.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvDanhMucThuoc.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDanhMucThuoc.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvDanhMucThuoc.Location = new System.Drawing.Point(3, 0);
+            this.dgvDanhMucThuoc.Name = "dgvDanhMucThuoc";
+            this.dgvDanhMucThuoc.RowHeadersVisible = false;
+            this.dgvDanhMucThuoc.RowHeadersWidth = 51;
+            this.dgvDanhMucThuoc.RowTemplate.Height = 24;
+            this.dgvDanhMucThuoc.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvDanhMucThuoc.Size = new System.Drawing.Size(889, 410);
+            this.dgvDanhMucThuoc.TabIndex = 1;
             // 
-            // btTimkiem
+            // txtTimKiem
             // 
-            this.btTimkiem.BackColor = System.Drawing.Color.CornflowerBlue;
-            this.btTimkiem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btTimkiem.FlatAppearance.BorderSize = 0;
-            this.btTimkiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btTimkiem.ImageKey = "(none)";
-            this.btTimkiem.Location = new System.Drawing.Point(493, 67);
-            this.btTimkiem.Name = "btTimkiem";
-            this.btTimkiem.Size = new System.Drawing.Size(42, 27);
-            this.btTimkiem.TabIndex = 6;
-            this.btTimkiem.UseVisualStyleBackColor = false;
-            // 
-            // txtTimkiem
-            // 
-            this.txtTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTimkiem.ForeColor = System.Drawing.Color.DarkGray;
-            this.txtTimkiem.Location = new System.Drawing.Point(3, 65);
-            this.txtTimkiem.Name = "txtTimkiem";
-            this.txtTimkiem.Size = new System.Drawing.Size(484, 30);
-            this.txtTimkiem.TabIndex = 5;
-            this.txtTimkiem.Text = "Nhập mã đơn, họ tên bệnh nhân";
+            this.txtTimKiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimKiem.ForeColor = System.Drawing.Color.DarkGray;
+            this.txtTimKiem.Location = new System.Drawing.Point(3, 65);
+            this.txtTimKiem.Name = "txtTimKiem";
+            this.txtTimKiem.Size = new System.Drawing.Size(484, 30);
+            this.txtTimKiem.TabIndex = 5;
+            this.txtTimKiem.Text = "Tìm kiếm...";
             // 
             // btThem
             // 
@@ -125,6 +102,7 @@
             this.btThem.TabIndex = 11;
             this.btThem.Text = "Thêm";
             this.btThem.UseVisualStyleBackColor = true;
+            this.btThem.Click += new System.EventHandler(this.btThem_Click);
             // 
             // btSua
             // 
@@ -135,6 +113,7 @@
             this.btSua.TabIndex = 12;
             this.btSua.Text = "Sửa";
             this.btSua.UseVisualStyleBackColor = true;
+            this.btSua.Click += new System.EventHandler(this.btSua_Click);
             // 
             // btXoa
             // 
@@ -145,6 +124,23 @@
             this.btXoa.TabIndex = 13;
             this.btXoa.Text = "Xóa";
             this.btXoa.UseVisualStyleBackColor = true;
+            this.btXoa.Click += new System.EventHandler(this.btXoa_Click);
+            // 
+            // btTimkiem
+            // 
+            this.btTimkiem.BackColor = System.Drawing.Color.CornflowerBlue;
+            this.btTimkiem.BackgroundImage = global::BenhVienS.Properties.Resources.Search_White_Transparent__Search_Icon__Search_Icons__Search_Clipart__Magnifying_Glass_PNG_Image_For_Free_Download_removebg_preview;
+            this.btTimkiem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btTimkiem.FlatAppearance.BorderSize = 0;
+            this.btTimkiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btTimkiem.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btTimkiem.ImageKey = "(none)";
+            this.btTimkiem.Location = new System.Drawing.Point(493, 67);
+            this.btTimkiem.Name = "btTimkiem";
+            this.btTimkiem.Size = new System.Drawing.Size(42, 27);
+            this.btTimkiem.TabIndex = 6;
+            this.btTimkiem.UseVisualStyleBackColor = false;
+            this.btTimkiem.Click += new System.EventHandler(this.btTimkiem_Click);
             // 
             // ucDanhMucThuoc
             // 
@@ -156,13 +152,13 @@
             this.Controls.Add(this.btThem);
             this.Controls.Add(this.btTimkiem);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtTimkiem);
+            this.Controls.Add(this.txtTimKiem);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.panel3);
             this.Name = "ucDanhMucThuoc";
             this.Size = new System.Drawing.Size(907, 603);
             this.panel3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDonThuoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDanhMucThuoc)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -173,9 +169,9 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView dgvDonThuoc;
+        private System.Windows.Forms.DataGridView dgvDanhMucThuoc;
         private System.Windows.Forms.Button btTimkiem;
-        private System.Windows.Forms.TextBox txtTimkiem;
+        private System.Windows.Forms.TextBox txtTimKiem;
         private System.Windows.Forms.Button btThem;
         private System.Windows.Forms.Button btSua;
         private System.Windows.Forms.Button btXoa;

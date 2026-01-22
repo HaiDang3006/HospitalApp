@@ -354,6 +354,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="dskham.resx">
       <DependentUpon>dskham.cs</DependentUpon>
+    <EmbeddedResource Include="DuocSi.resx">
+      <DependentUpon>DuocSi.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
@@ -401,6 +403,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="uclichhensaptoi.resx">
       <DependentUpon>uclichhensaptoi.cs</DependentUpon>
+    <EmbeddedResource Include="ucCD.resx">
+      <DependentUpon>ucCD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucDanhMucThuoc.resx">
+      <DependentUpon>ucDanhMucThuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucDanhSachNhapThuoc.resx">
+      <DependentUpon>ucDanhSachNhapThuoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucQlibacsi.resx">
       <DependentUpon>ucQlibacsi.cs</DependentUpon>
@@ -420,6 +430,8 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ucttbv.resx">
       <DependentUpon>ucttbv.cs</DependentUpon>
+    <EmbeddedResource Include="ucQuanLyDonThuoc.resx">
+      <DependentUpon>ucQuanLyDonThuoc.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="benhvienvsDataSet.xsc">
       <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
@@ -462,6 +474,13 @@
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview1.png" />
     <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview2.png" />
     <None Include="Resources\4a8bae08568f81029a018d1fdd439a4d-removebg-preview.png" />
+    <None Include="Resources\1.png" />
+    <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview.png" />
+    <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview1.png" />
+    <Content Include="Resources\17b4557bc883c78782564ec7283bf15a-removebg-preview2.png" />
+    <None Include="Resources\4.png" />
+    <None Include="Resources\3.png" />
+    <None Include="Resources\2.png" />
     <Content Include="Resources\5248a67978b9ac609717e0cdd691c7a9-removebg-preview.png" />
     <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview.png" />
     <Content Include="Resources\56f8205850dc6a2e92c791a67e91da6f-removebg-preview1.png" />
@@ -542,6 +561,7 @@
     <Content Include="Resources\power.png" />
     <None Include="Resources\prescription-removebg-preview.png" />
     <Content Include="Resources\report.png" />
+    <None Include="Resources\Search_White_Transparent__Search_Icon__Search_Icons__Search_Clipart__Magnifying_Glass_PNG_Image_For_Free_Download-removebg-preview.png" />
     <Content Include="Resources\settings.png" />
     <Content Include="Resources\stethoscope.png" />
     <Content Include="Resources\user.png" />
