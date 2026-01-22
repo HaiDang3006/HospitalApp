@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.SqlClient;
 
 namespace BenhVienS
 {
     public class dbUtils
     {
         public static string ConnectionString =
-           "Data Source=DESKTOP-2F65IMT;Initial Catalog=haidang6868;Integrated Security=True;Encrypt=True;TrustServerCertificate=True";
-        //"Data Source=DESKTOP-GA7P42L;Initial Catalog=benhvienv10;Integrated Security=True;Encrypt=true;TrustServerCertificate=True";
+            @"Data Source=MSI\SQLPHAT;Initial Catalog=Benhvienv1;Integrated Security=True;TrustServerCertificate=True";
+
         public static SqlConnection GetConnection()
         {
             return new SqlConnection(ConnectionString);

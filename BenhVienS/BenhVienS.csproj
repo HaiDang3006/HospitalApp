@@ -421,28 +421,6 @@
     <EmbeddedResource Include="ucttbv.resx">
       <DependentUpon>ucttbv.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="benhvienvsDataSet.xsc">
-      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="benhvienvsDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>benhvienvsDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="benhvienvsDataSet.xss">
-      <DependentUpon>benhvienvsDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xsc">
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>HospitalManagementSystemDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="HospitalManagementSystemDataSet.xss">
-      <DependentUpon>HospitalManagementSystemDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

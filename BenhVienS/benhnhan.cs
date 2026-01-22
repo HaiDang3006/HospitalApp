@@ -23,6 +23,7 @@ namespace BenhVienS
 
           
         }
+        string connectionString = "Server=MSI\\SQLPHAT;Database=Benhvienv1;Trusted_Connection=True;TrustServerCertificate=True;";
         private void showControl(Control control)
         {
 
@@ -150,8 +151,8 @@ namespace BenhVienS
 
         private void btnGoLichHen_Click(object sender, EventArgs e)
         {
-            ucqllichhen uc = new ucqllichhen();
-            showControl(uc);
+
+     
         }
 
         private void btnGoDonThuoc_Click(object sender, EventArgs e)
@@ -170,6 +171,16 @@ namespace BenhVienS
         {
             ucttbv uc = new ucttbv();
             showControl(uc);
+        }
+
+        private void panelLichHen_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel9_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

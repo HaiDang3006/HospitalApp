@@ -1,213 +1,169 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
-using System.IO;
-using System.Xml.Serialization;
-using System.Linq;
-using System.ComponentModel;
 
 namespace BenhVienS
 {
     public partial class uchsbenhan : UserControl
     {
-        private string filePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "DataHoSoBenhAn.xml");
-
-        // Sử dụng BindingList để đồng bộ hóa dữ liệu với DataGridView
-        private BindingList<HoSoBenhAn> danhSachHoSo = new BindingList<HoSoBenhAn>();
+        string connectionString =
+            "Server=MSI\\SQLPHAT;Database=Benhvienv1;Trusted_Connection=True;TrustServerCertificate=True;";
 
         public uchsbenhan()
         {
             InitializeComponent();
-            // Khấu hình bảng để không tự đẻ thêm cột thừa
-            dgvHoSoBenhAn.AutoGenerateColumns = false;
-            dgvHoSoBenhAn.DataSource = danhSachHoSo;
+
+            dgvHoSoBenhAn.AutoGenerateColumns = true;
+            dgvHoSoBenhAn.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvHoSoBenhAn.ScrollBars = ScrollBars.Both;
         }
 
         private void uchsbenhan_Load(object sender, EventArgs e)
         {
-            DocTuFile();
+            LoadHoSoBenhAn();
             dtpNgayTao.Value = DateTime.Now;
+            dtpNgayCapNhat.Value = DateTime.Now;
         }
 
-        // NÚT LƯU
-        public void btnLuu_Click(object sender, EventArgs e)
+        // ================= LOAD =================
+        private void LoadHoSoBenhAn()
         {
-            if (string.IsNullOrWhiteSpace(txtHoSoID.Text))
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                MessageBox.Show("⚠️ Vui lòng nhập Mã hồ sơ!", "Thông báo");
-                return;
+                string sql = @"SELECT 
+                                MaHoSo,
+                                MaBenhNhan,
+                                MaPhieuKham,
+                                NgayTao,
+                                NgayCapNhat,
+                                TienSuBenh,
+                                DiUng,
+                                TienSuGiaDinh,
+                                BenhManTinh
+                               FROM HoSoBenhAn";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                dgvHoSoBenhAn.DataSource = dt;
+            }
+        }
+
+        // ================= LƯU =================
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string sql = @"INSERT INTO HoSoBenhAn
+                               (MaBenhNhan, MaPhieuKham, NgayTao, NgayCapNhat,
+                                TienSuBenh, DiUng, TienSuGiaDinh, BenhManTinh)
+                               VALUES
+                               (@MaBenhNhan,@MaPhieuKham,@NgayTao,@NgayCapNhat,
+                                @TienSuBenh,@DiUng,@TienSuGiaDinh,@BenhManTinh)";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@MaBenhNhan", txtBenhNhanID.Text);
+                cmd.Parameters.AddWithValue("@MaPhieuKham", txtPhieuKhamID.Text);
+                cmd.Parameters.AddWithValue("@NgayTao", dtpNgayTao.Value);
+                cmd.Parameters.AddWithValue("@NgayCapNhat", dtpNgayCapNhat.Value);
+                cmd.Parameters.AddWithValue("@TienSuBenh", txtTienSuBenh.Text);
+                cmd.Parameters.AddWithValue("@DiUng", txtDiUng.Text);
+                cmd.Parameters.AddWithValue("@TienSuGiaDinh", txtTienSuGiaDinh.Text);
+                cmd.Parameters.AddWithValue("@BenhManTinh", txtBenhManTinh.Text);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
 
-            var hs = new HoSoBenhAn
-            {
-                MaHoSo = txtHoSoID.Text.Trim(),
-                MaBenhNhan = txtBenhNhanID.Text.Trim(),
-                MaPhieuKham = txtPhieuKhamID.Text.Trim(),
-                NgayTao = dtpNgayTao.Value,
-                TienSuBenh = txtTienSuBenh.Text.Trim(),
-                DiUng = txtDiUng.Text.Trim(),
-                TienSuGiaDinh = txtTienSuGiaDinh.Text.Trim()
-            };
-
-            danhSachHoSo.Add(hs);
-            LuuVaoFile();
-            MessageBox.Show("✅ Đã lưu và hiển thị lên bảng!");
+            LoadHoSoBenhAn();
             ClearForm();
         }
 
-        // NÚT XÓA - Đã sửa lỗi MessageBox hiện mà không xóa được
-        public void btnXoa_Click(object sender, EventArgs e)
+        // ================= SỬA =================
+        private void btnSua_Click(object sender, EventArgs e)
         {
-            if (dgvHoSoBenhAn.CurrentRow == null)
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                MessageBox.Show("⚠️ Hãy chọn một dòng trên bảng để xóa!", "Thông báo");
-                return;
+                string sql = @"UPDATE HoSoBenhAn SET
+                                MaBenhNhan=@MaBenhNhan,
+                                MaPhieuKham=@MaPhieuKham,
+                                NgayTao=@NgayTao,
+                                NgayCapNhat=@NgayCapNhat,
+                                TienSuBenh=@TienSuBenh,
+                                DiUng=@DiUng,
+                                TienSuGiaDinh=@TienSuGiaDinh,
+                                BenhManTinh=@BenhManTinh
+                               WHERE MaHoSo=@MaHoSo";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@MaHoSo", txtHoSoID.Text);
+                cmd.Parameters.AddWithValue("@MaBenhNhan", txtBenhNhanID.Text);
+                cmd.Parameters.AddWithValue("@MaPhieuKham", txtPhieuKhamID.Text);
+                cmd.Parameters.AddWithValue("@NgayTao", dtpNgayTao.Value);
+                cmd.Parameters.AddWithValue("@NgayCapNhat", dtpNgayCapNhat.Value);
+                cmd.Parameters.AddWithValue("@TienSuBenh", txtTienSuBenh.Text);
+                cmd.Parameters.AddWithValue("@DiUng", txtDiUng.Text);
+                cmd.Parameters.AddWithValue("@TienSuGiaDinh", txtTienSuGiaDinh.Text);
+                cmd.Parameters.AddWithValue("@BenhManTinh", txtBenhManTinh.Text);
+
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
 
-            // Lấy mã hồ sơ từ dòng đang chọn trên bảng
-            string maXoa = dgvHoSoBenhAn.CurrentRow.Cells[0].Value?.ToString();
-
-            DialogResult dr = MessageBox.Show($"Bạn có chắc muốn xóa hồ sơ: {maXoa}?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (dr == DialogResult.Yes)
-            {
-                var hs = danhSachHoSo.FirstOrDefault(x => x.MaHoSo == maXoa);
-                if (hs != null)
-                {
-                    danhSachHoSo.Remove(hs); // Xóa trong danh sách
-                    LuuVaoFile();           // Lưu vào file
-
-                    // Ép bảng cập nhật lại giao diện ngay lập tức
-                    danhSachHoSo.ResetBindings();
-
-                    ClearForm();
-                    MessageBox.Show("✅ Đã xóa thành công!");
-                }
-            }
+            LoadHoSoBenhAn();
         }
 
-        // NÚT SỬA
-        public void btnSua_Click(object sender, EventArgs e)
+        // ================= XÓA =================
+        private void btnXoa_Click(object sender, EventArgs e)
         {
-            var hs = danhSachHoSo.FirstOrDefault(x => x.MaHoSo == txtHoSoID.Text.Trim());
-            if (hs != null)
+            if (dgvHoSoBenhAn.CurrentRow == null) return;
+
+            int maHoSo = Convert.ToInt32(dgvHoSoBenhAn.CurrentRow.Cells["MaHoSo"].Value);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                hs.MaBenhNhan = txtBenhNhanID.Text.Trim();
-                hs.MaPhieuKham = txtPhieuKhamID.Text.Trim();
-                hs.NgayTao = dtpNgayTao.Value;
-                hs.TienSuBenh = txtTienSuBenh.Text.Trim();
-                hs.DiUng = txtDiUng.Text.Trim();
-                hs.TienSuGiaDinh = txtTienSuGiaDinh.Text.Trim();
+                SqlCommand cmd = new SqlCommand(
+                    "DELETE FROM HoSoBenhAn WHERE MaHoSo=@MaHoSo", conn);
+                cmd.Parameters.AddWithValue("@MaHoSo", maHoSo);
 
-                danhSachHoSo.ResetBindings(); // Cập nhật lại bảng
-                LuuVaoFile();
-                MessageBox.Show("✅ Đã cập nhật dữ liệu!");
+                conn.Open();
+                cmd.ExecuteNonQuery();
             }
+
+            LoadHoSoBenhAn();
         }
 
-        private void LuuVaoFile()
-        {
-            try
-            {
-                XmlSerializer ser = new XmlSerializer(typeof(List<HoSoBenhAn>));
-                using (StreamWriter sw = new StreamWriter(filePath))
-                {
-                    ser.Serialize(sw, danhSachHoSo.ToList());
-                }
-            }
-            catch { }
-        }
-
-        private void DocTuFile()
-        {
-            if (File.Exists(filePath))
-            {
-                try
-                {
-                    XmlSerializer ser = new XmlSerializer(typeof(List<HoSoBenhAn>));
-                    using (StreamReader sr = new StreamReader(filePath))
-                    {
-                        var data = (List<HoSoBenhAn>)ser.Deserialize(sr);
-                        danhSachHoSo.Clear();
-                        foreach (var item in data) danhSachHoSo.Add(item);
-                    }
-                }
-                catch { }
-            }
-        }
-
-        private void ClearForm()
-        {
-            txtHoSoID.Clear(); txtBenhNhanID.Clear(); txtPhieuKhamID.Clear();
-            txtTienSuBenh.Clear(); txtDiUng.Clear(); txtTienSuGiaDinh.Clear();
-            dtpNgayTao.Value = DateTime.Now;
-        }
-
-        // Khi click vào bảng, hiện thông tin lên các ô bên trái
+        // ================= CLICK GRID =================
         private void dgvHoSoBenhAn_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                HoSoBenhAn hs = danhSachHoSo[e.RowIndex];
-                txtHoSoID.Text = hs.MaHoSo;
-                txtBenhNhanID.Text = hs.MaBenhNhan;
-                txtPhieuKhamID.Text = hs.MaPhieuKham;
-                dtpNgayTao.Value = hs.NgayTao;
-                txtTienSuBenh.Text = hs.TienSuBenh;
-                txtDiUng.Text = hs.DiUng;
-                txtTienSuGiaDinh.Text = hs.TienSuGiaDinh;
-            }
+            if (e.RowIndex < 0) return;
+
+            DataGridViewRow r = dgvHoSoBenhAn.Rows[e.RowIndex];
+
+            txtHoSoID.Text = r.Cells["MaHoSo"].Value.ToString();
+            txtBenhNhanID.Text = r.Cells["MaBenhNhan"].Value.ToString();
+            txtPhieuKhamID.Text = r.Cells["MaPhieuKham"].Value.ToString();
+            txtTienSuBenh.Text = r.Cells["TienSuBenh"].Value.ToString();
+            txtDiUng.Text = r.Cells["DiUng"].Value.ToString();
+            txtTienSuGiaDinh.Text = r.Cells["TienSuGiaDinh"].Value.ToString();
+            txtBenhManTinh.Text = r.Cells["BenhManTinh"].Value.ToString();
+            dtpNgayTao.Value = Convert.ToDateTime(r.Cells["NgayTao"].Value);
+            dtpNgayCapNhat.Value = Convert.ToDateTime(r.Cells["NgayCapNhat"].Value);
         }
 
-        private void btnSuaHoSo_Click(object sender, EventArgs e)
+        // ================= CLEAR =================
+        private void ClearForm()
         {
-            // 1. Lấy mã hồ sơ đang hiển thị trong ô nhập liệu
-            string maHoSoHienTai = txtHoSoID.Text.Trim();
-
-            if (string.IsNullOrWhiteSpace(maHoSoHienTai))
-            {
-                MessageBox.Show("⚠️ Vui lòng chọn một hồ sơ từ bảng để sửa!", "Thông báo");
-                return;
-            }
-
-            // 2. Tìm đối tượng trong danh sách có Mã hồ sơ trùng khớp
-            var hs = danhSachHoSo.FirstOrDefault(x => x.MaHoSo == maHoSoHienTai);
-
-            if (hs != null)
-            {
-                // 3. Cập nhật các thông tin mới từ TextBox vào đối tượng đó
-                hs.MaBenhNhan = txtBenhNhanID.Text.Trim();
-                hs.MaPhieuKham = txtPhieuKhamID.Text.Trim();
-                hs.NgayTao = dtpNgayTao.Value;
-                hs.TienSuBenh = txtTienSuBenh.Text.Trim();
-                hs.DiUng = txtDiUng.Text.Trim();
-                hs.TienSuGiaDinh = txtTienSuGiaDinh.Text.Trim();
-
-                // 4. Ép BindingList thông báo cho bảng vẽ lại dữ liệu mới
-                danhSachHoSo.ResetBindings();
-
-                // 5. Lưu xuống file XML để không bị mất khi tắt app
-                LuuVaoFile();
-
-                MessageBox.Show("✅ Đã cập nhật hồ sơ thành công!", "Thông báo");
-            }
-            else
-            {
-                MessageBox.Show("⚠️ Không tìm thấy hồ sơ có mã này. Lưu ý: Không nên sửa Mã hồ sơ!", "Lỗi");
-            }
+            txtHoSoID.Clear();
+            txtBenhNhanID.Clear();
+            txtPhieuKhamID.Clear();
+            txtTienSuBenh.Clear();
+            txtDiUng.Clear();
+            txtTienSuGiaDinh.Clear();
+            txtBenhManTinh.Clear();
+            dtpNgayTao.Value = DateTime.Now;
+            dtpNgayCapNhat.Value = DateTime.Now;
         }
-    }
-
-    // Đặt class này ở đây để hết lỗi CS0246
-    [Serializable]
-    public class HoSoBenhAn
-    {
-        public string MaHoSo { get; set; }
-        public string MaBenhNhan { get; set; }
-        public string MaPhieuKham { get; set; }
-        public DateTime NgayTao { get; set; }
-        public string TienSuBenh { get; set; }
-        public string DiUng { get; set; }
-        public string TienSuGiaDinh { get; set; }
     }
 }
