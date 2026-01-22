@@ -177,6 +177,7 @@
     <Compile Include="MapperSql\PatientMapper.cs" />
     <Compile Include="MapperSql\UserMapper.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UserSession.cs" />
     <Compile Include="Models\Doctor.cs" />
