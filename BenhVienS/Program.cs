@@ -17,7 +17,12 @@ namespace BenhVienS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
             Application.Run(new Dangnhap()); 
+
+           
+
+
         }
     }
 }
