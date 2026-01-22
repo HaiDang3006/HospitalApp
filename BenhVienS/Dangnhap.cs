@@ -23,7 +23,7 @@ namespace BenhVienS
             InitializeComponent();
             InitPlaceholder();
         }
-
+        string connectionString = "Server=MSI\\SQLPHAT;Database=Benhvienv1;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private void LoadSessionAndRedirect()
         {
@@ -54,33 +54,35 @@ namespace BenhVienS
                 string username = txtEmail.Text.Trim();
                 string password = txtPassword.Text;
 
-                if (string.IsNullOrEmpty(username))
+                // Bỏ qua placeholder khi kiểm tra
+                if (string.IsNullOrEmpty(username) || username == txtEmail.Tag.ToString())
                 {
                     MessageBox.Show("Vui lòng nhập tên đăng nhập!");
-                    txtEmail.Focus();
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(password))
-                {
-                    MessageBox.Show("Vui lòng nhập mật khẩu!");
-                    txtPassword.Focus();
                     return;
                 }
 
                 var authService = new AuthService();
+                // Giả sử Login trả về true/false dựa trên kết quả từ SQL
+                var isLoginSuccess = authService.Login(username, password);
 
-                var user = authService.Login(username, password);
-
-                if (user)
+                if (isLoginSuccess)
                 {
-                    NavigationService.RedirectByRole(this);
-                } 
+                    MessageBox.Show("✅ Đăng nhập thành công!");
+
+                    // Mở Form Bệnh Nhân (Thay 'benhnhan' bằng tên chính xác của Form trong Project)
+                    benhnhan formBN = new benhnhan();
+                    formBN.Show();
+
+                    this.Hide(); // Ẩn form đăng nhập
+                }
+                else
+                {
+                    MessageBox.Show("❌ Sai tên đăng nhập hoặc mật khẩu!");
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi đăng nhập",
-                MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Lỗi kết nối Database: {ex.Message}");
             }
         }
 
@@ -152,7 +154,6 @@ namespace BenhVienS
             btDangnhap.BackColor = Color.FromArgb(52, 152, 219);
         }
 
-       
 
         private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
         {

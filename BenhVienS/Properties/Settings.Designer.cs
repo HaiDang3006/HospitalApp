@@ -37,8 +37,8 @@ namespace BenhVienS.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS02;Initial Catalog=benhvienvs;Integrated Security" +
-            "=True;Encrypt=True;TrustServerCertificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=MSI\\SQLPHAT;Initial Catalog=Benhvienv1;Integrated Security=True;Encry" +
+            "pt=True;Trust Server Certificate=True")]
         public string benhvienvsConnectionString {
             get {
                 return ((string)(this["benhvienvsConnectionString"]));
