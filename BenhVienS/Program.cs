@@ -17,7 +17,7 @@ namespace BenhVienS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Thungan()); 
+            Application.Run(new Dangnhap()); 
         }
     }
 }

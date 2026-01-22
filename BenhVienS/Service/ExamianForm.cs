@@ -4,30 +4,54 @@ namespace BenhVienS.Models
 {
     public class ExaminationForm
     {
-        public int Id { get; set; }              // MaPhieuKham
-        public int AppointmentId { get; set; }   // MaLichHen
-        public string Diagnosis { get; set; }    // ChanDoan
-        public string Advice { get; set; }       // LoiKhuyen
-        public DateTime ExamDate { get; set; }   // NgayKham
+        public int Id { get; set; }        // MaPhieuKham
+        public int AppointmentId { get; set; }        // MaLichHen
+        public int DoctorId { get; set; }             // MaBacSi
+        public DateTime ExaminationDate { get; set; } // NgayKham
 
-        // Constructor không tham số
-        public ExaminationForm()
-        {
-        }
+        public string Symptoms { get; set; }          // TrieuChung
+        public decimal Height { get; set; }           // ChieuCao
+        public decimal Weight { get; set; }           // CanNang
+        public decimal Temperature { get; set; }      // NhietDo
 
-        // Constructor đầy đủ
+        public string BloodPressure { get; set; }     // HuyetAp
+        public int HeartRate { get; set; }             // Mach
+        public int RespiratoryRate { get; set; }       // NhipTho
+
+        public string PreliminaryDiagnosis { get; set; } // ChanDoanSoBo
+        public string Status { get; set; }              // TrangThai
+
+        public ExaminationForm() { }
+
         public ExaminationForm(
-            int id,
+            int Id,
             int appointmentId,
-            string diagnosis,
-            string advice,
-            DateTime examDate)
+            int doctorId,
+            DateTime examinationDate,
+            string symptoms,
+            decimal height,
+            decimal weight,
+            decimal temperature,
+            string bloodPressure,
+            int heartRate,
+            int respiratoryRate,
+            string preliminaryDiagnosis,
+            string status)
         {
-            Id = id;
+            Id = Id;
             AppointmentId = appointmentId;
-            Diagnosis = diagnosis;
-            Advice = advice;
-            ExamDate = examDate;
+            DoctorId = doctorId;
+            ExaminationDate = examinationDate;
+            Symptoms = symptoms;
+            Height = height;
+            Weight = weight;
+            Temperature = temperature;
+            BloodPressure = bloodPressure;
+            HeartRate = heartRate;
+            RespiratoryRate = respiratoryRate;
+            PreliminaryDiagnosis = preliminaryDiagnosis;
+            Status = status;
         }
     }
+
 }

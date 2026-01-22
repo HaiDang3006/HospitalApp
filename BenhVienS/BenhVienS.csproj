@@ -217,9 +217,11 @@
       <DependentUpon>Lichhen.cs</DependentUpon>
     </Compile>
     <Compile Include="MapperSql\DoctorMapper.cs" />
+    <Compile Include="MapperSql\ExaminationFormMapper.cs" />
     <Compile Include="MapperSql\PatientMapper.cs" />
     <Compile Include="MapperSql\UserMapper.cs" />
     <Compile Include="Models\Appointment.cs" />
+    <Compile Include="Models\HoaDon.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\UserSession.cs" />
     <Compile Include="Models\Doctor.cs" />
@@ -245,7 +247,10 @@
       <DependentUpon>QuenMK.cs</DependentUpon>
     </Compile>
     <Compile Include="MapperSql\AppointmentMapper.cs" />
+    <Compile Include="Repository\ExaminationFormRepository.cs" />
     <Compile Include="Service\AuthService\AuthService.cs" />
+    <Compile Include="Service\ExamianForm.cs" />
+    <Compile Include="Service\ExaminationFormService\ExaminationFormService.cs" />
     <Compile Include="Service\LichHenService\LichHenService.cs" />
     <Compile Include="Repository\AppointmentRepository.cs" />
     <Compile Include="Repository\DoctorRepository.cs" />

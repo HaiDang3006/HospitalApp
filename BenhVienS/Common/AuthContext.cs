@@ -10,9 +10,7 @@ namespace BenhVienS.Common
     public class AuthContext
     {
         public UserSession CurrentUser { get; private set; }
-
         public bool IsAuthenticated => CurrentUser != null;
-
         public void Set(UserSession session)
         {
             CurrentUser = session;
